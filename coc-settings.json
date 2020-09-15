@@ -1,0 +1,4 @@
+{
+    "diagnostic.displayByAle": true,
+    "clangd.arguments": ["--background-index"]
+}
