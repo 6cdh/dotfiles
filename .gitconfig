@@ -1,0 +1,9 @@
+[alias]
+    hist = log --pretty=format:'%h %ad [%an] %s%d ' --graph --date=short
+
+[core]
+    autocrlf = input
+    safecrlf = true
+
+[pull]
+    rebase = false
