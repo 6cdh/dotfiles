@@ -139,6 +139,9 @@ export PATH="${HOME}/.node_modules/bin:${PATH}"
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:${PATH}"
 
+# ruby
+export PATH="${HOME}/.gem/ruby/2.7.0/bin:${PATH}"
+
 # npm global path
 export npm_config_prefix=~/.node_modules
 
@@ -156,7 +159,6 @@ alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # package manager
-alias pacman="sudo env ${PROXY_ENV} pacman"
 alias pip="${PROXY_ENV} pip"
 alias pub="${PROXY_ENV} pub"
 alias cargo="${PROXY_ENV} cargo"
