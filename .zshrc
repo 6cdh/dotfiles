@@ -186,6 +186,8 @@ alias diff="diff --color=always"
 alias googler="${PROXY_ENV} googler"
 alias how2="${PROXY_ENV} how2"
 
+eval "$(pyenv init -)"
+
 # function
 source ~/.zshfunc.sh
 
