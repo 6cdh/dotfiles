@@ -124,7 +124,8 @@ Plug 'joshdick/onedark.vim'
 " ====================================
 " [Auto pair parentheses, brackets and quotes...]
 " ====================================
-" Plug 'jiangmiao/auto-pairs' " TODO: buggy
+" Plug 'jiangmiao/auto-pairs'
+Plug 'tmsvg/pear-tree'
 
 
 " ====================================
