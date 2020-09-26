@@ -82,7 +82,7 @@ Plug 'preservim/nerdcommenter'
 " Plug 'scrooloose/syntastic'
 
 " Syntax highlight
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot', {'tag': '*'}
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'jaxbot/semantic-highlight.vim'
 
@@ -93,7 +93,7 @@ Plug 'jaxbot/semantic-highlight.vim'
 " Plug 'lervag/vimtex', {'for': 'tex'}
 
 " Markdown
-Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 
@@ -113,8 +113,9 @@ Plug 'honza/vim-snippets'
 " ====================================
 " [Intellisense engine, LSP support]
 " ====================================
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale', {'tag': '*'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 " ====================================
 " [Themes]
@@ -139,7 +140,12 @@ Plug 'junegunn/goyo.vim'
 " [Add Icons to Plugins, such as airline, nerdtree...]
 " ====================================
 Plug 'ryanoasis/vim-devicons'
-"
+
+
+" ====================================
+" [Search]
+" ====================================
+Plug 'junegunn/fzf', {'tag': '*'}
 
 
 " ====================================
@@ -504,6 +510,20 @@ let g:coc_snippet_next = '<tab>'
 
 
 " ========================================================================
+" [coc.nvim extensions]
+" ========================================================================
+let g:coc_global_extensions = ['coc-word',
+            \'coc-snippets',
+            \'coc-marketplace',
+            \'coc-clangd',
+            \'coc-texlab',
+            \'coc-python',
+            \'coc-json',
+            \'coc-go'
+            \]
+
+
+" ========================================================================
 " [Semantic highlight]
 " ========================================================================
 :nnoremap <leader>sh :SemanticHighlightToggle<cr>
@@ -513,3 +533,4 @@ let g:coc_snippet_next = '<tab>'
 " [ALE]
 " ========================================================================
 let g:ale_echo_msg_format = '%s --%linter%'
+
