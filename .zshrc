@@ -159,7 +159,7 @@ alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # package manager
-alias pip="${PROXY_ENV} pip"
+# alias pip="${PROXY_ENV} pip"
 alias pub="${PROXY_ENV} pub"
 alias cargo="${PROXY_ENV} cargo"
 alias npm="${PROXY_ENV} npm"
