@@ -149,6 +149,12 @@ Plug 'junegunn/fzf', {'tag': '*'}
 
 
 " ====================================
+" [Debug]
+" ====================================
+Plug 'puremourning/vimspector', {'tag': '*'}
+
+
+" ====================================
 " [Leetcode]
 " ====================================
 " Plug 'ianding1/leetcode.vim'
@@ -519,7 +525,6 @@ let g:coc_global_extensions = ['coc-word',
             \'coc-texlab',
             \'coc-python',
             \'coc-json',
-            \'coc-go'
             \]
 
 
@@ -533,4 +538,11 @@ let g:coc_global_extensions = ['coc-word',
 " [ALE]
 " ========================================================================
 let g:ale_echo_msg_format = '%s --%linter%'
+
+
+" ========================================================================
+" [vimspector]
+" ========================================================================
+let g:vimspector_enable_mappings = 'HUMAN'
+
 
