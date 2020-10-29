@@ -91,6 +91,7 @@ Plug 'jaxbot/semantic-highlight.vim'
 
 " Tex
 " Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'joom/latex-unicoder.vim'
 
 " Markdown
 Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
@@ -125,8 +126,8 @@ Plug 'joshdick/onedark.vim'
 " ====================================
 " [Auto pair parentheses, brackets and quotes...]
 " ====================================
-" Plug 'jiangmiao/auto-pairs'
-Plug 'tmsvg/pear-tree'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'tmsvg/pear-tree'
 
 
 " ====================================
@@ -538,6 +539,7 @@ let g:coc_global_extensions = ['coc-word',
 " [ALE]
 " ========================================================================
 let g:ale_echo_msg_format = '%s --%linter%'
+let g:ale_disable_lsp = 1
 
 
 " ========================================================================

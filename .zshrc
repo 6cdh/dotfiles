@@ -55,7 +55,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -141,6 +141,9 @@ export PATH="${PYENV_ROOT}/bin:${PATH}"
 
 # ruby
 export PATH="${HOME}/.gem/ruby/2.7.0/bin:${PATH}"
+
+# haskell
+export PATH="${HOME}/.ghcup/bin:${PATH}"
 
 # npm global path
 export npm_config_prefix=~/.node_modules
