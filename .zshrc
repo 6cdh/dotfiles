@@ -88,7 +88,7 @@ plugins=(
     extract
     fzf
     zsh-autosuggestions
-    zsh-syntax-highlighting
+    fast-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh

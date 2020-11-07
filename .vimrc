@@ -50,7 +50,7 @@ Plug 'tpope/vim-fugitive'
 " [quoting, parenthesizing made simple]
 " ====================================
 Plug 'tpope/vim-surround'
-
+Plug 'junegunn/rainbow_parentheses.vim'
 
 " ====================================
 " [Format]
@@ -84,18 +84,19 @@ Plug 'preservim/nerdcommenter'
 " Syntax highlight
 Plug 'sheerun/vim-polyglot', {'tag': '*'}
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'jaxbot/semantic-highlight.vim'
+Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
 
 " Golang
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 " Tex
 " Plug 'lervag/vimtex', {'for': 'tex'}
-Plug 'joom/latex-unicoder.vim'
+" Plug 'joom/latex-unicoder.vim'
 
 " Markdown
-Plug 'godlygeek/tabular' | Plug 'plasticboy/vim-markdown'
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'godlygeek/tabular', {'for': 'markdown'} " Required by plasticboy/vim-markdown
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
 
 
 " ====================================
@@ -134,7 +135,7 @@ Plug 'jiangmiao/auto-pairs'
 " [Zenroom]
 " ====================================
 " Plug 'amix/vim-zenroom2'
-Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 
 
 " ====================================
@@ -240,7 +241,7 @@ endif
 " ========================================================================
 augroup set_filetype
     au!
-    autocmd BufNewFile,BufRead *.cls set filetype=tex
+    au BufNewFile,BufRead *.cls set filetype=tex
 augroup END
 
 
@@ -367,8 +368,8 @@ let g:airline_theme='onedark'
 noremap <leader>nt :NERDTreeToggle<CR>
 
 " Open NERDTree automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+au StdinReadPre * let s:std_in=1
+au VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 
 " ========================================================================
@@ -430,10 +431,6 @@ highlight Normal guibg=NONE
 " ========================================================================
 " [Markdown preview]
 " ========================================================================
-let g:instant_markdown_slow=1
-let g:instant_markdown_autostart=0
-let g:instant_markdown_mathjax = 1
-let g:instant_markdown_browser = "chromium"
 
 
 " ========================================================================
@@ -468,7 +465,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
+au CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming
 nmap <leader>cocrn <Plug>(coc-rename)
@@ -540,6 +537,7 @@ let g:coc_global_extensions = ['coc-word',
 " ========================================================================
 let g:ale_echo_msg_format = '%s --%linter%'
 let g:ale_disable_lsp = 1
+let g:ale_linters_ignore = {'cpp': ['clangtidy']}
 
 
 " ========================================================================
@@ -547,4 +545,14 @@ let g:ale_disable_lsp = 1
 " ========================================================================
 let g:vimspector_enable_mappings = 'HUMAN'
 
+
+" ========================================================================
+" [Rainbow parentheses]
+" ========================================================================
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#blacklist = [238, 248, 59]
+
+augroup rainbow_activate
+    au BufEnter * :RainbowParentheses<CR>
+augroup END
 
