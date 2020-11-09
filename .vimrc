@@ -148,6 +148,7 @@ Plug 'ryanoasis/vim-devicons'
 " [Search]
 " ====================================
 Plug 'junegunn/fzf', {'tag': '*'}
+Plug 'junegunn/vim-slash'
 
 
 " ====================================
@@ -299,7 +300,9 @@ noremap <C-l> <C-W>l
 " [autoformat]
 " ========================================================================
 " shortcut
-noremap <leader>f :Autoformat<CR>
+
+" https://github.com/Chiel92/vim-autoformat/issues/131
+noremap <leader>f ix<ESC>x:undojoin \| Autoformat<CR>
 " format upon saving file
 " au BufWrite * :Autoformat
 " markdown
@@ -545,11 +548,17 @@ let g:ale_linters_ignore = {'cpp': ['clangtidy']}
 " ========================================================================
 let g:vimspector_enable_mappings = 'HUMAN'
 
+" ========================================================================
+" [vimspector]
+" ========================================================================
+" https://github.com/jiangmiao/auto-pairs/issues/204
+au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
+
 
 " ========================================================================
 " [Rainbow parentheses]
 " ========================================================================
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
 let g:rainbow#blacklist = [238, 248, 59]
 
 augroup rainbow_activate
