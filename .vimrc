@@ -29,7 +29,7 @@ Plug 'mhinz/vim-startify'
 " ====================================
 " [Display Tags]
 " ====================================
-" Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
+Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
 
 
 " ====================================
@@ -147,8 +147,7 @@ Plug 'ryanoasis/vim-devicons'
 " ====================================
 " [Search]
 " ====================================
-Plug 'junegunn/fzf', {'tag': '*'}
-Plug 'junegunn/vim-slash'
+Plug 'junegunn/fzf.vim', {'tag': '*'}
 
 
 " ====================================
@@ -182,7 +181,6 @@ set linebreak       " Break lines at word (requires Wrap lines)
 set textwidth=120   " Line wrap (number of cols)
 set showmatch       " Highlight matching brace
 "set spell          " Enable spell-checking
-"set visualbel      " Use visual bell (no beeping)
 
 set hlsearch        " Highlight all search results
 set smartcase       " Enable smart-case search
@@ -192,7 +190,6 @@ set incsearch       " Searches for strings incrementally
 set expandtab       " expand tab to space
 set shiftwidth=4    " Number of auto-indent spaces
 set smartindent     " Enable smart-indent
-" set smarttab      " Enable smart-tabs
 set softtabstop=4   " Number of spaces per Tab
 
 " Advanced
@@ -200,26 +197,36 @@ set ruler                       " Show row and column ruler information
 
 set undolevels=1000             " Number of undo levels
 
-" set backspace=eol,start,indent  " Configure backspace so it acts as it should act
 " set whichwrap+=<,>,h,l
 set showcmd
+
 " enable filetype plugins
 filetype plugin on
 filetype indent on
+
 " Auto read when a file is changed from the outside
 set autoread
-" autocmd
-au FocusGained,BufEnter * checktime
+
+" auto reload changed file
+augroup reloadFile
+    au FocusGained,BufEnter * checktime
+augroup END
+
 " Height of the command bar
 set cmdheight=2
+
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
+
 " For regular expressions turn magic on
 set magic
+
 " Add a bit extra margin to the left
 set foldcolumn=1
+
 " Enable syntax highlighting
 syntax enable
+
 set termguicolors
 set nobackup
 set nowritebackup
@@ -240,7 +247,7 @@ endif
 " ========================================================================
 " [set filetype for certain suffix]
 " ========================================================================
-augroup set_filetype
+augroup setFiletype
     au!
     au BufNewFile,BufRead *.cls set filetype=tex
 augroup END
@@ -362,6 +369,10 @@ let g:airline_powerline_fonts = 1
 " airline theme
 let g:airline_theme='onedark'
 
+" Tab navigation
+nnoremap <C-S-tab> :bprevious<CR>
+nnoremap <C-tab> :bnext<CR>
+
 
 
 " ========================================================================
@@ -371,8 +382,10 @@ let g:airline_theme='onedark'
 noremap <leader>nt :NERDTreeToggle<CR>
 
 " Open NERDTree automatically when vim starts up on opening a directory
-au StdinReadPre * let s:std_in=1
-au VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+augroup nerdTreeDir
+    au StdinReadPre * let s:std_in=1
+    au VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+augroup END
 
 
 " ========================================================================
@@ -428,7 +441,7 @@ let g:vim_markdown_strikethrough = 1
 let g:onedark_terminal_italics=1
 colorscheme onedark
 " transparent background
-highlight Normal guibg=NONE
+" highlight Normal guibg=NONE
 
 
 " ========================================================================
@@ -468,10 +481,12 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor
-au CursorHold * silent call CocActionAsync('highlight')
+augroup highlightSymbol
+    au CursorHold * silent call CocActionAsync('highlight')
+augroup END
 
 " Symbol renaming
-nmap <leader>cocrn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " codeAction to the selected region.
 xmap <leader>cocca <Plug>(coc-codeaction-selected)
@@ -552,7 +567,9 @@ let g:vimspector_enable_mappings = 'HUMAN'
 " [vimspector]
 " ========================================================================
 " https://github.com/jiangmiao/auto-pairs/issues/204
-au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
+augroup vimSpector
+    au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
+augroup END
 
 
 " ========================================================================
@@ -561,7 +578,8 @@ au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
 let g:rainbow#blacklist = [238, 248, 59]
 
-augroup rainbow_activate
+augroup rainbowActivate
     au BufEnter * :RainbowParentheses<CR>
 augroup END
+
 

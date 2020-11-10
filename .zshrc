@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -82,7 +84,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    autojump
+    z
     colorize
     colored-man-pages
     extract
@@ -191,10 +193,11 @@ alias how2="${PROXY_ENV} how2"
 
 eval "$(pyenv init -)"
 
+# History size
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=1000000
+SAVEHIST=1000000
+
 # function
 source ~/.zshfunc.sh
-
-fpath+=~/.zfunc
-
-compinit -d
 

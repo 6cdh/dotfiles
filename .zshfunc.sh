@@ -91,3 +91,18 @@ use_clang_toolset() {
     export HOSTLD=ld.lld
 }
 
+lcdh_plugin_bench() {
+    for plugin in $plugins; do
+        N=1000000
+        timer=$(($(date +%s%N) / N))
+        if [ -f "$ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh" ]; then
+            source "$ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh"
+        elif [ -f "$ZSH/plugins/$plugin/$plugin.plugin.zsh" ]; then
+            source "$ZSH/plugins/$plugin/$plugin.plugin.zsh"
+        fi
+        now=$(($(date +%s%N) / N))
+        elapsed=$((now - timer))
+        echo "$elapsed: $plugin"
+    done
+}
+
