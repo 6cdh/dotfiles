@@ -36,7 +36,7 @@ lcdh_all_repos_pull() {
 }
 
 lcdh_update_pypkgs() {
-    pip freeze — local --user | grep -v ‘^\-e’ | cut -d = -f 1 | xargs -n1 pip install -U --user --proxy "${PROXY_ADDR}"
+    pip freeze — local --user | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U --user
 }
 
 lcdh_dnsset() {
