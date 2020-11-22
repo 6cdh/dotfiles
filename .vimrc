@@ -153,7 +153,7 @@ Plug 'ryanoasis/vim-devicons'
 " ====================================
 " [Search]
 " ====================================
-Plug 'junegunn/fzf.vim', {'tag': '*'}
+Plug 'junegunn/fzf.vim'
 
 
 " ====================================
