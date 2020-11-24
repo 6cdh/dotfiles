@@ -145,7 +145,7 @@ export PATH="${PYENV_ROOT}/bin:${PATH}"
 export PATH="${HOME}/.gem/ruby/2.7.0/bin:${PATH}"
 
 # haskell
-export PATH="${HOME}/.ghcup/bin:${PATH}"
+export PATH="${HOME}/.cabal/bin:${HOME}/.ghcup/bin:${PATH}"
 
 # npm global path
 export npm_config_prefix=~/.node_modules
