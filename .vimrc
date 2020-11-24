@@ -55,12 +55,11 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " ====================================
 " [Format]
 " ====================================
-Plug 'chiel92/vim-autoformat'
-" Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat'
 
 
 " ====================================
-" [Format]
+" [Repeat]
 " ====================================
 Plug 'tpope/vim-repeat'
 
@@ -290,49 +289,26 @@ noremap <C-l> <C-W>l
 " [neoformat]
 " ========================================================================
 " shortcut
-" noremap <leader>f :Neoformat<CR>
-" format on save
-" augroup fmt
-"     autocmd!
-"     autocmd BufWritePre * undojoin | Neoformat
-" augroup END
+noremap <leader>f :Neoformat<CR>
+
 " Enable alignment
-" let g:neoformat_basic_format_align = 1
+let g:neoformat_basic_format_align = 1
 " Enable tab to spaces conversion
-" let g:neoformat_basic_format_retab = 1
+let g:neoformat_basic_format_retab = 1
 " Enable trimmming of trailing whitespace
-" let g:neoformat_basic_format_trim = 1
+let g:neoformat_basic_format_trim = 1
 " python format
-" let g:neoformat_python_yapf = {}
-" let g:neoformat_enabled_python = ['yapf', 'autopep8']
+let g:neoformat_enabled_python = ['black']
+" Haskell
+let g:neoformat_enabled_haskell = ['ormolu']
 " shell format
-" let g:shfmt_opt="-ci"
-
-
-" ========================================================================
-" [autoformat]
-" ========================================================================
-" shortcut
-
-" https://github.com/Chiel92/vim-autoformat/issues/131
-noremap <leader>f ix<ESC>x:undojoin \| Autoformat<CR>
-" format upon saving file
-" au BufWrite * :Autoformat
-" markdown
-let g:formatdef_formd = '"prettier --stdin-filepath ".expand("%:p")'
-let g:formatters_markdown = ['formd']
-" python
-" let g:formatter_yapf_style = 'google'
-let g:formatters_python = ['black']
-
-let g:formatdef_tomlfmt = '"toml-fmt"'
-let g:formatters_toml = ['tomlfmt']
-
-" let g:autoformat_verbosemode = 1
-
-" latex
-let g:formatdef_latexindent = '"latexindent"'
-let g:formatters_tex = ['latexindent']
+let g:shfmt_opt="-ci"
+" toml
+let g:neoformat_toml_tomlfmt = {
+    \ 'exe': 'toml-fmt',
+    \ 'stdin': 1,
+    \ }
+let g:neoformat_enabled_toml = ['tomlfmt']
 
 
 " ========================================================================
@@ -570,10 +546,10 @@ let g:ale_linters_ignore = {'cpp': ['clangtidy']}
 let g:vimspector_enable_mappings = 'HUMAN'
 
 " ========================================================================
-" [vimspector]
+" [Autopairs]
 " ========================================================================
 " https://github.com/jiangmiao/auto-pairs/issues/204
-augroup vimSpector
+augroup autoPairs
     au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
 augroup END
 
