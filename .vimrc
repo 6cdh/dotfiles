@@ -139,7 +139,6 @@ Plug 'jiangmiao/auto-pairs'
 " ====================================
 " [Zenroom]
 " ====================================
-" Plug 'amix/vim-zenroom2'
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 
 
@@ -179,30 +178,41 @@ call plug#end()
 " [General]
 " ====================================
 
-set nocompatible    " no compatible vi
-set number          " Show line numbers
-set linebreak       " Break lines at word (requires Wrap lines)
-" set showbreak=+++ " Wrap-broken line prefix
-set textwidth=120   " Line wrap (number of cols)
-set showmatch       " Highlight matching brace
-"set spell          " Enable spell-checking
+" no compatible vi
+set nocompatible
+" Show line numbers
+set number
 
-set hlsearch        " Highlight all search results
-set smartcase       " Enable smart-case search
-set ignorecase      " Always case-insensitive
-set incsearch       " Searches for strings incrementally
+" Line wrap (number of cols)
+set textwidth=90
+" Highlight matching brace
+set showmatch
 
-set expandtab       " expand tab to space
-set shiftwidth=4    " Number of auto-indent spaces
-set smartindent     " Enable smart-indent
-set softtabstop=4   " Number of spaces per Tab
+" Highlight all search results
+set hlsearch
+" Enable smart-case search
+set smartcase
+" Always case-insensitive
+set ignorecase
+" Searches for strings incrementally
+set incsearch
 
-" Advanced
-set ruler                       " Show row and column ruler information
+" expand tab to space
+set expandtab
+" Number of auto-indent spaces
+set shiftwidth=4
+" Enable smart-indent
+set smartindent
+" Number of spaces per Tab
+set softtabstop=4
 
-set undolevels=1000             " Number of undo levels
+" Show row and column ruler information
+set ruler
 
-" set whichwrap+=<,>,h,l
+" Number of undo levels
+set undolevels=1000
+
+" show partial command in the last line of the screen
 set showcmd
 
 " enable filetype plugins
@@ -232,17 +242,26 @@ set foldcolumn=1
 " Enable syntax highlighting
 syntax enable
 
+
+" Enable 24-bit RGB color in the TUI
 set termguicolors
+" backup before overwriting a file
 set nobackup
+" No backup before overwriting a file,
+" the backup is removed after the file was successfully written
 set nowritebackup
+" No swapfile
 set noswapfile
+" Don't show Insert or Visual mode
 set noshowmode
 
+" Whne off a buffer is unloaded when it is abandoned
 set hidden
+" If nothing is typed in 300ms the swap file will be written to disk
 set updatetime=300
 
 " ========================================================================
-" [nvim]
+" [nvim conf]
 " ========================================================================
 if has('nvim')
     let g:python3_host_prog='/bin/python3'
@@ -275,6 +294,18 @@ noremap <C-h> <C-W>h
 noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
 
+" For C++ header
+noremap <leader>hpp :set filetype=cpp<CR>
+
+" Buffer switching
+nnoremap <leader>tp :bprevious<CR>
+nnoremap <leader>tn :bnext<CR>
+nnoremap <leader>bd :bdelete<CR>
+" tab navigation like chrome
+nnoremap <M-1> :bfirst<CR>
+nnoremap <M-2> :bfirst<CR>:bn<CR>
+nnoremap <M-3> :bfirst<CR>:2bn<CR>
+nnoremap <M-4> :bfirst<CR>:3bn<CR>
 
 
 " ========================================================================
@@ -282,7 +313,6 @@ noremap <C-l> <C-W>l
 " ========================================================================
 " <tab> navigate the completion menu from top to bottom rather bottom to top
 " let g:SuperTabDefaultCompletionType = '<c-n>'
-
 
 
 " ========================================================================
@@ -302,12 +332,12 @@ let g:neoformat_enabled_python = ['black']
 " Haskell
 let g:neoformat_enabled_haskell = ['ormolu']
 " shell format
-let g:shfmt_opt="-ci"
+let g:shfmt_opt='-ci'
 " toml
 let g:neoformat_toml_tomlfmt = {
-    \ 'exe': 'toml-fmt',
-    \ 'stdin': 1,
-    \ }
+            \ 'exe': 'toml-fmt',
+            \ 'stdin': 1,
+            \ }
 let g:neoformat_enabled_toml = ['tomlfmt']
 
 
@@ -354,7 +384,6 @@ let g:airline_theme='onedark'
 " Tab navigation
 nnoremap <C-S-tab> :bprevious<CR>
 nnoremap <C-tab> :bnext<CR>
-
 
 
 " ========================================================================
