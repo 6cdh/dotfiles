@@ -566,7 +566,9 @@ let g:coc_global_extensions = ['coc-word',
 " ========================================================================
 let g:ale_echo_msg_format = '%s --%linter%'
 let g:ale_disable_lsp = 1
-let g:ale_linters_ignore = {'cpp': ['clangtidy']}
+let g:ale_linters_ignore = {
+            \'cpp': ['clangtidy']
+            \}
 
 
 " ========================================================================
