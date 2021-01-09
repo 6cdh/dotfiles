@@ -552,6 +552,7 @@ let g:coc_global_extensions = ['coc-word',
             \'coc-texlab',
             \'coc-python',
             \'coc-json',
+            \'coc-rls',
             \]
 
 
