@@ -78,7 +78,7 @@ lcdh_enable_internal_keyboard() {
     xinput list | awk '/AT Translated Set 2 keyboard/{print $7}' | sed 's/id=//' | xargs -I '{}' xinput reattach '{}' 3
 }
 
-use_clang_toolset() {
+lcdh_clang_toolset() {
     export LD=ld.lld
     export AR=llvm-ar
     export NM=llvm-nm
@@ -104,5 +104,9 @@ lcdh_plugin_bench() {
         elapsed=$((now - timer))
         echo "$elapsed: $plugin"
     done
+}
+
+lcdh_image_trim() {
+    convert $1 -fuzz 1% -trim +repage $1
 }
 
