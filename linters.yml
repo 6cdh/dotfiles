@@ -1,0 +1,93 @@
+# Linters, Formatters and LSPs
+---
+- name: asmfmt
+  lang: [asm]
+  type: [formatter]
+  run: go get -u github.com/klauspost/asmfmt/cmd/gofmt/...
+
+- name: bash-language-server
+  lang: [bash]
+  type: [lsp]
+  run: npm i -g bash-language-server
+
+- name: black
+  lang: [python]
+  type: [formatter]
+  run: pip install black
+
+- name: cmake format
+  lang: [cmake]
+  type: [formatter, linter]
+  run: pip install cmakelang
+
+- name: cpp-check
+  lang: [c++]
+  type: [linter]
+  run: yay -S cppcheck
+
+- name: eslint
+  lang: [es, js]
+  type: [linter]
+  run: npm i -g eslint
+
+- name: flake8
+  lang: [python]
+  type: [linter]
+  run: pip install flake8
+
+- name: flawfinder
+  lang: [c, c++]
+  type: [linter]
+  run: yay -S flawfinder
+
+- name: golint
+  lang: [go]
+  type: [linter]
+  run: go get -u golang.org/x/lint/golint
+
+- name: hadolint
+  lang: [dockerfile]
+  type: [linter]
+  run: yay -S hadolint-bin
+
+- name: jq
+  lang: [json]
+  type: [linter]
+  run: yay -S jq
+
+- name: ormolu
+  lang: [haskell]
+  type: [formatter]
+  run: |
+    cabal update
+    cabal install ormolu --ghc-options=-dynamic
+
+- name: prettier
+  lang: [js, ts, json, css, scss, html, vue, angular, graphql, markdown, yaml]
+  type: [formatter]
+  run: npm i -g prettier
+
+- name: pylint
+  lang: [python]
+  type: [linter]
+  run: pip install pylint
+
+- name: rustfmt
+  lang: [rust]
+  type: [formatter]
+  run: rustup component add rustfmt
+
+- name: shfmt
+  lang: [shell]
+  type: [formatter]
+  run: go get mvdan.cc/sh/v3/cmd/shfmt
+
+- name: vint
+  lang: [vim]
+  type: [linter]
+  run: pip install vim-vint
+
+- name: yamllint
+  lang: [yaml]
+  type: [linter]
+  run: pip install yamllint
