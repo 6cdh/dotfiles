@@ -8,7 +8,7 @@
 - name: bash-language-server
   lang: [bash]
   type: [lsp]
-  run: npm i -g bash-language-server
+  run: yarn global add bash-language-server
 
 - name: black
   lang: [python]
@@ -28,7 +28,7 @@
 - name: eslint
   lang: [es, js]
   type: [linter]
-  run: npm i -g eslint
+  run: yarn global add eslint
 
 - name: flake8
   lang: [python]
@@ -65,7 +65,7 @@
 - name: prettier
   lang: [js, ts, json, css, scss, html, vue, angular, graphql, markdown, yaml]
   type: [formatter]
-  run: npm i -g prettier
+  run: yarn global add prettier
 
 - name: pylint
   lang: [python]
