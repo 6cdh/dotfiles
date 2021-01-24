@@ -67,6 +67,11 @@
   type: [formatter]
   run: yarn global add prettier
 
+- name: pvs studio
+  lang: [c, c++, c#, java]
+  type: [linter]
+  run: yay -S pvs-studio
+
 - name: pylint
   lang: [python]
   type: [linter]

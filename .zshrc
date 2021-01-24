@@ -371,6 +371,7 @@ alias ll="ls -l"
 alias diff="diff --color=always"
 alias googler="${PROXY_ENV} googler"
 alias how2="${PROXY_ENV} how2"
+alias tldr="${PROXY_ENV} tldr"
 
 eval "$(pyenv init -)"
 

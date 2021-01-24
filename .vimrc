@@ -340,6 +340,14 @@ let g:neoformat_toml_tomlfmt = {
             \ }
 let g:neoformat_enabled_toml = ['tomlfmt']
 
+" Makefile
+let g:neoformat_make_makefmt = {
+            \ 'exe': 'unexpand',
+            \ 'args': ['-t 2'],
+            \ 'stdin': 1,
+            \}
+let g:neoformat_enabled_make = ['makefmt']
+
 
 " ========================================================================
 " [Ultisnips]
