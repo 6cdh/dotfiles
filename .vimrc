@@ -1,72 +1,77 @@
+let mapleader=' '
+
 call plug#begin('~/.vim/plugged')
 
 
-" ====================================
-" [Alignment]
-" ====================================
-" Plug 'junegunn/vim-easy-align'
+"------------------------------------------------------------------------------"
+"                                   Alignment                                  "
+"------------------------------------------------------------------------------"
+Plug 'junegunn/vim-easy-align'
+Plug 'yggdroot/indentline'
 
 
-" ====================================
-" [Code completion]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                Code Completion                               "
+"------------------------------------------------------------------------------"
 " Plug 'valloric/youcompleteme'
 
 
-" ====================================
-" [Tree Explorer]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                 Tree Explorer                                "
+"------------------------------------------------------------------------------"
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 
-" ====================================
-" [Start screen]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                 Start Screen                                 "
+"------------------------------------------------------------------------------"
 Plug 'mhinz/vim-startify'
 
 
-" ====================================
-" [Display Tags]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                 Display Tags                                 "
+"------------------------------------------------------------------------------"
 Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
 
 
-" ====================================
-" [Status bar]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                  Status Bar                                  "
+"------------------------------------------------------------------------------"
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
 
-" ====================================
-" [Git Integration]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                Git Integration                               "
+"------------------------------------------------------------------------------"
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 
-" ====================================
-" [quoting, parenthesizing made simple]
-" ====================================
+"------------------------------------------------------------------------------"
+"                            Quoting, Parenthesizing                           "
+"------------------------------------------------------------------------------"
 Plug 'tpope/vim-surround'
 Plug 'junegunn/rainbow_parentheses.vim'
 
-" ====================================
-" [Format]
-" ====================================
+
+"------------------------------------------------------------------------------"
+"                                    Format                                    "
+"------------------------------------------------------------------------------"
 Plug 'sbdchd/neoformat'
 
 
-" ====================================
-" [Repeat]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                    Repeat                                    "
+"------------------------------------------------------------------------------"
 Plug 'tpope/vim-repeat'
 
 
-" ====================================
-" [Web]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                      Web                                     "
+"------------------------------------------------------------------------------"
 " Emmet
 " Plug 'mattn/emmet-vim'
 
@@ -74,20 +79,20 @@ Plug 'tpope/vim-repeat'
 " Plug 'posva/vim-vue'
 
 
-" ====================================
-" [Comment Plugin]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                Comment Plugin                                "
+"------------------------------------------------------------------------------"
 Plug 'preservim/nerdcommenter'
 
 
-" ====================================
-" [Languages]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                   Languages                                  "
+"------------------------------------------------------------------------------"
 " Syntax check
 " Plug 'scrooloose/syntastic'
 
 " Syntax highlight
-Plug 'sheerun/vim-polyglot', {'tag': '*'}
+Plug 'sheerun/vim-polyglot'
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
 
@@ -104,79 +109,86 @@ Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
 
 
-" ====================================
-" [Snippets]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                   Snippets                                   "
+"------------------------------------------------------------------------------"
 " Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 
 
-" ====================================
-" [Solve Tab conflict]
-" ====================================
+"------------------------------------------------------------------------------"
+"                              Solve Tab Conflict                              "
+"------------------------------------------------------------------------------"
 " Plug 'ervandew/supertab'
 
 
-" ====================================
-" [Intellisense engine, LSP support]
-" ====================================
-Plug 'dense-analysis/ale', {'tag': '*'}
+"------------------------------------------------------------------------------"
+"                       Intellisense engine, LSP support                       "
+"------------------------------------------------------------------------------"
+Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
-" ====================================
-" [Themes]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                    Themes                                    "
+"------------------------------------------------------------------------------"
 Plug 'joshdick/onedark.vim'
 
-" ====================================
-" [Auto pair parentheses, brackets and quotes...]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                   Autopairs                                  "
+"------------------------------------------------------------------------------"
 Plug 'jiangmiao/auto-pairs'
 " Plug 'tmsvg/pear-tree'
 
 
-" ====================================
-" [Zenroom]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                    Zenroom                                   "
+"------------------------------------------------------------------------------"
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
 
 
-" ====================================
-" [Add Icons to Plugins, such as airline, nerdtree...]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                     Icons                                    "
+"------------------------------------------------------------------------------"
 Plug 'ryanoasis/vim-devicons'
 
 
-" ====================================
-" [Search]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                    Search                                    "
+"------------------------------------------------------------------------------"
 Plug 'junegunn/fzf.vim'
 
 
-" ====================================
-" [Debug]
-" ====================================
-Plug 'puremourning/vimspector', {'tag': '*'}
+"------------------------------------------------------------------------------"
+"                                     Debug                                    "
+"------------------------------------------------------------------------------"
+Plug 'puremourning/vimspector'
 
 
-" ====================================
-" [Leetcode]
-" ====================================
-" Plug 'ianding1/leetcode.vim'
+
+"------------------------------------------------------------------------------"
+"                                   splitjoin                                  "
+"------------------------------------------------------------------------------"
+Plug 'andrewradev/splitjoin.vim'
 
 
-" ====================================
-" [tiddlywiki]
-" ====================================
-" Plug 'sukima/vim-tiddlywiki'
+"------------------------------------------------------------------------------"
+"                                  easy motion                                 "
+"------------------------------------------------------------------------------"
+Plug 'easymotion/vim-easymotion'
+
+
+"------------------------------------------------------------------------------"
+"                                     suda                                     "
+"------------------------------------------------------------------------------"
+Plug 'lambdalisue/suda.vim'
 
 
 call plug#end()
 
-" ====================================
-" [General]
-" ====================================
+"------------------------------------------------------------------------------"
+"                                    General                                   "
+"------------------------------------------------------------------------------"
 
 " no compatible vi
 set nocompatible
@@ -258,36 +270,33 @@ set noshowmode
 " Whne off a buffer is unloaded when it is abandoned
 set hidden
 " If nothing is typed in 300ms the swap file will be written to disk
-set updatetime=300
+set updatetime=100
 
-" ========================================================================
-" [nvim conf]
-" ========================================================================
-if has('nvim')
-    let g:python3_host_prog='/bin/python3'
-endif
+" timeoutlen
+set timeoutlen=700
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
 
 
-" ========================================================================
-" [set filetype for certain suffix]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                   Filetype                                   "
+"------------------------------------------------------------------------------"
 augroup setFiletype
     au!
     au BufNewFile,BufRead *.cls set filetype=tex
 augroup END
 
 
-" ========================================================================
-" [Keybinding]
-" ========================================================================
-" set mapleader
-let g:mapleader=','
+"------------------------------------------------------------------------------"
+"                                  Keybindings                                 "
+"------------------------------------------------------------------------------"
 " Fast saving
 nnoremap <leader>w :w<CR>
 " fast quit
 nnoremap <leader>q :q<CR>
-" :W sudo saves the file
-nnoremap <leader>W :w !sudo tee %<CR>
+nnoremap <leader>Q :q!<CR>
 " move between windows
 noremap <C-j> <C-W>j
 noremap <C-h> <C-W>h
@@ -307,17 +316,30 @@ nnoremap <M-2> :bfirst<CR>:bn<CR>
 nnoremap <M-3> :bfirst<CR>:2bn<CR>
 nnoremap <M-4> :bfirst<CR>:3bn<CR>
 
+" resource
+nnoremap <leader>res :source %<CR>
+nnoremap <leader>nh :noh<CR>
 
-" ========================================================================
-" [SuperTab]
-" ========================================================================
+
+"------------------------------------------------------------------------------"
+"                                 nvim specific                                "
+"------------------------------------------------------------------------------"
+if has('nvim')
+    let g:python3_host_prog='/bin/python3'
+    nnoremap <leader>tm :terminal<CR>
+endif
+
+
+"------------------------------------------------------------------------------"
+"                                   SuperTab                                   "
+"------------------------------------------------------------------------------"
 " <tab> navigate the completion menu from top to bottom rather bottom to top
 " let g:SuperTabDefaultCompletionType = '<c-n>'
 
 
-" ========================================================================
-" [neoformat]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                   neoformat                                  "
+"------------------------------------------------------------------------------"
 " shortcut
 noremap <leader>f :Neoformat<CR>
 
@@ -349,17 +371,17 @@ let g:neoformat_make_makefmt = {
 let g:neoformat_enabled_make = ['makefmt']
 
 
-" ========================================================================
-" [Ultisnips]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                   Ultisnips                                  "
+"------------------------------------------------------------------------------"
 " let g:UltiSnipsExpandTrigger='<c-a>'
 " let g:UtliSnipsJumpForwardTrigger='<tab>'
 " let g:UtliSnipsJumpBackwardTrigger='<s-tab>'
 
 
-" ========================================================================
-" [lightline]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                   lightline                                  "
+"------------------------------------------------------------------------------"
 " function! CocCurrentFunction()
 "     return get(b:, 'coc_current_function', '')
 " endfunction
@@ -379,9 +401,9 @@ let g:neoformat_enabled_make = ['makefmt']
 "
 
 
-" ========================================================================
-" [airline]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                    airline                                   "
+"------------------------------------------------------------------------------"
 " Automatically displays all buffers when there's only one tab open
 let g:airline#extensions#tabline#enabled = 1
 " Show powerline symbols
@@ -394,9 +416,9 @@ nnoremap <C-S-tab> :bprevious<CR>
 nnoremap <C-tab> :bnext<CR>
 
 
-" ========================================================================
-" [NERDTree]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                   nerdtree                                   "
+"------------------------------------------------------------------------------"
 " shortcut to open NERDTree
 noremap <leader>nt :NERDTreeToggle<CR>
 
@@ -407,9 +429,9 @@ augroup nerdTreeDir
 augroup END
 
 
-" ========================================================================
-" [NERDComment]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                  nerdcomment                                 "
+"------------------------------------------------------------------------------"
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
@@ -424,9 +446,9 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 
-" ========================================================================
-" [YCM]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                      YCM                                     "
+"------------------------------------------------------------------------------"
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -440,9 +462,9 @@ let g:NERDToggleCheckAllLines = 1
 " let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 
-" ========================================================================
-" [vim-markdown]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                 vim-markdown                                 "
+"------------------------------------------------------------------------------"
 " disable the folding configuration
 let g:vim_markdown_folding_disabled = 1
 " disable conceal
@@ -453,9 +475,9 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_strikethrough = 1
 
 
-" ========================================================================
-" [onedark]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                    onedark                                   "
+"------------------------------------------------------------------------------"
 " enable italics
 let g:onedark_terminal_italics=1
 colorscheme onedark
@@ -463,19 +485,11 @@ colorscheme onedark
 " highlight Normal guibg=NONE
 
 
-" ========================================================================
-" [Markdown preview]
-" ========================================================================
-
-
-" ========================================================================
-" [Coc.nvim]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                   coc.nvim                                   "
+"------------------------------------------------------------------------------"
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
@@ -488,9 +502,6 @@ nmap <slient> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
@@ -498,6 +509,8 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Highlight the symbol and its references when holding the cursor
 augroup highlightSymbol
@@ -533,7 +546,21 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " `:OR` for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" ========== coc-snippets ==========
+let g:coc_global_extensions = [
+            \'coc-word',
+            \'coc-snippets',
+            \'coc-marketplace',
+            \'coc-clangd',
+            \'coc-texlab',
+            \'coc-python',
+            \'coc-json',
+            \'coc-rls',
+            \]
+
+
+"------------------------------------------------------------------------------"
+"                                 coc-snippets                                 "
+"------------------------------------------------------------------------------"
 " Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? coc#_select_confirm() :
@@ -547,56 +574,44 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-" ========== coc-snippets ==========
 
 
-" ========================================================================
-" [coc.nvim extensions]
-" ========================================================================
-let g:coc_global_extensions = ['coc-word',
-            \'coc-snippets',
-            \'coc-marketplace',
-            \'coc-clangd',
-            \'coc-texlab',
-            \'coc-python',
-            \'coc-json',
-            \'coc-rls',
-            \]
+"------------------------------------------------------------------------------"
+"                              Semantic highlight                              "
+"------------------------------------------------------------------------------"
+nnoremap <leader>sh :SemanticHighlightToggle<CR>
 
 
-" ========================================================================
-" [Semantic highlight]
-" ========================================================================
-:nnoremap <leader>sh :SemanticHighlightToggle<cr>
-
-
-" ========================================================================
-" [ALE]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                      ale                                     "
+"------------------------------------------------------------------------------"
 let g:ale_echo_msg_format = '%s --%linter%'
 let g:ale_disable_lsp = 1
 let g:ale_linters_ignore = {
             \'cpp': ['clangtidy']
             \}
+let g:ale_sign_error = '--'
+let g:ale_sign_warning = ' !'
 
 
-" ========================================================================
-" [vimspector]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                                  vimspector                                  "
+"------------------------------------------------------------------------------"
 let g:vimspector_enable_mappings = 'HUMAN'
 
-" ========================================================================
-" [Autopairs]
-" ========================================================================
+
+"------------------------------------------------------------------------------"
+"                                   autopairs                                  "
+"------------------------------------------------------------------------------"
 " https://github.com/jiangmiao/auto-pairs/issues/204
 augroup autoPairs
     au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
 augroup END
 
 
-" ========================================================================
-" [Rainbow parentheses]
-" ========================================================================
+"------------------------------------------------------------------------------"
+"                              rainbow parentheses                             "
+"------------------------------------------------------------------------------"
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [238, 248, 59]
 
@@ -605,3 +620,74 @@ augroup rainbowActivate
 augroup END
 
 
+"------------------------------------------------------------------------------"
+"                                 Comment Frame                                "
+"------------------------------------------------------------------------------"
+function! s:CommentFrame(left_border, right_border, line_width, topdown_fill, middle_fill, title)
+    let except_left_right = a:line_width - len(a:left_border) - len(a:right_border)
+    let middle_fill_len = except_left_right - len(a:title)
+    let middle_fill_left = middle_fill_len / 2
+    let middle_fill_right = middle_fill_len - middle_fill_left
+    let middle_content = a:left_border . repeat(a:middle_fill, middle_fill_left) . a:title .
+                \    repeat(a:middle_fill, middle_fill_right) . a:right_border
+
+    let topdown_border = a:left_border . repeat(a:topdown_fill, except_left_right) . a:right_border
+
+    call append(line('.'), l:topdown_border)
+    call append(line('.'), l:middle_content)
+    call append(line('.'), l:topdown_border)
+endfunction
+
+function! s:CommentFramePrompt()
+    let str = input('[Comment Frame]: ')
+    if str ==# ''
+        return
+    endif
+    let left = b:NERDCommenterDelims['left']
+    let right = b:NERDCommenterDelims['right'] ==# '' ? left : b:NERDCommenterDelims['right']
+    call s:CommentFrame(left, right, 80, '-', ' ', str)
+endfunction
+
+nnoremap <leader>cfq :call <SID>CommentFramePrompt()<CR>
+
+
+"------------------------------------------------------------------------------"
+"                                  easy align                                  "
+"------------------------------------------------------------------------------"
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+
+"------------------------------------------------------------------------------"
+"                                  easymotion                                  "
+"------------------------------------------------------------------------------"
+map <leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+
+map s <Plug>(easymotion-overwin-f2)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
+
+
+"------------------------------------------------------------------------------"
+"                                  gitgutter                                   "
+"------------------------------------------------------------------------------"
+let g:gitgutter_map_keys = 0
+nnoremap <leader>gd :GitGutterPreviewHunk<CR>
+
+
+"------------------------------------------------------------------------------"
+"                                     suda                                     "
+"------------------------------------------------------------------------------"
+let g:suda#prompt = '[sudo] Password: '
+
+" :W sudo saves the file
+nnoremap <leader>W :SudaWrite<CR>
+nnoremap <leader>sdr :SudaRead<CR>
+
+
+"------------------------------------------------------------------------------"
+"                                 indent line                                  "
+"------------------------------------------------------------------------------"
+let g:indentLine_char = '⎸'

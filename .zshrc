@@ -1,20 +1,13 @@
 # zmodload zsh/zprof
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME='powerlevel10k/powerlevel10k'
 
-# ==========================
-# P10k configuration
-# ==========================
+
+#------------------------------------------------------------------------------#
+#                                     p10k                                     #
+#------------------------------------------------------------------------------#
 
 # Temporarily change options.
 'builtin' 'local' '-a' 'p10k_config_opts'
@@ -25,12 +18,6 @@ ZSH_THEME='powerlevel10k/powerlevel10k'
 
 () {
     emulate -L zsh -o extended_glob
-
-    # Unset all configuration options.
-    unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
-
-    # Zsh >= 5.1 is required.
-    autoload -Uz is-at-least && is-at-least 5.1 || return
 
     # Prompt colors.
     local grey='242'
@@ -154,26 +141,9 @@ ZSH_THEME='powerlevel10k/powerlevel10k'
     # their preceding commands.
     typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
 
-    # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
-    # when accepting a command line. Supported values:
-    #
-    #   - off:      Don't change prompt when accepting a command line.
-    #   - always:   Trim down prompt when accepting a command line.
-    #   - same-dir: Trim down prompt when accepting a command line unless this is the first command
-    #               typed after changing current working directory.
     typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
 
-    # Instant prompt mode.
-    #
-    #   - off:     Disable instant prompt. Choose this if you've tried instant prompt and found
-    #              it incompatible with your zsh configuration files.
-    #   - quiet:   Enable instant prompt and don't print warnings when detecting console output
-    #              during zsh initialization. Choose this if you've read and understood
-    #              https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
-    #   - verbose: Enable instant prompt and print a warning when detecting console output during
-    #              zsh initialization. Choose this if you've never tried instant prompt, haven't
-    #              seen the warning, or if you are unsure what this all means.
-    typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+    typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
     # Hot reload allows you to change POWERLEVEL9K options after Powerlevel10k has been initialized.
     # For example, you can type POWERLEVEL9K_BACKGROUND=red and see your prompt turn red. Hot reload
@@ -193,59 +163,15 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 'builtin' 'unset' 'p10k_config_opts'
 
 
-# POWERLEVEL9K_CUSTOM_USER='echo 6cdh'
-# POWERLEVEL9K_CUSTOM_USER_BACKGROUND='black'
-# POWERLEVEL9K_CUSTOM_USER_FOREGROUND='skyblue1'
-#
-# POWERLEVEL9K_DIR_BACKGROUND='skyblue1'
-#
-# POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-# POWERLEVEL9K_SHORTEN_DELIMITER=''
-# POWERLEVEL9K_SHORTEN_STRATEGY='truncate_to_first_and_last'
-#
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_user dir vcs)
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time)
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
+# To use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
+# Disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
+# Disable marking untracked files under VCS as dirty. This makes repository 
+# status check for large repositories much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
@@ -259,11 +185,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
     z
     colorize
@@ -276,33 +197,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch native"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-
+#------------------------------------------------------------------------------#
+#                                 User Config                                  #
+#------------------------------------------------------------------------------#
 # Environments
 export PATH="${PATH}:${HOME}/go/bin"
 export PATH="${PATH}:${HOME}/.cargo/bin"
