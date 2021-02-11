@@ -186,6 +186,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
+    vi-mode
     z
     colorize
     colored-man-pages
@@ -279,4 +280,7 @@ SAVEHIST=1000000
 
 # function
 source ~/.zshfunc.sh
+
+export VI_MODE_SET_CURSOR=true
+
 
