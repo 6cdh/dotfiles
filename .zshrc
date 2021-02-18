@@ -37,7 +37,7 @@ ZSH_THEME='powerlevel10k/powerlevel10k'
     # command_execution_time  # previous command duration
     # =========================[ Line #2 ]=========================
     newline                   # \n
-    # virtualenv              # python virtual environment
+    virtualenv              # python virtual environment
     prompt_char               # prompt symbol
     )
 
@@ -201,42 +201,8 @@ source $ZSH/oh-my-zsh.sh
 #------------------------------------------------------------------------------#
 #                                 User Config                                  #
 #------------------------------------------------------------------------------#
-# Environments
-export PATH="${PATH}:${HOME}/go/bin"
-export PATH="${PATH}:${HOME}/.cargo/bin"
-# export PATH="$PATH:/opt/cuda/bin"
-export ANDROID_HOME=${HOME}/Android/Sdk
-
 export PROXY_ADDR="127.0.0.1:4097"
 export PROXY_ENV="http_proxy=http://${PROXY_ADDR} https_proxy=http://${PROXY_ADDR} no_proxy=localhost,127.0.0.1"
-export MAKEFLAGS=8
-
-#export CHROME_EXECUTABLE="google-chrome-stable"
-
-# user-widen npm
-export PATH="${HOME}/.node_modules/bin:${PATH}"
-
-# pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:${PATH}"
-
-# ruby
-export PATH="${HOME}/.gem/ruby/2.7.0/bin:${PATH}"
-
-# haskell
-export PATH="${HOME}/.cabal/bin:${HOME}/.ghcup/bin:${PATH}"
-
-# npm global path
-export npm_config_prefix=~/.node_modules
-
-# editor
-export EDITOR=nvim
-
-# clang
-export CC=/usr/bin/clang
-export HOSTCC=/usr/bin/clang
-export CXX=/usr/bin/clang++
-export HOSTCXX=/usr/bin/clang++
 
 # config
 alias zshconfig="mate ~/.zshrc"
@@ -283,4 +249,6 @@ source ~/.zshfunc.sh
 
 export VI_MODE_SET_CURSOR=true
 
+# Auto Rehash
+zstyle ':completion:*' rehash true
 

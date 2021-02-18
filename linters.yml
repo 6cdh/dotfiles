@@ -87,6 +87,11 @@
   type: [formatter]
   run: go get mvdan.cc/sh/v3/cmd/shfmt
 
+- name: prettier toml plugin
+  lang: [toml]
+  type: [formatter]
+  run: yarn global add prettier prettier-plugin-toml
+
 - name: vint
   lang: [vim]
   type: [linter]

@@ -20,7 +20,6 @@ Plug 'yggdroot/indentline'
 "                                 Tree Explorer                                "
 "------------------------------------------------------------------------------"
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 
 "------------------------------------------------------------------------------"
@@ -38,9 +37,7 @@ Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
 "------------------------------------------------------------------------------"
 "                                  Status Bar                                  "
 "------------------------------------------------------------------------------"
-" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 
 
 "------------------------------------------------------------------------------"
@@ -60,7 +57,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 "------------------------------------------------------------------------------"
 "                                    Format                                    "
 "------------------------------------------------------------------------------"
-Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat', { 'on': 'Neoformat' }
 
 
 "------------------------------------------------------------------------------"
@@ -73,10 +70,7 @@ Plug 'tpope/vim-repeat'
 "                                      Web                                     "
 "------------------------------------------------------------------------------"
 " Emmet
-" Plug 'mattn/emmet-vim'
-
-" Vue
-" Plug 'posva/vim-vue'
+Plug 'mattn/emmet-vim'
 
 
 "------------------------------------------------------------------------------"
@@ -88,45 +82,43 @@ Plug 'preservim/nerdcommenter'
 "------------------------------------------------------------------------------"
 "                                   Languages                                  "
 "------------------------------------------------------------------------------"
-" Syntax check
-" Plug 'scrooloose/syntastic'
-
 " Syntax highlight
 Plug 'sheerun/vim-polyglot'
-" Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'jaxbot/semantic-highlight.vim', {'on': 'SemanticHighlightToggle'}
-
-" Golang
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-
-" Tex
-" Plug 'lervag/vimtex', {'for': 'tex'}
-" Plug 'joom/latex-unicoder.vim'
-
 " Markdown
 Plug 'godlygeek/tabular', {'for': 'markdown'} " Required by plasticboy/vim-markdown
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
+Plug 'iamcco/markdown-preview.nvim', {
+            \'on': 'MarkdownPreview',
+            \'for': 'markdown',
+            \'do': 'cd app && yarn install'
+            \}
 
 
 "------------------------------------------------------------------------------"
 "                                   Snippets                                   "
 "------------------------------------------------------------------------------"
-" Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-
-
-"------------------------------------------------------------------------------"
-"                              Solve Tab Conflict                              "
-"------------------------------------------------------------------------------"
-" Plug 'ervandew/supertab'
 
 
 "------------------------------------------------------------------------------"
 "                       Intellisense engine, LSP support                       "
 "------------------------------------------------------------------------------"
 Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
+
+"------------------------------------------------------------------------------"
+"                               Coc.nvim Plugins                               "
+"------------------------------------------------------------------------------"
+Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-marketplace', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'clangd/coc-clangd', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-pyright', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'fannheyward/coc-texlab', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-rls', { 'do': 'yarn install --frozen-lockfile' }
 
 
 "------------------------------------------------------------------------------"
@@ -138,13 +130,12 @@ Plug 'joshdick/onedark.vim'
 "                                   Autopairs                                  "
 "------------------------------------------------------------------------------"
 Plug 'jiangmiao/auto-pairs'
-" Plug 'tmsvg/pear-tree'
 
 
 "------------------------------------------------------------------------------"
 "                                    Zenroom                                   "
 "------------------------------------------------------------------------------"
-Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 
 "------------------------------------------------------------------------------"
@@ -156,7 +147,7 @@ Plug 'ryanoasis/vim-devicons'
 "------------------------------------------------------------------------------"
 "                                    Search                                    "
 "------------------------------------------------------------------------------"
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim', { 'on': 'FZF' }
 
 
 "------------------------------------------------------------------------------"
@@ -181,7 +172,7 @@ Plug 'easymotion/vim-easymotion'
 "------------------------------------------------------------------------------"
 "                                     suda                                     "
 "------------------------------------------------------------------------------"
-Plug 'lambdalisue/suda.vim'
+Plug 'lambdalisue/suda.vim', { 'on': 'SudaWrite' }
 
 
 call plug#end()
@@ -331,13 +322,6 @@ endif
 
 
 "------------------------------------------------------------------------------"
-"                                   SuperTab                                   "
-"------------------------------------------------------------------------------"
-" <tab> navigate the completion menu from top to bottom rather bottom to top
-" let g:SuperTabDefaultCompletionType = '<c-n>'
-
-
-"------------------------------------------------------------------------------"
 "                                   neoformat                                  "
 "------------------------------------------------------------------------------"
 " shortcut
@@ -355,12 +339,13 @@ let g:neoformat_enabled_python = ['black']
 let g:neoformat_enabled_haskell = ['ormolu']
 " shell format
 let g:shfmt_opt='-ci'
-" toml
-let g:neoformat_toml_tomlfmt = {
-            \ 'exe': 'toml-fmt',
+let g:neoformat_toml_prettier = {
+            \ 'exe': 'prettier',
+            \ 'args': ['--stdin-filepath', '"%:p"'],
             \ 'stdin': 1,
-            \ }
-let g:neoformat_enabled_toml = ['tomlfmt']
+            \}
+" toml
+let g:neoformat_enabled_toml = ['prettier']
 
 " Makefile
 let g:neoformat_make_makefmt = {
@@ -369,36 +354,6 @@ let g:neoformat_make_makefmt = {
             \ 'stdin': 1,
             \}
 let g:neoformat_enabled_make = ['makefmt']
-
-
-"------------------------------------------------------------------------------"
-"                                   Ultisnips                                  "
-"------------------------------------------------------------------------------"
-" let g:UltiSnipsExpandTrigger='<c-a>'
-" let g:UtliSnipsJumpForwardTrigger='<tab>'
-" let g:UtliSnipsJumpBackwardTrigger='<s-tab>'
-
-
-"------------------------------------------------------------------------------"
-"                                   lightline                                  "
-"------------------------------------------------------------------------------"
-" function! CocCurrentFunction()
-"     return get(b:, 'coc_current_function', '')
-" endfunction
-"
-" let g:lightline = {
-"             \ 'colorscheme': 'onedark',
-"             \ 'active': {
-"             \   'left': [ [ 'mode', 'paste' ],
-"             \             [ 'cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-"             \ },
-"             \ 'component_function': {
-"             \   'gitbranch': 'fugitive#head',
-"             \   'cocstatus': 'coc#status',
-"             \   'currentfunction': 'CocCurrentFunction'
-"             \ },
-"             \ }
-"
 
 
 "------------------------------------------------------------------------------"
@@ -447,32 +402,18 @@ let g:NERDToggleCheckAllLines = 1
 
 
 "------------------------------------------------------------------------------"
-"                                      YCM                                     "
-"------------------------------------------------------------------------------"
-" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-" let g:SuperTabDefaultCompletionType = '<C-n>'
-"
-" let g:clang_format#style_options = {
-"             \ 'AccessModifierOffset' : -4,
-"             \ 'AllowShortIfStatementsOnASingleLine' : 'true',
-"             \ 'AlwaysBreakTemplateDeclarations' : 'true',
-"             \ 'Standard' : 'C++17'}
-" let g:clang_format#auto_format=1
-" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-
-
-"------------------------------------------------------------------------------"
 "                                 vim-markdown                                 "
 "------------------------------------------------------------------------------"
 " disable the folding configuration
 let g:vim_markdown_folding_disabled = 1
-" disable conceal
-let g:vim_markdown_conceal = 0
+" enable conceal
+let g:vim_markdown_conceal = 1
 " Latex math syntax
 let g:vim_markdown_math = 1
 " Strikethrough uses two tildes
 let g:vim_markdown_strikethrough = 1
+" Enable TOC Autofit
+let g:vim_markdown_toc_autofit = 1
 
 
 "------------------------------------------------------------------------------"
@@ -481,8 +422,6 @@ let g:vim_markdown_strikethrough = 1
 " enable italics
 let g:onedark_terminal_italics=1
 colorscheme onedark
-" transparent background
-" highlight Normal guibg=NONE
 
 
 "------------------------------------------------------------------------------"
@@ -530,12 +469,6 @@ nmap <leader>cocca <Plug>(coc-codeaction)
 " fixCurrent
 nmap <leader>cocfc <Plug>(coc-fix-current)
 
-" Introduce function text object
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
 " <TAB> for selections ranges.
 nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -545,17 +478,6 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " `:OR` for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
-let g:coc_global_extensions = [
-            \'coc-word',
-            \'coc-snippets',
-            \'coc-marketplace',
-            \'coc-clangd',
-            \'coc-texlab',
-            \'coc-python',
-            \'coc-json',
-            \'coc-rls',
-            \]
 
 
 "------------------------------------------------------------------------------"
@@ -691,3 +613,5 @@ nnoremap <leader>sdr :SudaRead<CR>
 "                                 indent line                                  "
 "------------------------------------------------------------------------------"
 let g:indentLine_char = '⎸'
+" https://github.com/plasticboy/vim-markdown/issues/395
+let g:indentLine_concealcursor = ''

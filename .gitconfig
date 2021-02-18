@@ -1,3 +1,7 @@
+[user]
+    name = 6cdh
+    email = cd6cdh@gmail.com
+
 [alias]
     hist = log --pretty=format:'%h %ad [%an] %s%d ' --graph --date=short
 
