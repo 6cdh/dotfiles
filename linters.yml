@@ -15,6 +15,11 @@
   type: [formatter]
   run: pip install black
 
+- name: clojure-lsp
+  lang: [clojure]
+  type: [lsp]
+  run: yay -S clojure-lsp-bin
+
 - name: cmake format
   lang: [cmake]
   type: [formatter, linter]

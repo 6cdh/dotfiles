@@ -29,19 +29,19 @@ scrolling:
 #------------------------------------------------------------------------------#
 font:
   normal:
-    family: SFMono Nerd Font Mono
+    family: CaskaydiaCove Nerd Font
     style: Regular
 
   bold:
-    family: SFMono Nerd Font Mono
+    family: CaskaydiaCove Nerd Font
     style: Bold
 
   italic:
-    family: SFMono Nerd Font Mono
+    family: CaskaydiaCove Nerd Font
     style: Regular Italic
 
   bold_italic:
-    family: SFMono Nerd Font Mono
+    family: CaskaydiaCove Nerd Font
     style: Bold Italic
   size: 10
 
@@ -91,7 +91,6 @@ cursor:
   style:
     shape: Block
     blinking: Off
-
 
 #------------------------------------------------------------------------------#
 #                                    Mouse                                     #

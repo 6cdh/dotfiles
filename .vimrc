@@ -11,6 +11,12 @@ Plug 'yggdroot/indentline'
 
 
 "------------------------------------------------------------------------------"
+"                                   vimwiki                                    "
+"------------------------------------------------------------------------------"
+" Plug 'vimwiki/vimwiki'
+
+
+"------------------------------------------------------------------------------"
 "                                Code Completion                               "
 "------------------------------------------------------------------------------"
 " Plug 'valloric/youcompleteme'
@@ -37,7 +43,8 @@ Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
 "------------------------------------------------------------------------------"
 "                                  Status Bar                                  "
 "------------------------------------------------------------------------------"
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 
 
 "------------------------------------------------------------------------------"
@@ -102,9 +109,15 @@ Plug 'honza/vim-snippets'
 
 
 "------------------------------------------------------------------------------"
+"                                     REPL                                     "
+"------------------------------------------------------------------------------"
+Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto'] }
+
+
+"------------------------------------------------------------------------------"
 "                       Intellisense engine, LSP support                       "
 "------------------------------------------------------------------------------"
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale', { 'tag': '*' }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 
@@ -115,10 +128,14 @@ Plug 'neoclide/coc-snippets', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-marketplace', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'clangd/coc-clangd', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-pyright', { 'do': 'yarn install --frozen-lockfile' }
-Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile' }
+" Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'fannheyward/coc-texlab', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-json', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-rls', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-html', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'josa42/coc-sh', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'josa42/coc-go', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-tabnine', { 'do': 'yarn install --frozen-lockfile' }
 
 
 "------------------------------------------------------------------------------"
@@ -270,6 +287,10 @@ set timeoutlen=700
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
+" if has('gui_running')
+set guifont=CaskaydiaCove\ Nerd\ Font:h11
+" endif
+
 
 "------------------------------------------------------------------------------"
 "                                   Filetype                                   "
@@ -293,6 +314,11 @@ noremap <C-j> <C-W>j
 noremap <C-h> <C-W>h
 noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
+tnoremap <C-j> <C-\><C-n><C-W>j
+tnoremap <C-h> <C-\><C-n><C-W>h
+tnoremap <C-k> <C-\><C-n><C-W>k
+tnoremap <C-l> <C-\><C-n><C-W>l
+
 
 " For C++ header
 noremap <leader>hpp :set filetype=cpp<CR>
@@ -355,6 +381,64 @@ let g:neoformat_make_makefmt = {
             \}
 let g:neoformat_enabled_make = ['makefmt']
 
+
+"------------------------------------------------------------------------------"
+"                                  lightline                                   "
+"------------------------------------------------------------------------------"
+let g:lightline = {
+            \'colorscheme': 'onedark',
+            \'active': {
+            \  'left': [['mode', 'paste'],
+            \           ['filename', 'readonly', 'modified', 'fugitive', 'gitgutter', 'cocstatus']],
+            \  'right': [['lineinfo'],
+            \            ['percent'],
+            \            ['fileformat', 'fileencoding', 'filetype'],
+            \            ['aleinfo']]
+            \},
+            \'component_function': {
+            \  'cocstatus': 'coc#status',
+            \  'aleinfo': 'Alestatus',
+            \  'gitgutter': 'GitStatus',
+            \  'fugitive': 'FugitiveHead'
+            \},
+            \}
+
+
+function! GitStatus() abort
+    let [a, m, r] = GitGutterGetHunkSummary()
+    let l:add = a == 0 ? '' : printf('+%d', a)
+    let l:change = m == 0 ? '' : printf((empty(l:add) ?  '' : ' ') . '~%d', m)
+    let l:delete = r == 0 ? '' : printf((empty(l:add) && empty(l:change) ? '' : ' ') . '-%d', r)
+    return l:add . l:change . l:delete
+endfunction
+
+function! s:aleLinted() abort
+    return get(g:, 'ale_enabled', 0) == 1
+                \ && getbufvar(bufnr(''), 'ale_enabled', 1)
+                \ && getbufvar(bufnr(''), 'ale_linted', 0) > 0
+                \ && ale#engine#IsCheckingBuffer(bufnr('')) == 0
+endfunction
+
+function! Alestatus() abort
+    if !s:aleLinted()
+        return ''
+    endif
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:infos = l:counts.info == 0 ? '' : printf("\uf129 %d", l:counts.info)
+    let l:warn_cnt = l:counts.warning + l:counts.style_warning
+    let l:warnings = l:warn_cnt == 0 ? '' : printf((empty(l:infos) ? '' : ' ') . "\uf071 %d", l:warn_cnt)
+    let l:err_cnt = l:counts.error + l:counts.style_error
+    let l:errors = l:err_cnt == 0 ? '' : printf((empty(l:infos) && empty(l:warnings) ? '' : ' ') . " \uf05e %d", l:err_cnt)
+    return ale#engine#IsCheckingBuffer(bufnr('')) ? 'ALE Checking' : l:infos . l:warnings . l:errors
+endfunction
+
+" augroup lightlineUpdate
+"     autocmd!
+"     autocmd User CocStatusChange, CocDiagnosticChange call lightline#update()
+"     autocmd User ALEJobStarted call lightline#update()
+"     autocmd User ALELintPost call lightline#update()
+"     autocmd User ALEFixPost call lightline#update()
+" augroup END
 
 "------------------------------------------------------------------------------"
 "                                    airline                                   "
@@ -528,6 +612,7 @@ let g:vimspector_enable_mappings = 'HUMAN'
 " https://github.com/jiangmiao/auto-pairs/issues/204
 augroup autoPairs
     au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
+    au filetype clojure,lisp let b:AutoPairs = {'"':'"', '(':')', '[':']',  '{':'}', '`':'`'}
 augroup END
 
 
@@ -615,3 +700,21 @@ nnoremap <leader>sdr :SudaRead<CR>
 let g:indentLine_char = '⎸'
 " https://github.com/plasticboy/vim-markdown/issues/395
 let g:indentLine_concealcursor = ''
+
+
+"------------------------------------------------------------------------------"
+"                                     REPL                                     "
+"------------------------------------------------------------------------------"
+nnoremap <leader>rp :Repl<CR>
+nnoremap <leader>rps :ReplSend<CR>
+nnoremap <leader>rpr :ReplRecv<CR>
+vnoremap <leader>rps :ReplSend<CR>
+nnoremap <leader>rpsp :ReplStop<CR>
+
+
+"------------------------------------------------------------------------------"
+"                                   vimwiki                                    "
+"------------------------------------------------------------------------------"
+
+
+
