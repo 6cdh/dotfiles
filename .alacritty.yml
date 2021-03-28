@@ -29,24 +29,24 @@ scrolling:
 #------------------------------------------------------------------------------#
 font:
   normal:
-    family: CaskaydiaCove Nerd Font
+    family: FiraCode Nerd Font
     style: Regular
 
   bold:
-    family: CaskaydiaCove Nerd Font
+    family: FiraCode Nerd Font
     style: Bold
 
   italic:
-    family: CaskaydiaCove Nerd Font
-    style: Regular Italic
+    family: FiraCode Nerd Font
+    style: Italic
 
   bold_italic:
-    family: CaskaydiaCove Nerd Font
+    family: FiraCode Nerd Font
     style: Bold Italic
-  size: 10
+  size: 11
 
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: false
+draw_bold_text_with_bright_colors: true
 
 #------------------------------------------------------------------------------#
 #                                   One Dark                                   #

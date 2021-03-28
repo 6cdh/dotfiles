@@ -1,9 +1,9 @@
 let mapleader=' '
 
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 
 Plug 'junegunn/vim-easy-align'
-Plug 'yggdroot/indentline'
+Plug 'Yggdroot/indentLine'
 
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 
@@ -92,60 +92,32 @@ call plug#end()
 "                                    General                                   "
 "------------------------------------------------------------------------------"
 
-" no compatible vi
-set nocompatible
 " Show line numbers
-set nu
-set rnu
+set number
+set relativenumber
 
 " Line wrap (number of cols)
 set textwidth=90
-" Highlight matching brace
-set showmatch
 
-" Highlight all search results
-set hlsearch
 " Enable smart-case search
 set smartcase
-" Always case-insensitive
 set ignorecase
-" Searches for strings incrementally
-set incsearch
 
 " expand tab to space
 set expandtab
-" Number of auto-indent spaces
+
+" Tab size
 set shiftwidth=4
-" Enable smart-indent
-set smartindent
-" Number of spaces per Tab
 set softtabstop=4
 
-" Show row and column ruler information
-set ruler
-
-" Number of undo levels
-set undolevels=1000
-
-" show partial command in the last line of the screen
-set showcmd
-
-" enable filetype plugins
+" filetype plugins
 filetype plugin on
 filetype indent on
-
-" Auto read when a file is changed from the outside
-set autoread
-
-" auto reload changed file
-augroup reloadFile
-    au FocusGained,BufEnter * checktime
-augroup END
 
 " Height of the command bar
 set cmdheight=2
 
-" Don't redraw while executing macros (good performance config)
+" Don't redraw while executing macros
 set lazyredraw
 
 " For regular expressions turn magic on
@@ -154,14 +126,11 @@ set magic
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-" Enable syntax highlighting
 syntax enable
-
 
 " Enable 24-bit RGB color in the TUI
 set termguicolors
-" backup before overwriting a file
-set nobackup
+
 " No backup before overwriting a file,
 " the backup is removed after the file was successfully written
 set nowritebackup
@@ -170,7 +139,7 @@ set noswapfile
 " Don't show Insert or Visual mode
 set noshowmode
 
-" Whne off a buffer is unloaded when it is abandoned
+" When off a buffer is unloaded when it is abandoned
 set hidden
 " If nothing is typed in 300ms the swap file will be written to disk
 set updatetime=100
@@ -181,10 +150,6 @@ set timeoutlen=700
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
-
-" if has('gui_running')
-set guifont=CaskaydiaCove\ Nerd\ Font:h11
-" endif
 
 
 "------------------------------------------------------------------------------"
@@ -209,6 +174,7 @@ noremap <C-j> <C-W>j
 noremap <C-h> <C-W>h
 noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
+
 tnoremap <C-j> <C-\><C-n><C-W>j
 tnoremap <C-h> <C-\><C-n><C-W>h
 tnoremap <C-k> <C-\><C-n><C-W>k
@@ -222,6 +188,7 @@ noremap <leader>hpp :set filetype=cpp<CR>
 nnoremap <leader>tp :bprevious<CR>
 nnoremap <leader>tn :bnext<CR>
 nnoremap <leader>bd :bdelete<CR>
+
 " tab navigation like chrome
 nnoremap <M-1> :bfirst<CR>
 nnoremap <M-2> :bfirst<CR>:bn<CR>
@@ -230,16 +197,11 @@ nnoremap <M-4> :bfirst<CR>:3bn<CR>
 
 " resource
 nnoremap <leader>res :source %<CR>
+
 nnoremap <leader>nh :noh<CR>
 
-
-"------------------------------------------------------------------------------"
-"                                 nvim specific                                "
-"------------------------------------------------------------------------------"
-if has('nvim')
-    let g:python3_host_prog='/bin/python3'
-    nnoremap <leader>tm :terminal<CR>
-endif
+let g:python3_host_prog='/bin/python3'
+nnoremap <leader>tm :terminal<CR>
 
 
 "------------------------------------------------------------------------------"
@@ -343,21 +305,6 @@ endfunction
 
 
 "------------------------------------------------------------------------------"
-"                                    airline                                   "
-"------------------------------------------------------------------------------"
-" Automatically displays all buffers when there's only one tab open
-let g:airline#extensions#tabline#enabled = 1
-" Show powerline symbols
-let g:airline_powerline_fonts = 1
-" airline theme
-let g:airline_theme='onedark'
-
-" Tab navigation
-nnoremap <C-S-tab> :bprevious<CR>
-nnoremap <C-tab> :bnext<CR>
-
-
-"------------------------------------------------------------------------------"
 "                                   nerdtree                                   "
 "------------------------------------------------------------------------------"
 " shortcut to open NERDTree
@@ -365,6 +312,7 @@ noremap <leader>nt :NERDTreeToggle<CR>
 
 " Open NERDTree automatically when vim starts up on opening a directory
 augroup nerdTreeDir
+    au!
     au StdinReadPre * let s:std_in=1
     au VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 augroup END
@@ -435,7 +383,7 @@ function! s:show_documentation()
     endif
 endfunction
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent>K :call <SID>show_documentation()<CR>
 
 " Highlight the symbol and its references when holding the cursor
 augroup highlightSymbol
@@ -513,6 +461,7 @@ let g:vimspector_enable_mappings = 'HUMAN'
 "------------------------------------------------------------------------------"
 " https://github.com/jiangmiao/auto-pairs/issues/204
 augroup autoPairs
+    au!
     au filetype vim let b:AutoPairs = {'(':')', '[':']', '{':'}', "'":"'", '`':'`'}
     au filetype clojure,lisp let b:AutoPairs = {'"':'"', '(':')', '[':']',  '{':'}', '`':'`'}
 augroup END
@@ -525,6 +474,7 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#blacklist = [238, 248, 59]
 
 augroup rainbowActivate
+    au!
     au BufEnter * :RainbowParentheses<CR>
 augroup END
 

@@ -1,12 +1,12 @@
 PROXY_ADDR="127.0.0.1:4097"
 
-lcdh_enable_proxy() {
+lcdh_proxy_enable() {
     export readonly http_proxy="http://${PROXY_ADDR}"
     export readonly https_proxy="http://${PROXY_ADDR}"
     export readonly no_proxy=localhost,127.0.0.1
 }
 
-lcdh_disable_proxy() {
+lcdh_proxy_disable() {
     unset http_proxy
     unset https_proxy
     unset no_proxy
@@ -78,7 +78,9 @@ lcdh_enable_internal_keyboard() {
     xinput list | awk '/AT Translated Set 2 keyboard/{print $7}' | sed 's/id=//' | xargs -I '{}' xinput reattach '{}' 3
 }
 
-lcdh_clang_toolset() {
+lcdh_toolset_clang() {
+    export CC=clang
+    export CXX=clang++
     export LD=ld.lld
     export AR=llvm-ar
     export NM=llvm-nm
@@ -89,6 +91,21 @@ lcdh_clang_toolset() {
     export READELF=llvm-readelf
     export HOSTAR=llvm-ar
     export HOSTLD=ld.lld
+}
+
+lcdh_toolset_gcc() {
+    export CC=gcc
+    export CXX=g++
+    export LD=ld
+    export AR=ar
+    export NM=nm
+    export STRIP=strip
+    export OBJCOPY=objcopy
+    export OBJDUMP=objdump
+    export OBJSIZE=size
+    export READELF=readelf
+    export HOSTAR=ar
+    export HOSTLD=ld
 }
 
 lcdh_plugin_bench() {
