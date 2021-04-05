@@ -8,11 +8,19 @@
 [core]
     autocrlf = input
     safecrlf = true
+    pager = delta
+
+[delta]
+    navigate = true
+
+[interactive]
+    diffFilter = delta --color-only
 
 [pull]
     rebase = false
 
 [init]
     defaultBranch = main
+
 [credential "https://github.com"]
 	helper = !gh auth git-credential

@@ -19,7 +19,8 @@ export PATH="${PYENV_ROOT}/bin:${PATH}"
 export CHROME_EXECUTABLE="google-chrome-stable"
 
 # Ruby
-export PATH="${HOME}/.gem/ruby/2.7.0/bin:${PATH}"
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="${PATH}:${GEM_HOME}/bin"
 
 # Haskell
 source ~/.ghcup/env
@@ -36,3 +37,14 @@ export MAKEFLAGS=8
 
 # CUDA
 # export PATH="$PATH:/opt/cuda/bin"
+
+# BAT
+export BAT_THEME="TwoDark"
+
+# FZF
+export FZF_DEFAULT_COMMAND='rg --files --smart-case'
+export FZF_DEFAULT_OPTS='-m --height 50% --border'
+
+# Kitty Chinese
+export GLFW_IM_MODULE=ibus
+

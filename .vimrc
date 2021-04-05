@@ -214,6 +214,9 @@ tnoremap <C-h> <C-\><C-n><C-W>h
 tnoremap <C-k> <C-\><C-n><C-W>k
 tnoremap <C-l> <C-\><C-n><C-W>l
 
+" copy to clipboard
+nnoremap <leader>cp :%y+<CR>
+vnoremap <leader>cp "+y
 
 " For C++ header
 noremap <leader>hpp :set filetype=cpp<CR>

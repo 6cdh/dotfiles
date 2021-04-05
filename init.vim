@@ -36,7 +36,8 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'junegunn/fzf.vim', { 'on': 'FZF' }
+" Plug 'junegunn/fzf.vim', { 'on': 'FZF' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'puremourning/vimspector'
 
@@ -174,6 +175,10 @@ noremap <C-j> <C-W>j
 noremap <C-h> <C-W>h
 noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
+
+" copy to clipboard
+nnoremap <leader>cp :%y+<CR>
+vnoremap <leader>cp "+y
 
 tnoremap <C-j> <C-\><C-n><C-W>j
 tnoremap <C-h> <C-\><C-n><C-W>h
