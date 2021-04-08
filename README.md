@@ -26,13 +26,17 @@ zsh <(yq e '.[] | select((.lang | .[] == "python") and (.type | .[] == "linter")
 
 ## Install dotfiles
 
+I use [GNU stow](https://www.gnu.org/software/stow/) to mange my dotfiles.
+
 ```bash
 # Install nvim config
-make nvim
+stow -t ~ -D nvim
 # Install vim config
-make vim
+stow -t ~ -D vim
 # Install zsh config
-make zsh
+stow -t ~ -D zsh
 # Install kitty config
-make terminal
+stow -t ~ -D kitty
 ```
+
+You may want to use `stow -nv -t ~ -D <DIR>` to see what stow will do before any modifications.
