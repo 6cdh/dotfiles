@@ -187,13 +187,13 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
     vi-mode
-    z
     colorize
     colored-man-pages
     extract
     fzf
     zsh-autosuggestions
     fast-syntax-highlighting
+    git
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -253,4 +253,7 @@ export VI_MODE_SET_CURSOR=true
 
 # Auto Rehash
 zstyle ':completion:*' rehash true
+
+# z.lua
+eval "$(lua ${ZSH}/custom/plugins/z.lua/z.lua --init zsh enhanced once fzf)"
 
