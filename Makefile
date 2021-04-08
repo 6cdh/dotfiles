@@ -14,7 +14,7 @@ all: install
 
 .PHONY: install vim nvim terminal pam_env zsh gitconfig
 
-install: zsh gitconfig vim
+install: vim nvim terminal pam_env zsh gitconfig
 
 vim:
 	ln -s ${VIM_CONF}/.vimrc ${HOME}/.vimrc
