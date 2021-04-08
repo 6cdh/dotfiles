@@ -48,3 +48,6 @@ export FZF_DEFAULT_OPTS='-m --height 50% --border'
 # Kitty Chinese
 export GLFW_IM_MODULE=ibus
 
+# luarocks
+export PATH="${HOME}/.luarocks/bin:${PATH}"
+
