@@ -26,7 +26,7 @@ zsh <(yq e '.[] | select((.lang | .[] == "python") and (.type | .[] == "linter")
 
 ## Install dotfiles
 
-I use [GNU stow](https://www.gnu.org/software/stow/) to mange my dotfiles.
+I use [GNU stow](https://www.gnu.org/software/stow/) to manage my dotfiles.
 
 ```bash
 # Install nvim config
