@@ -24,3 +24,15 @@ Install only linters for Python:
 zsh <(yq e '.[] | select((.lang | .[] == "python") and (.type | .[] == "linter")).run' linters.yml)
 ```
 
+## Install dotfiles
+
+```bash
+# Install nvim config
+make nvim
+# Install vim config
+make vim
+# Install zsh config
+make zsh
+# Install kitty config
+make terminal
+```
