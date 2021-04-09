@@ -82,6 +82,11 @@
   type: [linter]
   run: pip install pylint
 
+- name: pyright
+  lang: [python]
+  type: [lsp]
+  run: yarn global add pyright
+
 - name: rustfmt
   lang: [rust]
   type: [formatter]
@@ -92,10 +97,20 @@
   type: [formatter]
   run: go get mvdan.cc/sh/v3/cmd/shfmt
 
+- name: texlab
+  lang: [tex]
+  type: [lsp]
+  run: yay -S texlab
+
 - name: prettier toml plugin
   lang: [toml]
   type: [formatter]
   run: yarn global add prettier prettier-plugin-toml
+
+- name: vim-language-server
+  lang: [vim]
+  type: [lsp]
+  run: yarn global add vim-language-server
 
 - name: vint
   lang: [vim]
