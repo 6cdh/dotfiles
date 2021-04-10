@@ -18,7 +18,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     })
 
 -- lua
-
 local sumneko_root_path = vim.fn.stdpath('cache') ..
                               '/lspconfig/sumneko_lua/lua-language-server'
 
@@ -54,7 +53,7 @@ km.map(km.mode.normal, '<leader>cca', ':Lspsaga code_action<CR>',
 km.map(km.mode.visual, '<leader>cca', ':Lspsaga range_code_action<CR>',
        km.opts(km.optstr.noremap))
 
-km.map(km.mode.normal, '<silent>K', ':Lspsaga hover_doc<CR>',
+km.map(km.mode.normal, '<silent>K', ':Lspsaga signature_help<CR>',
        km.opts(km.optstr.noremap))
 km.map(km.mode.normal, '<leader>rn', ':Lspsaga rename<CR>',
        km.opts(km.optstr.noremap))

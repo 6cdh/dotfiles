@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
@@ -25,6 +26,8 @@ packer.startup(function()
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
     use 'glepnir/lspsaga.nvim'
+    -- use 'RishabhRD/popfix'
+    -- use 'RishabhRD/nvim-lsputils'
     use 'onsails/lspkind-nvim'
 
     use 'hrsh7th/nvim-compe'
@@ -33,9 +36,14 @@ packer.startup(function()
         run = './install.sh',
         requires = 'hrsh7th/nvim-compe'
     }
+    use {'plasticboy/vim-markdown', ft = {'markdown'}}
+    use {
+        'iamcco/markdown-preview.nvim',
+        run = 'cd app && yarn install',
+        ft = {'markdown'}
+    }
 
-    use {'plasticboy/vim-markdown'}
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+    use 'windwp/nvim-autopairs'
 
     use 'mhinz/vim-startify'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
@@ -73,14 +81,14 @@ local opts = {global = vim.o, buffer = vim.bo, window = vim.wo}
 opts.window.number = true
 opts.window.relativenumber = true
 
-opts.global.textwidth = 90
+opts.buffer.textwidth = 90
 
 local indent = 4
 
-opts.global.expandtab = true
-opts.global.tabstop = indent
-opts.global.shiftwidth = indent
-opts.global.softtabstop = indent
+opts.buffer.expandtab = true
+opts.buffer.tabstop = indent
+opts.buffer.shiftwidth = indent
+opts.buffer.softtabstop = indent
 
 opts.global.smartcase = true
 opts.global.ignorecase = true
@@ -152,6 +160,9 @@ require 'statusline'
 
 -- comment
 require'nvim_comment'.setup()
+
+-- nvim-autopairs
+require('nvim-autopairs').setup()
 
 -- vim markdown
 
