@@ -34,22 +34,26 @@ local gl_rainbow = function()
     }
     cmd('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()] .. ' guibg=' ..
             colors.bg)
-    return '▊ '
+    return '▊'
 end
 
 gl.short_line_list = {'nvimtree', 'packer'}
 
+local file_size = function() return '' end
+
 gls.left = {
     {ViMode = {provider = gl_rainbow}}, {
         FileSize = {
-            provider = 'FileSize',
+            provider = file_size,
             condition = condition.buffer_not_empty,
+            separator = ' ',
             highlight = {colors.fg, colors.bg}
         }
     }, {
         FileIcon = {
             provider = 'FileIcon',
             condition = condition.buffer_not_empty,
+            separator = ' ',
             highlight = {
                 require('galaxyline.provider_fileinfo').get_file_icon_color,
                 colors.bg
@@ -58,6 +62,7 @@ gls.left = {
     }, {
         FileName = {
             provider = 'FileName',
+            separator = ' ',
             condition = condition.buffer_not_empty,
             highlight = {colors.fg, colors.bg, 'bold'}
         }
@@ -96,7 +101,7 @@ gls.left = {
 }
 
 local lsp_info = function()
-    lsp_client = lspclient.get_lsp_client()
+    local lsp_client = lspclient.get_lsp_client()
     return lsp_client == 'No Active Lsp' and '' or lsp_client
 end
 
@@ -116,13 +121,13 @@ gls.mid = {
 }
 
 local file_encoding = function()
-    encoding = glf.get_file_encode()
+    local encoding = glf.get_file_encode()
     return encoding == ' UTF-8' and '' or encoding
 end
 
 local file_info = function()
-    format = glf.get_file_format()
-    icon = ''
+    local format = glf.get_file_format()
+    local icon = ''
     return icon .. ' ' .. format
 end
 
@@ -144,17 +149,10 @@ gls.right = {
             highlight = {colors.green, colors.bg, 'bold'}
         }
     }, {
-        GitIcon = {
-            provider = function() return '' end,
-            condition = condition.check_git_workspace,
-            separator = ' ',
-            separator_highlight = {'NONE', colors.bg},
-            highlight = {colors.violet, colors.bg, 'bold'}
-        }
-    }, {
         GitBranch = {
             provider = 'GitBranch',
             condition = condition.check_git_workspace,
+            icon = ' ',
             separator = ' ',
             highlight = {colors.violet, colors.bg, 'bold'}
         }

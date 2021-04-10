@@ -21,3 +21,17 @@ require'compe'.setup {
         vsnip = true
     }
 }
+
+local km = require 'keymap'
+
+function _G.smart_tab()
+    if vim.fn.pumvisible() ~= 0 then
+        return vim.fn['compe#confirm']()
+    else
+        return km.to_keycodes '<TAB>'
+    end
+end
+
+km.map(km.mode.insert, '<TAB>', 'v:lua.smart_tab()',
+       km.opts(km.optstr.noremap, km.optstr.expr, km.optstr.silent))
+

@@ -2,8 +2,6 @@ local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 
-local indent = 4
-
 g.mapleader = ' '
 
 -- Plugins
@@ -21,9 +19,13 @@ packer = require 'packer'
 
 packer.startup(function()
     use 'wbthomason/packer.nvim'
+
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'p00f/nvim-ts-rainbow'
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
+    use 'glepnir/lspsaga.nvim'
+    use 'onsails/lspkind-nvim'
 
     use 'hrsh7th/nvim-compe'
     use {
@@ -31,6 +33,12 @@ packer.startup(function()
         run = './install.sh',
         requires = 'hrsh7th/nvim-compe'
     }
+
+    use {'plasticboy/vim-markdown'}
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+
+    use 'mhinz/vim-startify'
+    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 
     use {
         'nvim-telescope/telescope.nvim',
@@ -44,19 +52,16 @@ packer.startup(function()
     }
 
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
-
-    use 'p00f/nvim-ts-rainbow'
+    use 'terrortylor/nvim-comment'
 
     use 'sbdchd/neoformat'
 
-    use 'glepnir/lspsaga.nvim'
-
     use 'hrsh7th/vim-vsnip'
-
-    use 'onsails/lspkind-nvim'
 
     use 'dense-analysis/ale'
     use 'nathunsmitty/nvim-ale-diagnostic'
+
+    use 'romgrk/barbar.nvim'
 
     use 'joshdick/onedark.vim'
 end)
@@ -70,11 +75,12 @@ opts.window.relativenumber = true
 
 opts.global.textwidth = 90
 
+local indent = 4
+
 opts.global.expandtab = true
 opts.global.tabstop = indent
 opts.global.shiftwidth = indent
 opts.global.softtabstop = indent
-opts.global.smartindent = true
 
 opts.global.smartcase = true
 opts.global.ignorecase = true
@@ -88,25 +94,45 @@ cmd [[colorscheme onedark]]
 
 cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 
+g.python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
+
 -- Keymaps
 local km = require 'keymap'
 
-km.map(km.mode.normal, '<leader>w', ':w<CR>', km.noremap)
-km.map(km.mode.normal, '<leader>q', ':q<CR>', km.noremap)
-km.map(km.mode.normal, '<leader>Q', ':q!<CR>', km.noremap)
-km.map(km.mode.normal, '<C-j>', '<C-w>j', km.noremap)
-km.map(km.mode.normal, '<C-k>', '<C-w>k', km.noremap)
-km.map(km.mode.normal, '<C-h>', '<C-w>h', km.noremap)
-km.map(km.mode.normal, '<C-l>', '<C-w>l', km.noremap)
-km.map(km.mode.terminal, '<C-j>', [[<C-\><C-n><C-w>j]], km.noremap)
-km.map(km.mode.terminal, '<C-k>', [[<C-\><C-n><C-w>k]], km.noremap)
-km.map(km.mode.terminal, '<C-h>', [[<C-\><C-n><C-w>h]], km.noremap)
-km.map(km.mode.terminal, '<C-l>', [[<C-\><C-n><C-w>l]], km.noremap)
+km.map(km.mode.normal, '<leader>w', ':w<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>q', ':q<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>Q', ':q!<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<C-j>', '<C-w>j', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<C-k>', '<C-w>k', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<C-h>', '<C-w>h', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<C-l>', '<C-w>l', km.opts(km.optstr.noremap))
+km.map(km.mode.terminal, '<C-j>', [[<C-\><C-n><C-w>j]],
+       km.opts(km.optstr.noremap))
+km.map(km.mode.terminal, '<C-k>', [[<C-\><C-n><C-w>k]],
+       km.opts(km.optstr.noremap))
+km.map(km.mode.terminal, '<C-h>', [[<C-\><C-n><C-w>h]],
+       km.opts(km.optstr.noremap))
+km.map(km.mode.terminal, '<C-l>', [[<C-\><C-n><C-w>l]],
+       km.opts(km.optstr.noremap))
 
-km.map(km.mode.normal, '<leader>f', ':Neoformat<CR>', km.noremap)
-km.map(km.mode.visual, '<leader>f', ':Neoformat<CR>', km.noremap)
+km.map(km.mode.normal, '<leader>cp', ':%y+<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.visual, '<leader>cp', '\"+y', km.opts(km.optstr.noremap))
 
-km.map(km.mode.normal, '<leader>nt', ':NvimTreeToggle<CR>', km.noremap)
+km.map(km.mode.normal, '<leader>hpp', ':set filetype=cpp<CR>',
+       km.opts(km.optstr.noremap))
+
+km.map(km.mode.normal, '<leader>tm', ':terminal<CR>', km.opts(km.optstr.noremap))
+
+km.map(km.mode.normal, '<leader>f', ':Neoformat<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.visual, '<leader>f', ':Neoformat<CR>', km.opts(km.optstr.noremap))
+
+km.map(km.mode.normal, '<leader>nt', ':NvimTreeToggle<CR>',
+       km.opts(km.optstr.noremap))
+
+km.map(km.mode.normal, '<leader>nc', ':CommentToggle<CR>',
+       km.opts(km.optstr.noremap))
+km.map(km.mode.visual, '<leader>nc', ':CommentToggle<CR>',
+       km.opts(km.optstr.noremap))
 
 -- treesitter
 require 'treesitter'
@@ -123,4 +149,20 @@ require 'fmt'
 
 -- statusline
 require 'statusline'
+
+-- comment
+require'nvim_comment'.setup()
+
+-- vim markdown
+
+-- disable the folding configuration
+g.vim_markdown_folding_disabled = 1
+-- enable conceal
+g.vim_markdown_conceal = 1
+-- Latex math syntax
+g.vim_markdown_math = 1
+-- Strikethrough uses two tildes
+g.vim_markdown_strikethrough = 1
+-- Enable TOC Autofit
+g.vim_markdown_toc_autofit = 1
 
