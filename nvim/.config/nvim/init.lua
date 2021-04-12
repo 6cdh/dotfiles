@@ -71,6 +71,8 @@ packer.startup(function()
 
     use 'romgrk/barbar.nvim'
 
+    use 'lambdalisue/suda.vim'
+
     use 'joshdick/onedark.vim'
 end)
 
@@ -81,13 +83,17 @@ local opts = {global = vim.o, buffer = vim.bo, window = vim.wo}
 opts.window.number = true
 opts.window.relativenumber = true
 
-opts.buffer.textwidth = 90
+opts.global.textwidth = 90
 
 local indent = 4
 
+opts.global.expandtab = true
 opts.buffer.expandtab = true
+opts.global.tabstop = indent
 opts.buffer.tabstop = indent
+opts.global.shiftwidth = indent
 opts.buffer.shiftwidth = indent
+opts.global.softtabstop = indent
 opts.buffer.softtabstop = indent
 
 opts.global.smartcase = true
@@ -96,6 +102,16 @@ opts.global.ignorecase = true
 opts.global.showmode = false
 
 opts.global.completeopt = 'menuone,noselect'
+
+opts.global.magic = true
+opts.global.backup = false
+opts.global.writebackup = false
+opts.global.swapfile = false
+
+cmd [[set shortmess+=c]]
+
+-- cmd [[filetype plugin on]]
+-- cmd [[filetype indent on]]
 
 opts.global.termguicolors = true
 cmd [[colorscheme onedark]]
@@ -177,3 +193,8 @@ g.vim_markdown_strikethrough = 1
 -- Enable TOC Autofit
 g.vim_markdown_toc_autofit = 1
 
+-- suda
+g['suda#prompt'] = '[sudo] Password: '
+km.map(km.mode.normal, '<leader>W', ':SudaWrite<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>sdr', ':SudaRead<CR>',
+       km.opts(km.optstr.noremap))
