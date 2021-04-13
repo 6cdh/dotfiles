@@ -21,23 +21,26 @@ packer = require 'packer'
 packer.startup(function()
     use 'wbthomason/packer.nvim'
 
+    -- lsp
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'p00f/nvim-ts-rainbow'
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
     use 'glepnir/lspsaga.nvim'
     use 'onsails/lspkind-nvim'
+    use 'ray-x/lsp_signature.nvim'
 
+    -- completion
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
     use 'hrsh7th/nvim-compe'
     use {
         'tzachar/compe-tabnine',
         run = './install.sh',
         requires = 'hrsh7th/nvim-compe'
     }
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
-    use 'ray-x/lsp_signature.nvim'
 
+    -- languages
     use {'plasticboy/vim-markdown', ft = {'markdown'}}
     use {
         'iamcco/markdown-preview.nvim',
@@ -45,42 +48,43 @@ packer.startup(function()
         ft = {'markdown'}
     }
 
-    use 'windwp/nvim-autopairs'
-
+    -- visual
     use 'mhinz/vim-startify'
+    use 'romgrk/barbar.nvim'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
-
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-    }
-
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
         requires = {'kyazdani42/nvim-web-devicons'}
     }
 
+    -- utils
+    use 'tpope/vim-repeat'
+    use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
+    use 'lambdalisue/suda.vim'
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
-    use 'terrortylor/nvim-comment'
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    }
 
+    -- coding
     use 'sbdchd/neoformat'
-
+    use 'terrortylor/nvim-comment'
+    use 'windwp/nvim-autopairs'
     use 'metakirby5/codi.vim'
+    use 'junegunn/vim-easy-align'
 
+    -- diagnostic
     use 'dense-analysis/ale'
     use 'nathunsmitty/nvim-ale-diagnostic'
 
-    use 'romgrk/barbar.nvim'
-
-    use 'lambdalisue/suda.vim'
-
+    -- color scheme
     use 'Th3Whit3Wolf/one-nvim'
     use 'norcalli/nvim-colorizer.lua'
 end)
 
--- General Conf
-
+-- General
 local opts = {global = vim.o, buffer = vim.bo, window = vim.wo}
 
 opts.window.number = true
@@ -104,6 +108,8 @@ opts.global.ignorecase = true
 
 opts.global.showmode = false
 
+opts.window.signcolumn = 'yes:2'
+
 opts.global.completeopt = 'menuone,noselect'
 
 opts.global.magic = true
@@ -126,41 +132,49 @@ g.python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 -- Keymaps
 local km = require 'keymap'
 
-km.map(km.mode.normal, '<leader>w', ':w<CR>', km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<leader>q', ':q<CR>', km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<leader>Q', ':q!<CR>', km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<C-j>', '<C-w>j', km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<C-k>', '<C-w>k', km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<C-h>', '<C-w>h', km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<C-l>', '<C-w>l', km.opts(km.optstr.noremap))
-km.map(km.mode.terminal, '<C-j>', [[<C-\><C-n><C-w>j]],
-       km.opts(km.optstr.noremap))
-km.map(km.mode.terminal, '<C-k>', [[<C-\><C-n><C-w>k]],
-       km.opts(km.optstr.noremap))
-km.map(km.mode.terminal, '<C-h>', [[<C-\><C-n><C-w>h]],
-       km.opts(km.optstr.noremap))
-km.map(km.mode.terminal, '<C-l>', [[<C-\><C-n><C-w>l]],
-       km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>w', ':w<CR>', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>q', ':q<CR>', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>Q', ':q!<CR>', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<C-j>', '<C-w>j', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<C-k>', '<C-w>k', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<C-h>', '<C-w>h', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<C-l>', '<C-w>l', km.mk(km.opts.noremap))
+km.map(km.mode.terminal, '<C-j>', [[<C-\><C-n><C-w>j]], km.mk(km.opts.noremap))
+km.map(km.mode.terminal, '<C-k>', [[<C-\><C-n><C-w>k]], km.mk(km.opts.noremap))
+km.map(km.mode.terminal, '<C-h>', [[<C-\><C-n><C-w>h]], km.mk(km.opts.noremap))
+km.map(km.mode.terminal, '<C-l>', [[<C-\><C-n><C-w>l]], km.mk(km.opts.noremap))
 
-km.map(km.mode.normal, '<leader>cp', ':%y+<CR>', km.opts(km.optstr.noremap))
-km.map(km.mode.visual, '<leader>cp', '\"+y', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>cp', ':%y+<CR>', km.mk(km.opts.noremap))
+km.map(km.mode.visual, '<leader>cp', '\"+y', km.mk(km.opts.noremap))
 
 km.map(km.mode.normal, '<leader>hpp', ':set filetype=cpp<CR>',
-       km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
 
-km.map(km.mode.normal, '<leader>tm', ':terminal<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>tm', ':terminal<CR>', km.mk(km.opts.noremap))
 
-km.map(km.mode.normal, '<leader>f', ':Neoformat<CR>', km.opts(km.optstr.noremap))
-km.map(km.mode.visual, '<leader>f', ':Neoformat<CR>', km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>f', ':Neoformat<CR>', km.mk(km.opts.noremap))
+km.map(km.mode.visual, '<leader>f', ':Neoformat<CR>', km.mk(km.opts.noremap))
 
 km.map(km.mode.normal, '<leader>nt', ':NvimTreeToggle<CR>',
-       km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
 
 km.map(km.mode.normal, '<leader>nc', ':CommentToggle<CR>',
-       km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
 km.map(km.mode.visual, '<leader>nc', ':CommentToggle<CR>',
-       km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<leader>ci', ':Codi<CR>', km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>ci', ':Codi<CR>', km.mk(km.opts.noremap))
+
+-- packer
+km.map(km.mode.normal, '<leader>pi', ':PackerInstall<CR>',
+       km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>ps', ':PackerStatus<CR>', km.mk(km.opts.noremap))
+
+-- fast make
+km.map(km.mode.normal, '<leader>mk', ':!make', km.mk(km.opts.noremap))
+
+-- easy align
+km.map(km.mode.visual, '<leader>ea', '<Plug>(EasyAlgin)', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>ea', '<Plug>(EasyAlgin)', km.mk(km.opts.noremap))
 
 -- treesitter
 require 'treesitter'
@@ -190,6 +204,9 @@ require'colorizer'.setup()
 -- lsp_signature
 require'lsp_signature'.on_attach()
 
+-- gitsigns
+require'gitsigns'.setup()
+
 -- vim markdown
 
 -- disable the folding configuration
@@ -205,7 +222,6 @@ g.vim_markdown_toc_autofit = 1
 
 -- suda
 g['suda#prompt'] = '[sudo] Password: '
-km.map(km.mode.normal, '<leader>W', ':SudaWrite<CR>', km.opts(km.optstr.noremap))
-km.map(km.mode.normal, '<leader>sdr', ':SudaRead<CR>',
-       km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>W', ':SudaWrite<CR>', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>sdr', ':SudaRead<CR>', km.mk(km.opts.noremap))
 

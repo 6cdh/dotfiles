@@ -49,16 +49,16 @@ saga.init_lsp_saga()
 local km = require 'keymap'
 
 km.map(km.mode.normal, '<leader>cf', ':Lspsaga lsp_finder<CR>',
-       km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
 km.map(km.mode.normal, '<leader>cca', ':Lspsaga code_action<CR>',
-       km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
 km.map(km.mode.visual, '<leader>cca', ':Lspsaga range_code_action<CR>',
-       km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
 
 km.map(km.mode.normal, 'K', ':Lspsaga hover_doc<CR>',
-       km.opts(km.optstr.noremap, km.optstr.silent))
+       km.mk(km.opts.noremap, km.opts.silent))
 km.map(km.mode.normal, '<leader>rn', ':Lspsaga rename<CR>',
-       km.opts(km.optstr.noremap))
+       km.mk(km.opts.noremap))
 
 -- lspkind
 require'lspkind'.init {

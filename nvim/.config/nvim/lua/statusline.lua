@@ -8,17 +8,17 @@ local gls = gl.section
 local glf = require('galaxyline.provider_fileinfo')
 local lspclient = require('galaxyline.provider_lsp')
 
--- bg = #202328
--- fg = #bbc2cf
--- yellow = #ECBE7B
--- cyan = #008080
--- darkblue = #081633
--- green = #98be65
--- orange = #FF8800
--- violet = #a9a1e1
--- magenta = #c678dd
--- blue = #51afef
--- red = #ec5f67
+colors.bg = '#2c323c'
+colors.fg = '#abb2bf'
+colors.yellow = '#ECBE7B'
+colors.cyan = '#008080'
+colors.darkblue = '#081633'
+colors.green = '#98be65'
+colors.orange = '#FF8800'
+colors.violet = '#a9a1e1'
+colors.magenta = '#c678dd'
+colors.blue = '#51afef'
+colors.red = '#ec5f67'
 
 local gl_rainbow = function()
     -- auto change color according the vim mode
@@ -57,15 +57,15 @@ gls.left = {
     {ViMode = {provider = gl_rainbow}}, {
         FileSize = {
             provider = file_size,
-            condition = condition.buffer_not_empty,
             separator = ' ',
+            separator_highlight = {'NONE', colors.bg},
+            condition = condition.buffer_not_empty,
             highlight = {colors.fg, colors.bg}
         }
     }, {
         FileIcon = {
             provider = 'FileIcon',
             condition = condition.buffer_not_empty,
-            separator = ' ',
             highlight = {
                 require('galaxyline.provider_fileinfo').get_file_icon_color,
                 colors.bg
@@ -74,39 +74,38 @@ gls.left = {
     }, {
         FileName = {
             provider = 'FileName',
-            separator = ' ',
             condition = condition.buffer_not_empty,
             highlight = {colors.fg, colors.bg, 'bold'}
         }
     }, {
         PerCent = {
             provider = 'LinePercent',
-            separator = ' ',
-            separator_highlight = {'NONE', colors.bg},
             highlight = {colors.fg, colors.bg, 'bold'}
         }
     }, {
         DiagnosticError = {
             provider = 'DiagnosticError',
-            icon = '  ',
+            separator = ' ',
+            separator_highlight = {'NONE', colors.bg},
+            icon = ' ',
             highlight = {colors.red, colors.bg}
         }
     }, {
         DiagnosticWarn = {
             provider = 'DiagnosticWarn',
-            icon = '  ',
+            icon = ' ',
             highlight = {colors.yellow, colors.bg}
         }
     }, {
         DiagnosticHint = {
             provider = 'DiagnosticHint',
-            icon = '  ',
+            icon = ' ',
             highlight = {colors.cyan, colors.bg}
         }
     }, {
         DiagnosticInfo = {
             provider = 'DiagnosticInfo',
-            icon = '  ',
+            icon = ' ',
             highlight = {colors.blue, colors.bg}
         }
     }
@@ -126,21 +125,15 @@ gls.mid = {
                 if tbl[vim.bo.filetype] then return false end
                 return true
             end,
-            icon = ' LSP: ',
+            icon = '漣LSP: ',
             highlight = {colors.yellow, colors.bg, 'bold'}
         }
     }
 }
 
-local file_encoding = function()
+local function file_encoding()
     local encoding = glf.get_file_encode()
     return encoding == ' UTF-8' and '' or encoding
-end
-
-local file_info = function()
-    local format = glf.get_file_format()
-    local icon = ''
-    return icon .. ' ' .. format
 end
 
 gls.right = {
@@ -148,48 +141,56 @@ gls.right = {
         FileEncode = {
             provider = file_encoding,
             condition = condition.hide_in_width,
-            separator = ' ',
-            separator_highlight = {'NONE', colors.bg},
             highlight = {colors.green, colors.bg, 'bold'}
         }
     }, {
         FileFormatIcon = {
-            provider = file_info,
-            condition = condition.hide_in_width,
+            provider = 'FileFormat',
             separator = ' ',
             separator_highlight = {'NONE', colors.bg},
+            icon = ' ',
+            condition = condition.hide_in_width,
             highlight = {colors.green, colors.bg, 'bold'}
         }
     }, {
         GitBranch = {
             provider = 'GitBranch',
+            separator = ' ',
+            separator_highlight = {'NONE', colors.bg},
             condition = condition.check_git_workspace,
             icon = ' ',
-            separator = ' ',
             highlight = {colors.violet, colors.bg, 'bold'}
         }
     }, {
         DiffAdd = {
             provider = 'DiffAdd',
+            separator = ' ',
+            separator_highlight = {'NONE', colors.bg},
             condition = condition.hide_in_width,
-            icon = '  ',
+            icon = ' ',
             highlight = {colors.green, colors.bg}
         }
     }, {
         DiffModified = {
             provider = 'DiffModified',
             condition = condition.hide_in_width,
-            icon = ' 柳',
+            icon = ' ',
             highlight = {colors.orange, colors.bg}
         }
     }, {
         DiffRemove = {
             provider = 'DiffRemove',
             condition = condition.hide_in_width,
-            icon = '  ',
+            icon = ' ',
             highlight = {colors.red, colors.bg}
         }
-    }, {ViMode = {provider = gl_rainbow, separator = ' '}}
+    }, {
+        ViMode = {
+            provider = gl_rainbow,
+            separator = ' ',
+            separator_highlight = {'NONE', colors.bg}
+        }
+    }
 }
 
 gls.short_line_left = {
@@ -203,6 +204,8 @@ gls.short_line_left = {
     }, {
         SFileName = {
             provider = 'SFileName',
+            separator = ' ',
+            separator_highlight = {'NONE', colors.bg},
             condition = condition.buffer_not_empty,
             highlight = {colors.fg, colors.bg, 'bold'}
         }
@@ -212,4 +215,3 @@ gls.short_line_left = {
 gls.short_line_right = {
     {BufferIcon = {provider = 'BufferIcon', highlight = {colors.fg, colors.bg}}}
 }
-

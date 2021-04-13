@@ -13,8 +13,8 @@ local km = {
     },
 
     map = vim.api.nvim_set_keymap,
-    optstr = {noremap = 'noremap', expr = 'expr', silent = 'silent'},
-    opts = function(...)
+    opts = {noremap = 'noremap', expr = 'expr', silent = 'silent'},
+    mk = function(...)
         local arg = {...}
         local t = {}
         for _, v in ipairs(arg) do t[v] = true end
