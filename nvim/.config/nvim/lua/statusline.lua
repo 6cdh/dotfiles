@@ -8,14 +8,26 @@ local gls = gl.section
 local glf = require('galaxyline.provider_fileinfo')
 local lspclient = require('galaxyline.provider_lsp')
 
+-- bg = #202328
+-- fg = #bbc2cf
+-- yellow = #ECBE7B
+-- cyan = #008080
+-- darkblue = #081633
+-- green = #98be65
+-- orange = #FF8800
+-- violet = #a9a1e1
+-- magenta = #c678dd
+-- blue = #51afef
+-- red = #ec5f67
+
 local gl_rainbow = function()
     -- auto change color according the vim mode
     local mode_color = {
         n = colors.green,
-        i = colors.red,
-        v = colors.blue,
+        i = colors.blue,
+        v = colors.magenta,
         [''] = colors.blue,
-        V = colors.blue,
+        V = colors.magenta,
         c = colors.magenta,
         no = colors.red,
         s = colors.orange,

@@ -60,6 +60,11 @@
   type: [linter]
   run: yay -S jq
 
+- name: lua-formatter
+  lang: [lua]
+  type: [formatter]
+  run: luarocks install luacheck --server=https://luarocks.org/dev --local
+
 - name: ormolu
   lang: [haskell]
   type: [formatter]

@@ -26,8 +26,6 @@ packer.startup(function()
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
     use 'glepnir/lspsaga.nvim'
-    -- use 'RishabhRD/popfix'
-    -- use 'RishabhRD/nvim-lsputils'
     use 'onsails/lspkind-nvim'
 
     use 'hrsh7th/nvim-compe'
@@ -36,6 +34,9 @@ packer.startup(function()
         run = './install.sh',
         requires = 'hrsh7th/nvim-compe'
     }
+    use 'hrsh7th/vim-vsnip'
+    use 'ray-x/lsp_signature.nvim'
+
     use {'plasticboy/vim-markdown', ft = {'markdown'}}
     use {
         'iamcco/markdown-preview.nvim',
@@ -64,7 +65,7 @@ packer.startup(function()
 
     use 'sbdchd/neoformat'
 
-    use 'hrsh7th/vim-vsnip'
+    use 'metakirby5/codi.vim'
 
     use 'dense-analysis/ale'
     use 'nathunsmitty/nvim-ale-diagnostic'
@@ -73,7 +74,8 @@ packer.startup(function()
 
     use 'lambdalisue/suda.vim'
 
-    use 'joshdick/onedark.vim'
+    use 'Th3Whit3Wolf/one-nvim'
+    use 'norcalli/nvim-colorizer.lua'
 end)
 
 -- General Conf
@@ -114,7 +116,7 @@ cmd [[set shortmess+=c]]
 -- cmd [[filetype indent on]]
 
 opts.global.termguicolors = true
-cmd [[colorscheme onedark]]
+cmd [[colorscheme one-nvim]]
 
 cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 
@@ -157,6 +159,7 @@ km.map(km.mode.normal, '<leader>nc', ':CommentToggle<CR>',
        km.opts(km.optstr.noremap))
 km.map(km.mode.visual, '<leader>nc', ':CommentToggle<CR>',
        km.opts(km.optstr.noremap))
+km.map(km.mode.normal, '<leader>ci', ':Codi<CR>', km.opts(km.optstr.noremap))
 
 -- treesitter
 require 'treesitter'
@@ -180,6 +183,12 @@ require'nvim_comment'.setup()
 -- nvim-autopairs
 require('nvim-autopairs').setup()
 
+-- colorizer
+require'colorizer'.setup()
+
+-- lsp_signature
+require'lsp_signature'.on_attach()
+
 -- vim markdown
 
 -- disable the folding configuration
@@ -198,3 +207,4 @@ g['suda#prompt'] = '[sudo] Password: '
 km.map(km.mode.normal, '<leader>W', ':SudaWrite<CR>', km.opts(km.optstr.noremap))
 km.map(km.mode.normal, '<leader>sdr', ':SudaRead<CR>',
        km.opts(km.optstr.noremap))
+

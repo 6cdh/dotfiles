@@ -6,16 +6,7 @@ lspconfig.pyright.setup {}
 lspconfig.hls.setup {}
 lspconfig.vimls.setup {}
 lspconfig.texlab.setup {}
-
-require('nvim-ale-diagnostic')
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
-        underline = false,
-        signs = true,
-        update_in_insert = false
-    })
+lspconfig.gopls.setup {}
 
 -- lua
 local sumneko_root_path = vim.fn.stdpath('cache') ..
@@ -38,6 +29,17 @@ lspconfig.sumneko_lua.setup {
     }
 }
 
+-- ale
+require('nvim-ale-diagnostic')
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false,
+        underline = false,
+        signs = true,
+        update_in_insert = false
+    })
+
 -- lspsaga
 
 local saga = require 'lspsaga'
@@ -59,4 +61,5 @@ km.map(km.mode.normal, '<leader>rn', ':Lspsaga rename<CR>',
        km.opts(km.optstr.noremap))
 
 -- lspkind
-require'lspkind'.init()
+require'lspkind'.init {with_text = false}
+
