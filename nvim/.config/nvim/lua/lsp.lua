@@ -61,5 +61,34 @@ km.map(km.mode.normal, '<leader>rn', ':Lspsaga rename<CR>',
        km.opts(km.optstr.noremap))
 
 -- lspkind
-require'lspkind'.init {with_text = false}
+require'lspkind'.init {
+    with_text = false,
+    -- vscode-like pictograms
+    symbol_map = {
+        Text = ' ',
+        Method = ' ',
+        Function = ' ',
+        Constructor = ' ',
+        Variable = ' ',
+        Class = ' ',
+        Interface = ' ',
+        Module = ' ',
+        Property = ' ',
+        Unit = ' ',
+        Value = ' ',
+        Enum = ' ',
+        Keyword = ' ',
+        Snippet = ' ',
+        Color = ' ',
+        File = ' ',
+        Reference = ' ',
+        Folder = ' ',
+        EnumMember = ' ',
+        Constant = ' ',
+        Struct = ' ',
+        Event = ' ',
+        Operator = ' ',
+        TypeParameter = ' '
+    }
+}
 

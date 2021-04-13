@@ -35,6 +35,7 @@ packer.startup(function()
         requires = 'hrsh7th/nvim-compe'
     }
     use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
     use 'ray-x/lsp_signature.nvim'
 
     use {'plasticboy/vim-markdown', ft = {'markdown'}}
