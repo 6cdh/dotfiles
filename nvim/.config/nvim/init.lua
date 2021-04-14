@@ -49,6 +49,7 @@ packer.startup(function()
     }
 
     -- vision
+    use 'kyazdani42/nvim-web-devicons'
     use 'mhinz/vim-startify'
     use 'romgrk/barbar.nvim'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
@@ -200,7 +201,7 @@ require 'statusline'
 require'nvim_comment'.setup()
 
 -- nvim-autopairs
-require('nvim-autopairs').setup()
+require'nvim-autopairs'.setup()
 
 -- colorizer
 require'colorizer'.setup()

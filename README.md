@@ -30,13 +30,15 @@ I use [GNU stow](https://www.gnu.org/software/stow/) to manage my dotfiles.
 
 ```bash
 # Install nvim config
-stow -t ~ -D nvim
+stow -t ~ nvim
 # Install vim config
-stow -t ~ -D vim
+stow -t ~ vim
 # Install zsh config
-stow -t ~ -D zsh
+stow -t ~ zsh
 # Install kitty config
-stow -t ~ -D kitty
+stow -t ~ kitty
+# Uninstall zsh config
+stow -t ~ -D zsh
 ```
 
-You may want to use `stow -nv -t ~ -D <DIR>` to see what stow will do before any modifications.
+You may want to use `stow -nv -t ~ <DIR>` to see what stow will do before any modifications.
