@@ -169,7 +169,7 @@ km.map(km.mode.normal, '<leader>ci', ':Codi<CR>', km.mk(km.opts.noremap))
 -- packer
 km.map(km.mode.normal, '<leader>pi', ':PackerInstall<CR>',
        km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>ps', ':PackerStatus<CR>', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>ps', ':PackerSync<CR>', km.mk(km.opts.noremap))
 
 -- fast make
 km.map(km.mode.normal, '<leader>mk', ':!make', km.mk(km.opts.noremap))
