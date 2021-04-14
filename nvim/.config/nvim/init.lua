@@ -48,15 +48,16 @@ packer.startup(function()
         ft = {'markdown'}
     }
 
-    -- visual
+    -- vision
     use 'mhinz/vim-startify'
     use 'romgrk/barbar.nvim'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
-    use {
-        'glepnir/galaxyline.nvim',
-        branch = 'main',
-        requires = {'kyazdani42/nvim-web-devicons'}
-    }
+    use 'famiu/feline.nvim'
+    -- use {
+    --     'glepnir/galaxyline.nvim',
+    --     branch = 'main',
+    --     requires = {'kyazdani42/nvim-web-devicons'}
+    -- }
 
     -- utils
     use 'tpope/vim-repeat'
@@ -189,6 +190,9 @@ require 'complete'
 -- neoformat
 require 'fmt'
 
+-- gitsigns
+require'gitsigns'.setup()
+
 -- statusline
 require 'statusline'
 
@@ -203,9 +207,6 @@ require'colorizer'.setup()
 
 -- lsp_signature
 require'lsp_signature'.on_attach()
-
--- gitsigns
-require'gitsigns'.setup()
 
 -- vim markdown
 
