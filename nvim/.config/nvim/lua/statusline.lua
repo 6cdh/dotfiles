@@ -30,13 +30,6 @@ local vi_mode_colors = {
     NONE = colors.yellow
 }
 
-local function lsp_name()
-    for _, client in pairs(vim.lsp.buf_get_clients()) do
-        if client then return ' ' .. client.name end
-    end
-    return ''
-end
-
 local function file_osinfo()
     local os = vim.bo.fileformat:upper()
     local icon
@@ -163,8 +156,9 @@ local comps = {
     },
     lsp = {
         name = {
-            provider = lsp_name,
+            provider = 'lsp_client_names',
             left_sep = ' ',
+            icon = ' ',
             hl = {
                 fg = colors.yellow,
                 style = 'bold'
