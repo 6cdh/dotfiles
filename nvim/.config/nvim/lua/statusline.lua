@@ -70,12 +70,18 @@ local comps = {
     file = {
         info = {
             provider = 'file_info',
-            hl = {fg = colors.blue, style = 'bold'}
+            hl = {
+                fg = colors.blue,
+                style = 'bold'
+            }
         },
         encoding = {
             provider = 'file_encoding',
             left_sep = ' ',
-            hl = {fg = colors.violet, style = 'bold'}
+            hl = {
+                fg = colors.violet,
+                style = 'bold'
+            }
         },
         type = {
             provider = 'file_type'
@@ -83,7 +89,9 @@ local comps = {
     },
     line_percentage = {
         provider = 'line_percentage',
-        hl = {style = 'bold'}
+        hl = {
+            style = 'bold'
+        }
     },
     diagnos = {
         err = {
@@ -91,58 +99,75 @@ local comps = {
             enabled = function()
                 return lsp.diagnostics_exist('Error')
             end,
-            hl = {fg = colors.red}
+            hl = {
+                fg = colors.red
+            }
         },
         warn = {
             provider = 'diagnostic_warnings',
             enabled = function()
                 return lsp.diagnostics_exist('Warning')
             end,
-            hl = {fg = colors.yellow}
+            hl = {
+                fg = colors.yellow
+            }
         },
         hint = {
             provider = 'diagnostic_hints',
             enabled = function()
                 return lsp.diagnostics_exist('Hint')
             end,
-            hl = {fg = colors.cyan}
+            hl = {
+                fg = colors.cyan
+            }
         },
         info = {
             provider = 'diagnostic_info',
             enabled = function()
                 return lsp.diagnostics_exist('Information')
             end,
-            hl = {fg = colors.blue}
+            hl = {
+                fg = colors.blue
+            }
         },
     },
     lsp = {
         name = {
             provider = lsp_name,
-            hl = {fg = colors.yellow, style = 'bold'},
-            left_sep = ' '
-        },
+            left_sep = ' ',
+            hl = {
+                fg = colors.yellow,
+                style = 'bold'
+            }
+        }
     },
     git = {
         branch = {
             provider = 'git_branch',
             icon = ' ',
+            left_sep = ' ',
             hl = {
                 fg = colors.violet,
                 style = 'bold'
             },
-            left_sep = ' '
         },
         add = {
             provider = 'git_diff_added',
-            hl = {fg = colors.green}
+            hl = {
+                fg = colors.green
+            }
         },
         change = {
             provider = 'git_diff_changed',
-            hl = {fg = colors.orange}
+            hl = {
+                fg = colors.orange
+            }
         },
         remove = {
             provider = 'git_diff_removed',
-            hl = {fg = colors.red}
+            hl = {
+                fg = colors.red
+            }
         }
     }
 }
@@ -168,11 +193,11 @@ local components = {
             comps.vi_mode.left,
             comps.file.info,
             comps.line_percentage,
+            comps.lsp.name,
             comps.diagnos.err,
             comps.diagnos.warn,
             comps.diagnos.hint,
-            comps.diagnos.info,
-            comps.lsp.name
+            comps.diagnos.info
         },
         inactive = {
             comps.vi_mode.left,
@@ -181,11 +206,11 @@ local components = {
     },
     right = {
         active = {
-            comps.file.encoding,
-            comps.git.branch,
             comps.git.add,
             comps.git.change,
             comps.git.remove,
+            comps.file.encoding,
+            comps.git.branch,
             comps.vi_mode.right
         },
         inactive = {}

@@ -54,17 +54,13 @@ packer.startup(function()
     use 'romgrk/barbar.nvim'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'famiu/feline.nvim'
-    -- use {
-    --     'glepnir/galaxyline.nvim',
-    --     branch = 'main',
-    --     requires = {'kyazdani42/nvim-web-devicons'}
-    -- }
 
     -- utils
     use 'tpope/vim-repeat'
     use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
     use 'lambdalisue/suda.vim'
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    use 'akinsho/nvim-toggleterm.lua'
     use {
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
@@ -75,7 +71,7 @@ packer.startup(function()
     use 'terrortylor/nvim-comment'
     use 'windwp/nvim-autopairs'
     use 'metakirby5/codi.vim'
-    use 'junegunn/vim-easy-align'
+    use 'godlygeek/tabular'
 
     -- diagnostic
     use 'dense-analysis/ale'
