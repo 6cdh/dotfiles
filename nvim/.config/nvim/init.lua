@@ -205,6 +205,18 @@ require'colorizer'.setup()
 -- lsp_signature
 require'lsp_signature'.on_attach()
 
+-- nvim-toggleterm
+require'toggleterm'.setup {
+    size = 10,
+    open_mapping = '<leader>tt',
+    shade_filetypes = {},
+    shade_terminals = true,
+    shading_factor = 1,
+    start_in_insert = true,
+    persist_size = true,
+    direction = 'horizontal'
+}
+
 -- vim markdown
 
 -- disable the folding configuration
