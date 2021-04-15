@@ -37,6 +37,19 @@ local function lsp_name()
     return ''
 end
 
+local function file_osinfo()
+    local os = vim.bo.fileformat:upper()
+    local icon
+    if os == 'UNIX' then
+        icon = ' '
+    elseif os == 'MAC' then
+        icon = ' '
+    else
+        icon = ' '
+    end
+    return icon .. os
+end
+
 local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
 
@@ -85,11 +98,28 @@ local comps = {
         },
         type = {
             provider = 'file_type'
+        },
+        os = {
+            provider = file_osinfo,
+            left_sep = ' ',
+            hl = {
+                fg = colors.violet,
+                style = 'bold'
+            }
         }
     },
     line_percentage = {
         provider = 'line_percentage',
+        left_sep = ' ',
         hl = {
+            style = 'bold'
+        }
+    },
+    scroll_bar = {
+        provider = 'scroll_bar',
+        left_sep = ' ',
+        hl = {
+            fg = colors.blue,
             style = 'bold'
         }
     },
@@ -192,7 +222,6 @@ local components = {
         active = {
             comps.vi_mode.left,
             comps.file.info,
-            comps.line_percentage,
             comps.lsp.name,
             comps.diagnos.err,
             comps.diagnos.warn,
@@ -209,8 +238,10 @@ local components = {
             comps.git.add,
             comps.git.change,
             comps.git.remove,
-            comps.file.encoding,
+            comps.file.os,
             comps.git.branch,
+            comps.line_percentage,
+            comps.scroll_bar,
             comps.vi_mode.right
         },
         inactive = {}
