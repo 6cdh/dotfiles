@@ -1,4 +1,3 @@
--- local cmd = vim.cmd
 local colors = {
     bg = '#2c323c',
     fg = '#abb2bf',

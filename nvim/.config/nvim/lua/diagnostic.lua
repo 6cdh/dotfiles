@@ -8,5 +8,5 @@ g.ale_sign_warning = ' '
 
 g.ale_set_highlights = 0
 
-vim.cmd [[:highlight ALEError ctermbg=none cterm=underline]]
-vim.cmd [[:highlight ALEWarning ctermbg=none cterm=underline]]
+vim.api.nvim_command [[:highlight ALEError ctermbg=none cterm=underline]]
+vim.api.nvim_command [[:highlight ALEWarning ctermbg=none cterm=underline]]

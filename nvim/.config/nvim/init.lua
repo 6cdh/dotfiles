@@ -1,24 +1,28 @@
----@diagnostic disable: undefined-global
-local cmd = vim.cmd
+local cmd = vim.api.nvim_command
 local fn = vim.fn
 local g = vim.g
 
 g.mapleader = ' '
 
--- Plugins
-
 -- packer.nvim
-local packer_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local packer_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(packer_path)) > 0 then
-    cmd([[!git clone https://github.com/wbthomason/packer.nvim --depth 1]] ..
+    cmd('!git clone https://github.com/wbthomason/packer.nvim --depth 1' ..
             packer_path)
-    cmd [[packadd packer.nvim]]
 end
 
-packer = require 'packer'
+vim.api.nvim_exec([[
+    augroup Packer
+        autocmd!
+        autocmd BufWritePost init.lua PackerCompile
+    augroup end
+]], false)
 
-packer.startup(function()
+local packer = require 'packer'
+
+-- Plugins
+packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'wbthomason/packer.nvim'
 
     -- lsp
@@ -80,12 +84,13 @@ packer.startup(function()
     -- diagnostic
     use 'dense-analysis/ale'
     use 'nathunsmitty/nvim-ale-diagnostic'
+    use 'tweekmonster/startuptime.vim'
 
     -- color scheme
     use 'Th3Whit3Wolf/one-nvim'
 end)
 
--- General
+-- Options
 local opts = {global = vim.o, buffer = vim.bo, window = vim.wo}
 
 opts.window.number = true
@@ -104,12 +109,26 @@ opts.buffer.shiftwidth = indent
 opts.global.softtabstop = indent
 opts.buffer.softtabstop = indent
 
+opts.global.inccommand = 'nosplit'
+
+opts.global.hlsearch = false
+opts.global.incsearch = true
+
+opts.global.lazyredraw = true
+
+opts.global.breakindent = true
+
+cmd [[set undofile]]
+
+opts.global.updatetime = 100
+opts.global.timeoutlen = 700
+
 opts.global.smartcase = true
 opts.global.ignorecase = true
 
 opts.global.showmode = false
 
-opts.window.signcolumn = 'yes:2'
+opts.window.signcolumn = 'yes'
 
 opts.global.completeopt = 'menuone,noselect'
 
@@ -128,8 +147,6 @@ cmd [[set shortmess+=c]]
 
 opts.global.termguicolors = true
 cmd [[colorscheme one-nvim]]
-
-cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 
 g.python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
@@ -166,6 +183,7 @@ km.map(km.mode.normal, '<leader>nc', km.cmd('CommentToggle'),
        km.mk(km.opts.noremap))
 km.map(km.mode.visual, '<leader>nc', km.cmd('CommentToggle'),
        km.mk(km.opts.noremap))
+
 km.map(km.mode.normal, '<leader>ci', km.cmd('Codi'), km.mk(km.opts.noremap))
 
 -- packer
