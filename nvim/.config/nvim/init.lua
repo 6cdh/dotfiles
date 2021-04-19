@@ -200,6 +200,7 @@ km.map(km.mode.normal, '<leader>mk', ':!make ', 'noremap')
 
 -- tabular
 km.map(km.mode.normal, '<leader>tb', ':Tabularize /', 'noremap')
+km.map(km.mode.visual, '<leader>tb', ':Tabularize /', 'noremap')
 
 -- barbar.nvim
 km.map(km.mode.normal, '<A-<>', km.cmd('BufferPrevious'), 'noremap')
