@@ -12,12 +12,11 @@ local km = {
         visual_select = 'v'
     },
 
-    map = vim.api.nvim_set_keymap,
-    opts = {noremap = 'noremap', expr = 'expr', silent = 'silent'},
-    mk = function(...)
+    map = function(mode, lhs, rhs, ...)
+        local opts = {...}
         local t = {}
-        for _, v in ipairs({...}) do t[v] = true end
-        return t
+        for _, v in ipairs(opts) do t[v] = true end
+        vim.api.nvim_set_keymap(mode, lhs, rhs, t)
     end,
     cmd = function(s) return '<Cmd>' .. s .. '<CR>' end,
     to_keycodes = function(s)

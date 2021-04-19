@@ -4,7 +4,8 @@ local g = vim.g
 
 g.mapleader = ' '
 
--- packer.nvim
+-- packer.nvim {{{
+
 local packer_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(packer_path)) > 0 then
@@ -19,9 +20,12 @@ vim.api.nvim_exec([[
     augroup end
 ]], false)
 
+-- }}}
+
+-- Plugins {{{
+
 local packer = require 'packer'
 
--- Plugins
 packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'wbthomason/packer.nvim'
 
@@ -90,7 +94,10 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'Th3Whit3Wolf/one-nvim'
 end)
 
--- Options
+-- }}}
+
+-- Options {{{
+
 local opts = {global = vim.o, buffer = vim.bo, window = vim.wo}
 
 opts.window.number = true
@@ -137,87 +144,83 @@ opts.global.backup = false
 opts.global.writebackup = false
 opts.global.swapfile = false
 
+cmd [[set foldmethod=marker]]
+
 -- For barbar.nvim
 opts.global.mouse = 'a'
 
 cmd [[set shortmess+=c]]
-
--- cmd [[filetype plugin on]]
--- cmd [[filetype indent on]]
 
 opts.global.termguicolors = true
 cmd [[colorscheme one-nvim]]
 
 g.python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
--- Keymaps
+-- }}}
+
+-- Keymaps {{{
+
 local km = require 'keymap'
 
-km.map(km.mode.normal, '<leader>w', km.cmd('w'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>q', km.cmd('q'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>Q', km.cmd('q!'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<C-j>', '<C-w>j', km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<C-k>', '<C-w>k', km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<C-h>', '<C-w>h', km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<C-l>', '<C-w>l', km.mk(km.opts.noremap))
-km.map(km.mode.terminal, '<C-j>', [[<C-\><C-n><C-w>j]], km.mk(km.opts.noremap))
-km.map(km.mode.terminal, '<C-k>', [[<C-\><C-n><C-w>k]], km.mk(km.opts.noremap))
-km.map(km.mode.terminal, '<C-h>', [[<C-\><C-n><C-w>h]], km.mk(km.opts.noremap))
-km.map(km.mode.terminal, '<C-l>', [[<C-\><C-n><C-w>l]], km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>w', km.cmd('w'), 'noremap')
+km.map(km.mode.normal, '<leader>q', km.cmd('q'), 'noremap')
+km.map(km.mode.normal, '<leader>Q', km.cmd('q!'), 'noremap')
+km.map(km.mode.normal, '<C-j>', '<C-w>j', 'noremap')
+km.map(km.mode.normal, '<C-k>', '<C-w>k', 'noremap')
+km.map(km.mode.normal, '<C-h>', '<C-w>h', 'noremap')
+km.map(km.mode.normal, '<C-l>', '<C-w>l', 'noremap')
+km.map(km.mode.terminal, '<C-j>', [[<C-\><C-n><C-w>j]], 'noremap')
+km.map(km.mode.terminal, '<C-k>', [[<C-\><C-n><C-w>k]], 'noremap')
+km.map(km.mode.terminal, '<C-h>', [[<C-\><C-n><C-w>h]], 'noremap')
+km.map(km.mode.terminal, '<C-l>', [[<C-\><C-n><C-w>l]], 'noremap')
 
-km.map(km.mode.normal, '<leader>cp', km.cmd('%y+'), km.mk(km.opts.noremap))
-km.map(km.mode.visual, '<leader>cp', '\"+y', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>cp', km.cmd('%y+'), 'noremap')
+km.map(km.mode.visual, '<leader>cp', '\"+y', 'noremap')
 
-km.map(km.mode.normal, '<leader>hpp', km.cmd('set filetype=cpp'),
-       km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>hpp', km.cmd('set filetype=cpp'), 'noremap')
 
-km.map(km.mode.normal, '<leader>tm', km.cmd('terminal'), km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>tm', km.cmd('terminal'), 'noremap')
 
-km.map(km.mode.normal, '<leader>nf', km.cmd('Neoformat'), km.mk(km.opts.noremap))
-km.map(km.mode.visual, '<leader>nf', km.cmd('Neoformat'), km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>nf', km.cmd('Neoformat'), 'noremap')
+km.map(km.mode.visual, '<leader>nf', km.cmd('Neoformat'), 'noremap')
 
-km.map(km.mode.normal, '<leader>nt', km.cmd('NvimTreeToggle'),
-       km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>nt', km.cmd('NvimTreeToggle'), 'noremap')
 
-km.map(km.mode.normal, '<leader>nc', km.cmd('CommentToggle'),
-       km.mk(km.opts.noremap))
-km.map(km.mode.visual, '<leader>nc', km.cmd('CommentToggle'),
-       km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>nc', km.cmd('CommentToggle'), 'noremap')
+km.map(km.mode.visual, '<leader>nc', ':CommentToggle<CR>', 'noremap', 'silent')
 
-km.map(km.mode.normal, '<leader>ci', km.cmd('Codi'), km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>ci', km.cmd('Codi'), 'noremap')
 
 -- packer
-km.map(km.mode.normal, '<leader>pi', km.cmd('PackerInstall'),
-       km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>ps', km.cmd('PackerSync'),
-       km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>pi', km.cmd('PackerInstall'), 'noremap')
+km.map(km.mode.normal, '<leader>ps', km.cmd('PackerSync'), 'noremap')
 
 -- fast make
-km.map(km.mode.normal, '<leader>mk', ':!make', km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>mk', ':!make', 'noremap')
 
 -- easy align
-km.map(km.mode.visual, '<leader>ea', '<Plug>(EasyAlgin)', km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>ea', '<Plug>(EasyAlgin)', km.mk(km.opts.noremap))
+km.map(km.mode.visual, '<leader>ea', '<Plug>(EasyAlign)', 'noremap')
+km.map(km.mode.normal, '<leader>ea', '<Plug>(EasyAlign)', 'noremap')
 
 -- barbar.nvim
-km.map(km.mode.normal, '<A-<>', km.cmd('BufferPrevious'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<A->>', km.cmd('BufferNext'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<A-q>', km.cmd('BufferGoto 1'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<A-w>', km.cmd('BufferGoto 2'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<A-e>', km.cmd('BufferGoto 3'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<A-r>', km.cmd('BufferGoto 4'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<A-c>', km.cmd('BufferClose'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<A-m>', km.cmd('BufferPick'), km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<A-<>', km.cmd('BufferPrevious'), 'noremap')
+km.map(km.mode.normal, '<A->>', km.cmd('BufferNext'), 'noremap')
+km.map(km.mode.normal, '<A-q>', km.cmd('BufferGoto 1'), 'noremap')
+km.map(km.mode.normal, '<A-w>', km.cmd('BufferGoto 2'), 'noremap')
+km.map(km.mode.normal, '<A-e>', km.cmd('BufferGoto 3'), 'noremap')
+km.map(km.mode.normal, '<A-r>', km.cmd('BufferGoto 4'), 'noremap')
+km.map(km.mode.normal, '<A-c>', km.cmd('BufferClose'), 'noremap')
+km.map(km.mode.normal, '<A-m>', km.cmd('BufferPick'), 'noremap')
 
 -- telescope
-km.map(km.mode.normal, '<leader>ff', km.cmd('Telescope find_files'),
-       km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>fg', km.cmd('Telescope live_grep'),
-       km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>fb', km.cmd('Telescope buffers'),
-       km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>fh', km.cmd('Telescope help_tags'),
-       km.mk(km.opts.noremap))
+km.map(km.mode.normal, '<leader>ff', km.cmd('Telescope find_files'), 'noremap')
+km.map(km.mode.normal, '<leader>fg', km.cmd('Telescope live_grep'), 'noremap')
+km.map(km.mode.normal, '<leader>fb', km.cmd('Telescope buffers'), 'noremap')
+km.map(km.mode.normal, '<leader>fh', km.cmd('Telescope help_tags'), 'noremap')
+
+-- }}}
+
+-- Import modules {{{
 
 -- treesitter
 require 'treesitter'
@@ -263,7 +266,9 @@ require'toggleterm'.setup {
     direction = 'horizontal'
 }
 
--- vim markdown
+-- }}}
+
+-- vim markdown {{{
 
 -- disable the folding configuration
 g.vim_markdown_folding_disabled = 1
@@ -276,8 +281,12 @@ g.vim_markdown_strikethrough = 1
 -- Enable TOC Autofit
 g.vim_markdown_toc_autofit = 1
 
--- suda
-g['suda#prompt'] = '[sudo] Password: '
-km.map(km.mode.normal, '<leader>W', km.cmd('SudaWrite'), km.mk(km.opts.noremap))
-km.map(km.mode.normal, '<leader>sdr', km.cmd('SudaRead'), km.mk(km.opts.noremap))
+-- }}}
 
+-- suda {{{
+
+g['suda#prompt'] = '[sudo] Password: '
+km.map(km.mode.normal, '<leader>W', km.cmd('SudaWrite'), 'noremap')
+km.map(km.mode.normal, '<leader>sdr', km.cmd('SudaRead'), 'noremap')
+
+-- }}}

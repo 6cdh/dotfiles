@@ -35,6 +35,5 @@ function _G.smart_tab()
     end
 end
 
-km.map(km.mode.insert, '<TAB>', 'v:lua.smart_tab()',
-       km.mk(km.opts.expr, km.opts.silent))
+km.map(km.mode.insert, '<TAB>', 'v:lua.smart_tab()', 'expr', 'silent')
 

@@ -226,6 +226,10 @@ local components = {
             comps.file.info
         }
     },
+    mid = {
+        active = {},
+        inactive = {}
+    },
     right = {
         active = {
             comps.git.add,
