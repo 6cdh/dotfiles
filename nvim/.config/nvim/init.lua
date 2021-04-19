@@ -196,11 +196,10 @@ km.map(km.mode.normal, '<leader>pi', km.cmd('PackerInstall'), 'noremap')
 km.map(km.mode.normal, '<leader>ps', km.cmd('PackerSync'), 'noremap')
 
 -- fast make
-km.map(km.mode.normal, '<leader>mk', ':!make', 'noremap')
+km.map(km.mode.normal, '<leader>mk', ':!make ', 'noremap')
 
--- easy align
-km.map(km.mode.visual, '<leader>ea', '<Plug>(EasyAlign)', 'noremap')
-km.map(km.mode.normal, '<leader>ea', '<Plug>(EasyAlign)', 'noremap')
+-- tabular
+km.map(km.mode.normal, '<leader>tb', ':Tabularize /', 'noremap')
 
 -- barbar.nvim
 km.map(km.mode.normal, '<A-<>', km.cmd('BufferPrevious'), 'noremap')
