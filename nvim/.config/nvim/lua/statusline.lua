@@ -159,8 +159,7 @@ local comps = {
             left_sep = ' ',
             icon = ' ',
             hl = {
-                fg = colors.yellow,
-                style = 'bold'
+                fg = colors.yellow
             }
         }
     },
