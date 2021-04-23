@@ -125,8 +125,6 @@ opts.global.lazyredraw = true
 
 opts.global.breakindent = true
 
-cmd [[set undofile]]
-
 opts.global.updatetime = 100
 opts.global.timeoutlen = 700
 
@@ -136,6 +134,8 @@ opts.global.ignorecase = true
 opts.global.showmode = false
 
 opts.window.signcolumn = 'yes'
+
+opts.global.cmdheight = 2
 
 opts.global.completeopt = 'menuone,noselect'
 
