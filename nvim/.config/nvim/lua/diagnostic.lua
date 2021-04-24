@@ -4,6 +4,7 @@ local colors = require 'colors'
 g.ale_echo_msg_format = '%s --%linter%'
 g.ale_disable_lsp = 1
 g.ale_linters_ignore = {cpp = {'clangtidy'}}
+g.ale_set_signs = false
 g.ale_sign_error = ' '
 g.ale_sign_warning = ' '
 
