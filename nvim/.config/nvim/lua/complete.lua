@@ -26,7 +26,8 @@ require'compe'.setup {
 local km = require 'keymap'
 
 function _G.smart_tab()
-    if vim.fn.pumvisible() ~= 0 then
+    if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({'selected'}).selected ~=
+        -1 then
         return vim.fn['compe#confirm']()
     elseif vim.fn['vsnip#available'](1) == 1 then
         return km.to_keycodes '<Plug>(vsnip-expand-or-jump)'

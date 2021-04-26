@@ -118,15 +118,12 @@ opts.buffer.softtabstop = indent
 
 opts.global.inccommand = 'nosplit'
 
-opts.global.hlsearch = false
-opts.global.incsearch = true
-
 opts.global.lazyredraw = true
 
 opts.global.breakindent = true
 
 opts.global.updatetime = 100
-opts.global.timeoutlen = 700
+opts.global.timeoutlen = 1000
 
 opts.global.smartcase = true
 opts.global.ignorecase = true
@@ -186,9 +183,6 @@ km.map(km.mode.visual, '<leader>nf', km.cmd('Neoformat'), 'noremap')
 
 km.map(km.mode.normal, '<leader>nt', km.cmd('NvimTreeToggle'), 'noremap')
 
-km.map(km.mode.normal, '<leader>nc', km.cmd('CommentToggle'), 'noremap')
-km.map(km.mode.visual, '<leader>nc', ':CommentToggle<CR>', 'noremap', 'silent')
-
 km.map(km.mode.normal, '<leader>ci', km.cmd('Codi'), 'noremap')
 
 -- packer
@@ -241,8 +235,7 @@ require'gitsigns'.setup()
 -- statusline
 require 'statusline'
 
--- comment
-require'nvim_comment'.setup()
+require 'comment'
 
 -- nvim-autopairs
 require'nvim-autopairs'.setup()

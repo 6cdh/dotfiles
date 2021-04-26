@@ -42,3 +42,7 @@ stow -t ~ -D zsh
 ```
 
 You may want to use `stow -nv -t ~ <DIR>` to see what stow will do before any modifications.
+
+## About Emacs
+
+My emacs configuration is essentially a copy of spacemacs plus a little customization. Its org-mode is really great.
