@@ -13,12 +13,13 @@ if fn.empty(fn.glob(packer_path)) > 0 then
             packer_path)
 end
 
-vim.api.nvim_exec([[
-    augroup Packer
-        autocmd!
-        autocmd BufWritePost init.lua PackerCompile
-    augroup end
-]], false)
+local utils = require 'utils'
+
+utils.new_augroup {
+    packer = {
+        'BufWritePost init.lua PackerCompile'
+    }
+}
 
 -- }}}
 
