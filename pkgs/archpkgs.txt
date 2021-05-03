@@ -19,7 +19,6 @@ bmenu
 bmon
 btrfs-progs
 bzip2
-chromium
 clang
 clojure
 clojure-lsp-bin
@@ -29,6 +28,7 @@ coreutils
 cppcheck
 cpufetch-git
 cpupower
+cpupower-gui
 crda
 cronie
 cryptsetup
@@ -48,8 +48,10 @@ e2fsprogs
 ecryptfs-utils
 efibootmgr
 emacs
+emscripten
 epiphany
 evince
+exa
 exfat-utils
 f2fs-tools
 fakeroot
@@ -59,6 +61,7 @@ fcitx5-configtool
 fcitx5-gtk
 fcitx5-material-color
 fcitx5-qt
+fd
 file
 file-roller
 filesystem
@@ -105,7 +108,9 @@ go
 google-chrome
 googler
 gparted
+gperftools
 grep
+grex
 grilo-plugins
 grub
 grub-theme-manjaro
@@ -128,6 +133,8 @@ htop
 httpie
 hugo
 hyper-bin
+hyperfine
+i7z
 ibus
 illyria-wallpaper
 imgcat-bin
@@ -141,6 +148,7 @@ ipython
 jetbrains-toolbox
 jfsutils
 jq
+kcachegrind
 kitty
 less
 lib32-libva-vdpau-driver
@@ -155,9 +163,12 @@ licenses
 lighter-gnome
 linux510
 linux510-nvidia
+lld
+lldb
 llvm
 logrotate
-lua-format
+lua-language-server
+luarocks
 lvm2
 m4
 make
@@ -198,10 +209,10 @@ nautilus
 nautilus-admin
 nautilus-empty-file
 neofetch
-neovim
-neovim-gtk
+neovim-git
 nerd-fonts-cascadia-code
 nerd-fonts-fira-code
+nerd-fonts-jetbrains-mono
 netctl
 networkmanager
 networkmanager-openconnect
@@ -251,6 +262,7 @@ pvs-studio
 pyenv
 pyenv-virtualenv
 python-pip
+python-poetry
 qgnomeplatform
 reiserfsprogs
 ripgrep
@@ -263,6 +275,7 @@ shadow
 spectre-meltdown-checker
 squashfs-tools
 steam-manjaro
+stow
 sudo
 sushi
 sysfsutils
@@ -272,6 +285,7 @@ systemd-sysvcompat
 tar
 telegram-desktop
 texinfo
+texlab
 texlive-bibtexextra
 texlive-fontsextra
 texlive-formatsextra
@@ -289,6 +303,7 @@ thunderbird
 timeshift
 tldr
 tlp
+tlpui
 tmux
 totem
 traceroute
@@ -301,12 +316,13 @@ ttf-droid
 ttf-fira-code
 ttf-inconsolata
 ttf-indic-otf
+ttf-jetbrains-mono
 ttf-liberation
 typora
 usb_modeswitch
 usbutils
 util-linux
-v2ray
+valgrind
 vi
 vim
 vim-plug
@@ -335,6 +351,8 @@ xorg-mkfontscale
 xorg-server
 xorg-twm
 xorg-xinit
+xray
 xz
 yarn
 yay
+zenkit

@@ -89,7 +89,7 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     -- diagnostic
     use 'dense-analysis/ale'
     use 'nathunsmitty/nvim-ale-diagnostic'
-    use 'tweekmonster/startuptime.vim'
+    use 'dstein64/vim-startuptime'
 
     -- color scheme
     use 'Th3Whit3Wolf/one-nvim'
