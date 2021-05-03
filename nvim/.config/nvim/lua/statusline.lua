@@ -30,6 +30,17 @@ local function file_osinfo()
     return icon .. os
 end
 
+local function lsp_diagnostics_info()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local counts = vim.fn['ale#statusline#Count'](bufnr)
+
+    local all_errors = counts.error + counts.style_error
+    local all_warnings = counts.warning + counts.style_warning
+    local all_infos = counts.info
+
+    return {errors = all_errors, warnings = all_warnings, infos = all_infos}
+end
+
 local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
 
@@ -105,21 +116,39 @@ local comps = {
     },
     diagnos = {
         err = {
-            provider = 'diagnostic_errors',
+            provider = function()
+                return ' ' .. lsp_diagnostics_info().errors
+            end,
+            left_sep = ' ',
             enabled = function()
-                return lsp.diagnostics_exist('Error')
+                return lsp_diagnostics_info().errors ~= 0
             end,
             hl = {
                 fg = colors.red
             }
         },
         warn = {
-            provider = 'diagnostic_warnings',
+            provider = function()
+                return ' ' .. lsp_diagnostics_info().warnings
+            end,
+            left_sep = ' ',
             enabled = function()
-                return lsp.diagnostics_exist('Warning')
+                return lsp_diagnostics_info().warnings ~= 0
             end,
             hl = {
                 fg = colors.yellow
+            }
+        },
+        info = {
+            provider = function()
+                return ' ' .. lsp_diagnostics_info().infos
+            end,
+            left_sep = ' ',
+            enabled = function()
+                return lsp_diagnostics_info().infos ~= 0
+            end,
+            hl = {
+                fg = colors.blue
             }
         },
         hint = {
@@ -129,15 +158,6 @@ local comps = {
             end,
             hl = {
                 fg = colors.cyan
-            }
-        },
-        info = {
-            provider = 'diagnostic_info',
-            enabled = function()
-                return lsp.diagnostics_exist('Information')
-            end,
-            hl = {
-                fg = colors.blue
             }
         },
     },
