@@ -15,11 +15,7 @@ end
 
 local utils = require 'utils'
 
-utils.new_augroup {
-    packer = {
-        'BufWritePost init.lua PackerCompile'
-    }
-}
+utils.new_augroup {packer = {'BufWritePost init.lua PackerCompile'}}
 
 -- }}}
 
@@ -70,6 +66,7 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
 
     -- utils
     use 'tpope/vim-repeat'
+    use 'psliwka/vim-smoothie'
     use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
     use 'lambdalisue/suda.vim'
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
@@ -105,6 +102,8 @@ opts.window.number = true
 opts.window.relativenumber = true
 
 opts.global.textwidth = 90
+
+opts.window.cursorline = true
 
 local indent = 4
 
