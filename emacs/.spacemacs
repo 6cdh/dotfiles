@@ -41,10 +41,12 @@ This function should only modify configuration layer settings."
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
+     (deft :variables
+        deft-zetteldeft t)
      ;; git
      helm
      ;; lsp
-     ;; markdown
+     markdown
      multiple-cursors
      org
 

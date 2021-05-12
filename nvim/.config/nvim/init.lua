@@ -64,17 +64,22 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'famiu/feline.nvim'
     use 'norcalli/nvim-colorizer.lua'
 
-    -- utils
-    use 'tpope/vim-repeat'
-    use 'psliwka/vim-smoothie'
-    use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
-    use 'lambdalisue/suda.vim'
+    -- explorer
     use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
-    use 'akinsho/nvim-toggleterm.lua'
+    use 'kevinhwang91/rnvimr'
     use {
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+
+    -- git
+    use {'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim'}
+
+    -- utils
+    use 'tpope/vim-repeat'
+    use 'psliwka/vim-smoothie'
+    use 'lambdalisue/suda.vim'
+    use 'akinsho/nvim-toggleterm.lua'
 
     -- coding
     use 'sbdchd/neoformat'
@@ -140,6 +145,8 @@ opts.global.magic = true
 opts.global.backup = false
 opts.global.writebackup = false
 opts.global.swapfile = false
+
+cmd [[filetype plugin indent on]]
 
 cmd [[set foldmethod=marker]]
 
@@ -212,6 +219,9 @@ km.map(km.mode.normal, '<leader>fg', km.cmd('Telescope live_grep'), 'noremap')
 km.map(km.mode.normal, '<leader>fb', km.cmd('Telescope buffers'), 'noremap')
 km.map(km.mode.normal, '<leader>fh', km.cmd('Telescope help_tags'), 'noremap')
 
+-- ranger
+km.map(km.mode.normal, '<leader>rg', km.cmd('RnvimrToggle'), 'noremap')
+
 -- }}}
 
 -- Import modules {{{
@@ -258,6 +268,8 @@ require'toggleterm'.setup {
     persist_size = true,
     direction = 'horizontal'
 }
+
+require 'tree'
 
 -- }}}
 

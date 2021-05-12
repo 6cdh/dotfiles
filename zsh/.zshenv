@@ -22,9 +22,6 @@ export CHROME_EXECUTABLE="google-chrome-stable"
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="${PATH}:${GEM_HOME}/bin"
 
-# Haskell
-source ~/.ghcup/env
-
 # Editor
 export EDITOR=nvim
 

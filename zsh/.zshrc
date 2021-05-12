@@ -257,3 +257,5 @@ zstyle ':completion:*' rehash true
 # z.lua
 eval "$(lua ${ZSH}/custom/plugins/z.lua/z.lua --init zsh enhanced once fzf)"
 
+# nix
+source /etc/profile.d/nix{,-daemon}.sh

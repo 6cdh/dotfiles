@@ -60,10 +60,21 @@
   type: [linter]
   run: yay -S jq
 
-- name: lua-formatter
+- name: luacheck
+  lang: [lua]
+  type: [linter]
+  run: luarocks install luacheck --server=https://luarocks.org/dev --local
+  nix: nix-env -iA nixpkgs.luajitPackages.luacheck
+
+- name: luaformatter
   lang: [lua]
   type: [formatter]
-  run: luarocks install luacheck --server=https://luarocks.org/dev --local
+  nix: nix-env -iA nixpkgs.luaformatter
+
+- name: lua-language-server
+  lang: [lua]
+  type: [lsp]
+  nix: nix-env -iA nixpkgs.sumneko-lua-language-server
 
 - name: ormolu
   lang: [haskell]
@@ -71,6 +82,7 @@
   run: |
     cabal update
     cabal install ormolu --ghc-options=-dynamic
+  nix: nix-env -iA nixpkgs.ormolu
 
 - name: prettier
   lang: [js, ts, json, css, scss, html, vue, angular, graphql, markdown, yaml]
