@@ -8,7 +8,7 @@ g.ale_cache_executable_check_failures = 1
 g.ale_maximum_file_size = 1024 * 1024
 
 g.ale_set_signs = 1
-g.ale_sign_error = ' '
+g.ale_sign_error = ' '
 g.ale_sign_warning = ' '
 
 vim.api.nvim_command(string.format(

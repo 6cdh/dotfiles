@@ -17,7 +17,7 @@ lspconfig.sumneko_lua.setup {
     settings = {
         Lua = {
             runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
-            diagnostics = {'vim'},
+            diagnostics = {globals = {'vim'}},
             workspace = {
                 library = {
                     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
@@ -34,16 +34,6 @@ lspconfig.sumneko_lua.setup {
 local saga = require 'lspsaga'
 
 saga.init_lsp_saga()
-
-local km = require 'keymap'
-
-km.map(km.mode.normal, '<leader>cf', km.cmd('Lspsaga lsp_finder'), 'noremap')
-km.map(km.mode.normal, '<leader>cca', km.cmd('Lspsaga code_action'), 'noremap')
-km.map(km.mode.visual, '<leader>cca', km.cmd('Lspsaga range_code_action'),
-       'noremap')
-
-km.map(km.mode.normal, 'K', km.cmd('Lspsaga hover_doc'), 'noremap', 'silent')
-km.map(km.mode.normal, '<leader>rn', km.cmd('Lspsaga rename'), 'noremap')
 
 -- lspkind
 require'lspkind'.init {
@@ -77,3 +67,5 @@ require'lspkind'.init {
     }
 }
 
+-- lsp_signature
+require'lsp_signature'.on_attach()

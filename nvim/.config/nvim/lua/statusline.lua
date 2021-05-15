@@ -117,7 +117,7 @@ local comps = {
     diagnos = {
         err = {
             provider = function()
-                return ' ' .. lsp_diagnostics_info().errors
+                return ' ' .. lsp_diagnostics_info().errors
             end,
             left_sep = ' ',
             enabled = function()

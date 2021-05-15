@@ -11,4 +11,8 @@ function _M.new_augroup(defs)
     end
 end
 
+function _M.to_keycodes(s)
+    return vim.api.nvim_replace_termcodes(s, true, true, true)
+end
+
 return _M
