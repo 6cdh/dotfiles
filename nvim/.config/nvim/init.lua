@@ -81,7 +81,14 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     }
 
     -- explorer
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            vim.g.nvim_tree_auto_open = 1
+            vim.g.nvim_tree_auto_ignore_ft = {'startify'}
+        end
+    }
     use 'kevinhwang91/rnvimr'
     use {
         'nvim-telescope/telescope.nvim',
@@ -156,7 +163,6 @@ require 'fmt'
 require 'lsp'
 require 'keymap'
 require 'statusline'
-require 'tree'
 require 'treesitter'
 
 -- }}}
