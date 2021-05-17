@@ -29,12 +29,6 @@ lspconfig.sumneko_lua.setup {
     }
 }
 
--- lspsaga
-
-local saga = require 'lspsaga'
-
-saga.init_lsp_saga()
-
 -- lspkind
 require'lspkind'.init {
     with_text = false,
@@ -67,5 +61,3 @@ require'lspkind'.init {
     }
 }
 
--- lsp_signature
-require'lsp_signature'.on_attach()

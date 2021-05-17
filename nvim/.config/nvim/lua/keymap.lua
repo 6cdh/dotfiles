@@ -22,6 +22,7 @@ local function kmap(m, lhs, rhs, ...)
 end
 
 local function cmd(s) return '<Cmd>' .. s .. '<CR>' end
+local function plug(s) return '<Plug>' .. s end
 
 function _G.smart_tab()
     if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({'selected'}).selected ~=
@@ -69,7 +70,7 @@ local function verify_maps(mappings)
                 assert(k2 == 'name' or k == k2 or
                            (not_both_in_tbl(left_hand, k, k2) and
                                not_both_in_tbl(right_hand, k, k2)),
-                       "Mappings Didn't Balance Two Hands: " .. k .. k2)
+                       'Mappings Didn\'t Balance Two Hands: ' .. k .. k2)
             end
         end
     end
@@ -99,7 +100,9 @@ local normal_map = {
         f = {cmd('Lspsaga lsp_finder'), 'Find definitions and references'},
         a = {cmd('Lspsaga code_action'), 'Code Action By LSP'},
         r = {cmd('Lspsaga rename'), 'Rename'},
-        c = {cmd('CommentToggle'), 'Comment'}
+        c = {plug('kommentary_line_default'), 'Comment'},
+        s = {cmd('Codi'), 'Run REPL'},
+        d = {cmd('Codi!'), 'Close REPL'}
     },
     e = {
         name = 'Explorer',
@@ -144,7 +147,9 @@ local visual_map = {
         o = {cmd('Neoformat'), 'Neoformat'},
         t = {cmd('Tabularize /'), 'Align'},
         a = {cmd('Lspsaga range_code_action'), 'Code Action By LSP'},
-        c = {':CommentToggle<CR>', 'Comment'}
+        c = {plug('kommentary_visual_default'), 'Comment'},
+        s = {cmd('Codi'), 'Run REPL'},
+        d = {cmd('Codi!'), 'Close REPL'}
     },
     c = {
         name = 'Clipboard',

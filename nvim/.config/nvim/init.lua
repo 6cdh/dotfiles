@@ -29,9 +29,15 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'p00f/nvim-ts-rainbow'
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
-    use 'glepnir/lspsaga.nvim'
+    use {
+        'glepnir/lspsaga.nvim',
+        config = function() require'lspsaga'.init_lsp_saga() end
+    }
     use 'onsails/lspkind-nvim'
-    use 'ray-x/lsp_signature.nvim'
+    use {
+        'ray-x/lsp_signature.nvim',
+        config = function() require'lsp_signature'.on_attach() end
+    }
 
     -- dap
     use 'mfussenegger/nvim-dap'
@@ -75,6 +81,7 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'romgrk/barbar.nvim'
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
     use 'famiu/feline.nvim'
+    use 'kdav5758/TrueZen.nvim'
     use {
         'norcalli/nvim-colorizer.lua',
         config = function() require'colorizer'.setup() end
@@ -134,13 +141,25 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
 
     -- coding
     use 'sbdchd/neoformat'
-    use 'terrortylor/nvim-comment'
+    use {
+        'b3nj5m1n/kommentary',
+        config = function()
+            vim.g.kommentary_create_default_mappings = false
+            local kc = require 'kommentary.config'
+            kc.configure_language('default',
+                                  {prefer_single_line_comments = true})
+        end
+    }
     use {
         'windwp/nvim-autopairs',
         config = function() require'nvim-autopairs'.setup() end
     }
-    use 'metakirby5/codi.vim'
+    use {
+        'blackCauldron7/surround.nvim',
+        config = function() require'surround'.setup {} end
+    }
     use 'godlygeek/tabular'
+    use {'metakirby5/codi.vim'}
 
     -- diagnostic
     use 'dense-analysis/ale'
@@ -156,7 +175,6 @@ end)
 -- Import modules {{{
 
 require 'options'
-require 'comment'
 require 'complete'
 require 'diagnostic'
 require 'fmt'
