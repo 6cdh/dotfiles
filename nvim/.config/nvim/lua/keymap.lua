@@ -153,7 +153,7 @@ local visual_map = {
     },
     c = {
         name = 'Clipboard',
-        p = {cmd('\"+y'), 'Copy Selection'}
+        p = {'\"+y', 'Copy Selection'}
     }
 }
 

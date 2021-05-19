@@ -45,4 +45,4 @@ You may want to use `stow -nv -t ~ <DIR>` to see what stow will do before any mo
 
 ## About Emacs
 
-My emacs configuration is essentially a copy of spacemacs plus a little customization. Its org-mode is really great.
+My emacs configuration is essentially a copy of Doom Emacs plus a little customization. Its org-mode is really great.
