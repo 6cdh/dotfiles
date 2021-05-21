@@ -96,7 +96,7 @@ local normal_map = {
     o = {
         name = 'Code Action',
         o = {cmd('Neoformat'), 'Neoformat'},
-        t = {':Tabularize /', 'Align'},
+        t = {':Tabularize /', 'Align', silent = false},
         f = {cmd('Lspsaga lsp_finder'), 'Find definitions and references'},
         a = {cmd('Lspsaga code_action'), 'Code Action By LSP'},
         r = {cmd('Lspsaga rename'), 'Rename'},
@@ -145,7 +145,7 @@ local visual_map = {
     o = {
         name = 'Code Action',
         o = {cmd('Neoformat'), 'Neoformat'},
-        t = {cmd('Tabularize /'), 'Align'},
+        t = {':Tabularize /', 'Align', silent = false},
         a = {cmd('Lspsaga range_code_action'), 'Code Action By LSP'},
         c = {plug('kommentary_visual_default'), 'Comment'},
         s = {cmd('Codi'), 'Run REPL'},

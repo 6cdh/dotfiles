@@ -47,8 +47,6 @@ global.backup = false
 global.writebackup = false
 global.swapfile = false
 
-cmd [[filetype plugin indent on]]
-
 cmd [[set foldmethod=marker]]
 
 -- For barbar.nvim

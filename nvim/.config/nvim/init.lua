@@ -38,6 +38,10 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
         'ray-x/lsp_signature.nvim',
         config = function() require'lsp_signature'.on_attach() end
     }
+    use {
+        "folke/trouble.nvim",
+        config = function() require("trouble").setup() end
+    }
 
     -- dap
     use 'mfussenegger/nvim-dap'
