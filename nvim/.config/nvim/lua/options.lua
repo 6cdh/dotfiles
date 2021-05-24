@@ -55,6 +55,6 @@ global.mouse = 'a'
 cmd [[set shortmess+=c]]
 
 global.termguicolors = true
-cmd [[colorscheme one-nvim]]
+cmd [[colorscheme onedark]]
 
 vim.g.python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'

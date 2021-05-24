@@ -83,7 +83,7 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'kyazdani42/nvim-web-devicons'
     use 'mhinz/vim-startify'
     use 'romgrk/barbar.nvim'
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua', disable = true}
     use 'famiu/feline.nvim'
     use 'kdav5758/TrueZen.nvim'
     use {
@@ -171,7 +171,7 @@ packer.startup(function(use) -- Suppress undefined global variables warnings
     use 'dstein64/vim-startuptime'
 
     -- color scheme
-    use 'Th3Whit3Wolf/one-nvim'
+    use 'monsonjeremy/onedark.nvim'
 end)
 
 -- }}}
