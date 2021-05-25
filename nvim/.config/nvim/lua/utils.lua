@@ -1,6 +1,6 @@
 local _M = {}
 
-local cmd = vim.cmd
+local cmd = vim.api.nvim_command
 
 function _M.new_augroup(defs)
     for name, def in pairs(defs) do

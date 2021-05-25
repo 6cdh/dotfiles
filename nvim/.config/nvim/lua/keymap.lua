@@ -90,7 +90,7 @@ local normal_map = {
     },
     t = {
         name = 'Terminal',
-        t = {cmd('<c-u>exe v:count1 . "ToggleTerm"'), 'Embeded Float Terminal'},
+        t = {':<c-u>exe v:count1 . "ToggleTerm"<CR>', 'Embeded Float Terminal'},
         m = {cmd('terminal'), 'Terminal'}
     },
     o = {
@@ -122,10 +122,10 @@ local normal_map = {
     },
     b = {
         name = 'Buffer',
-        b = {cmd('BufferPick'), 'BufferPick'},
-        h = {cmd('BufferPrevious'), 'BufferPrevious'},
-        l = {cmd('BufferNext'), 'BufferNext'},
-        j = {cmd('BufferClose'), 'BufferClose'},
+        b = {cmd('BufferLinePick'), 'BufferLinePick'},
+        h = {cmd('BufferLineCyclePrev'), 'BufferLinePrevious'},
+        l = {cmd('BufferLineCycleNext'), 'BufferLineNext'},
+        j = {cmd('bdelete'), 'BufferClose'},
     },
     r = {
         name = 'Root action',
