@@ -1,4 +1,4 @@
-local colors = require 'colors'
+local colors = require 'theme.colors'
 
 local vi_mode_colors = {
     NORMAL = colors.green,

@@ -10,7 +10,7 @@ g.ale_set_signs = 1
 g.ale_sign_error = ' '
 g.ale_sign_warning = ' '
 
-local colors = require 'colors'
+local colors = require 'theme.colors'
 
 vim.api.nvim_command(string.format(
                          "autocmd Colorscheme * highlight SpellBad guifg=NONE cterm=undercurl guisp='%s'",

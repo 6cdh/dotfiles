@@ -10,7 +10,9 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 end
 
 require 'plugins'
+require 'theme'
 require 'options'
+
 require 'complete'
 require 'diagnostic'
 require 'fmt'

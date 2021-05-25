@@ -40,12 +40,10 @@ buffer.tabstop = indent
 buffer.shiftwidth = indent
 buffer.softtabstop = indent
 
-vim.g.onedark_dark_sidebar = false
 vim.g.python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
 local cmd = vim.api.nvim_command
 
 cmd [[set foldmethod=marker]]
 cmd [[set shortmess+=c]]
-cmd [[colorscheme onedark]]
 
