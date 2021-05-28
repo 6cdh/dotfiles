@@ -28,7 +28,6 @@ require'packer'.startup(
 
         -- completion
         use 'hrsh7th/vim-vsnip'
-        use 'hrsh7th/vim-vsnip-integ'
         use 'hrsh7th/nvim-compe'
         use {
             'tzachar/compe-tabnine',
