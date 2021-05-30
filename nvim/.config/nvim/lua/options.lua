@@ -1,48 +1,38 @@
 local indent = 4
 local textwidth = 90
 
-local global = vim.o
-
-global.textwidth = textwidth
-global.expandtab = true
-global.tabstop = indent
-global.shiftwidth = indent
-global.softtabstop = indent
-global.inccommand = 'nosplit'
-global.lazyredraw = true
-global.breakindent = true
-global.updatetime = 100
-global.timeoutlen = 1000
-global.smartcase = true
-global.ignorecase = true
-global.showmode = false
-global.cmdheight = 2
-global.completeopt = 'menuone,noselect'
-global.magic = true
-global.backup = false
-global.writebackup = false
-global.swapfile = false
--- For bufferline
-global.mouse = 'a'
-global.termguicolors = true
-
-local window = vim.wo
-
-window.number = true
-window.relativenumber = true
-window.cursorline = true
-window.signcolumn = 'yes'
-
-local buffer = vim.bo
-
-buffer.expandtab = true
-buffer.tabstop = indent
-buffer.shiftwidth = indent
-buffer.softtabstop = indent
-
 vim.g.python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
-local cmd = vim.api.nvim_command
+local opt = vim.opt
 
-cmd [[set shortmess+=c]]
+opt.textwidth = textwidth
+opt.expandtab = true
+opt.tabstop = indent
+opt.shiftwidth = indent
+opt.softtabstop = indent
+opt.inccommand = 'nosplit'
+opt.lazyredraw = true
+opt.breakindent = true
+opt.updatetime = 100
+opt.timeoutlen = 1000
+opt.smartcase = true
+opt.ignorecase = true
+opt.showmode = false
+opt.cmdheight = 2
+opt.completeopt = 'menuone,noselect'
+opt.magic = true
+opt.backup = false
+opt.writebackup = false
+opt.swapfile = false
+
+-- For bufferline
+opt.mouse = 'a'
+opt.termguicolors = true
+
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
+opt.signcolumn = 'yes'
+
+opt.shortmess:append 'c'
 
