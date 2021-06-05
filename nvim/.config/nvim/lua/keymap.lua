@@ -1,5 +1,6 @@
 local wk = require 'which-key'
 local utils = require 'utils'
+local npairs = require 'nvim-autopairs'
 
 local mode = {
     normal = 'n',
@@ -32,6 +33,14 @@ function _G.smart_tab()
         return utils.to_keycodes '<Plug>(vsnip-expand-or-jump)'
     else
         return utils.to_keycodes '<TAB>'
+    end
+end
+
+function _G.smart_cr()
+    if vim.fn.pumvisible() ~= 0 then
+        return npairs.esc '<cr>'
+    else
+        return npairs.autopairs_cr()
     end
 end
 
@@ -191,4 +200,5 @@ kmap(mode.terminal, '<C-l>', [[<C-\><C-n><C-w>l]], 'noremap')
 
 kmap(mode.normal, 'K', cmd('Lspsaga hover_doc'), 'noremap', 'silent')
 kmap(mode.insert, '<TAB>', 'v:lua.smart_tab()', 'expr', 'silent')
+kmap(mode.insert, '<CR>', 'v:lua.smart_cr()', 'expr', 'silent')
 

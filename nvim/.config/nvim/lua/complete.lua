@@ -1,5 +1,5 @@
 require'compe'.setup {
-    preselect = 'enable',
+    preselect = 'always',
     max_abbr_width = 45,
     source = {
         path = true,

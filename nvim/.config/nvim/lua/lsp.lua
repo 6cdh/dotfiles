@@ -7,6 +7,7 @@ lspconfig.hls.setup {}
 lspconfig.vimls.setup {}
 lspconfig.texlab.setup {}
 lspconfig.gopls.setup {}
+lspconfig.rust_analyzer.setup {}
 
 -- lua
 local sumneko_root_path = vim.fn.stdpath('cache') ..

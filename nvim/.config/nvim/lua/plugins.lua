@@ -1,11 +1,13 @@
-require'utils'.new_augroup {packer = {'BufWritePost plugins.lua PackerCompile'}}
-
 require'packer'.startup(
     function(use) -- Suppress undefined global variables warnings
         use 'wbthomason/packer.nvim'
 
         -- lsp
-        use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+        use {
+            'nvim-treesitter/nvim-treesitter',
+            run = ':TSUpdate',
+            config = function() require 'treesitter' end
+        }
         use 'p00f/nvim-ts-rainbow'
         use 'nvim-treesitter/playground'
         use 'neovim/nvim-lspconfig'
@@ -28,7 +30,7 @@ require'packer'.startup(
 
         -- completion
         use 'hrsh7th/vim-vsnip'
-        use 'hrsh7th/nvim-compe'
+        use {'hrsh7th/nvim-compe', config = function() require 'complete' end}
         use {
             'tzachar/compe-tabnine',
             run = './install.sh',
@@ -41,15 +43,15 @@ require'packer'.startup(
             ft = {'markdown'},
             config = function()
                 -- disable the folding configuration
-                g.vim_markdown_folding_disabled = 1
+                vim.g.vim_markdown_folding_disabled = 1
                 -- enable conceal
-                g.vim_markdown_conceal = 1
+                vim.g.vim_markdown_conceal = 1
                 -- Latex math syntax
-                g.vim_markdown_math = 1
+                vim.g.vim_markdown_math = 1
                 -- Strikethrough uses two tildes
-                g.vim_markdown_strikethrough = 1
+                vim.g.vim_markdown_strikethrough = 1
                 -- Enable TOC Autofit
-                g.vim_markdown_toc_autofit = 1
+                vim.g.vim_markdown_toc_autofit = 1
             end
         }
         use {
@@ -58,7 +60,7 @@ require'packer'.startup(
             ft = {'markdown'}
         }
 
-        -- vision
+        -- ui
         use 'kyazdani42/nvim-web-devicons'
         use 'mhinz/vim-startify'
         use {
@@ -69,12 +71,9 @@ require'packer'.startup(
                 }
             end
         }
-        use {
-            'lukas-reineke/indent-blankline.nvim',
-            branch = 'lua',
-            disable = true
-        }
-        use 'famiu/feline.nvim'
+        use {'famiu/feline.nvim', config = function()
+            require 'statusline'
+        end}
         use 'kdav5758/TrueZen.nvim'
         use {
             'norcalli/nvim-colorizer.lua',
@@ -137,7 +136,7 @@ require'packer'.startup(
         }
 
         -- coding
-        use 'sbdchd/neoformat'
+        use {'sbdchd/neoformat', config = function() require 'fmt' end}
         use {
             'b3nj5m1n/kommentary',
             config = function()
@@ -147,16 +146,13 @@ require'packer'.startup(
                                       {prefer_single_line_comments = true})
             end
         }
-        use {
-            'windwp/nvim-autopairs',
-            config = function() require'nvim-autopairs'.setup() end
-        }
+        use {'windwp/nvim-autopairs', config = function() require 'pairs' end}
         use {
             'blackCauldron7/surround.nvim',
             config = function() require'surround'.setup {} end
         }
         use 'godlygeek/tabular'
-        use {'metakirby5/codi.vim'}
+        use 'metakirby5/codi.vim'
 
         -- diagnostic
         use 'dense-analysis/ale'
@@ -164,5 +160,5 @@ require'packer'.startup(
         use 'dstein64/vim-startuptime'
 
         -- color scheme
-        use {'monsonjeremy/onedark.nvim'}
+        use 'monsonjeremy/onedark.nvim'
     end)
