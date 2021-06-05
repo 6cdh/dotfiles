@@ -5,7 +5,6 @@ npairs.setup()
 
 npairs.add_rules {
     Rule(' ', ' '):with_pair(function(opts)
-        print(opts.line)
         local pair = opts.line:sub(opts.col, opts.col + 1)
         return vim.tbl_contains({'()', '[]', '{}'}, pair)
     end)
