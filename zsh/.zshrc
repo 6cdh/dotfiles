@@ -239,6 +239,7 @@ alias googler="${PROXY_ENV} googler"
 alias how2="${PROXY_ENV} how2"
 alias tldr="${PROXY_ENV} tldr"
 
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
 # History size
