@@ -145,6 +145,10 @@ local normal_map = {
         name = 'Clipboard',
         p = {cmd('%y+'), 'Copy Buffer'},
     },
+    l = {
+        name = 'Lint',
+        l = {cmd('ALELint'), 'ALE Lint'}
+    },
     w = {cmd('w'), 'Save'},
     q = {cmd('q'), 'Quit'},
     Q = {cmd('q!'), 'Force Quit'}

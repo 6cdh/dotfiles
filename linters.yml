@@ -13,7 +13,7 @@
 - name: black
   lang: [python]
   type: [formatter]
-  run: pip install black
+  run: pip install black --upgrade
 
 - name: clojure-lsp
   lang: [clojure]
@@ -23,7 +23,7 @@
 - name: cmake format
   lang: [cmake]
   type: [formatter, linter]
-  run: pip install cmakelang
+  run: pip install cmakelang --upgrade
 
 - name: cpp-check
   lang: [c++]
@@ -38,7 +38,7 @@
 - name: flake8
   lang: [python]
   type: [linter]
-  run: pip install flake8
+  run: pip install flake8 --upgrade
 
 - name: flawfinder
   lang: [c, c++]
@@ -97,7 +97,7 @@
 - name: pylint
   lang: [python]
   type: [linter]
-  run: pip install pylint
+  run: pip install pylint --upgrade
 
 - name: pyright
   lang: [python]
@@ -132,9 +132,9 @@
 - name: vint
   lang: [vim]
   type: [linter]
-  run: pip install vim-vint
+  run: pip install vim-vint --upgrade
 
 - name: yamllint
   lang: [yaml]
   type: [linter]
-  run: pip install yamllint
+  run: pip install yamllint --upgrade
