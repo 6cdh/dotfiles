@@ -44,7 +44,9 @@ dnscrypt-proxy
 dnsmasq
 docker
 docker-compose
+dos2unix
 dosfstools
+dropbox
 e2fsprogs
 ecryptfs-utils
 efibootmgr
@@ -249,6 +251,7 @@ papirus-maia-icon-theme
 parallel
 patch
 pciutils
+pdftk
 perf
 perl
 pigz
@@ -272,6 +275,7 @@ reiserfsprogs
 ripgrep
 rsync
 ruby
+rust-analyzer
 rustup
 s-nail
 sassc

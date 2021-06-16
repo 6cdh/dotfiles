@@ -1,0 +1,10 @@
+cabal-install-3.4.0.0
+cachix-0.6.0
+cling-0.7
+ghc-8.10.4
+haskell-language-server-1.1.0.0
+julia-bin-1.6.1
+luajit-2.1.0-2020-12-28-luacheck-0.23.0-1
+neuron-1.9.30.0
+ormolu-0.1.4.1
+sumneko-lua-language-server-1.20.2
