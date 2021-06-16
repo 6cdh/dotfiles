@@ -147,7 +147,9 @@ local normal_map = {
     },
     l = {
         name = 'Lint',
-        l = {cmd('ALELint'), 'ALE Lint'}
+        l = {cmd('ALELint'), 'ALE Lint'},
+        a = {plug('(ale_previous_wrap)'), 'ALE Last Lint'},
+        f = {plug('(ale_next_wrap)'), 'ALE Last Lint'}
     },
     w = {cmd('w'), 'Save'},
     q = {cmd('q'), 'Quit'},
@@ -160,7 +162,7 @@ local visual_map = {
         o = {cmd('Neoformat'), 'Neoformat'},
         t = {':Tabularize /', 'Align', silent = false},
         a = {cmd('Lspsaga range_code_action'), 'Code Action By LSP'},
-        c = {plug('kommentary_visual_default'), 'Comment'},
+        c = {plug('kommentary_visual_default<C-c>'), 'Comment'},
         s = {cmd('Codi'), 'Run REPL'},
         d = {cmd('Codi!'), 'Close REPL'}
     },
