@@ -8,8 +8,13 @@ require'compe'.setup {
         calc = true,
         nvim_lsp = true,
         nvim_lua = true,
-        tabnine = true,
-        vsnip = true
+        vsnip = true,
+        tabnine = {
+            max_line = 1000,
+            max_num_resuts = 6,
+            sort = false,
+            show_prediction_strength = true,
+        }
     }
 }
 

@@ -31,9 +31,11 @@ lspconfig.sumneko_lua.setup {
 }
 
 -- lspkind
+
+-- vscode-like pictograms
+-- https://github.com/microsoft/vscode-codicons
 require'lspkind'.init {
     with_text = false,
-    -- vscode-like pictograms
     symbol_map = {
         Text = ' ',
         Method = ' ',

@@ -1,6 +1,6 @@
 # dotfiles
 
-6cdh's dotfiles.
+6cdh’s dotfiles.
 
 ## Install Linters, LSPs and Formatters
 
@@ -8,19 +8,19 @@ For me, linters and neovim work together.
 
 You need to install [yq](https://github.com/mikefarah/yq) and run
 
-```shell
+``` shell
 zsh <(yq e '.[].run' linters.yml)
 ```
 
 Install only linters, LSPs and formatters for Python:
 
-```
+``` shell
 zsh <(yq e '.[] | select(.lang | .[] == "python").run' linters.yml)
 ```
 
 Install only linters for Python:
 
-```
+``` shell
 zsh <(yq e '.[] | select((.lang | .[] == "python") and (.type | .[] == "linter")).run' linters.yml)
 ```
 
@@ -28,7 +28,7 @@ zsh <(yq e '.[] | select((.lang | .[] == "python") and (.type | .[] == "linter")
 
 I use [GNU stow](https://www.gnu.org/software/stow/) to manage my dotfiles.
 
-```bash
+``` bash
 # Install nvim config
 stow -t ~ nvim
 # Install vim config
@@ -41,8 +41,10 @@ stow -t ~ kitty
 stow -t ~ -D zsh
 ```
 
-You may want to use `stow -nv -t ~ <DIR>` to see what stow will do before any modifications.
+You may want to use `stow -nv -t ~ <DIR>` to see what stow will do before any
+modifications.
 
 ## About Emacs
 
-My emacs configuration is essentially a copy of Doom Emacs plus a little customization. Its org-mode is really great.
+My emacs configuration is essentially a copy of Doom Emacs plus a little customization.
+Its org-mode is really great.

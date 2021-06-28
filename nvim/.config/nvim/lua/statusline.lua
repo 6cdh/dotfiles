@@ -1,4 +1,6 @@
 local colors = require 'theme.colors'
+local lsp = require 'feline.providers.lsp'
+local vi_mode_utils = require 'feline.providers.vi_mode'
 
 local vi_mode_colors = {
     NORMAL = colors.green,
@@ -17,32 +19,63 @@ local vi_mode_colors = {
     NONE = colors.yellow
 }
 
+local icons = {
+    linux = ' ',
+    macos = ' ',
+    windows = ' ',
+
+    errs = ' ',
+    warns = ' ',
+    infos = ' ',
+    hints = ' ',
+
+    lsp = ' ',
+    git = ''
+}
+
 local function file_osinfo()
     local os = vim.bo.fileformat:upper()
     local icon
     if os == 'UNIX' then
-        icon = ' '
+        icon = icons.linux
     elseif os == 'MAC' then
-        icon = ' '
+        icon = icons.macos
     else
-        icon = ' '
+        icon = icons.windows
     end
     return icon .. os
 end
 
 local function lsp_diagnostics_info()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local counts = vim.fn['ale#statusline#Count'](bufnr)
-
-    local all_errors = counts.error + counts.style_error
-    local all_warnings = counts.warning + counts.style_warning
-    local all_infos = counts.info
-
-    return {errors = all_errors, warnings = all_warnings, infos = all_infos}
+    return {
+        errs = lsp.get_diagnostics_count('Error'),
+        warns = lsp.get_diagnostics_count('Warning'),
+        infos = lsp.get_diagnostics_count('Information'),
+        hints = lsp.get_diagnostics_count('Hint')
+    }
 end
 
-local lsp = require 'feline.providers.lsp'
-local vi_mode_utils = require 'feline.providers.vi_mode'
+local function diag_enable(f, s)
+    return function()
+        local diag = f()[s]
+        return diag and diag ~= 0
+    end
+end
+
+local function diag_of(f, s)
+    local icon = icons[s]
+    return function()
+        local diag = f()[s]
+        return icon .. diag
+    end
+end
+
+local function vimode_hl()
+    return {
+        name = vi_mode_utils.get_mode_highlight_name(),
+        fg = vi_mode_utils.get_mode_color()
+    }
+end
 
 -- LuaFormatter off
 
@@ -50,24 +83,12 @@ local comps = {
     vi_mode = {
         left = {
             provider = '▊',
-            hl = function()
-                local val = {
-                    name = vi_mode_utils.get_mode_highlight_name(),
-                    fg = vi_mode_utils.get_mode_color()
-                }
-                return val
-            end,
+            hl = vimode_hl,
             right_sep = ' '
         },
         right = {
             provider = '▊',
-            hl = function()
-                local val = {
-                    name = vi_mode_utils.get_mode_highlight_name(),
-                    fg = vi_mode_utils.get_mode_color()
-                }
-                return val
-            end,
+            hl = vimode_hl,
             left_sep = ' '
         }
     },
@@ -116,46 +137,33 @@ local comps = {
     },
     diagnos = {
         err = {
-            provider = function()
-                return ' ' .. lsp_diagnostics_info().errors
-            end,
+            provider = diag_of(lsp_diagnostics_info, 'errs'),
             left_sep = ' ',
-            enabled = function()
-                return lsp_diagnostics_info().errors ~= 0
-            end,
+            enabled = diag_enable(lsp_diagnostics_info, 'errs'),
             hl = {
                 fg = colors.red
             }
         },
         warn = {
-            provider = function()
-                return ' ' .. lsp_diagnostics_info().warnings
-            end,
+            provider = diag_of(lsp_diagnostics_info, 'warns'),
             left_sep = ' ',
-            enabled = function()
-                return lsp_diagnostics_info().warnings ~= 0
-            end,
+            enabled = diag_enable(lsp_diagnostics_info, 'warns'),
             hl = {
                 fg = colors.yellow
             }
         },
         info = {
-            provider = function()
-                return ' ' .. lsp_diagnostics_info().infos
-            end,
+            provider = diag_of(lsp_diagnostics_info, 'infos'),
             left_sep = ' ',
-            enabled = function()
-                return lsp_diagnostics_info().infos ~= 0
-            end,
+            enabled = diag_enable(lsp_diagnostics_info, 'infos'),
             hl = {
                 fg = colors.blue
             }
         },
         hint = {
-            provider = 'diagnostic_hints',
-            enabled = function()
-                return lsp.diagnostics_exist('Hint')
-            end,
+            provider = diag_of(lsp_diagnostics_info, 'hints'),
+            left_sep = ' ',
+            enabled = diag_enable(lsp_diagnostics_info, 'hints'),
             hl = {
                 fg = colors.cyan
             }
@@ -165,7 +173,7 @@ local comps = {
         name = {
             provider = 'lsp_client_names',
             left_sep = ' ',
-            icon = ' ',
+            icon = icons.lsp,
             hl = {
                 fg = colors.yellow
             }
@@ -174,7 +182,7 @@ local comps = {
     git = {
         branch = {
             provider = 'git_branch',
-            icon = ' ',
+            icon = icons.git,
             left_sep = ' ',
             hl = {
                 fg = colors.violet,

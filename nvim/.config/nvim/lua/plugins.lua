@@ -136,7 +136,7 @@ require'packer'.startup(
         }
 
         -- coding
-        use {'sbdchd/neoformat', config = function() require 'fmt' end}
+        -- use {'sbdchd/neoformat', config = function() require 'fmt' end}
         use {
             'b3nj5m1n/kommentary',
             config = function()
@@ -155,8 +155,8 @@ require'packer'.startup(
         use 'metakirby5/codi.vim'
 
         -- diagnostic
-        use 'dense-analysis/ale'
-        use 'nathunsmitty/nvim-ale-diagnostic'
+        -- use 'dense-analysis/ale'
+        -- use 'nathunsmitty/nvim-ale-diagnostic'
         use 'dstein64/vim-startuptime'
 
         -- color scheme

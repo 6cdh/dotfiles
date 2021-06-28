@@ -3,7 +3,7 @@
 - name: asmfmt
   lang: [asm]
   type: [formatter]
-  run: go get -u github.com/klauspost/asmfmt/cmd/gofmt/...
+  run: go get -u github.com/klauspost/asmfmt/cmd/asmfmt
 
 - name: bash-language-server
   lang: [bash]
@@ -50,6 +50,11 @@
   type: [linter]
   run: go get -u golang.org/x/lint/golint
 
+- name: gopls
+  lang: [go]
+  type: [lsp]
+  run: go get golang.org/x/tools/gopls@latest
+
 - name: hadolint
   lang: [dockerfile]
   type: [linter]
@@ -69,20 +74,17 @@
 - name: luaformatter
   lang: [lua]
   type: [formatter]
-  nix: nix-env -iA nixpkgs.luaformatter
+  run: yay -S lua-format
 
 - name: lua-language-server
   lang: [lua]
   type: [lsp]
-  nix: nix-env -iA nixpkgs.sumneko-lua-language-server
+  run: nix-env -iA nixpkgs.sumneko-lua-language-server
 
 - name: ormolu
   lang: [haskell]
   type: [formatter]
-  run: |
-    cabal update
-    cabal install ormolu --ghc-options=-dynamic
-  nix: nix-env -iA nixpkgs.ormolu
+  run: nix-env -iA nixpkgs.ormolu
 
 - name: prettier
   lang: [js, ts, json, css, scss, html, vue, angular, graphql, markdown, yaml]
@@ -118,6 +120,11 @@
   lang: [tex]
   type: [lsp]
   run: yay -S texlab
+
+- name: pandoc
+  lang: [markdown, rst]
+  type: [formatter]
+  run: nix-env -iA nixpkgs.pandoc
 
 - name: prettier toml plugin
   lang: [toml]

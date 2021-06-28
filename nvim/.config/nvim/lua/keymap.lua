@@ -104,7 +104,7 @@ local normal_map = {
     },
     o = {
         name = 'Code Action',
-        o = {cmd('Neoformat'), 'Neoformat'},
+        o = {cmd('lua vim.lsp.buf.formatting()'), 'Format Buffer'},
         t = {':Tabularize /', 'Align', silent = false},
         f = {cmd('Lspsaga lsp_finder'), 'Find definitions and references'},
         a = {cmd('Lspsaga code_action'), 'Code Action By LSP'},
@@ -146,10 +146,10 @@ local normal_map = {
         p = {cmd('%y+'), 'Copy Buffer'},
     },
     l = {
-        name = 'Lint',
-        l = {cmd('ALELint'), 'ALE Lint'},
-        a = {plug('(ale_previous_wrap)'), 'ALE Last Lint'},
-        f = {plug('(ale_next_wrap)'), 'ALE Last Lint'}
+        name = 'Lint/Diagnostics',
+        l = {cmd('lua require"lspsaga.diagnostic".show_line_diagnostics()'), 'Show Line Diagnostics'},
+        a = {cmd('Lspsaga diagnostic_jump_prev'), 'Last Diagnostic'},
+        f = {cmd('Lspsaga diagnostic_jump_next'), 'Next Diagnostic'}
     },
     w = {cmd('w'), 'Save'},
     q = {cmd('q'), 'Quit'},
