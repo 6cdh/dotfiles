@@ -13,11 +13,10 @@ tools:
 
   cpp-cppcheck: &cpp-cppcheck
     lint-command: 'cppcheck --quiet --force --enable=style --error-exitcode=1 ${INPUT}'
-    lint-stdin: false
     lint-formats:
       - '%f:%l:%c: %m'
     root-markers:
-    - compile_commands.json
+      - compile_commands.json
   cpp-clangformat: &cpp-clangformat
     format-command: 'clang-format'
     format-stdin: true
@@ -31,6 +30,11 @@ tools:
     lint-command: 'hadolint'
     lint-formats:
       - '%f:%l %m'
+
+  go-staticcheck: &go-staticcheck
+    lint-command: 'staticcheck'
+    lint-formats:
+      - '%f:%l:%c %m'
 
   html-prettier: &html-prettier
     format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html'
@@ -51,7 +55,7 @@ tools:
       - "%f(%l,%c): %rror %m"
 
   lua-lua-format: &lua-lua-format
-    format-command: 'lua-format'
+    format-command: 'lua-format -i'
     format-stdin: true
   lua-luacheck: &lua-luacheck
     lint-command: 'luacheck --no-color -'
@@ -123,6 +127,8 @@ languages:
     - <<: *csv-csvlint
   dockerfile:
     - <<: *dockerfile-hadolint
+  go:
+    - <<: *go-staticcheck
   html:
     - <<: *html-prettier
   javascript:

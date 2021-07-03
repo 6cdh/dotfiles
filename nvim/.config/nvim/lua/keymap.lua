@@ -159,7 +159,7 @@ local normal_map = {
 local visual_map = {
     o = {
         name = 'Code Action',
-        o = {cmd('Neoformat'), 'Neoformat'},
+        o = {cmd('lua vim.lsp.buf.range_formatting()'), 'Format Selection'},
         t = {':Tabularize /', 'Align', silent = false},
         a = {cmd('Lspsaga range_code_action'), 'Code Action By LSP'},
         c = {plug('kommentary_visual_default<C-c>'), 'Comment'},

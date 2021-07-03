@@ -41,6 +41,7 @@ require'packer'.startup(
         use {
             'plasticboy/vim-markdown',
             ft = {'markdown'},
+            disable = true,
             config = function()
                 -- disable the folding configuration
                 vim.g.vim_markdown_folding_disabled = 1

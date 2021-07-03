@@ -35,19 +35,20 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 plugins=(
     cargo
-    colorize
     colored-man-pages
     extract
     fast-syntax-highlighting
     fd
-    fzf
     git
     ripgrep
     rustup
     vi-mode
     zoxide
     zsh-autosuggestions
+    fzf
 )
+
+source $ZSH/oh-my-zsh.sh
 
 # History size
 HISTFILE="$HOME/.zsh_history"
@@ -71,7 +72,6 @@ zstyle ':completion:*' rehash true
 # comp
 fpath+=~/.zfunc
 
-source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.zsh_prompt.sh.
 [[ ! -f ~/.zsh_prompt.sh ]] || source ~/.zsh_prompt.sh
 
