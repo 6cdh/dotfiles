@@ -58,7 +58,7 @@ require'packer'.startup(
         use {
             'iamcco/markdown-preview.nvim',
             run = 'cd app && yarn install',
-            ft = {'markdown'}
+            cmd = 'MarkdownPreview'
         }
 
         -- ui
