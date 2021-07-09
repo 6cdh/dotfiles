@@ -10,10 +10,7 @@ require'compe'.setup {
         nvim_lua = true,
         vsnip = true,
         tabnine = {
-            max_line = 1000,
-            max_num_resuts = 6,
-            sort = false,
-            show_prediction_strength = true,
+            ignore_pattern = "[)};]"
         }
     }
 }

@@ -79,6 +79,6 @@ fpath+=~/.zfunc
 #                                 User Config                                  #
 #------------------------------------------------------------------------------#
 #aliases
-source .zsh_aliases.sh
+source ~/.zsh_aliases.sh
 # function
-source .zsh_func.sh
+source ~/.zsh_func.sh

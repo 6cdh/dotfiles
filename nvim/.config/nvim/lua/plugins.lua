@@ -113,7 +113,6 @@ require'packer'.startup(
         }
 
         -- utils
-        use 'Pocco81/AbbrevMan.nvim'
         use 'tpope/vim-repeat'
         use {
             'karb94/neoscroll.nvim',
