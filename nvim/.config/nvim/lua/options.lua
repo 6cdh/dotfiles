@@ -1,3 +1,4 @@
+vim.g.mapleader = ' '
 local indent = 4
 local textwidth = 90
 
@@ -14,19 +15,18 @@ opt.inccommand = 'nosplit'
 opt.lazyredraw = true
 opt.breakindent = true
 opt.updatetime = 100
-opt.timeoutlen = 1000
+opt.timeoutlen = 300
 opt.smartcase = true
 opt.ignorecase = true
 opt.showmode = false
 opt.cmdheight = 2
-opt.completeopt = 'menuone,noselect'
+opt.pumheight = 10
+opt.completeopt = {'menuone', 'noselect'}
 opt.magic = true
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
--- For bufferline
-opt.mouse = 'a'
 opt.termguicolors = true
 
 opt.number = true

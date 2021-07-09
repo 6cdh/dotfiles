@@ -55,7 +55,7 @@ tools:
       - "%f(%l,%c): %rror %m"
 
   lua-lua-format: &lua-lua-format
-    format-command: 'lua-format -i'
+    format-command: 'lua-format'
     format-stdin: true
   lua-luacheck: &lua-luacheck
     lint-command: 'luacheck --no-color -'

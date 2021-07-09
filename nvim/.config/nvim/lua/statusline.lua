@@ -2,27 +2,22 @@ local colors = require 'theme.colors'
 local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
 
+-- Meta Data
+
 local vi_mode_colors = {
     NORMAL = colors.green,
     INSERT = colors.red,
+    REPLACE = colors.red,
     VISUAL = colors.magenta,
-    OP = colors.green,
-    BLOCK = colors.blue,
-    REPLACE = colors.violet,
-    ['V-REPLACE'] = colors.violet,
-    ENTER = colors.cyan,
-    MORE = colors.cyan,
-    SELECT = colors.orange,
-    COMMAND = colors.green,
-    SHELL = colors.green,
-    TERM = colors.green,
+    COMMAND = colors.blue,
+    TERM = colors.darkblue,
     NONE = colors.yellow
 }
 
 local icons = {
-    linux = ' ',
-    macos = ' ',
-    windows = ' ',
+    unix = ' ',
+    mac = ' ',
+    dos = ' ',
 
     errs = ' ',
     warns = ' ',
@@ -30,20 +25,29 @@ local icons = {
     hints = ' ',
 
     lsp = ' ',
-    git = ''
+    git = '',
+
+    left_sep = '',
+    right_sep = ''
 }
 
+-- Funcs
+
+local function wrapper_str(msg, s) return s .. msg .. s end
+
 local function file_osinfo()
-    local os = vim.bo.fileformat:upper()
-    local icon
-    if os == 'UNIX' then
-        icon = icons.linux
-    elseif os == 'MAC' then
-        icon = icons.macos
-    else
-        icon = icons.windows
+    local os = vim.bo.fileformat:lower()
+    return icons[os] .. os
+end
+
+local function lsp_clientnames(component)
+    local icon = component.icon or icons.lsp
+    local clients = {}
+    for _, client in pairs(vim.lsp.buf_get_clients()) do
+        clients[#clients+1] = client.name
     end
-    return icon .. os
+
+    return icon .. table.concat(clients, '/')
 end
 
 local function lsp_diagnostics_info()
@@ -72,27 +76,41 @@ end
 
 local function vimode_hl()
     return {
-        name = vi_mode_utils.get_mode_highlight_name(),
-        fg = vi_mode_utils.get_mode_color()
+        fg = colors.bg,
+        bg = vi_mode_utils.get_mode_color()
     }
 end
 
 -- LuaFormatter off
 
+-- Layout
+
 local comps = {
     vi_mode = {
         left = {
-            provider = '▊',
+            provider = function()
+                return wrapper_str(vi_mode_utils.get_vim_mode():sub(1, 3), ' ')
+            end,
             hl = vimode_hl,
-            right_sep = ' '
+            right_sep = icons.right_sep
         },
         right = {
-            provider = '▊',
+            provider = function()
+                return string.format(' %d:%-d ', vim.fn.line('.'), vim.fn.col('.'))
+            end,
             hl = vimode_hl,
-            left_sep = ' '
+            left_sep = icons.left_sep
         }
     },
     file = {
+        encoding = {
+            provider = 'file_encoding',
+            left_sep = ' ',
+            hl = {
+                fg = colors.violet,
+                style = 'bold'
+            }
+        },
         info = {
             provider = 'file_info',
             hl = {
@@ -100,8 +118,8 @@ local comps = {
                 style = 'bold'
             }
         },
-        encoding = {
-            provider = 'file_encoding',
+        os = {
+            provider = file_osinfo,
             left_sep = ' ',
             hl = {
                 fg = colors.violet,
@@ -111,14 +129,6 @@ local comps = {
         type = {
             provider = 'file_type'
         },
-        os = {
-            provider = file_osinfo,
-            left_sep = ' ',
-            hl = {
-                fg = colors.violet,
-                style = 'bold'
-            }
-        }
     },
     line_percentage = {
         provider = 'line_percentage',
@@ -130,10 +140,11 @@ local comps = {
     scroll_bar = {
         provider = 'scroll_bar',
         left_sep = ' ',
-        hl = {
-            fg = colors.blue,
-            style = 'bold'
-        }
+        hl = function()
+            return {
+                fg = vi_mode_utils.get_mode_color()
+            }
+        end
     },
     diagnos = {
         err = {
@@ -144,12 +155,12 @@ local comps = {
                 fg = colors.red
             }
         },
-        warn = {
-            provider = diag_of(lsp_diagnostics_info, 'warns'),
+        hint = {
+            provider = diag_of(lsp_diagnostics_info, 'hints'),
             left_sep = ' ',
-            enabled = diag_enable(lsp_diagnostics_info, 'warns'),
+            enabled = diag_enable(lsp_diagnostics_info, 'hints'),
             hl = {
-                fg = colors.yellow
+                fg = colors.cyan
             }
         },
         info = {
@@ -160,26 +171,22 @@ local comps = {
                 fg = colors.blue
             }
         },
-        hint = {
-            provider = diag_of(lsp_diagnostics_info, 'hints'),
+        warn = {
+            provider = diag_of(lsp_diagnostics_info, 'warns'),
             left_sep = ' ',
-            enabled = diag_enable(lsp_diagnostics_info, 'hints'),
-            hl = {
-                fg = colors.cyan
-            }
-        },
-    },
-    lsp = {
-        name = {
-            provider = 'lsp_client_names',
-            left_sep = ' ',
-            icon = icons.lsp,
+            enabled = diag_enable(lsp_diagnostics_info, 'warns'),
             hl = {
                 fg = colors.yellow
             }
-        }
+        },
     },
     git = {
+        add = {
+            provider = 'git_diff_added',
+            hl = {
+                fg = colors.green
+            }
+        },
         branch = {
             provider = 'git_branch',
             icon = icons.git,
@@ -188,12 +195,6 @@ local comps = {
                 fg = colors.violet,
                 style = 'bold'
             },
-        },
-        add = {
-            provider = 'git_diff_added',
-            hl = {
-                fg = colors.green
-            }
         },
         change = {
             provider = 'git_diff_changed',
@@ -207,6 +208,18 @@ local comps = {
                 fg = colors.red
             }
         }
+    },
+    lsp = {
+        name = {
+            provider = lsp_clientnames,
+            icon = icons.lsp,
+            hl = {
+                fg = colors.yellow
+            }
+        }
+    },
+    space = {
+        provider = ' '
     }
 }
 
@@ -229,6 +242,7 @@ local components = {
     left = {
         active = {
             comps.vi_mode.left,
+            comps.space,
             comps.file.info,
             comps.lsp.name,
             comps.diagnos.err,
@@ -238,6 +252,7 @@ local components = {
         },
         inactive = {
             comps.vi_mode.left,
+            comps.space,
             comps.file.info
         }
     },
@@ -253,8 +268,8 @@ local components = {
             comps.file.os,
             comps.git.branch,
             comps.line_percentage,
-            comps.scroll_bar,
-            comps.vi_mode.right
+            comps.space,
+            comps.vi_mode.right,
         },
         inactive = {}
     }

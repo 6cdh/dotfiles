@@ -68,11 +68,18 @@ require'packer'.startup(
             'akinsho/nvim-bufferline.lua',
             config = function()
                 require'bufferline'.setup {
-                    options = {mappings = false, always_show_bufferline = false}
+                    options = {
+                        mappings = false,
+                        show_close_icon = false,
+                        always_show_bufferline = false
+                    }
                 }
             end
         }
         use {'famiu/feline.nvim', config = function()
+            require 'statusline'
+        end}
+        use {'hoob3rt/lualine.nvim', config = function()
             require 'statusline'
         end}
         use 'kdav5758/TrueZen.nvim'
@@ -80,6 +87,8 @@ require'packer'.startup(
             'norcalli/nvim-colorizer.lua',
             config = function() require'colorizer'.setup() end
         }
+        use 'xiyaowong/nvim-cursorword'
+        use 'haringsrob/nvim_context_vt'
 
         -- explorer
         use {
@@ -90,7 +99,7 @@ require'packer'.startup(
                 vim.g.nvim_tree_auto_ignore_ft = {'startify'}
             end
         }
-        use 'kevinhwang91/rnvimr'
+        use {'kevinhwang91/rnvimr', cmd = 'RnvimrToggle'}
         use {
             'nvim-telescope/telescope.nvim',
             requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
@@ -137,7 +146,6 @@ require'packer'.startup(
         }
 
         -- coding
-        -- use {'sbdchd/neoformat', config = function() require 'fmt' end}
         use {
             'b3nj5m1n/kommentary',
             config = function()
@@ -153,13 +161,12 @@ require'packer'.startup(
             config = function() require'surround'.setup {} end
         }
         use 'godlygeek/tabular'
-        use 'metakirby5/codi.vim'
+        use {'metakirby5/codi.vim', cmd = 'Codi'}
+        use {'mizlan/iswap.nvim', cmd = 'ISwap'}
 
         -- diagnostic
-        -- use 'dense-analysis/ale'
-        -- use 'nathunsmitty/nvim-ale-diagnostic'
         use 'dstein64/vim-startuptime'
 
         -- color scheme
-        use 'monsonjeremy/onedark.nvim'
+        use 'ful1e5/onedark.nvim'
     end)
