@@ -1,34 +1,53 @@
 -- lspconfig
 local lspconfig = require 'lspconfig'
 
-lspconfig.clangd.setup {}
-lspconfig.pyright.setup {}
-lspconfig.hls.setup {}
-lspconfig.vimls.setup {}
-lspconfig.texlab.setup {}
-lspconfig.gopls.setup {}
-lspconfig.rust_analyzer.setup {}
-
--- lua
 local sumneko_root_path = vim.fn.stdpath('cache') ..
                               '/lspconfig/sumneko_lua/lua-language-server'
 
-lspconfig.sumneko_lua.setup {
-    cmd = {'lua-language-server', '-E', sumneko_root_path .. '/main.lua'},
-    settings = {
-        Lua = {
-            runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
-            diagnostics = {globals = {'vim'}},
-            workspace = {
-                library = {
-                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                }
-            },
-            telemetry = {enable = false}
+local servers = {
+    'clangd', 'pyright', 'hls', 'vimls', 'texlab', 'gopls', 'rust_analyzer',
+    'efm', 'sumneko_lua'
+}
+
+local config = {
+    default = {flags = {debounce_text_changes = 500}},
+    clangd = {
+        on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+        end
+    },
+    pyright = {},
+    hls = {},
+    vimls = {},
+    texlab = {},
+    gopls = {},
+    rust_analyzer = {},
+    efm = {init_options = {documentFormatting = true}},
+    sumneko_lua = {
+        cmd = {'lua-language-server', '-E', sumneko_root_path .. '/main.lua'},
+        settings = {
+            Lua = {
+                runtime = {
+                    version = 'LuaJIT',
+                    path = vim.split(package.path, ';')
+                },
+                diagnostics = {globals = {'vim'}},
+                workspace = {
+                    library = {
+                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                    }
+                },
+                telemetry = {enable = false}
+            }
         }
     }
 }
+
+for _, lsp in ipairs(servers) do
+    local cfg = vim.tbl_extend('force', config.default, config[lsp])
+    lspconfig[lsp].setup(cfg)
+end
 
 -- lspkind
 

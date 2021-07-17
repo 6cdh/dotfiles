@@ -1,4 +1,5 @@
 local colors = require 'theme.colors'
+local icons = require 'theme.icons'
 local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
 
@@ -14,23 +15,6 @@ local vi_mode_colors = {
     NONE = colors.yellow
 }
 
-local icons = {
-    unix = ' ',
-    mac = ' ',
-    dos = ' ',
-
-    errs = ' ',
-    warns = ' ',
-    infos = ' ',
-    hints = ' ',
-
-    lsp = ' ',
-    git = '',
-
-    left_sep = '',
-    right_sep = ''
-}
-
 -- Funcs
 
 local function wrapper_str(msg, s) return s .. msg .. s end
@@ -44,7 +28,7 @@ local function lsp_clientnames(component)
     local icon = component.icon or icons.lsp
     local clients = {}
     for _, client in pairs(vim.lsp.buf_get_clients()) do
-        clients[#clients+1] = client.name
+        clients[#clients + 1] = client.name
     end
 
     return icon .. table.concat(clients, '/')
@@ -75,10 +59,7 @@ local function diag_of(f, s)
 end
 
 local function vimode_hl()
-    return {
-        fg = colors.bg,
-        bg = vi_mode_utils.get_mode_color()
-    }
+    return {fg = colors.bg, bg = vi_mode_utils.get_mode_color()}
 end
 
 -- LuaFormatter off

@@ -155,10 +155,7 @@ require'packer'.startup(
             end
         }
         use {'windwp/nvim-autopairs', config = function() require 'pairs' end}
-        use {
-            'blackCauldron7/surround.nvim',
-            config = function() require'surround'.setup {} end
-        }
+        use 'tpope/vim-surround'
         use 'godlygeek/tabular'
         use {'metakirby5/codi.vim', cmd = 'Codi'}
         use {'mizlan/iswap.nvim', cmd = 'ISwap'}

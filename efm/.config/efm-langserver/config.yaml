@@ -17,6 +17,7 @@ tools:
       - '%f:%l:%c: %m'
     root-markers:
       - compile_commands.json
+
   cpp-clangformat: &cpp-clangformat
     format-command: 'clang-format'
     format-stdin: true
@@ -55,7 +56,7 @@ tools:
       - "%f(%l,%c): %rror %m"
 
   lua-lua-format: &lua-lua-format
-    format-command: 'lua-format'
+    format-command: 'lua-format -i'
     format-stdin: true
   lua-luacheck: &lua-luacheck
     lint-command: 'luacheck --no-color -'

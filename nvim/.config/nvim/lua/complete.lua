@@ -10,7 +10,7 @@ require'compe'.setup {
         nvim_lua = true,
         vsnip = true,
         tabnine = {
-            ignore_pattern = "[)};]"
+            ignore_pattern = "[){};]"
         }
     }
 }
