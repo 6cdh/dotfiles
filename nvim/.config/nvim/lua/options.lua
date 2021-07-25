@@ -21,7 +21,7 @@ opt.ignorecase = true
 opt.showmode = false
 opt.cmdheight = 2
 opt.pumheight = 10
-opt.completeopt = {'menuone', 'noselect'}
+opt.completeopt = { 'menuone', 'noselect' }
 opt.magic = true
 opt.backup = false
 opt.writebackup = false
@@ -35,4 +35,3 @@ opt.cursorline = true
 opt.signcolumn = 'yes'
 
 opt.shortmess:append 'c'
-

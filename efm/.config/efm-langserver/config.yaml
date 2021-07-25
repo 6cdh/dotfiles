@@ -2,15 +2,8 @@
 version: 2
 root-markers:
   - .git/
-commands:
-  - title: Reload
-    command: :reload-config
 
 tools:
-  any-excitetranslate: &any-excitetranslate
-    hover-command: 'excitetranslate'
-    hover-stdin: true
-
   cpp-cppcheck: &cpp-cppcheck
     lint-command: 'cppcheck --quiet --force --enable=style --error-exitcode=1 ${INPUT}'
     lint-formats:
@@ -61,6 +54,14 @@ tools:
   lua-luacheck: &lua-luacheck
     lint-command: 'luacheck --no-color -'
     lint-stdin: true
+    lint-ignore-exit-code: true
+  lua-stylua: &lua-stylua
+    format-command: 'stylua -s --stdin-filepath ${INPUT} -'
+    format-stdin: true
+  lua-selene: &lua-selene
+    lint-command: 'selene --display-style quiet'
+    lint-formats:
+      - "%f:%l:%c: %m"
 
   markdown-markdownlint: &markdown-markdownlint
     lint-command: 'markdownlint -s -c %USERPROFILE%\.markdownlintrc'
@@ -122,34 +123,22 @@ languages:
   cpp:
     - <<: *cpp-clangformat
     - <<: *cpp-cppcheck
-  css:
-    - <<: *css-prettier
-  csv:
-    - <<: *csv-csvlint
   dockerfile:
     - <<: *dockerfile-hadolint
   go:
     - <<: *go-staticcheck
-  html:
-    - <<: *html-prettier
-  javascript:
-    - <<: *javascript-eslint
   json:
     - <<: *json-jq
     - <<: *json-fixjson
   lua:
-    - <<: *lua-lua-format
+    - <<: *lua-stylua
     - <<: *lua-luacheck
   markdown:
     - <<: *markdown-markdownlint
     - <<: *markdown-pandoc
   python:
     - <<: *python-flake8
-    - <<: *python-mypy
     - <<: *python-black
-  rst:
-    - <<: *rst-lint
-    - <<: *rst-pandoc
   sh:
     - <<: *sh-shellcheck
     - <<: *sh-shfmt
@@ -157,5 +146,3 @@ languages:
     - <<: *vim-vint
   yaml:
     - <<: *yaml-yamllint
-  _:
-    - <<: *any-excitetranslate

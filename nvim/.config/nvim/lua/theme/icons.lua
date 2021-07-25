@@ -1,4 +1,4 @@
-_M = {
+local _M = {
     unix = ' ',
     mac = ' ',
     dos = ' ',
@@ -12,7 +12,7 @@ _M = {
     git = '',
 
     left_sep = '',
-    right_sep = ''
+    right_sep = '',
 }
 
 return _M

@@ -1,0 +1,4 @@
+column_width = 90
+indent_type = "Spaces"
+quote_style = "AutoPreferSingle"
+no_call_parentheses = true

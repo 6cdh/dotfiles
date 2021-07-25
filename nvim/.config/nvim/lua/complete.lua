@@ -1,4 +1,4 @@
-require'compe'.setup {
+require('compe').setup {
     preselect = 'always',
     max_abbr_width = 45,
     source = {
@@ -10,8 +10,7 @@ require'compe'.setup {
         nvim_lua = true,
         vsnip = true,
         tabnine = {
-            ignore_pattern = "[){};]"
-        }
-    }
+            ignore_pattern = '[){};]',
+        },
+    },
 }
-

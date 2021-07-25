@@ -1,20 +1,17 @@
 -- lspconfig
 local lspconfig = require 'lspconfig'
 
-local sumneko_root_path = vim.fn.stdpath('cache') ..
-                              '/lspconfig/sumneko_lua/lua-language-server'
+vim.lsp.set_log_level 'debug'
 
-local servers = {
-    'clangd', 'pyright', 'hls', 'vimls', 'texlab', 'gopls', 'rust_analyzer',
-    'efm', 'sumneko_lua'
-}
+local sumneko_root_path = vim.fn.stdpath 'cache'
+    .. '/lspconfig/sumneko_lua/lua-language-server'
 
 local config = {
-    default = {flags = {debounce_text_changes = 500}},
+    default = { flags = { debounce_text_changes = 500 } },
     clangd = {
         on_attach = function(client)
             client.resolved_capabilities.document_formatting = false
-        end
+        end,
     },
     pyright = {},
     hls = {},
@@ -22,26 +19,44 @@ local config = {
     texlab = {},
     gopls = {},
     rust_analyzer = {},
-    efm = {init_options = {documentFormatting = true}},
+    efm = {
+        init_options = { documentFormatting = true },
+        languages = {
+            lua = {},
+            cpp = {},
+        },
+    },
     sumneko_lua = {
-        cmd = {'lua-language-server', '-E', sumneko_root_path .. '/main.lua'},
+        cmd = { 'lua-language-server', '-E', sumneko_root_path .. '/main.lua' },
         settings = {
             Lua = {
                 runtime = {
                     version = 'LuaJIT',
-                    path = vim.split(package.path, ';')
+                    path = vim.split(package.path, ';'),
                 },
-                diagnostics = {globals = {'vim'}},
+                diagnostics = { globals = { 'vim' } },
                 workspace = {
                     library = {
-                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                    }
+                        [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+                        [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+                    },
                 },
-                telemetry = {enable = false}
-            }
-        }
-    }
+                telemetry = { enable = false },
+            },
+        },
+    },
+}
+
+local servers = {
+    'clangd',
+    'pyright',
+    'hls',
+    'vimls',
+    'texlab',
+    'gopls',
+    'rust_analyzer',
+    'efm',
+    -- 'sumneko_lua',
 }
 
 for _, lsp in ipairs(servers) do
@@ -53,7 +68,7 @@ end
 
 -- vscode-like pictograms
 -- https://github.com/microsoft/vscode-codicons
-require'lspkind'.init {
+require('lspkind').init {
     with_text = false,
     symbol_map = {
         Text = ' ',
@@ -79,7 +94,6 @@ require'lspkind'.init {
         Struct = ' ',
         Event = ' ',
         Operator = ' ',
-        TypeParameter = ' '
-    }
+        TypeParameter = ' ',
+    },
 }
-
