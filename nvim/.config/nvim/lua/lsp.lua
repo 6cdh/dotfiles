@@ -1,8 +1,6 @@
 -- lspconfig
 local lspconfig = require 'lspconfig'
 
-vim.lsp.set_log_level 'debug'
-
 local sumneko_root_path = vim.fn.stdpath 'cache'
     .. '/lspconfig/sumneko_lua/lua-language-server'
 
@@ -56,7 +54,7 @@ local servers = {
     'gopls',
     'rust_analyzer',
     'efm',
-    -- 'sumneko_lua',
+    'sumneko_lua',
 }
 
 for _, lsp in ipairs(servers) do

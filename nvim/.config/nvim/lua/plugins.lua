@@ -10,7 +10,7 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
         end,
     }
     use 'p00f/nvim-ts-rainbow'
-    use 'nvim-treesitter/playground'
+    use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
     use 'neovim/nvim-lspconfig'
     use {
         'glepnir/lspsaga.nvim',
@@ -30,6 +30,7 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
         config = function()
             require('trouble').setup()
         end,
+        cmd = 'Trouble'
     }
     use {
         'folke/todo-comments.nvim',
@@ -46,12 +47,14 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
     use 'hrsh7th/vim-vsnip'
     use {
         'hrsh7th/nvim-compe',
+        event = 'InsertEnter',
         config = function()
             require 'complete'
         end,
     }
     use {
         'tzachar/compe-tabnine',
+        after = 'nvim-compe',
         run = './install.sh',
         requires = 'hrsh7th/nvim-compe',
     }
@@ -97,12 +100,6 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
     }
     use {
         'famiu/feline.nvim',
-        config = function()
-            require 'statusline'
-        end,
-    }
-    use {
-        'hoob3rt/lualine.nvim',
         config = function()
             require 'statusline'
         end,

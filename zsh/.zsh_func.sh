@@ -22,12 +22,12 @@ lcpdf2mobi() {
 	ebook-convert "$1" "$(basename ${1} .pdf).mobi" --output-profile kindle_pw3 --mobi-file-type both --mobi-ignore-margins --mobi-keep-original-images --pretty-print --no-inline-toc
 }
 
-lcall_repos() {
+lcrepos() {
 	find . -name .git -type d -prune
 }
 
-lcall_repos_pull() {
-	for each in $(lcdh_all_repos); do
+lcrepos_pull() {
+	for each in $(lcrepos); do
 		echo "\n${each%.git}\n"
 		git -C "${each%.git}" pull
 	done
