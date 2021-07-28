@@ -45,7 +45,7 @@ local config = {
     },
 }
 
-local servers = {
+local enabled_servers = {
     'clangd',
     'pyright',
     'hls',
@@ -57,7 +57,7 @@ local servers = {
     'sumneko_lua',
 }
 
-for _, lsp in ipairs(servers) do
+for _, lsp in ipairs(enabled_servers) do
     local cfg = vim.tbl_extend('force', config.default, config[lsp])
     lspconfig[lsp].setup(cfg)
 end

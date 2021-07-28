@@ -10,7 +10,7 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
         end,
     }
     use 'p00f/nvim-ts-rainbow'
-    use {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle'}
+    use { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' }
     use 'neovim/nvim-lspconfig'
     use {
         'glepnir/lspsaga.nvim',
@@ -27,10 +27,10 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
     }
     use {
         'folke/trouble.nvim',
+        cmd = 'Trouble',
         config = function()
             require('trouble').setup()
         end,
-        cmd = 'Trouble'
     }
     use {
         'folke/todo-comments.nvim',
@@ -85,7 +85,8 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
 
     -- ui
     use 'kyazdani42/nvim-web-devicons'
-    use 'mhinz/vim-startify'
+    -- TODO: Speedup vim-startify
+    -- use 'mhinz/vim-startify'
     use {
         'akinsho/nvim-bufferline.lua',
         config = function()
@@ -116,12 +117,10 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
 
     -- explorer
     use {
+        -- TODO: Defer nvim-tree
         'kyazdani42/nvim-tree.lua',
+        cmd = 'NvimTreeToggle',
         requires = 'kyazdani42/nvim-web-devicons',
-        config = function()
-            vim.g.nvim_tree_auto_open = 1
-            vim.g.nvim_tree_auto_ignore_ft = { 'startify' }
-        end,
     }
     use { 'kevinhwang91/rnvimr', cmd = 'RnvimrToggle' }
     use {
@@ -154,6 +153,7 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
     }
     use {
         'akinsho/nvim-toggleterm.lua',
+        cmd = 'ToggleTerm',
         config = function()
             require('toggleterm').setup {
                 size = 10,
@@ -197,7 +197,7 @@ require('packer').startup(function(use) -- Suppress undefined global variables w
     use { 'mizlan/iswap.nvim', cmd = 'ISwap' }
 
     -- diagnostic
-    use 'dstein64/vim-startuptime'
+    use { 'dstein64/vim-startuptime', cmd = 'StartupTime' }
 
     -- color scheme
     use 'ful1e5/onedark.nvim'
