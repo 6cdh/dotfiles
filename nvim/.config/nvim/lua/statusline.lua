@@ -33,7 +33,7 @@ local function lsp_clientnames()
         clients[#clients + 1] = client.name
     end
 
-    if clients == {} then
+    if #clients == 0 then
         return ''
     end
 
