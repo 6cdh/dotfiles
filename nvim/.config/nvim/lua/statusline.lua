@@ -26,8 +26,8 @@ local function file_osinfo()
     return icons[os] .. os
 end
 
-local function lsp_clientnames(component)
-    local icon = component.icon or icons.lsp
+local function lsp_clientnames()
+    local icon = icons.lsp
     local clients = {}
     for _, client in pairs(vim.lsp.buf_get_clients()) do
         clients[#clients + 1] = client.name
@@ -200,6 +200,9 @@ local comps = {
         name = {
             provider = lsp_clientnames,
             icon = icons.lsp,
+            enabled = function()
+                return lsp_clientnames() ~= ''
+            end,
             hl = {
                 fg = colors.yellow,
             },

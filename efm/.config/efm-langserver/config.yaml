@@ -5,43 +5,55 @@ root-markers:
 
 tools:
   cpp-cppcheck: &cpp-cppcheck
-    lint-command: 'cppcheck --quiet --force --enable=style --error-exitcode=1 ${INPUT}'
+    lint-command: "cppcheck --quiet --force --enable=style --error-exitcode=1 ${INPUT}"
+    lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l:%c: %m'
+      - "%f:%l:%c: %m"
     root-markers:
       - compile_commands.json
 
   cpp-clangformat: &cpp-clangformat
-    format-command: 'clang-format'
+    format-command: "clang-format"
+    format-stdin: true
+
+  cpp-flawfinder: &cpp-flawfinder
+    lint-command: "flawfinder -CDQS"
+    lint-ignore-exit-code: true
+    lint-formats:
+      - "%f:%l:%c:%m"
+
+  cmake-cmake-format: &cmake-cmake-format
+    format-command: "cmake-format -"
     format-stdin: true
 
   css-prettier: &css-prettier
-    format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css'
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css"
   csv-csvlint: &csv-csvlint
-    lint-command: 'csvlint'
+    lint-command: "csvlint"
 
   dockerfile-hadolint: &dockerfile-hadolint
-    lint-command: 'hadolint'
+    lint-command: "hadolint"
     lint-formats:
-      - '%f:%l %m'
+      - "%f:%l %m"
 
   go-staticcheck: &go-staticcheck
-    lint-command: 'staticcheck'
+    lint-command: "staticcheck"
+    lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l:%c %m'
+      - "%f:%l:%c %m"
 
   html-prettier: &html-prettier
-    format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html'
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html"
 
   json-prettier: &json-prettier
-    format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} --parser json'
+    format-command: "prettier ${--tab-width:tabWidth} --parser json"
   json-jq: &json-jq
-    lint-command: 'jq .'
+    lint-command: "jq ."
   json-fixjson: &json-fixjson
-    format-command: 'fixjson'
+    format-command: "fixjson"
 
   javascript-eslint: &javascript-eslint
-    lint-command: 'eslint -f visualstudio --stdin --stdin-filename ${INPUT}'
+    lint-command: "eslint -f visualstudio --stdin --stdin-filename ${INPUT}"
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
@@ -49,100 +61,114 @@ tools:
       - "%f(%l,%c): %rror %m"
 
   lua-lua-format: &lua-lua-format
-    format-command: 'lua-format -i'
+    format-command: "lua-format -i"
     format-stdin: true
   lua-luacheck: &lua-luacheck
-    lint-command: 'luacheck --no-color -'
+    lint-command: "luacheck --no-color -"
     lint-stdin: true
     lint-ignore-exit-code: true
   lua-stylua: &lua-stylua
-    format-command: 'stylua -s --stdin-filepath ${INPUT} -'
+    format-command: "stylua -s --stdin-filepath ${INPUT} -"
     format-stdin: true
   lua-selene: &lua-selene
-    lint-command: 'selene --display-style quiet'
+    lint-command: "selene --display-style quiet"
     lint-formats:
       - "%f:%l:%c: %m"
+    lint-ignore-exit-code: true
 
   markdown-markdownlint: &markdown-markdownlint
     lint-command: 'markdownlint -s -c %USERPROFILE%\.markdownlintrc'
     lint-stdin: true
     lint-formats:
-      - '%f:%l %m'
-      - '%f:%l:%c %m'
-      - '%f: %l: %m'
+      - "%f:%l %m"
+      - "%f:%l:%c %m"
+      - "%f: %l: %m"
   markdown-pandoc: &markdown-pandoc
-    format-command: 'pandoc -f markdown -t gfm -sp --tab-stop=4 --columns=90'
+    format-command: "pandoc -f markdown -t gfm -sp --tab-stop=4 --columns=90"
 
   python-black: &python-black
-    format-command: 'black --quiet -'
+    format-command: "black --quiet -"
     format-stdin: true
   python-flake8: &python-flake8
-    lint-command: 'flake8 --stdin-display-name ${INPUT} -'
+    lint-command: "flake8 --stdin-display-name ${INPUT} -"
     lint-stdin: true
+    lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l:%c: %m'
+      - "%f:%l:%c: %m"
   python-mypy: &python-mypy
-    lint-command: 'mypy --show-column-numbers'
+    lint-command: "mypy --show-column-numbers"
+    lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l:%c: %trror: %m'
-      - '%f:%l:%c: %tarning: %m'
-      - '%f:%l:%c: %tote: %m'
+      - "%f:%l:%c: %trror: %m"
+      - "%f:%l:%c: %tarning: %m"
+      - "%f:%l:%c: %tote: %m"
 
   rst-pandoc: &rst-pandoc
-    format-command: 'pandoc -f rst -t rst -s --columns=79'
+    format-command: "pandoc -f rst -t rst -s --columns=79"
   rst-lint: &rst-lint
-    lint-command: 'rst-lint'
+    lint-command: "rst-lint"
     lint-formats:
-      - '%tNFO %f:%l %m'
-      - '%tARNING %f:%l %m'
-      - '%tRROR %f:%l %m'
-      - '%tEVERE %f:%l %m'
+      - "%tNFO %f:%l %m"
+      - "%tARNING %f:%l %m"
+      - "%tRROR %f:%l %m"
+      - "%tEVERE %f:%l %m"
 
   sh-shellcheck: &sh-shellcheck
-    lint-command: 'shellcheck -f gcc -x'
-    lint-source: 'shellcheck'
+    lint-command: "shellcheck -f gcc -x"
+    lint-source: "shellcheck"
+    lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l:%c: %trror: %m'
-      - '%f:%l:%c: %tarning: %m'
-      - '%f:%l:%c: %tote: %m'
+      - "%f:%l:%c: %trror: %m"
+      - "%f:%l:%c: %tarning: %m"
+      - "%f:%l:%c: %tote: %m"
   sh-shfmt: &sh-shfmt
-    format-command: 'shfmt -ci -s -bn'
+    format-command: "shfmt -ci -s -bn"
     format-stdin: true
 
+  toml-prettier: &toml-prettier
+    format-command: "prettier ${--tab-width:tabWidth} --parser toml"
+
   vim-vint: &vim-vint
-    lint-command: 'vint -'
+    lint-command: "vint -"
     lint-stdin: true
+    lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l:%c: %m'
+      - "%f:%l:%c: %m"
 
   yaml-yamllint: &yaml-yamllint
-    lint-command: 'yamllint -f parsable -'
+    lint-command: "yamllint -f parsable -"
     lint-stdin: true
+    lint-ignore-exit-code: true
+  yaml-prettier: &yaml-prettier
+    format-command: "prettier ${--tab-width:tabWidth} --parser yaml"
 
 languages:
   cpp:
     - <<: *cpp-clangformat
     - <<: *cpp-cppcheck
+    - <<: *cpp-flawfinder
   dockerfile:
     - <<: *dockerfile-hadolint
   go:
     - <<: *go-staticcheck
   json:
     - <<: *json-jq
-    - <<: *json-fixjson
   lua:
     - <<: *lua-stylua
     - <<: *lua-luacheck
   markdown:
-    - <<: *markdown-markdownlint
     - <<: *markdown-pandoc
   python:
     - <<: *python-flake8
     - <<: *python-black
+    - <<: *python-mypy
   sh:
     - <<: *sh-shellcheck
     - <<: *sh-shfmt
+  toml:
+    - <<: *toml-prettier
   vim:
     - <<: *vim-vint
   yaml:
     - <<: *yaml-yamllint
+    - <<: *yaml-prettier

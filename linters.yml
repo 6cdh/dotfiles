@@ -1,4 +1,4 @@
-# Linters, Formatters and LSPs
+# Linters, Formatters and LSP servers
 ---
 - name: asmfmt
   lang: [asm]
@@ -15,6 +15,11 @@
   type: [formatter]
   run: pip install black --upgrade
 
+- name: clangformat
+  lang: [c, cpp]
+  type: [formatter]
+  run: yay -S clang
+
 - name: clojure-lsp
   lang: [clojure]
   type: [lsp]
@@ -26,7 +31,7 @@
   run: pip install cmakelang --upgrade
 
 - name: cpp-check
-  lang: [c++]
+  lang: [cpp]
   type: [linter]
   run: yay -S cppcheck
 
@@ -41,7 +46,7 @@
   run: pip install flake8 --upgrade
 
 - name: flawfinder
-  lang: [c, c++]
+  lang: [c, cpp]
   type: [linter]
   run: yay -S flawfinder
 
@@ -81,6 +86,11 @@
   type: [lsp]
   run: nix-env -iA nixpkgs.sumneko-lua-language-server
 
+- name: mypy
+  lang: [python]
+  type: [linter]
+  run: pip install mypy --upgrade
+
 - name: ormolu
   lang: [haskell]
   type: [formatter]
@@ -92,7 +102,7 @@
   run: yarn global add prettier
 
 - name: pvs studio
-  lang: [c, c++, c#, java]
+  lang: [c, cpp, c#, java]
   type: [linter]
   run: yay -S pvs-studio
 
@@ -111,10 +121,20 @@
   type: [formatter]
   run: rustup component add rustfmt
 
+- name: shellcheck
+  lang: [shell]
+  type: [linter]
+  run: nix-env -iA nixpkgs.shellcheck
+
 - name: shfmt
   lang: [shell]
   type: [formatter]
   run: go get mvdan.cc/sh/v3/cmd/shfmt
+
+- name: stylua
+  lang: [lua]
+  type: [formatter]
+  run: cargo install stylua
 
 - name: texlab
   lang: [tex]

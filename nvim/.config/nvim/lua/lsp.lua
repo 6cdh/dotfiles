@@ -6,6 +6,7 @@ local sumneko_root_path = vim.fn.stdpath 'cache'
 
 local config = {
     default = { flags = { debounce_text_changes = 500 } },
+    bashls = {},
     clangd = {
         on_attach = function(client)
             client.resolved_capabilities.document_formatting = false
@@ -19,9 +20,18 @@ local config = {
     rust_analyzer = {},
     efm = {
         init_options = { documentFormatting = true },
-        languages = {
-            lua = {},
-            cpp = {},
+        filetypes = {
+            'cpp',
+            'dockerfile',
+            'go',
+            'json',
+            'lua',
+            'markdown',
+            'python',
+            'sh',
+            'toml',
+            'vim',
+            'yaml',
         },
     },
     sumneko_lua = {
@@ -46,6 +56,7 @@ local config = {
 }
 
 local enabled_servers = {
+    'bashls',
     'clangd',
     'pyright',
     'hls',
@@ -61,8 +72,6 @@ for _, lsp in ipairs(enabled_servers) do
     local cfg = vim.tbl_extend('force', config.default, config[lsp])
     lspconfig[lsp].setup(cfg)
 end
-
--- lspkind
 
 -- vscode-like pictograms
 -- https://github.com/microsoft/vscode-codicons
