@@ -35,6 +35,20 @@ tools:
     lint-command: "hadolint"
     lint-formats:
       - "%f:%l %m"
+  fennel-fnlfmt: &fennel-fnlfmt
+    format-command: "fnlfmt -"
+    format-stdin: true
+
+  fennel-fennel: &fennel-fennel
+    lint-command: "fennel --globals vim"
+    lint-ignore-exit-code: true
+    lint-formats:
+      - "%ECompile %trror in %f:%l"
+      - "%EParse %trror in %f:%l"
+      - "%C%p^^%#"
+      - "%C  %m"
+      - "%C* %m."
+      - "%C%.%#"
 
   go-staticcheck: &go-staticcheck
     lint-command: "staticcheck"
@@ -149,6 +163,9 @@ languages:
     - <<: *cpp-flawfinder
   dockerfile:
     - <<: *dockerfile-hadolint
+  fennel:
+    - <<: *fennel-fnlfmt
+    - <<: *fennel-fennel
   go:
     - <<: *go-staticcheck
   json:
