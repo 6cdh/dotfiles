@@ -1,8 +1,5 @@
 (local packer (require :packer))
 
-(let [utils (require :utils)]
-  (utils.new_augroup {:fennel_packer ["BufWritePost plugins.fnl PackerCompile"]}))
-
 (packer.startup (fn [use]
                   (macro plug [name tbl]
                     (local tbl (or tbl {}))
@@ -20,7 +17,7 @@
                   (plug :neovim/nvim-lspconfig)
                   (plug :glepnir/lspsaga.nvim
                         {:config #(setup :lspsaga :init_lsp_saga
-                                         {:code_action_prompt {:virtual_text false}})})
+                                         {:code_action_prompt {:enable false}})})
                   (plug :onsails/lspkind-nvim)
                   (plug :ray-x/lsp_signature.nvim
                         {:config #(setup :lsp_signature :on_attach)})
@@ -39,7 +36,7 @@
                         {:after :nvim-compe
                          :run :./install.sh
                          :requires :hrsh7th/nvim-compe})
-                  ;; langs
+                  ;; notes
                   (plug :plasticboy/vim-markdown
                         {:disable true
                          :ft :markdown
@@ -50,7 +47,13 @@
                                     (set vim.g.vim_markdown_strikethrough 1)
                                     (set vim.g.vim_markdown_toc_autofit 1))})
                   (plug :iamcco/markdown-preview.nvim
-                        {:run "cd app && yarn install" :cmd :MarkdownPreview})
+                        {:run "cd app && yarn install" :ft :markdown})
+                  (plug :kristijanhusak/orgmode.nvim
+                        {:ft :org :config #(setup :orgmode :setup)})
+                  (plug :vhyrro/neorg
+                        {:ft :norg
+                         :requires :nvim-lua/plenary.nvim
+                         :config #(setup :neorg :setup {})})
                   ;; ui
                   (plug :kyazdani42/nvim-web-devicons) ; (plug :mhinz/vim-startify)
                   (plug :akinsho/nvim-bufferline.lua
@@ -58,20 +61,21 @@
                                          {:options {:mappings true
                                                     :show_close_icon false
                                                     :always_show_bufferline false}})})
-                  (plug :famiu/feline.nvim {:config #(require :statusline)})
+                  (plug :famiu/feline.nvim
+                        {:after :onedark.nvim :config #(require :statusline)})
                   (plug :kdav5758/TrueZen.nvim)
                   (plug :norcalli/nvim-colorizer.lua
-                        {:config #(setup :colorizer :setup)})
-                  (plug :xiyaowong/nvim-cursorword)
-                  (plug :haringsrob/nvim_context_vt)
+                        {:config #(setup :colorizer :setup)}) ; (plug :xiyaowong/nvim-cursorword)
+                  (plug :haringsrob/nvim_context_vt {:disable true})
                   ;; explorer
                   (plug :kyazdani42/nvim-tree.lua
-                        {:cmd :NvimTreeToggle
-                         :requires :kyazdani42/nvim-web-devicons})
+                        {:requires :kyazdani42/nvim-web-devicons
+                         :cmd :NvimTreeToggle})
                   (plug :kevinhwang91/rnvimr {:cmd :RnvimrToggle})
                   (plug :nvim-telescope/telescope.nvim
                         {:requires [[:nvim-lua/popup.nvim]
-                                    [:nvim-lua/plenary.nvim]]})
+                                    [:nvim-lua/plenary.nvim]]
+                         :cmd :Telescope})
                   ;; git
                   (plug :lewis6991/gitsigns.nvim
                         {:requires :nvim-lua/plenary.nvim
@@ -108,10 +112,13 @@
                   (plug :windwp/nvim-autopairs {:config #(require :pairs)})
                   (plug :tpope/vim-surround)
                   (plug :godlygeek/tabular)
-                  (plug :metakirby5/codi.vim {:cmd :Codi})
                   (plug :mizlan/iswap.nvim {:cmd :ISwap})
-                  ;; diagnostic
+                  ;; Interactive
+                  (plug :metakirby5/codi.vim {:cmd :Codi})
+                  (plug :Olical/conjure
+                        {:ft [:fennel :clojure :racket :scheme]})
+                  ;; profile
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
                   ;; color scheme
-                  (plug :ful1e5/onedark.nvim)))
+                  (plug :ful1e5/onedark.nvim {:config #(require :theme)})))
 

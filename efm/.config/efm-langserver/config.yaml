@@ -40,7 +40,7 @@ tools:
     format-stdin: true
 
   fennel-fennel: &fennel-fennel
-    lint-command: "fennel --globals vim"
+    lint-command: "fennel --globals vim --compile"
     lint-ignore-exit-code: true
     lint-formats:
       - "%ECompile %trror in %f:%l"

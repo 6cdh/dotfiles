@@ -19,12 +19,14 @@
        :inccommand :nosplit
        :lazyredraw true
        :breakindent true
-       :updatetime 200
+       :smartindent true
+       :updatetime 250
        :timeoutlen 300
        :smartcase true
        :ignorecase true
        :showmode false
-       :cmdheight 2
+       :ruler false
+       :cmdheight 1
        :pumheight 10
        :completeopt [:menuone :noselect]
        :magic true
@@ -35,9 +37,22 @@
        :number true
        :relativenumber true
        :cursorline true
-       :signcolumn :yes})
+       :signcolumn :yes
+       :mouse :a})
 
-(opt.shortmess:append :c)
+(opt.shortmess:append :cI)
 
 (set vim.g.python3_host_prog "~/.pyenv/versions/nvim/bin/python3")
+
+(local disabled_builtins [:netrw
+                          :netrwPlugin
+                          :netrwSettings
+                          :netrwFileHandlers
+                          :gzip
+                          :zip
+                          :zipPlugin
+                          :tar
+                          :tarPlugin])
+
+(fs.imap2 #(tset vim.g (.. :loaded_ $1) 1) disabled_builtins)
 

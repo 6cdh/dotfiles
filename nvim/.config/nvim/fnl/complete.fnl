@@ -7,6 +7,7 @@
                     :nvim_lsp true
                     :nvim_lua true
                     :vsnip true
+                    :orgmode true
                     :tabnine {:ignore_pattern "[){};]"}}})
 
 (let [compe (require :compe)]
