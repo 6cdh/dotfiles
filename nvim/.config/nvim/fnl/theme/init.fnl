@@ -1,4 +1,3 @@
-(local onedark (require :onedark))
-
-(onedark.setup {:transparent true})
+(let [onedark (require :onedark)]
+  (onedark.setup {:transparent true}))
 

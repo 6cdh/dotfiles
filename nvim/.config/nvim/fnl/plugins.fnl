@@ -116,7 +116,11 @@
                   ;; Interactive
                   (plug :metakirby5/codi.vim {:cmd :Codi})
                   (plug :Olical/conjure
-                        {:ft [:fennel :clojure :racket :scheme]})
+                        {:ft [:fennel :clojure :racket :scheme]
+                         :config #(do
+                                    (tset vim.g "conjure#filetype#fennel"
+                                          :conjure.client.fennel.stdio)
+                                    (tset vim.g "conjure#log#hud#enabled" false))})
                   ;; profile
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
                   ;; color scheme

@@ -13,6 +13,7 @@
 ;; bool
 
 (fn _M.tbl? [tbl]
+  "a -> bool"
   (= (type tbl) :table))
 
 (fn _M.list? [tbl]

@@ -1,10 +1,12 @@
-(local colors (require :theme.colors))
-(local icons (require :theme.icons))
-(local lsp (require :feline.providers.lsp))
-(local vi_mode_utils (require :feline.providers.vi_mode))
-(local fs (require :fs))
+(local [colors icons lsp vi_mode fs feline]
+       [(require :theme.colors)
+        (require :theme.icons)
+        (require :feline.providers.lsp)
+        (require :feline.providers.vi_mode)
+        (require :fs)
+        (require :feline)])
+
 (local vf vim.fn)
-(local feline (require :feline))
 
 ; Meta Data
 
@@ -41,9 +43,9 @@
   #(.. (. icons s) (. (f) s)))
 
 (fn vimode_hl []
-  {:fg colors.bg :bg (vi_mode_utils.get_mode_color)})
+  {:fg colors.bg :bg (vi_mode.get_mode_color)})
 
-(local comps {:vi_mode {:left {:provider #(wrapper_str (-> (vi_mode_utils.get_vim_mode)
+(local comps {:vi_mode {:left {:provider #(wrapper_str (-> (vi_mode.get_vim_mode)
                                                            (: :sub 1 3))
                                                        " ")
                                :hl vimode_hl
@@ -67,7 +69,7 @@
                                 :hl {:style :bold}}
               :scroll_bar {:provider :scroll_bar
                            :left_sep " "
-                           :hl #{:fg (vi_mode_utils.get_mode_color)}}
+                           :hl #{:fg (vi_mode.get_mode_color)}}
               :diagnos {:err {:provider (diag_of lsp_diagnostics_info :errs)
                               :left_sep " "
                               :enabled (diag_enable? lsp_diagnostics_info :errs)

@@ -1,5 +1,3 @@
-(local fs (require :fs))
-
 (local sumneko_root_path
        (.. (vim.fn.stdpath :cache) :/lspconfig/sumneko_lua/lua-language-server))
 
@@ -49,10 +47,13 @@
                         :efm
                         :sumneko_lua])
 
-(let [lspconfig (require :lspconfig)]
-  (fs.imap2 #((. lspconfig $1 :setup) (vim.tbl_extend :force config.default
-                                                      (. config $1)))
-            enabled-servers))
+(let [lspconfig (require :lspconfig)
+      fs (require :fs)]
+  (fn setup-server [server]
+    ((. lspconfig server :setup) (vim.tbl_extend :force config.default
+                                                 (. config server))))
+
+  (fs.imap2 setup-server enabled-servers))
 
 (let [lspkind (require :lspkind)]
   (lspkind.init {:with_text false

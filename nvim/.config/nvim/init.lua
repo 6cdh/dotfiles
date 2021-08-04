@@ -16,22 +16,31 @@ if fn.empty(fn.glob(hotpot_path)) > 0 then
     )
 end
 
-nvim_profile = nil
+startup_features = {
+    debug = false,
+    profile_path = vim.fn.stdpath 'cache' .. '/profile.log',
+}
+
+local _s = nil
+
+if _G.startup_features.debug then
+    _s = os.clock()
+end
 
 require 'hotpot'
 
-if _G.nvim_profile then
-    local _s = os.clock()
+if _G.startup_features.debug then
+    local hotpot_loadtime = os.clock() - _s
     _G._require = require
     _G.require = require('requirebm').require
-    local f = io.open(vim.fn.stdpath 'cache' .. '/profile.log', 'w')
-    f:write('hotpot takes ', (os.clock() - _s) * 1000, ' ms\n')
+    local f = io.open(_G.startup_features.profile_path, 'w')
+    f:write('hotpot takes ', hotpot_loadtime * 1000, ' ms\n')
     f:close()
 end
 
 local modules = {
     'hotpot',
-    'lazy',
+    'register',
     'options',
     'keymap',
     'diagnostic',

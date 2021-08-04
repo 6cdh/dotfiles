@@ -1,6 +1,7 @@
-(local utils (require :utils))
-(local npairs (require :nvim-autopairs))
-(local fs (require :fs))
+(local [utils npairs fs] [(require :utils)
+                          (require :nvim-autopairs)
+                          (require :fs)])
+
 (local vf vim.fn)
 
 ; Keymap Principles
@@ -10,16 +11,25 @@
 ; 4. Semantic mappings.
 ; 5. A key on the home row is expected if it can't meet the principle 4.
 
-; stylua: ignore start
-
-(local left-hand [:q :w :e :r :t :a :s :d :f :g :z :x :c :v :b])
-(local right-hand [:y :u :i :o :p :h :j :k :l :n :m])
+(local [left-hand right-hand]
+       [[:q :w :e :r :t :a :s :d :f :g :z :x :c :v :b]
+        [:y :u :i :o :p :h :j :k :l :n :m]])
 
 (fn cmd [s]
   (.. :<Cmd> s :<CR>))
 
 (fn plug [s]
   (.. :<Plug> s))
+
+;; keymap format
+
+; {:<prefix> {:name :<prefix-name> ;; name is optional
+;             ;; A family of keymap
+;             :<key> [:<cmd> :<description>] 
+;             :<key> [:<cmd> :<description>]
+;             ...}
+;  ...
+;  :<prefix> [:<cmd> :<description>]}
 
 (local nmap {:p {:name "Plugins Manager"
                  :p [(cmd :PackerSync) :PackerSync]
@@ -61,10 +71,11 @@
                  :j [(cmd :SudaRead) "Read as Root"]}
              :c {:name :Clipboard :p [(cmd "%y+") "Copy Buffer"]}
              :l {:name :Lint/Diagnostics
-                 :l [(cmd "lua require\"lspsaga.diagnostic\".show_line_diagnostics()")
+                 :l [(cmd "lua require'lspsaga.diagnostic'.show_line_diagnostics()")
                      "Show Line Diagnostics"]
                  :a [(cmd "Lspsaga diagnostic_jump_prev") "Last Diagnostic"]
                  :f [(cmd "Lspsaga diagnostic_jump_next") "Next Diagnostic"]}
+             :h {:name :Hotpot :c [(cmd :HotpotCompileBuf) "Compile Buffer"]}
              :w [(cmd :w) :Save]
              :q [(cmd :q) :Quit]
              :Q [(cmd :q!) "Force Quit"]})
@@ -77,24 +88,33 @@
                  :c [(plug :kommentary_visual_default<C-c>) :Comment]
                  :s [(cmd :Codi) "Run REPL"]
                  :d [(cmd :Codi!) "Close REPL"]}
-             :c {:name :Clipboard :p ["\"+y" "Copy Selection"]}})
+             :c {:name :Clipboard :p ["\"+y" "Copy Selection"]}
+             :h {:name :Hotpot
+                 :c [(cmd :HotpotCompileSel) "Compile Selection"]}})
 
-(fn verify-maps [maps]
+(fn verify-maps-balance-hands [maps]
+  "{str {str str|[str]}|[str]} -> ()"
   (fn not-both-in-tbl [tbl v1 v2]
     (or (fs.!member? v1 tbl) (fs.!member? v2 tbl)))
 
-  (fn check-each [v k]
-    (if (and (fs.tbl? v) (fs.!nil? v.name))
-        (fs.map2 #(assert (or (= $2 :name) (= k $2)
-                              (and (not-both-in-tbl left-hand k $2)
-                                   (not-both-in-tbl right-hand k $2)))
-                          (.. "Mappings Didn't Balance\n        Two Hands: " k
-                              $2)) v)))
+  (fn verify-each-family [family prefix]
+    "{str str|[str]}|[str] -> str -> ()"
+    (fn verify-key [map key]
+      "str|[str] -> str -> ()"
+      (if (and (not= key :name) (not= key prefix))
+          (assert (and (not-both-in-tbl left-hand key prefix)
+                       (not-both-in-tbl right-hand key prefix))
+                  (.. "Mappings Didn't Balance Two Hands: " prefix key))))
 
-  (fs.map2 check-each maps))
+    (if (and (fs.tbl? family) (fs.!list? family))
+        (fs.map2 verify-key family)))
 
-(verify-maps nmap)
-(verify-maps vmap)
+  (fs.map2 verify-each-family maps))
+
+(if _G.startup_features.debug
+    (do
+      (verify-maps-balance-hands nmap)
+      (verify-maps-balance-hands vmap)))
 
 (local mode {:normal :n
              :select :s
@@ -115,6 +135,17 @@
                      :noremap true
                      :silent true}))
 
+(fn _G.smart_tab []
+  (if (and (not= (vf.pumvisible) 0)
+           (not= (. (vf.complete_info [:selected]) :selected) -1))
+      ((. vf "compe#confirm"))
+      (= ((. vf "vsnip#available") 1) 1)
+      (utils.to_keycodes "<Plug>(vsnip-expand-or-jump)")
+      (utils.to_keycodes :<TAB>)))
+
+(fn _G.smart_cr []
+  (if (not= (vf.pumvisible) 0) (npairs.esc :<cr>) (npairs.autopairs_cr)))
+
 (fn kmap [m lhs rhs ...]
   (let [t {}]
     (fs.imap2 #(tset t $1 true) [...])
@@ -131,17 +162,6 @@
 (kmap mode.terminal :<C-l> "<C-\\><C-n><C-w>l" :noremap)
 
 (kmap mode.normal :K (cmd "Lspsaga hover_doc" :noremap :silent))
-
-(fn _G.smart_tab []
-  (if (and (not= (vf.pumvisible) 0)
-           (not= (. (vf.complete_info [:selected]) :selected) -1))
-      ((. vf "compe#confirm"))
-      (= ((. vf "vsnip#available") 1) 1)
-      (utils.to_keycodes "<Plug>(vsnip-expand-or-jump)")
-      (utils.to_keycodes :<TAB>)))
-
-(fn _G.smart_cr []
-  (if (not= (vf.pumvisible) 0) (npairs.esc :<cr>) (npairs.autopairs_cr)))
 
 (kmap mode.insert :<TAB> "v:lua.smart_tab()" :expr :silent)
 (kmap mode.insert :<CR> "v:lua.smart_cr()" :expr :silent)
