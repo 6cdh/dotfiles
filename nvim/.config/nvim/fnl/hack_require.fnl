@@ -11,7 +11,7 @@
       (f:close)
       m))
 
-  (if _G.startup_features.debug (profile-require) (require module)))
+  (if _G.startup_features.edit_config (profile-require) (require module)))
 
 {:require _require}
 

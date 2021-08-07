@@ -1,6 +1,4 @@
-(local [utils npairs fs] [(require :utils)
-                          (require :nvim-autopairs)
-                          (require :fs)])
+(local [npairs fs] [(require :nvim-autopairs) (require :fs)])
 
 (local vf vim.fn)
 
@@ -111,7 +109,7 @@
 
   (fs.map2 verify-each-family maps))
 
-(if _G.startup_features.debug
+(if _G.startup_features.edit_config
     (do
       (verify-maps-balance-hands nmap)
       (verify-maps-balance-hands vmap)))
@@ -135,13 +133,16 @@
                      :noremap true
                      :silent true}))
 
+(fn to_keycodes [s]
+  (vim.api.nvim_replace_termcodes s true true true))
+
 (fn _G.smart_tab []
   (if (and (not= (vf.pumvisible) 0)
            (not= (. (vf.complete_info [:selected]) :selected) -1))
       ((. vf "compe#confirm"))
       (= ((. vf "vsnip#available") 1) 1)
-      (utils.to_keycodes "<Plug>(vsnip-expand-or-jump)")
-      (utils.to_keycodes :<TAB>)))
+      (to_keycodes "<Plug>(vsnip-expand-or-jump)")
+      (to_keycodes :<TAB>)))
 
 (fn _G.smart_cr []
   (if (not= (vf.pumvisible) 0) (npairs.esc :<cr>) (npairs.autopairs_cr)))
