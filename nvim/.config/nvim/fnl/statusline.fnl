@@ -8,8 +8,6 @@
 
 (local vf vim.fn)
 
-; Meta Data
-
 (local vi_mode_colors {:NORMAL colors.green
                        :INSERT colors.red
                        :REPLACE colors.red
@@ -36,8 +34,8 @@
    :hints (lsp.get_diagnostics_count :Hint)})
 
 (fn diag_enable? [f s]
-  (let [diag (. (f) s)]
-    (and (fs.!nil? diag) (not= 0 diag))))
+  #(let [diag (. (f) s)]
+     (and (fs.!nil? diag) (not= 0 diag))))
 
 (fn diag_of [f s]
   #(.. (. icons s) (. (f) s)))

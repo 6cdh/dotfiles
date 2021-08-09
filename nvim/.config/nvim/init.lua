@@ -17,25 +17,26 @@ if fn.empty(fn.glob(hotpot_path)) > 0 then
 end
 
 startup_features = {
-    edit_config = false, -- Change to false to speedup startup once you finish editing nvim config
+    edit_config = true, -- Change to false to speedup startup once you finish editing nvim config
+    require_profile = false,
     profile_path = vim.fn.stdpath 'cache' .. '/profile.log',
 }
 
-local _s = nil
-
-if _G.startup_features.edit_config then
-    _s = os.clock()
+local function hack_require(module)
+    local _s = os.clock()
+    local m = _G._require(module)
+    local _e = os.clock()
+    local f = io.open(_G.startup_features.profile_path, 'a')
+    f:write(module, ' takes ', (_e - _s) * 1000, ' ms\n')
+    f:close()
+    return m
 end
 
-require 'hotpot'
-
-if _G.startup_features.edit_config then
-    local hotpot_loadtime = os.clock() - _s
-    _G._require = require
-    _G.require = require('hack_require').require
+if _G.startup_features.require_profile then
     local f = io.open(_G.startup_features.profile_path, 'w')
-    f:write('hotpot takes ', hotpot_loadtime * 1000, ' ms\n')
     f:close()
+    _G._require = require
+    _G.require = hack_require
 end
 
 local modules = {
