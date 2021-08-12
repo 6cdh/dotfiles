@@ -168,6 +168,11 @@ languages:
     - <<: *fennel-fennel
   go:
     - <<: *go-staticcheck
+  html:
+    - <<: *html-prettier
+    - <<: *css-prettier
+  javascript:
+    - <<: *javascript-eslint
   json:
     - <<: *json-jq
   lua:

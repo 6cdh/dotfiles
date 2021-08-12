@@ -1,3 +1,4 @@
+; (import-macros fs :fs.macros)
 (let [fs (require :fs)
       icons (require :theme.icons)
       signs {:Error icons.errs

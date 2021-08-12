@@ -14,10 +14,13 @@
         :rust_analyzer {}
         :efm {:init_options {:documentFormatting true}
               :filetypes [:cpp
+                          :css
                           :dockerfile
                           :fennel
                           :go
                           :json
+                          :html
+                          :javascript
                           :lua
                           :markdown
                           :python

@@ -16,8 +16,8 @@
                        :TERM colors.darkblue
                        :NONE colors.yellow})
 
-(fn wrapper_str [msg s]
-  (.. s msg s))
+(macro wrapper_str [msg s]
+  `(.. ,s ,msg ,s))
 
 (fn file_osinfo []
   (let [os (vim.bo.fileformat:lower)]

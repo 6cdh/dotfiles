@@ -1,0 +1,4 @@
+xrandr --newmode "2560x1440R" 241.50 2560 2608 2640 2720 1440 1443 1448 1481 +hsync +vsync
+xrandr --addmode HDMI-1 2560x1440R
+xrandr --output HDMI-1 --mode 2560x1440R --primary
+xrandr --output eDP-1 --off
