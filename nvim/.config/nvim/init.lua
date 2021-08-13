@@ -33,8 +33,7 @@ local function hack_require(module)
 end
 
 if _G.startup_features.require_profile then
-    local f = io.open(_G.startup_features.profile_path, 'w')
-    f:close()
+    io.open(_G.startup_features.profile_path, 'w'):close()
     _G._require = require
     _G.require = hack_require
 end

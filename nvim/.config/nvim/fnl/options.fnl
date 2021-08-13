@@ -2,9 +2,9 @@
 
 (local opt vim.opt)
 
-(fn bset [tbl]
+(macro bset [tbl]
   "Batch set"
-  (fs.map2 #(tset opt $2 $1) tbl))
+  `(fs.map2 #(tset opt $2 $1) ,tbl))
 
 (let [indent 4
       textwidth 90]

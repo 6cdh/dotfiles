@@ -27,18 +27,18 @@
   (let [clients (fs.map #$1.name (fs.tbl-values (vim.lsp.buf_get_clients)))]
     (if (fs.empty? clients) "" (.. icons.lsp (table.concat clients "/")))))
 
-(fn lsp_diagnostics_info []
-  {:errs (lsp.get_diagnostics_count :Error)
-   :warns (lsp.get_diagnostics_count :Warning)
-   :infos (lsp.get_diagnostics_count :Information)
-   :hints (lsp.get_diagnostics_count :Hint)})
+(macro lsp_diagnostics_info []
+  `{:errs (lsp.get_diagnostics_count :Error)
+    :warns (lsp.get_diagnostics_count :Warning)
+    :infos (lsp.get_diagnostics_count :Information)
+    :hints (lsp.get_diagnostics_count :Hint)})
 
-(fn diag_enable? [f s]
-  #(let [diag (. (f) s)]
+(fn diag_enable? [s]
+  #(let [diag (. (lsp_diagnostics_info) s)]
      (and (fs.!nil? diag) (not= 0 diag))))
 
-(fn diag_of [f s]
-  #(.. (. icons s) (. (f) s)))
+(fn diag_of [s]
+  #(.. (. icons s) (. (lsp_diagnostics_info) s)))
 
 (fn vimode_hl []
   {:fg colors.bg :bg (vi_mode.get_mode_color)})
@@ -68,24 +68,21 @@
               :scroll_bar {:provider :scroll_bar
                            :left_sep " "
                            :hl #{:fg (vi_mode.get_mode_color)}}
-              :diagnos {:err {:provider (diag_of lsp_diagnostics_info :errs)
+              :diagnos {:err {:provider (diag_of :errs)
                               :left_sep " "
-                              :enabled (diag_enable? lsp_diagnostics_info :errs)
+                              :enabled (diag_enable? :errs)
                               :hl {:fg colors.red}}
-                        :hint {:provider (diag_of lsp_diagnostics_info :hints)
+                        :hint {:provider (diag_of :hints)
                                :left_sep " "
-                               :enabled (diag_enable? lsp_diagnostics_info
-                                                      :hints)
+                               :enabled (diag_enable? :hints)
                                :hl {:fg colors.cyan}}
-                        :info {:provider (diag_of lsp_diagnostics_info :infos)
+                        :info {:provider (diag_of :infos)
                                :left_sep " "
-                               :enabled (diag_enable? lsp_diagnostics_info
-                                                      :infos)
+                               :enabled (diag_enable? :infos)
                                :hl {:fg colors.blue}}
-                        :warn {:provider (diag_of lsp_diagnostics_info :warns)
+                        :warn {:provider (diag_of :warns)
                                :left_sep " "
-                               :enabled (diag_enable? lsp_diagnostics_info
-                                                      :warns)
+                               :enabled (diag_enable? :warns)
                                :hl {:fg colors.yellow}}}
               :git {:add {:provider :git_diff_added :hl {:fg colors.green}}
                     :branch {:provider :git_branch

@@ -85,7 +85,7 @@
                   (plug :karb94/neoscroll.nvim
                         {:config #(setup :neoscroll :setup)})
                   (plug :lambdalisue/suda.vim
-                        {:config #(tset vim :g "suda#prompt"
+                        {:config #(tset vim.g "suda#prompt"
                                         "[sudo] password: ")})
                   (plug :akinsho/nvim-toggleterm.lua
                         {:cmd :ToggleTerm
@@ -103,7 +103,7 @@
                   ;; coding
                   (plug :b3nj5m1n/kommentary
                         {:config #(do
-                                    (tset vim :g
+                                    (tset vim.g
                                           :kommentary_create_default_mappings
                                           false)
                                     (setup :kommentary.config

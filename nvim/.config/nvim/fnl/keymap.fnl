@@ -13,11 +13,11 @@
        [[:q :w :e :r :t :a :s :d :f :g :z :x :c :v :b]
         [:y :u :i :o :p :h :j :k :l :n :m]])
 
-(fn cmd [s]
-  (.. :<Cmd> s :<CR>))
+(macro cmd [s]
+  `(.. :<Cmd> ,s :<CR>))
 
-(fn plug [s]
-  (.. :<Plug> s))
+(macro plug [s]
+  `(.. :<Plug> ,s))
 
 ;; keymap format
 
@@ -133,8 +133,8 @@
                      :noremap true
                      :silent true}))
 
-(fn to_keycodes [s]
-  (vim.api.nvim_replace_termcodes s true true true))
+(macro to_keycodes [s]
+  `(vim.api.nvim_replace_termcodes ,s true true true))
 
 (fn _G.smart_tab []
   (if (and (not= (vf.pumvisible) 0)
@@ -147,10 +147,10 @@
 (fn _G.smart_cr []
   (if (not= (vf.pumvisible) 0) (npairs.esc :<cr>) (npairs.autopairs_cr)))
 
-(fn kmap [m lhs rhs ...]
-  (let [t {}]
-    (fs.imap2 #(tset t $1 true) [...])
-    (vim.api.nvim_set_keymap m lhs rhs t)))
+(macro kmap [m lhs rhs ...]
+  `(let [t# {}]
+     (fs.imap2 #(tset t# $1 true) [,...])
+     (vim.api.nvim_set_keymap ,m ,lhs ,rhs t#)))
 
 (kmap mode.normal :<C-j> :<C-w>j :noremap)
 (kmap mode.normal :<C-k> :<C-w>k :noremap)
