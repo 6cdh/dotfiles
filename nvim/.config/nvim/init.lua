@@ -1,8 +1,8 @@
-local packer_plugin_path = vim.fn.stdpath 'data' .. '/site/pack/packer/'
+local fn = vim.fn
+
+local packer_plugin_path = fn.stdpath 'data' .. '/site/pack/packer/'
 local packer_path = packer_plugin_path .. 'start/packer.nvim'
 local hotpot_path = packer_plugin_path .. 'start/hotpot.nvim'
-
-local fn = vim.fn
 
 if fn.empty(fn.glob(packer_path)) > 0 then
     vim.api.nvim_command(
@@ -19,7 +19,7 @@ end
 startup_features = {
     edit_config = true, -- Change to false to speedup startup once you finish editing nvim config
     require_profile = false,
-    profile_path = vim.fn.stdpath 'cache' .. '/profile.log',
+    profile_path = fn.stdpath 'cache' .. '/profile.log',
 }
 
 local function hack_require(module)
