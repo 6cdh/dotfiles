@@ -56,7 +56,7 @@
     ((. lspconfig server :setup) (vim.tbl_extend :force config.default
                                                  (. config server))))
 
-  (fs.imap2 setup-server enabled-servers))
+  (fs.for_each setup-server enabled-servers))
 
 (let [lspkind (require :lspkind)]
   (lspkind.init {:with_text false

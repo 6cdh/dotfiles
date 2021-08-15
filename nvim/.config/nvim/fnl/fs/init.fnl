@@ -1,221 +1,253 @@
-(local _M {})
+(local M {})
 
-;; number
+(macro dispatch [cond f1 f2]
+  `(if ,cond ,f1 ,f2))
 
-(fn _M.inc [num]
-  "(num n) => n -> n"
+;; numeric
+
+(fn M.inc [num]
+  "number | string -> number
+  O(1). Increase `num`. `num` may be a number or string that can be converted to a number."
   (+ num 1))
 
-(fn _M.dec [num]
-  "(num n) => n -> n"
+(fn M.dec [num]
+  "number | string -> number
+  O(1). Decrease `num`. `num` may be a number or string that can be converted to a number."
   (- num 1))
 
-;; bool
-
-(fn _M.tbl? [tbl]
-  "a -> bool"
-  (= (type tbl) :table))
-
-(fn _M.list? [tbl]
-  "{k v} -> bool"
-  "[v] -> bool"
-  (or (_M.empty? tbl) (_M.!nil? (?. tbl 1))))
-
-(fn _M.odd? [num]
-  "(num n) => n -> bool"
+(fn M.odd? [num]
+  "number | string -> bool
+  O(1). Return true if `num` is odd, false otherwise. If `num` is a string, it must be
+  convertible to a number."
   (= (% num 2) 1))
 
-(fn _M.even? [num]
-  "(num n) => n -> bool"
-  (not (_M.odd? num)))
+(fn M.even? [num]
+  "number | string -> bool
+  O(1). Return true if `num` is even, false otherwise. If `num` is a string, it must be
+  convertible to a number."
+  (not (M.odd? num)))
 
-(fn _M.nil? [v]
-  "a -> bool"
+;; type
+
+(fn M.nil? [v]
+  "any -> bool
+  O(1). Return true if `v` is nil, false otherwise."
   (= v nil))
 
+(fn M.tbl? [v]
+  "any -> bool
+  O(1). Return true if `v` is a table, false otherwise."
+  (= (type v) :table))
+
+(fn M.list? [v]
+  "any -> bool
+  O(1). Return true if `v` is a list, false otherwise. A table `t` is a list if it is empty
+  or `t[1] != nil`."
+  (or (M.empty? v) (not (M.nil? (?. v 1)))))
+
 (fn flt_eq? [flt1 flt2]
-  "(num n) => n -> n -> bool"
-  (< (math.abs (- flt1 flt2)) 1e-06))
+  (-> (- flt1 flt2) (math.abs) (< 1e-06)))
+
+(fn subset? [tbl1 tbl2]
+  "Is tbl1 a subset of tbl2?"
+  (M.all (fn [v k]
+           (M.eq? (. tbl2 k) v)) tbl1))
 
 (fn tbl_eq? [tbl1 tbl2]
-  "{k1 v1} -> {k2 v2} -> bool"
-  (and (_M.all #(_M.eq? (. tbl2 $2) $1) tbl1)
-       (_M.all #(_M.eq? (. tbl1 $2) $1) tbl2)))
+  (and (subset? tbl1 tbl2) (subset? tbl2 tbl1)))
 
-(fn _M.eq? [v1 v2]
-  "a -> b -> bool"
-  (if (= v1 v2) true (match [(type v1) (type v2)]
-                       [:number :number] (flt_eq? v1 v2)
-                       [:table :table] (tbl_eq? v1 v2)
-                       _ false)))
+(fn M.eq? [v1 v2]
+  "any -> any -> bool
+  O(1) if `v1` and `v2` are not both table. Basically the same as `v1 == v2` in Lua except
+  * for table, it will perform `eq?` for each key
+  and corresponding value.
+  * for number, it will perform float equality comparisons."
+  (match [(type v1) (type v2)]
+    [:number :number] (flt_eq? v1 v2)
+    [:table :table] (tbl_eq? v1 v2)
+    _ (= v1 v2)))
+
+(fn M.copy [tbl]
+  (M.map M.id tbl))
+
+;; Lisp primitives
+
+(fn M.cons [elem lst]
+  "any -> list -> list
+  O(n). Insert `elem` in front of `lst`. A new list would be created and returned."
+  (let [nlst (M.copy lst)]
+    (table.insert nlst 1 elem)
+    nlst))
+
+(fn M.car [lst]
+  "list -> any"
+  "O(1). Return the first element of `lst`."
+  (. lst 1))
+
+(fn M.cdr [lst]
+  "list -> list
+  O(n). Remove the first element of `lst` and return `lst`. A new table would be created
+  and returned."
+  (let [nlst (M.copy lst)]
+    (table.remove nlst 1)
+    nlst))
 
 ;; List
 
-(fn _M.empty? [tbl]
-  "[a] -> bool"
-  "{k v} -> bool"
-  ":a -> bool"
-  (match [(type tbl)]
-    [:string] (= tbl "")
-    [:table] (_M.nil? (next tbl))
+(fn M.empty? [v]
+  "table | string -> bool
+  O(1). Return true if `v` is an empty string or empty table, false otherwise."
+  (match [(type v)]
+    [:string] (= v "")
+    [:table] (M.nil? (next v))
     _ false))
 
-(fn _M.cons [elem tbl]
-  "a -> [a] -> [a]"
-  (table.insert tbl 1 elem)
-  tbl)
+(fn M.member? [elem tbl]
+  "any -> table -> bool
+  O(n). Return true if `elem` is one of the values of `tbl`."
+  (M.any #(M.eq? elem $1) tbl))
 
-(fn _M.first [tbl]
-  "[a] -> a"
-  (. tbl 1))
-
-(fn _M.rest [tbl]
-  "[a] -> [a]"
-  (table.remove tbl 1)
-  tbl)
-
-(fn _M.member? [elem tbl]
-  "a -> [a] -> bool"
-  "v -> {k v} -> bool"
-  (_M.any #(_M.eq? elem $1) tbl))
-
-(fn _M.tbl-keys [tbl]
-  "{k v} -> [k]"
-  "[v] -> [i]"
+(fn M.tbl-keys [tbl]
+  "table -> list
+  O(n). Return the list of keys of `tbl`."
   (let [ntbl []]
-    (_M.map2 #(_M.append ntbl $2) tbl)
+    (M.for_each #(M.append ntbl $2) tbl)
     ntbl))
 
-(fn _M.tbl-values [tbl]
-  "{k v} -> [v]"
-  "[v] -> [v]"
+(fn M.tbl-values [tbl]
+  "table -> list
+  O(n). Return the list of values of `tbl`."
   (let [ntbl []]
-    (_M.map2 #(_M.append ntbl $1) tbl)
+    (M.for_each #(M.append ntbl $1) tbl)
     ntbl))
+
+;; functional
+
+(fn M.id [v]
+  "any -> any
+  O(1). Identity function."
+  v)
 
 ;; all
 
-(fn _M.iall [pred tbl]
-  "(a -> i -> bool) -> [a] -> bool"
-  (for [i 1 (length tbl)]
-    (if (not (pred (. tbl i) i)) (lua "return false")))
+(fn all_lst [pred lst]
+  (for [i 1 (length lst)]
+    (if (not (pred (. lst i) i)) (lua "return false")))
   true)
 
-(fn _M.all [pred tbl]
-  "(a -> i -> bool) -> [a] -> bool"
-  "(v -> k -> bool) -> {k v} -> bool"
-  (if (_M.list? tbl) (_M.iall pred tbl)
-      (do
-        (each [k v (pairs tbl)]
-          (if (not (pred v k)) (lua "return false")))
-        true)))
+(fn all_tbl [pred tbl]
+  (each [k v (pairs tbl)]
+    (if (not (pred v k)) (lua "return false")))
+  true)
+
+(fn M.all [pred tbl]
+  "(v -> k -> bool) | (v -> bool) -> {k v}
+  O(n * pred). Return true if predicate `pred` return true for all elements of `tbl`,
+  false otherwise."
+  ((dispatch (M.list? tbl) all_lst all_tbl) pred tbl))
 
 ;; any
 
-(fn _M.any [pred tbl]
-  "(a -> i -> bool) -> [a] -> bool"
-  "(v -> k -> bool) -> {k v} -> bool"
-  (not (_M.all #(not (pred $...)) tbl)))
+(fn M.any [pred tbl]
+  "(v -> k -> bool) | (v -> bool) -> {k v}
+  O(n * pred). Return true if predicate `pred` return true for at least elements of `tbl`,
+  false otherwise."
+  (not (M.all #(not (pred $...)) tbl)))
 
 ;; append
 
-(fn _M.append [tbl v]
-  "[a] -> a -> [a]"
+(fn M.append [tbl v]
+  "table -> any -> table
+  O(1). Append `v` into `tbl`."
   (tset tbl (+ (length tbl) 1) v)
   tbl)
 
 ;; map
 
-(fn _M.imap2 [f tbl]
-  "(a -> i -> b) -> [a] -> [b]"
-  (let [len (length tbl)]
-    (for [i 1 len]
-      (f (. tbl i) i))))
+(fn for_each_in_lst [f lst]
+  (for [i 1 (length lst)]
+    (f (. lst i) i)))
 
-(fn _M.map2 [f tbl]
-  "(a -> i -> b) -> [a] -> [b]"
-  "(v -> k -> a) -> {k v} -> {a}"
+(fn for_each_in_tbl [f tbl]
   (each [i v (pairs tbl)]
     (f v i)))
 
-(fn _M.map [f tbl]
-  "(a -> i -> b) -> [a] -> [b]"
-  "(v -> k -> a) -> {k v} -> {a}"
+(fn M.for_each [f tbl]
+  "(v -> k -> any) | (v -> any) -> table | list -> table | list
+  O(n * f). Apply function `f` for all elements of `tbl` without change `tbl` or create a new
+  list."
+  ((dispatch (M.list? tbl) for_each_in_lst for_each_in_tbl) f tbl))
+
+(fn M.map [f tbl]
+  "(v -> k -> any) | (v -> any) -> table -> table
+  O(n * f). Like `for_each` but a new table would be created."
   (let [ntbl {}]
-    (if (_M.list? tbl) (_M.imap2 #(_M.append ntbl (f $1 $2)) tbl)
-        (_M.map2 #(tset ntbl $2 (f $1 $2)) tbl))
+    (if (M.list? tbl) (M.for_each #(M.append ntbl (f $1 $2)) tbl)
+        (M.for_each #(tset ntbl $2 (f $1 $2)) tbl))
     ntbl))
 
 ;; filter
 
-(fn _M.filter [pred tbl]
-  "(a -> i -> bool) -> [a] -> [a]"
-  "(v -> k -> bool) -> {k v} -> {k v}"
-  (_M.map #(if (pred $1 $2) $1) tbl))
+(fn M.filter [pred tbl]
+  "(v -> k -> bool) | (v -> bool) -> table -> table
+  O(n * pred). Return a new list with the elements of `tbl` for which `pred` returns true."
+  (M.map #(when (pred $1 $2)
+            $1) tbl))
 
-(fn _M.foldl [f init tbl]
-  "(acc -> v -> r) -> acc -> [v] -> r"
+;; fold
+
+(fn M.foldl [f init lst]
+  "(init -> v -> k -> init) | (init -> v -> init) -> init -> table -> init
+  O(n * f). Start with `init`, reduce `lst` with function `f`, from left to right."
   (var acc init)
-  (_M.map #(set acc (f acc $1)) tbl)
+  (M.for_each #(set acc (f acc $1 $2)) lst)
   acc)
 
-(fn _M.foldr [f init tbl]
-  "(v -> acc -> r) -> acc -> [v] -> r"
+(fn M.foldr [f init lst]
+  "(v -> init -> k -> init) | (v -> init -> init) -> init -> table -> init
+  O(n * f). Start with `init`, reduce `lst` with function `f`, from right to left."
   (var acc init)
-  (_M.map #(set acc (f $1 acc)) (_M.reverse tbl))
+  (M.for_each #(set acc (f $1 acc $2)) (M.reverse lst))
   acc)
 
 ;; reverse
 
-(fn _M.reverse [tbl]
-  "[v] -> [v]"
-  (_M.map #(. tbl (- (+ (length tbl) 1) $2)) tbl))
+(fn M.reverse [lst]
+  "list -> list
+  O(n). Reverse `lst`."
+  (M.map #(. lst (- (+ (length lst) 1) $2)) lst))
 
 ;; intersect 
 
-(fn _M.intersect [tbl1 tbl2]
-  "[a] -> [b] -> [i]"
-  "{k v} -> {k v2} -> [k]"
-  (_M.tbl-values (_M.map #(if (_M.!nil? (. tbl2 $2)) $2) tbl1)))
+(fn M.intersect [tbl1 tbl2]
+  "table -> table -> list
+  O(n). Return the intersection of `tbl1` and `tbl2`."
+  (M.tbl-values (M.map #(if (not (M.nil? (. tbl2 $2))) $2) tbl1)))
 
 ;; zip
 
-(fn _M.zipWith [f tbl1 tbl2]
-  "(a -> b -> c) -> [a] -> [b] -> [c]"
-  "(a -> b -> c) -> {k a} -> {k b} -> {k c}"
-  (if (_M.list? tbl1)
-      (let [ntbl []]
-        (_M.imap2 #(_M.append ntbl (f (. tbl1 $1) (. tbl2 $1)))
-                  (_M.intersect tbl1 tbl2))
-        ntbl)
-      (let [ntbl {}]
-        (_M.map2 #(tset ntbl $1 (f (. tbl1 $1) (. tbl2 $1)))
-                 (_M.intersect tbl1 tbl2))
-        ntbl)))
+(fn M.zip_with [f lst1 lst2]
+  "(v1 -> v2 -> any) -> {k1 v1} -> {k2 v2} -> list
+  O(min(m, n)). Return a list corresponding pair of `tbl1` and `tbl2`."
+  (let [nlst []]
+    (for_each_in_lst #(M.append nlst (f (. lst1 $1) (. lst2 $1)))
+                     (M.intersect lst1 lst2))
+    nlst))
 
-(fn _M.zip [tbl1 tbl2]
-  "[a] -> [b] -> [[a b]]"
-  "{k a} -> {k b} -> {k [a b]}"
-  (_M.zipWith #[$1 $2] tbl1 tbl2))
+(fn M.zip [tbl1 tbl2]
+  "table -> table -> list
+  O(min(m, n)). Return a list of corresponding pair of `tbl1` and `tbl2`."
+  (M.zip_with #[$1 $2] tbl1 tbl2))
 
 ;; neg functions register
 
-(fn neg-register [ns fname]
-  (tset ns (.. "!" fname) #(not ((. ns fname) $1 $2 $3))))
+(fn neg-register [fname]
+  (tset M (.. "!" fname) #(not ((. M fname) $...))))
 
-(macro neg-registers [ns fnames]
-  `(_M.imap2 #(neg-register ,ns $1) ,fnames))
+(fn neg-registers [fnames]
+  (M.for_each #(neg-register $1) fnames))
 
-(neg-registers _M [:tbl?
-                   :list?
-                   :odd?
-                   :even?
-                   :nil?
-                   :flt_eq?
-                   :tbl_eq?
-                   :eq?
-                   :empty?
-                   :member?])
+(neg-registers [:tbl? :list? :nil? :flt_eq? :tbl_eq? :eq? :empty? :member?])
 
-_M
+M
 

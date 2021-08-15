@@ -4,7 +4,7 @@
 
 (macro bset [tbl]
   "Batch set"
-  `(fs.map2 #(tset opt $2 $1) ,tbl))
+  `(fs.for_each #(tset opt $2 $1) ,tbl))
 
 (let [indent 4
       textwidth 90]
@@ -50,5 +50,5 @@
                          :zipPlugin
                          :tar
                          :tarPlugin]]
-  (fs.imap2 #(tset vim.g (.. :loaded_ $1) 1) disabled_builtins))
+  (fs.for_each #(tset vim.g (.. :loaded_ $1) 1) disabled_builtins))
 

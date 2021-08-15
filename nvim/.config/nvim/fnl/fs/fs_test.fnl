@@ -52,12 +52,12 @@
 (asserteq [1 2 3 4 [123]] (fs.cons 1 [2 3 4 [123]]))
 (asserteq [[321] [123]] (fs.cons [321] [[123]]))
 
-(asserteq 1 (fs.first [1 2]))
-(asserteq 2 (fs.first [2 3]))
-(asserteq [1 2 3] (fs.first [[1 2 3] 2 3]))
+(asserteq 1 (fs.car [1 2]))
+(asserteq 2 (fs.car [2 3]))
+(asserteq [1 2 3] (fs.car [[1 2 3] 2 3]))
 
-(asserteq [2 3] (fs.rest [1 2 3]))
-(asserteq [[2 3]] (fs.rest [1 [2 3]]))
+(asserteq [2 3] (fs.cdr [1 2 3]))
+(asserteq [[2 3]] (fs.cdr [1 [2 3]]))
 
 (asserteq true (fs.member? 1 [1 2 3]))
 (asserteq true (fs.member? [1] [[1] 2 3]))
@@ -104,10 +104,8 @@
 (asserteq [5 6] (fs.intersect {3 4 5 6 6 7} {9 8 6 6 5 4}))
 
 (asserteq [[1 2] [2 3]] (fs.zip [1 2] [2 3]))
-(asserteq {1 [2 4] 2 [3 5]} (fs.zip {1 2 2 3} {2 5 1 4}))
-(asserteq {4 [2 0] 8 [2 4]} (fs.zip {4 2 8 2} {4 0 8 4 2 1}))
+(asserteq [[1 2] [2 3] [3 4]] (fs.zip [1 2 3] [2 3 4]))
 
-(asserteq [5 7 9] (fs.zipWith #(+ $1 $2) [1 2 3] [4 5 6 7]))
-(asserteq [4 10 18] (fs.zipWith #(* $1 $2) [1 2 3] [4 5 6 7]))
-(asserteq {4 0 8 8} (fs.zipWith #(* $1 $2) {4 2 8 2} {4 0 8 4 2 1}))
+(asserteq [5 7 9] (fs.zip_with #(+ $1 $2) [1 2 3] [4 5 6 7]))
+(asserteq [4 10 18] (fs.zip_with #(* $1 $2) [1 2 3] [4 5 6 7]))
 
