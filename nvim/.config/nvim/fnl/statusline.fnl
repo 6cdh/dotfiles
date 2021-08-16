@@ -1,9 +1,9 @@
-(local [colors icons lsp vi_mode fs feline]
+(local [colors icons lsp vi_mode fl feline]
        [(require :theme.colors)
         (require :theme.icons)
         (require :feline.providers.lsp)
         (require :feline.providers.vi_mode)
-        (require :fs)
+        (require :fulib)
         (require :feline)])
 
 (local vf vim.fn)
@@ -24,8 +24,8 @@
     (.. (. icons os) os)))
 
 (fn lsp_clientnames []
-  (let [clients (fs.map #$1.name (fs.tbl-values (vim.lsp.buf_get_clients)))]
-    (if (fs.empty? clients) "" (.. icons.lsp (table.concat clients "/")))))
+  (let [clients (fl.map #$1.name (fl.tbl-values (vim.lsp.buf_get_clients)))]
+    (if (fl.empty? clients) "" (.. icons.lsp (table.concat clients "/")))))
 
 (macro lsp_diagnostics_info []
   `{:errs (lsp.get_diagnostics_count :Error)
@@ -35,7 +35,7 @@
 
 (fn diag_enable? [s]
   #(let [diag (. (lsp_diagnostics_info) s)]
-     (and (fs.!nil? diag) (not= 0 diag))))
+     (and (fl.!nil? diag) (not= 0 diag))))
 
 (fn diag_of [s]
   #(.. (. icons s) (. (lsp_diagnostics_info) s)))
@@ -94,7 +94,7 @@
                     :remove {:provider :git_diff_removed :hl {:fg colors.red}}}
               :lsp {:name {:provider lsp_clientnames
                            :icon icons.lsp
-                           :enabled #(fs.!empty? lsp_clientnames)
+                           :enabled #(fl.!empty? lsp_clientnames)
                            :hl {:fg colors.yellow}}}
               :space {:provider " "}})
 

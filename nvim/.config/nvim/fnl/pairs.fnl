@@ -1,5 +1,4 @@
 (let [npairs (require :nvim-autopairs)
-      Rule (require :nvim-autopairs.rule)
-      fs (require :fs)]
+      Rule (require :nvim-autopairs.rule)]
   (npairs.setup))
 

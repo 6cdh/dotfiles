@@ -51,12 +51,12 @@
                         :sumneko_lua])
 
 (let [lspconfig (require :lspconfig)
-      fs (require :fs)]
+      fl (require :fulib)]
   (fn setup-server [server]
     ((. lspconfig server :setup) (vim.tbl_extend :force config.default
                                                  (. config server))))
 
-  (fs.for_each setup-server enabled-servers))
+  (fl.for_each setup-server enabled-servers))
 
 (let [lspkind (require :lspkind)]
   (lspkind.init {:with_text false

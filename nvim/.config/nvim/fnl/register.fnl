@@ -1,14 +1,14 @@
-(local fs (require :fs))
+(local fl (require :fulib))
 (local vcmd vim.api.nvim_command)
 
 (fn new_augroup [name def]
   (vcmd (.. "augroup " name))
   (vcmd :au!)
-  (fs.map #(vcmd (.. "au " $1)) def)
+  (fl.map #(vcmd (.. "au " $1)) def)
   (vcmd "augroup END"))
 
 (fn new_augroups [defs]
-  (fs.map #(new_augroup $2 $1) defs))
+  (fl.map #(new_augroup $2 $1) defs))
 
 (fn literal-s [s]
   (.. "'" s "'"))

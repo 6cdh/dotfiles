@@ -45,7 +45,6 @@ local modules = {
     'keymap',
     'diagnostic',
     'lsp',
-    'fs.fs_test'
 }
 
 for _, m in ipairs(modules) do

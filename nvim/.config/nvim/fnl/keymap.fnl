@@ -1,4 +1,4 @@
-(local [npairs fs] [(require :nvim-autopairs) (require :fs)])
+(local [npairs fl] [(require :nvim-autopairs) (require :fulib)])
 
 (local vf vim.fn)
 
@@ -93,7 +93,7 @@
 (fn verify-maps-balance-hands [maps]
   "{str {str str|[str]}|[str]} -> ()"
   (fn not-both-in-tbl [tbl v1 v2]
-    (or (fs.!member? v1 tbl) (fs.!member? v2 tbl)))
+    (or (fl.!member? v1 tbl) (fl.!member? v2 tbl)))
 
   (fn verify-each-family [family prefix]
     "{str str|[str]}|[str] -> str -> ()"
@@ -104,10 +104,10 @@
                        (not-both-in-tbl right-hand key prefix))
                   (.. "Mappings Didn't Balance Two Hands: " prefix key))))
 
-    (if (and (fs.tbl? family) (fs.!list? family))
-        (fs.for_each verify-key family)))
+    (if (and (fl.tbl? family) (fl.!list? family))
+        (fl.for_each verify-key family)))
 
-  (fs.for_each verify-each-family maps))
+  (fl.for_each verify-each-family maps))
 
 (if _G.startup_features.edit_config
     (do
@@ -149,7 +149,7 @@
 
 (macro kmap [m lhs rhs ...]
   `(let [t# {}]
-     (fs.for_each #(tset t# $1 true) [,...])
+     (fl.for_each #(tset t# $1 true) [,...])
      (vim.api.nvim_set_keymap ,m ,lhs ,rhs t#)))
 
 (kmap mode.normal :<C-j> :<C-w>j :noremap)

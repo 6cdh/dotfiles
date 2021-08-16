@@ -1,11 +1,11 @@
-; (import-macros fs :fs.macros)
-(let [fs (require :fs)
+; (import-macros fl :fl.macros)
+(let [fl (require :fulib)
       icons (require :theme.icons)
       signs {:Error icons.errs
              :Warning icons.warns
              :Hint icons.hints
              :Information icons.infos}]
-  (fs.map #(let [hl (.. :LspDiagnosticsSign $2)]
+  (fl.map #(let [hl (.. :LspDiagnosticsSign $2)]
              (vim.fn.sign_define hl {:text $1 :texthl hl :numhl ""}))
           signs))
 

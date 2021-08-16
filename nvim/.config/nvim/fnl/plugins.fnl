@@ -85,8 +85,7 @@
                   (plug :karb94/neoscroll.nvim
                         {:config #(setup :neoscroll :setup)})
                   (plug :lambdalisue/suda.vim
-                        {:config #(tset vim.g "suda#prompt"
-                                        "[sudo] password: ")})
+                        {:config #(tset vim.g "suda#prompt" "[sudo] password: ")})
                   (plug :akinsho/nvim-toggleterm.lua
                         {:cmd :ToggleTerm
                          :config #(setup :toggleterm :setup
@@ -121,6 +120,8 @@
                                     (tset vim.g "conjure#filetype#fennel"
                                           :conjure.client.fennel.stdio)
                                     (tset vim.g "conjure#log#hud#enabled" false))})
+                  ;; lib
+                  (plug :6cdh/fulib.nvim)
                   ;; profile
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
                   ;; color scheme

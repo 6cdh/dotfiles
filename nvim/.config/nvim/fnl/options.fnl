@@ -1,10 +1,10 @@
-(local fs (require :fs))
+(local fl (require :fulib))
 
 (local opt vim.opt)
 
 (macro bset [tbl]
   "Batch set"
-  `(fs.for_each #(tset opt $2 $1) ,tbl))
+  `(fl.for_each #(tset opt $2 $1) ,tbl))
 
 (let [indent 4
       textwidth 90]
@@ -50,5 +50,5 @@
                          :zipPlugin
                          :tar
                          :tarPlugin]]
-  (fs.for_each #(tset vim.g (.. :loaded_ $1) 1) disabled_builtins))
+  (fl.for_each #(tset vim.g (.. :loaded_ $1) 1) disabled_builtins))
 
