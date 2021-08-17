@@ -1,4 +1,3 @@
-; (import-macros fl :fl.macros)
 (let [fl (require :fulib)
       icons (require :theme.icons)
       signs {:Error icons.errs

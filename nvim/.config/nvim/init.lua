@@ -18,7 +18,7 @@ end
 
 startup_features = {
     edit_config = true, -- Change to false to speedup startup once you finish editing nvim config
-    require_profile = false,
+    require_profile = true,
     profile_path = fn.stdpath 'cache' .. '/profile.log',
 }
 
