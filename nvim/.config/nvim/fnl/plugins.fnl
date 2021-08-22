@@ -82,6 +82,7 @@
                          :config #(setup :gitsigns :setup)})
                   ;; utils
                   (plug :tpope/vim-repeat)
+                  (plug :editorconfig/editorconfig-vim)
                   (plug :karb94/neoscroll.nvim
                         {:config #(setup :neoscroll :setup)})
                   (plug :lambdalisue/suda.vim
