@@ -1,16 +1,12 @@
-bat v0.18.2:
-    bat
-exa v0.10.1:
-    exa
-fd-find v8.2.1:
-    fd
-git-delta v0.8.0:
-    delta
-grex v1.2.0:
-    grex
-hexyl v0.8.0:
-    hexyl
-ripgrep v13.0.0:
-    rg
-zoxide v0.7.2:
-    zoxide
+bat
+exa
+fd-find
+git-delta
+grex
+hexyl
+inferno
+ripgrep
+selene
+stylua
+tokei
+zoxide
