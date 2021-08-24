@@ -60,28 +60,4 @@
 
 (let [lspkind (require :lspkind)]
   (lspkind.init {:with_text false
-                 :symbol_map {:Text " "
-                              :Method " "
-                              :Function " "
-                              :Constructor " "
-                              :Variable " "
-                              :Class " "
-                              :Interface " "
-                              :Module " "
-                              :Property " "
-                              :Unit " "
-                              :Value " "
-                              :Enum " "
-                              :Keyword " "
-                              :Snippet " "
-                              :Color " "
-                              :File " "
-                              :Reference " "
-                              :Folder " "
-                              :EnumMember " "
-                              :Constant " "
-                              :Struct " "
-                              :Event " "
-                              :Operator " "
-                              :TypeParameter " "}}))
-
+                 :symbol_map (-> (require :theme.icons) (. :codicon))}))

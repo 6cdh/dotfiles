@@ -1,10 +1,11 @@
-(local [colors icons lsp vi_mode fl feline]
+(local [colors icons lsp vi_mode fl feline gps]
        [(require :theme.colors)
         (require :theme.icons)
         (require :feline.providers.lsp)
         (require :feline.providers.vi_mode)
         (require :fulib)
-        (require :feline)])
+        (require :feline)
+        (require :nvim-gps)])
 
 (local vf vim.fn)
 
@@ -62,6 +63,10 @@
                           :left_sep " "
                           :hl {:fg colors.violet :style :bold}}
                      :type {:provider :file_type}}
+              :context {:name {:provider #(let [loc (gps.get_location)]
+                                            (if (not= "" loc) (.. loc " ") ""))
+                               :enabled #(gps.is_available)
+                               :hl {:fg colors.blue :style :bold}}}
               :line_percentage {:provider :line_percentage
                                 :left_sep " "
                                 :hl {:style :bold}}
@@ -110,6 +115,7 @@
 (local components {:left {:active [comps.vi_mode.left
                                    comps.space
                                    comps.file.info
+                                   comps.context.name
                                    comps.lsp.name
                                    comps.diagnos.err
                                    comps.diagnos.warn

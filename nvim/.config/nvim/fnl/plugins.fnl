@@ -56,10 +56,10 @@
                          :config #(setup :neorg :setup {})})
                   ;; ui
                   (plug :kyazdani42/nvim-web-devicons) ; (plug :mhinz/vim-startify)
+                  (plug :SmiteshP/nvim-gps {:config #(require :gps)})
                   (plug :akinsho/nvim-bufferline.lua
                         {:config #(setup :bufferline :setup
-                                         {:options {:mappings true
-                                                    :show_close_icon false
+                                         {:options {:show_close_icon false
                                                     :always_show_bufferline false}})})
                   (plug :famiu/feline.nvim
                         {:after :onedark.nvim :config #(require :statusline)})
