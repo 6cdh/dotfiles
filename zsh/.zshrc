@@ -1,15 +1,6 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # zmodload zsh/zprof
 
 export ZSH="${HOME}/.oh-my-zsh"
-
-ZSH_THEME='powerlevel10k/powerlevel10k'
 
 # To use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -63,22 +54,15 @@ export VI_MODE_SET_CURSOR=true
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
-# nix
-source /etc/profile.d/nix{,-daemon}.sh
-
 # Auto Rehash
 zstyle ':completion:*' rehash true
 
-# comp
+# completion
 fpath+=~/.zfunc
 
-# To customize prompt, run `p10k configure` or edit ~/.zsh_prompt.sh.
-[[ ! -f ~/.zsh_prompt.sh ]] || source ~/.zsh_prompt.sh
-
-#------------------------------------------------------------------------------#
-#                                 User Config                                  #
-#------------------------------------------------------------------------------#
 #aliases
 source ~/.zsh_aliases.sh
 # function
 source ~/.zsh_func.sh
+
+eval "$(starship init zsh)"

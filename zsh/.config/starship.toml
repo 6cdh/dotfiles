@@ -1,0 +1,5 @@
+[directory]
+truncation_length = 5
+
+[env_var.http_proxy]
+style = "green bold"
