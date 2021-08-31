@@ -1,4 +1,4 @@
-(local [npairs fl] [(require :nvim-autopairs) (require :fulib)])
+(local fl (require :fulib))
 
 (local vf vim.fn)
 
@@ -109,10 +109,8 @@
 
   (fl.for_each verify-each-family maps))
 
-(if _G.startup_features.edit_config
-    (do
-      (verify-maps-balance-hands nmap)
-      (verify-maps-balance-hands vmap)))
+(verify-maps-balance-hands nmap)
+(verify-maps-balance-hands vmap)
 
 (local mode {:normal :n
              :select :s
@@ -145,7 +143,8 @@
       (to_keycodes :<TAB>)))
 
 (fn _G.smart_cr []
-  (if (not= (vf.pumvisible) 0) (npairs.esc :<cr>) (npairs.autopairs_cr)))
+  (let [npairs (require :nvim-autopairs)]
+    (if (not= (vf.pumvisible) 0) (npairs.esc :<cr>) (npairs.autopairs_cr))))
 
 (macro kmap [m lhs rhs ...]
   `(let [t# {}]

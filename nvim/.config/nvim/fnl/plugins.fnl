@@ -125,6 +125,7 @@
                   (plug :6cdh/fulib.nvim)
                   ;; profile
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
+                  (plug :lewis6991/impatient.nvim)
                   ;; color scheme
                   (plug :ful1e5/onedark.nvim {:config #(require :theme)})))
 

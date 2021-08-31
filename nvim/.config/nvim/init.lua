@@ -17,8 +17,7 @@ if fn.empty(fn.glob(hotpot_path)) > 0 then
 end
 
 startup_features = {
-    edit_config = true, -- Change to false to speedup startup once you finish editing nvim config
-    require_profile = true,
+    profile = true,
     profile_path = fn.stdpath 'cache' .. '/profile.log',
 }
 
@@ -32,13 +31,14 @@ local function hack_require(module)
     return m
 end
 
-if _G.startup_features.require_profile then
+if _G.startup_features.profile then
     io.open(_G.startup_features.profile_path, 'w'):close()
     _G._require = require
     _G.require = hack_require
 end
 
 local modules = {
+    'impatient',
     'hotpot',
     'register',
     'options',
