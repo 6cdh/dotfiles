@@ -38,8 +38,8 @@ if _G.startup_features.profile then
 end
 
 local modules = {
-    'impatient',
     'hotpot',
+    'impatient',
     'register',
     'options',
     'keymap',

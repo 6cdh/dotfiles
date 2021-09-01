@@ -68,11 +68,11 @@
                                :icon icons.warns
                                :left_sep " "
                                :hl {:fg colors.yellow}}}
-              :git {:add {:provider :git_diff_added :hl {:fg colors.green}}
-                    :branch {:provider :git_branch
+              :git {:branch {:provider :git_branch
                              :icon icons.git
                              :left_sep " "
                              :hl {:fg colors.violet :style :bold}}
+                    :add {:provider :git_diff_added :hl {:fg colors.green}}
                     :change {:provider :git_diff_changed
                              :hl {:fg colors.orange}}
                     :remove {:provider :git_diff_removed :hl {:fg colors.red}}}

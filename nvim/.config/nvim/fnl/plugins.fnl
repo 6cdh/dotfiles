@@ -37,6 +37,7 @@
                          :run :./install.sh
                          :requires :hrsh7th/nvim-compe})
                   ;; notes
+                  (plug :chikamichi/mediawiki.vim)
                   (plug :plasticboy/vim-markdown
                         {:disable true
                          :ft :markdown
@@ -57,7 +58,7 @@
                   ;; ui
                   (plug :kyazdani42/nvim-web-devicons) ; (plug :mhinz/vim-startify)
                   (plug :SmiteshP/nvim-gps {:config #(require :gps)})
-                  (plug :akinsho/nvim-bufferline.lua
+                  (plug :akinsho/bufferline.nvim
                         {:config #(setup :bufferline :setup
                                          {:options {:show_close_icon false
                                                     :always_show_bufferline false}})})
