@@ -90,24 +90,23 @@
                                     :buftypes [:terminal]
                                     :bufnames {}}})
 
-(local components {:left {:active [comps.vi_mode.left
-                                   comps.file.info
-                                   comps.context.name
-                                   comps.lsp.name
-                                   comps.diagnos.err
-                                   comps.diagnos.warn
-                                   comps.diagnos.hint
-                                   comps.diagnos.info]
-                          :inactive [comps.vi_mode.left comps.file.info]}
-                   :mid {:active {} :inactive {}}
-                   :right {:active [comps.git.add
-                                    comps.git.change
-                                    comps.git.remove
-                                    comps.file.os
-                                    comps.git.branch
-                                    comps.line_percentage
-                                    comps.vi_mode.right]
-                           :inactive {}}})
+(local components
+       {:active [[comps.vi_mode.left
+                  comps.file.info
+                  comps.context.name
+                  comps.lsp.name
+                  comps.diagnos.err
+                  comps.diagnos.warn
+                  comps.diagnos.hint
+                  comps.diagnos.info]
+                 [comps.git.add
+                  comps.git.change
+                  comps.git.remove
+                  comps.file.os
+                  comps.git.branch
+                  comps.line_percentage
+                  comps.vi_mode.right]]
+        :inactive [[comps.vi_mode.left comps.file.info]]})
 
 (let [feline (require :feline)]
   (feline.setup {:default_bg colors.bg
