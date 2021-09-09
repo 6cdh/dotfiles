@@ -18,8 +18,8 @@
                           :dockerfile
                           :fennel
                           :go
-                          :json
                           :html
+                          :json
                           :javascript
                           :lua
                           :markdown

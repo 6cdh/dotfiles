@@ -29,7 +29,9 @@
                   ;; dap
                   (plug :mfussenegger/nvim-dap)
                   ;; completion
-                  (plug :hrsh7th/vim-vsnip)
+                  (plug :hrsh7th/vim-vsnip
+                        {:config #(set vim.g.vsnip_snippet_dir
+                                       "~/.config/nvim/snippets")})
                   (plug :hrsh7th/nvim-compe
                         {:event :InsertEnter :config #(require :complete)})
                   (plug :tzachar/compe-tabnine

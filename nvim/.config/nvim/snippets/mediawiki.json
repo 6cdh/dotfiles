@@ -1,0 +1,21 @@
+{
+  "Code": {
+    "prefix": "<code>",
+    "body": "<code>$1</code>",
+    "description": "code snippet"
+  },
+  "Math": {
+    "prefix": "<math>",
+    "body": "<math>$1</math>",
+    "description": "inline math snippet"
+  },
+  "Math Block": {
+    "prefix": "<math>",
+    "body": ["<math>", "$1", "</math>"],
+    "description": "math block snippet"
+  },
+  "SyntaxHighlight": {
+    "prefix": "<syntaxhighlight>",
+    "body": ["<syntaxhighlight lang=\"$1\">", "$2", "</syntaxhighlight>"]
+  }
+}

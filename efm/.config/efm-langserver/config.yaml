@@ -175,6 +175,7 @@ languages:
     - <<: *javascript-eslint
   json:
     - <<: *json-jq
+    - <<: *json-prettier
   lua:
     - <<: *lua-stylua
     - <<: *lua-luacheck
