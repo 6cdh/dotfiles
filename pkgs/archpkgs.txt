@@ -1,5 +1,6 @@
 acpi
 acpid
+act-bin
 adobe-source-han-sans-cn-fonts
 adobe-source-han-sans-jp-fonts
 adobe-source-han-sans-kr-fonts
@@ -22,6 +23,7 @@ bluedevil
 bmon
 bspwm
 btrfs-progs
+byzanz
 bzip2
 calc
 calibre
@@ -48,6 +50,7 @@ dmraid
 dnsmasq
 docker
 docker-compose
+dog
 dolphin
 dolphin-plugins
 dosfstools
@@ -79,8 +82,10 @@ gcc
 gcc-libs
 gdb
 gettext
+github-cli
 glibc
 glibc-locales
+glow-bin
 gnome-icon-theme
 gnome-themes-extra
 gnuplot
@@ -107,6 +112,7 @@ hadolint-bin
 haveged
 htop
 httpie
+hyper-bin
 hyperfine
 illyria-wallpaper
 inetutils
@@ -173,6 +179,7 @@ lua
 lua-format
 lua51
 luajit-2.1
+luarocks
 lvm2
 m4
 mailspring
@@ -220,6 +227,7 @@ nginx
 ninja
 nix
 noto-fonts
+npm
 nss-mdns
 ntfs-3g
 ntp
@@ -229,6 +237,7 @@ nvidia-utils
 okular
 onefetch
 openmp
+openra
 openresolv
 openssh
 os-prober
@@ -279,6 +288,7 @@ qt5-virtualkeyboard
 ranger
 reiserfsprogs
 rofi
+rpmextract
 rsync
 ruby
 s-nail
@@ -304,6 +314,7 @@ systemd-fsck-silent
 systemd-kcm
 systemd-sysvcompat
 systemsettings
+tabby-bin
 tar
 telegram-desktop-bin
 terminus-font
@@ -316,10 +327,12 @@ tlp
 traceroute
 translate-shell
 ttf-dejavu
+ttf-devicons
 typora
 udiskie
 udisks2
 unarchiver
+ungoogled-chromium
 units
 unrar
 unzip
@@ -330,6 +343,8 @@ valgrind
 vi
 vim
 virt-manager
+virtualbox
+virtualbox-ext-oracle
 visual-studio-code-bin
 wget
 which
