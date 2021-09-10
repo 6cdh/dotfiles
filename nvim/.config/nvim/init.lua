@@ -45,6 +45,7 @@ local modules = {
     'keymap',
     'diagnostic',
     'lsp',
+    'plugins',
 }
 
 for _, m in ipairs(modules) do

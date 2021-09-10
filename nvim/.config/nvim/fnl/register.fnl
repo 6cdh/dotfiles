@@ -35,21 +35,6 @@
 (fn print-s [...]
   (.. "print(" (table.concat [...] ",") ")"))
 
-(register-luacmd :PackerCompile
-                 (do-s (require-s :plugins) (require-run-s :packer :compile)))
-
-(register-luacmd :PackerInstall
-                 (do-s (require-s :plugins) (require-run-s :packer :install)))
-
-(register-luacmd :PackerStatus
-                 (do-s (require-s :plugins) (require-run-s :packer :status)))
-
-(register-luacmd :PackerSync
-                 (do-s (require-s :plugins) (require-run-s :packer :sync)))
-
-(register-luacmd :PackerUpdate
-                 (do-s (require-s :plugins) (require-run-s :packer :update)))
-
 (register-luacmd :HotpotCompileSel
                  (print-s (require-run-s :hotpot.api.compile :compile-selection)))
 
