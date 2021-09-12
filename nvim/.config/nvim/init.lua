@@ -1,20 +1,30 @@
 local fn = vim.fn
 
-local packer_plugin_path = fn.stdpath 'data' .. '/site/pack/packer/'
-local packer_path = packer_plugin_path .. 'start/packer.nvim'
-local hotpot_path = packer_plugin_path .. 'start/hotpot.nvim'
+-- preinstall plugins
 
-if fn.empty(fn.glob(packer_path)) > 0 then
-    vim.api.nvim_command(
-        '!git clone https://github.com/wbthomason/packer.nvim --depth 1 ' .. packer_path
-    )
+local preinstall_list = {
+    packer = { author = 'wbthomason', repo = 'packer.nvim' },
+    hotpot = { author = 'rktjmp', repo = 'hotpot.nvim' },
+    fulib = { author = '6cdh', repo = 'fulib.nvim' },
+}
+
+local preinstall_path = fn.stdpath 'data' .. '/site/pack/packer/start/'
+
+for _, info in pairs(preinstall_list) do
+    local plugin_path = preinstall_path .. info.repo
+    if fn.empty(fn.glob(plugin_path)) > 0 then
+        vim.api.nvim_command(
+            string.format(
+                '!git clone https://github.com/%s/%s --depth 1 %s',
+                info.author,
+                info.repo,
+                plugin_path
+            )
+        )
+    end
 end
 
-if fn.empty(fn.glob(hotpot_path)) > 0 then
-    vim.api.nvim_command(
-        '!git clone https://github.com/rktjmp/hotpot.nvim.git --depth 1 ' .. hotpot_path
-    )
-end
+-- profile requires
 
 startup_features = {
     profile = true,
@@ -36,6 +46,8 @@ if _G.startup_features.profile then
     _G._require = require
     _G.require = hack_require
 end
+
+-- require modules
 
 local modules = {
     'hotpot',
