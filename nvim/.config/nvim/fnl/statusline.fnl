@@ -81,15 +81,6 @@
                            :left_sep " "
                            :hl {:fg colors.yellow}}}})
 
-(local properties {:force_inactive {:filetypes [:NvimTree
-                                                :dbui
-                                                :packer
-                                                :startify
-                                                :fugitive
-                                                :fugitiveblame]
-                                    :buftypes [:terminal]
-                                    :bufnames {}}})
-
 (local components
        {:active [[comps.vi_mode.left
                   comps.file.info
@@ -109,9 +100,15 @@
         :inactive [[comps.vi_mode.left comps.file.info]]})
 
 (let [feline (require :feline)]
-  (feline.setup {:default_bg colors.bg
-                 :default_fg colors.fg
+  (feline.setup {:colors {:fg colors.fg :bg colors.bg}
                  : components
-                 : properties
+                 :force_inactive {:filetypes [:NvimTree
+                                              :dbui
+                                              :packer
+                                              :startify
+                                              :fugitive
+                                              :fugitiveblame]
+                                  :buftypes [:terminal]
+                                  :bufnames {}}
                  : vi_mode_colors}))
 

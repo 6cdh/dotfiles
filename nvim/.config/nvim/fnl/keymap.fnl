@@ -93,7 +93,7 @@
 (fn verify-maps-balance-hands [maps]
   "{str {str str|[str]}|[str]} -> ()"
   (fn not-both-in-tbl [tbl v1 v2]
-    (or (fl.!member? v1 tbl) (fl.!member? v2 tbl)))
+    (or (fl.not-member? v1 tbl) (fl.not-member? v2 tbl)))
 
   (fn verify-each-family [family prefix]
     "{str str|[str]}|[str] -> str -> ()"
@@ -104,7 +104,7 @@
                        (not-both-in-tbl right-hand key prefix))
                   (.. "Mappings Didn't Balance Two Hands: " prefix key))))
 
-    (if (and (fl.tbl? family) (fl.!list? family))
+    (if (and (fl.tbl? family) (fl.not-list? family))
         (fl.for_each verify-key family)))
 
   (fl.for_each verify-each-family maps))
