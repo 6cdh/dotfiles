@@ -99,6 +99,7 @@ tools:
       - "%f: %l: %m"
   markdown-pandoc: &markdown-pandoc
     format-command: "pandoc -f markdown -t gfm -sp --tab-stop=4 --columns=90"
+    format-stdin: true
 
   python-black: &python-black
     format-command: "black --quiet -"
