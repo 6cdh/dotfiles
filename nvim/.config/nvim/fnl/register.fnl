@@ -12,13 +12,9 @@
 
 (local vim-event {:BufWritePost :BufWritePost})
 
-(macro build-command [cmd expression]
-  `(let [hotpot# (require :hotpot.api.compile)
-         (_# luacode#) (hotpot#.compile-string ,(view expression))]
-     (string.format ":silent! :command %s :lua %s" ,cmd luacode#)))
-
 (macro register-luacmd [cmd expression]
-  `(vim.api.nvim_command (build-command ,cmd ,expression)))
+  `(vim.api.nvim_command ,(string.format ":silent! :command %s :Fnl %s" cmd
+                                         (view expression))))
 
 (global luacmd-util {:eval (fn [f ...]
                              (f ...))})
