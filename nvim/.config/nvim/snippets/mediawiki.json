@@ -9,13 +9,16 @@
     "body": "<math>$1</math>",
     "description": "inline math snippet"
   },
-  "Math Block": {
-    "prefix": "<math>",
-    "body": ["<math>", "$1", "</math>"],
-    "description": "math block snippet"
-  },
   "SyntaxHighlight": {
     "prefix": "<syntaxhighlight>",
     "body": ["<syntaxhighlight lang=\"$1\">", "$2", "</syntaxhighlight>"]
+  },
+  "Tabber": {
+    "prefix": "<tabber>",
+    "body": ["<tabber>", "$2", "</tabber>"]
+  },
+  "HTML": {
+      "prefix": ["html", "tag"],
+      "body": ["<$1>", "$2", "</$1>"]
   }
 }
