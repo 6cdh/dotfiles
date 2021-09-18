@@ -52,7 +52,7 @@ symbol = " "
 symbol = " "
 
 [nodejs]
-symbol = " "
+symbol = "node"
 
 [perl]
 symbol = " "

@@ -106,6 +106,23 @@ lctoolset_gcc() {
 	export HOSTLD=ld
 }
 
+lctoolset_intel() {
+    source /opt/intel/oneapi/setvars.sh intel64
+	export CC="icx -shared-intel"
+	export HOSTCC="icx -shared-intel"
+	export CXX="icpx -shared-intel"
+	export LD=ld
+	export AR=ar
+	export NM=nm
+	export STRIP=strip
+	export OBJCOPY=objcopy
+	export OBJDUMP=objdump
+	export OBJSIZE=size
+	export READELF=readelf
+	export HOSTAR=ar
+	export HOSTLD=ld
+}
+
 lcplugin_bench() {
 	for plugin in $plugins; do
 		N=1000000
