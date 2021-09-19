@@ -15,9 +15,6 @@
                   (plug :p00f/nvim-ts-rainbow)
                   (plug :nvim-treesitter/playground {:cmd :TSPlaygroundToggle})
                   (plug :neovim/nvim-lspconfig)
-                  (plug :glepnir/lspsaga.nvim
-                        {:config #(setup :lspsaga :init_lsp_saga
-                                         {:code_action_prompt {:enable false}})})
                   (plug :onsails/lspkind-nvim)
                   (plug :ray-x/lsp_signature.nvim
                         {:config #(setup :lsp_signature :on_attach)})

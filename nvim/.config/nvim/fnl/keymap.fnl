@@ -14,10 +14,13 @@
         [:y :u :i :o :p :h :j :k :l :n :m]])
 
 (macro cmd [s]
-  `(.. :<Cmd> ,s :<CR>))
+  (string.format "<Cmd>%s<CR>" s))
+
+(macro luacmd [s]
+  (string.format "<Cmd>lua %s<CR>" s))
 
 (macro plug [s]
-  `(.. :<Plug> ,s))
+  (string.format "<Plug>%s" s))
 
 ;; keymap format
 
@@ -41,12 +44,12 @@
                      "Embeded Float Terminal"]
                  :m [(cmd :terminal) :Terminal]}
              :o {:name "Code Action"
-                 :o [(cmd "lua vim.lsp.buf.formatting()") "Format Buffer"]
+                 :o [(luacmd "vim.lsp.buf.formatting()") "Format Buffer"]
                  :t {1 ":Tabularize /" 2 :Align :silent false}
-                 :f [(cmd "Lspsaga lsp_finder")
+                 :f [(luacmd "vim.lsp.buf.definition()")
                      "Find definitions and references"]
-                 :a [(cmd "Lspsaga code_action") "Code Action By LSP"]
-                 :r [(cmd "lua vim.lsp.buf.rename()") :Rename]
+                 :a [(luacmd "vim.lsp.buf.code_action()") "Code Action By LSP"]
+                 :r [(luacmd "vim.lsp.buf.rename()") :Rename]
                  :c [(plug :kommentary_line_default) :Comment]
                  :s [(cmd :Codi) "Run REPL"]
                  :d [(cmd :Codi!) "Close REPL"]}
@@ -69,20 +72,23 @@
                  :j [(cmd :SudaRead) "Read as Root"]}
              :c {:name :Clipboard :p [(cmd "%y+") "Copy Buffer"]}
              :l {:name :Lint/Diagnostics
-                 :l [(cmd "lua require'lspsaga.diagnostic'.show_line_diagnostics()")
+                 :l [(luacmd "vim.diagnostic.show_line_diagnostics()")
                      "Show Line Diagnostics"]
-                 :a [(cmd "Lspsaga diagnostic_jump_prev") "Last Diagnostic"]
-                 :f [(cmd "Lspsaga diagnostic_jump_next") "Next Diagnostic"]}
+                 :a [(luacmd "require'trouble'.previous({skip_groups=true, jump=true})")
+                     "Last Diagnostic"]
+                 :f [(luacmd "require'trouble'.next({skip_groups=true, jump=true})")
+                     "Next Diagnostic"]}
              :h {:name :Hotpot :c [(cmd :HotpotCompileBuf) "Compile Buffer"]}
              :w [(cmd :w) :Save]
              :q [(cmd :q) :Quit]
              :Q [(cmd :q!) "Force Quit"]})
 
 (local vmap {:o {:name "Code Action"
-                 :o [(cmd "lua vim.lsp.buf.range_formatting()")
+                 :o [(luacmd "vim.lsp.buf.range_formatting()")
                      "Format Selection"]
                  :t {1 ":Tabularize /" 2 :Align :silent false}
-                 :a [(cmd "Lspsaga range_code_action") "Code Action By LSP"]
+                 :a [(luacmd "vim.lsp.buf.range_code_action()")
+                     "Code Action By LSP"]
                  :c [(plug :kommentary_visual_default<C-c>) :Comment]
                  :s [(cmd :Codi) "Run REPL"]
                  :d [(cmd :Codi!) "Close REPL"]}
@@ -161,7 +167,7 @@
 (kmap mode.terminal :<C-h> "<C-\\><C-n><C-w>h" :noremap)
 (kmap mode.terminal :<C-l> "<C-\\><C-n><C-w>l" :noremap)
 
-(kmap mode.normal :K (cmd "Lspsaga hover_doc" :noremap :silent))
+(kmap mode.normal :K (luacmd "vim.lsp.buf.hover()" :noremap :silent))
 
 (kmap mode.insert :<TAB> "v:lua.smart_tab()" :expr :silent)
 (kmap mode.insert :<CR> "v:lua.smart_cr()" :expr :silent)
