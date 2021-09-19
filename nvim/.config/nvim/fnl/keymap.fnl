@@ -169,6 +169,6 @@
 
 (kmap mode.normal :K (luacmd "vim.lsp.buf.hover()" :noremap :silent))
 
-(kmap mode.insert :<TAB> "v:lua.smart_tab()" :expr :silent)
+; (kmap mode.insert :<TAB> "v:lua.smart_tab()" :expr :silent)
 (kmap mode.insert :<CR> "v:lua.smart_cr()" :expr :silent)
 

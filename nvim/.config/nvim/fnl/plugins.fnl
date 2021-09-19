@@ -1,12 +1,16 @@
 (local packer (require :packer))
 
 (packer.startup (fn [use]
-                  (macro plug [name tbl]
+                  (macro spec [name tbl]
                     (local tbl (or tbl {}))
                     (tset tbl 1 name)
-                    `(use ,tbl))
+                    tbl)
+                  (macro plug [name tbl]
+                    `(use (spec ,name ,tbl)))
+                  (macro call [f ...]
+                    `(,f ,...))
                   (macro setup [m f ...]
-                    `((. (require ,m) ,f) ,...))
+                    `(-> (require ,m) (. ,f) (call ,...)))
                   (plug :wbthomason/packer.nvim)
                   (plug :rktjmp/hotpot.nvim)
                   ;; lsp
@@ -15,7 +19,6 @@
                   (plug :p00f/nvim-ts-rainbow)
                   (plug :nvim-treesitter/playground {:cmd :TSPlaygroundToggle})
                   (plug :neovim/nvim-lspconfig)
-                  (plug :onsails/lspkind-nvim)
                   (plug :ray-x/lsp_signature.nvim
                         {:config #(setup :lsp_signature :on_attach)})
                   (plug :folke/trouble.nvim
@@ -26,15 +29,30 @@
                   ;; dap
                   (plug :mfussenegger/nvim-dap)
                   ;; completion
+                  (plug :hrsh7th/nvim-cmp
+                        {:event :InsertEnter
+                         :config #(require :complete)
+                         :requires [(spec :hrsh7th/cmp-nvim-lsp
+                                          {:after :nvim-cmp})
+                                    (spec :hrsh7th/cmp-buffer
+                                          {:after :nvim-cmp})
+                                    (spec :hrsh7th/cmp-vsnip {:after :nvim-cmp})
+                                    (spec :tzachar/cmp-tabnine
+                                          {:run :./install.sh
+                                           :after :nvim-cmp
+                                           :config #(let [tabnine (require :cmp_tabnine.config)]
+                                                      (tabnine:setup {:max_lines 1000
+                                                                      :max_num_results 20
+                                                                      :sort true}))})
+                                    (spec :hrsh7th/cmp-path {:after :nvim-cmp})
+                                    (spec :hrsh7th/cmp-nvim-lua
+                                          {:after :nvim-cmp})
+                                    (spec :hrsh7th/cmp-calc {:after :nvim-cmp})
+                                    (spec :f3fora/cmp-spell {:after :nvim-cmp})
+                                    (spec :hrsh7th/cmp-emoji {:after :nvim-cmp})]})
                   (plug :hrsh7th/vim-vsnip
                         {:config #(set vim.g.vsnip_snippet_dir
                                        "~/.config/nvim/snippets")})
-                  (plug :hrsh7th/nvim-compe
-                        {:event :InsertEnter :config #(require :complete)})
-                  (plug :tzachar/compe-tabnine
-                        {:after :nvim-compe
-                         :run :./install.sh
-                         :requires :hrsh7th/nvim-compe})
                   ;; notes
                   (plug :chikamichi/mediawiki.vim)
                   (plug :plasticboy/vim-markdown
@@ -83,8 +101,6 @@
                   ;; utils
                   (plug :tpope/vim-repeat)
                   (plug :editorconfig/editorconfig-vim)
-                  (plug :karb94/neoscroll.nvim
-                        {:config #(setup :neoscroll :setup)})
                   (plug :lambdalisue/suda.vim
                         {:config #(tset vim.g "suda#prompt" "[sudo] password: ")})
                   (plug :akinsho/nvim-toggleterm.lua

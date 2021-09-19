@@ -58,6 +58,5 @@
 
   (fl.for_each setup-server enabled-servers))
 
-(let [lspkind (require :lspkind)]
-  (lspkind.init {:with_text false
-                 :symbol_map (-> (require :theme.icons) (. :codicon))}))
+(vim.lsp.set_log_level :error)
+
