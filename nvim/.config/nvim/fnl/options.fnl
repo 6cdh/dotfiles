@@ -17,7 +17,7 @@
          :lazyredraw true
          :breakindent true
          :smartindent true
-         :updatetime 200
+         :updatetime 300
          :timeoutlen 300
          :smartcase true
          :ignorecase true

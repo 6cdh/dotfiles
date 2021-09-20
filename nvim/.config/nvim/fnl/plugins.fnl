@@ -55,15 +55,6 @@
                                        "~/.config/nvim/snippets")})
                   ;; notes
                   (plug :chikamichi/mediawiki.vim)
-                  (plug :plasticboy/vim-markdown
-                        {:disable true
-                         :ft :markdown
-                         :config #(do
-                                    (set vim.g.vim_markdown_folding_disabled 1)
-                                    (set vim.g.vim_markdown_conceal 1)
-                                    (set vim.g.vim_markdown_math 1)
-                                    (set vim.g.vim_markdown_strikethrough 1)
-                                    (set vim.g.vim_markdown_toc_autofit 1))})
                   (plug :iamcco/markdown-preview.nvim
                         {:run "cd app && yarn install" :ft :markdown})
                   (plug :kristijanhusak/orgmode.nvim
@@ -84,7 +75,6 @@
                   (plug :kdav5758/TrueZen.nvim)
                   (plug :norcalli/nvim-colorizer.lua
                         {:config #(setup :colorizer :setup)}) ; (plug :xiyaowong/nvim-cursorword)
-                  (plug :haringsrob/nvim_context_vt {:disable true})
                   ;; explorer
                   (plug :kyazdani42/nvim-tree.lua
                         {:requires :kyazdani42/nvim-web-devicons
@@ -99,6 +89,7 @@
                         {:requires :nvim-lua/plenary.nvim
                          :config #(setup :gitsigns :setup)})
                   ;; utils
+                  (plug :ggandor/lightspeed.nvim)
                   (plug :tpope/vim-repeat)
                   (plug :editorconfig/editorconfig-vim)
                   (plug :lambdalisue/suda.vim
