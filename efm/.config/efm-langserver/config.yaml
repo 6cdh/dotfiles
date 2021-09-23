@@ -63,10 +63,15 @@ tools:
 
   json-prettier: &json-prettier
     format-command: "prettier ${--tab-width:tabWidth} --parser json"
+    format-stdin: true
   json-jq: &json-jq
     lint-command: "jq ."
   json-fixjson: &json-fixjson
     format-command: "fixjson"
+
+  javascript-prettier: &javascript-prettier
+    format-command: "prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser typescript"
+    format-stdin: true
 
   javascript-eslint: &javascript-eslint
     lint-command: "eslint -f visualstudio --stdin --stdin-filename ${INPUT}"
@@ -178,6 +183,7 @@ languages:
     - <<: *css-prettier
   javascript:
     - <<: *javascript-eslint
+    - <<: *javascript-prettier
   json:
     - <<: *json-jq
     - <<: *json-prettier
