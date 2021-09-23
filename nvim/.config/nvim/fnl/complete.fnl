@@ -1,7 +1,3 @@
-(macro enable_source [names]
-  (icollect [_ name (ipairs names)]
-    {: name}))
-
 (let [cmp (require :cmp)
       {: codicon} (require :theme.icons)]
   (cmp.setup {:snippet {:expand (fn [args]

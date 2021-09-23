@@ -17,8 +17,16 @@
     "prefix": "<tabber>",
     "body": ["<tabber>", "$2", "</tabber>"]
   },
+  "InlineHTML": {
+      "prefix": ["ihtml", "itag"],
+      "body": "<$1>$2</$1>"
+  },
   "HTML": {
-      "prefix": ["html", "tag"],
-      "body": ["<$1>", "$2", "</$1>"]
+    "prefix": ["html", "tag"],
+    "body": ["<$1>", "$2", "</$1>"]
+  },
+  "Table": {
+    "prefix": ["table", "{|"],
+    "body": ["{|class=\"wikitable\"", "|-", "! $1", "|-", "| $2", "|}"]
   }
 }
