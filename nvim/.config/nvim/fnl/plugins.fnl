@@ -67,7 +67,6 @@
                          :config #(setup :neorg)})
                   ;; ui
                   (plug :kyazdani42/nvim-web-devicons) ; (plug :mhinz/vim-startify)
-                  (plug :SmiteshP/nvim-gps {:config #(require :gps)})
                   (plug :akinsho/bufferline.nvim
                         {:config #(setup :bufferline
                                          {:options {:show_close_icon false

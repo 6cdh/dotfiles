@@ -1,9 +1,8 @@
-(local [colors icons vi_mode fl gps]
+(local [colors icons vi_mode fl]
        [(require :theme.colors)
         (require :theme.icons)
         (require :feline.providers.vi_mode)
-        (require :fulib)
-        (require :nvim-gps)])
+        (require :fulib)])
 
 (local vf vim.fn)
 
@@ -46,9 +45,6 @@
                           :left_sep " "
                           :hl {:fg colors.violet :style :bold}}
                      :type {:provider :file_type}}
-              :context {:name {:provider #(gps.get_location)
-                               :enabled #(gps.is_available)
-                               :hl {:fg colors.blue :style :bold}}}
               :line_percentage {:provider :line_percentage
                                 :left_sep " "
                                 :hl {:style :bold}}
