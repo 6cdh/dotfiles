@@ -107,7 +107,7 @@ lctoolset_gcc() {
 }
 
 lctoolset_intel() {
-    source /opt/intel/oneapi/setvars.sh intel64
+	source /opt/intel/oneapi/setvars.sh intel64
 	export CC="icx -shared-intel"
 	export HOSTCC="icx -shared-intel"
 	export CXX="icpx -shared-intel"
@@ -156,4 +156,8 @@ function lcplot {
     plot $@
     set output '/dev/null'"
 	printf "$text" | gnuplot
+}
+
+function lccl {
+	qdbus org.kde.klipper /klipper org.kde.klipper.klipper.clearClipboardHistory
 }
