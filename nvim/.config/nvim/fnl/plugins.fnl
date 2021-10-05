@@ -9,8 +9,10 @@
                     `(use (spec ,name ,tbl)))
                   (macro call [f ...]
                     `(,f ,...))
-                  (macro setup [m f ...]
+                  (macro module-conf [m f ...]
                     `(-> (require ,m) (. ,f) (call ,...)))
+                  (macro setup [m ...]
+                    `(module-conf ,m :setup ,...))
                   (plug :wbthomason/packer.nvim)
                   (plug :rktjmp/hotpot.nvim)
                   ;; lsp
@@ -20,12 +22,12 @@
                   (plug :nvim-treesitter/playground {:cmd :TSPlaygroundToggle})
                   (plug :neovim/nvim-lspconfig)
                   (plug :ray-x/lsp_signature.nvim
-                        {:config #(setup :lsp_signature :on_attach)})
+                        {:config #(setup :lsp_signature)})
                   (plug :folke/trouble.nvim
-                        {:cmd :Trouble :config #(setup :trouble :setup)})
+                        {:cmd :Trouble :config #(setup :trouble)})
                   (plug :folke/todo-comments.nvim
                         {:requires :nvim-lua/plenary.nvim
-                         :config #(setup :todo-comments :setup)})
+                         :config #(setup :todo-comments)})
                   ;; dap
                   (plug :mfussenegger/nvim-dap)
                   ;; completion
@@ -58,26 +60,27 @@
                   (plug :iamcco/markdown-preview.nvim
                         {:run "cd app && yarn install" :ft :markdown})
                   (plug :kristijanhusak/orgmode.nvim
-                        {:ft :org :config #(setup :orgmode :setup)})
+                        {:ft :org :config #(setup :orgmode)})
                   (plug :vhyrro/neorg
                         {:ft :norg
                          :requires :nvim-lua/plenary.nvim
-                         :config #(setup :neorg :setup {})})
+                         :config #(setup :neorg)})
                   ;; ui
                   (plug :kyazdani42/nvim-web-devicons) ; (plug :mhinz/vim-startify)
                   (plug :SmiteshP/nvim-gps {:config #(require :gps)})
                   (plug :akinsho/bufferline.nvim
-                        {:config #(setup :bufferline :setup
+                        {:config #(setup :bufferline
                                          {:options {:show_close_icon false
                                                     :always_show_bufferline false}})})
                   (plug :famiu/feline.nvim
                         {:after :onedark.nvim :config #(require :statusline)})
                   (plug :kdav5758/TrueZen.nvim)
                   (plug :norcalli/nvim-colorizer.lua
-                        {:config #(setup :colorizer :setup)}) ; (plug :xiyaowong/nvim-cursorword)
+                        {:config #(setup :colorizer)}) ; (plug :xiyaowong/nvim-cursorword)
                   ;; explorer
                   (plug :kyazdani42/nvim-tree.lua
                         {:requires :kyazdani42/nvim-web-devicons
+                         :config #(setup :nvim-tree)
                          :cmd :NvimTreeToggle})
                   (plug :kevinhwang91/rnvimr {:cmd :RnvimrToggle})
                   (plug :nvim-telescope/telescope.nvim
@@ -87,7 +90,7 @@
                   ;; git
                   (plug :lewis6991/gitsigns.nvim
                         {:requires :nvim-lua/plenary.nvim
-                         :config #(setup :gitsigns :setup)})
+                         :config #(setup :gitsigns)})
                   ;; utils
                   (plug :ggandor/lightspeed.nvim)
                   (plug :tpope/vim-repeat)
@@ -96,7 +99,7 @@
                         {:config #(tset vim.g "suda#prompt" "[sudo] password: ")})
                   (plug :akinsho/nvim-toggleterm.lua
                         {:cmd :ToggleTerm
-                         :config #(setup :toggleterm :setup
+                         :config #(setup :toggleterm
                                          {:size 10
                                           :insert_mappings false
                                           :shade_filetypes {}
@@ -105,17 +108,16 @@
                                           :start_in_insert true
                                           :persist_size true
                                           :direction :float})})
-                  (plug :folke/which-key.nvim
-                        {:config #(setup :which-key :setup)})
+                  (plug :folke/which-key.nvim {:config #(setup :which-key)})
                   ;; coding
                   (plug :b3nj5m1n/kommentary
                         {:config #(do
                                     (tset vim.g
                                           :kommentary_create_default_mappings
                                           false)
-                                    (setup :kommentary.config
-                                           :configure_language :default
-                                           {:prefer_single_line_comments true}))})
+                                    (module-conf :kommentary.config
+                                                 :configure_language :default
+                                                 {:prefer_single_line_comments true}))})
                   (plug :windwp/nvim-autopairs {:config #(require :pairs)})
                   (plug :tpope/vim-surround)
                   (plug :godlygeek/tabular)
