@@ -51,7 +51,7 @@ end
 
 local modules = {
     'hotpot',
-    -- 'impatient', -- Waiting for hotpot support
+    'impatient', -- Waiting for hotpot support
     'register',
     'options',
     'keymap',

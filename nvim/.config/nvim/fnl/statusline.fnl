@@ -19,7 +19,7 @@
   (.. " " msg " "))
 
 (fn lsp_clientnames []
-  (let [clients (->> (vim.lsp.buf_get_clients) (fl.tbl-values)
+  (let [clients (->> (vim.lsp.buf_get_clients) (fl.table-values)
                      (fl.map #$1.name))]
     (table.concat clients "/")))
 
@@ -84,7 +84,6 @@
 (local components
        {:active [[comps.vi_mode.left
                   comps.file.info
-                  comps.context.name
                   comps.lsp.name
                   comps.diagnos.err
                   comps.diagnos.warn

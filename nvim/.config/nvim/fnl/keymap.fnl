@@ -110,7 +110,7 @@
                        (not-both-in-tbl right-hand key prefix))
                   (.. "Mappings Didn't Balance Two Hands: " prefix key))))
 
-    (if (and (fl.tbl? family) (fl.not-list? family))
+    (if (and (fl.table? family) (fl.not-list? family))
         (fl.for_each verify-key family)))
 
   (fl.for_each verify-each-family maps))
@@ -157,15 +157,15 @@
      (fl.for_each #(tset t# $1 true) [,...])
      (vim.api.nvim_set_keymap ,m ,lhs ,rhs t#)))
 
-(kmap mode.normal :<C-j> :<C-w>j :noremap)
-(kmap mode.normal :<C-k> :<C-w>k :noremap)
-(kmap mode.normal :<C-h> :<C-w>h :noremap)
-(kmap mode.normal :<C-l> :<C-w>l :noremap)
+(kmap mode.normal :<M-j> :<C-w>j :noremap)
+(kmap mode.normal :<M-k> :<C-w>k :noremap)
+(kmap mode.normal :<M-h> :<C-w>h :noremap)
+(kmap mode.normal :<M-l> :<C-w>l :noremap)
 
-(kmap mode.terminal :<C-j> "<C-\\><C-n><C-w>j" :noremap)
-(kmap mode.terminal :<C-k> "<C-\\><C-n><C-w>k" :noremap)
-(kmap mode.terminal :<C-h> "<C-\\><C-n><C-w>h" :noremap)
-(kmap mode.terminal :<C-l> "<C-\\><C-n><C-w>l" :noremap)
+(kmap mode.terminal :<M-j> "<C-\\><C-n><C-w>j" :noremap)
+(kmap mode.terminal :<M-k> "<C-\\><C-n><C-w>k" :noremap)
+(kmap mode.terminal :<M-h> "<C-\\><C-n><C-w>h" :noremap)
+(kmap mode.terminal :<M-l> "<C-\\><C-n><C-w>l" :noremap)
 
 (kmap mode.normal :K (luacmd "vim.lsp.buf.hover()" :noremap :silent))
 
