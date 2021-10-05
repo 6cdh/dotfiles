@@ -1,10 +1,21 @@
+(macro call [f ...]
+  `(,f ,...))
+
+(macro t [key]
+  `(-> (vim.api.nvim_replace_termcodes ,key true true true)
+       (vim.api.nvim_feedkeys :i true)))
+
 (let [cmp (require :cmp)
       {: codicon} (require :theme.icons)]
   (cmp.setup {:snippet {:expand (fn [args]
                                   (vim.fn.vsnip#anonymous args.body))}
               :mapping {:<C-k> (cmp.mapping.select_prev_item)
                         :<C-j> (cmp.mapping.select_next_item)
-                        :<TAB> (cmp.mapping.confirm {:select true})}
+                        :<TAB> (fn [fallback]
+                                 (if (= (vim.fn.vsnip#jumpable 1) 1)
+                                     (t "<Plug>(vsnip-jump-next)")
+                                     (-> (cmp.mapping.confirm {:select true})
+                                         (call fallback))))}
               :formatting {:format (fn [entry vim_item]
                                      ;; codicon and limit the menu width
                                      (set vim_item.kind
