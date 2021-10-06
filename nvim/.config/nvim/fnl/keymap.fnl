@@ -72,7 +72,7 @@
                  :j [(cmd :SudaRead) "Read as Root"]}
              :c {:name :Clipboard :p [(cmd "%y+") "Copy Buffer"]}
              :l {:name :Lint/Diagnostics
-                 :l [(luacmd "vim.diagnostic.show_line_diagnostics()")
+                 :l [(luacmd "vim.lsp.diagnostic.show_line_diagnostics()")
                      "Show Line Diagnostics"]
                  :a [(luacmd "require'trouble'.previous({skip_groups=true, jump=true})")
                      "Last Diagnostic"]

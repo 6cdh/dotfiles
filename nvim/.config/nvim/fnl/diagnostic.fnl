@@ -4,7 +4,7 @@
              :Warning icons.warns
              :Hint icons.hints
              :Information icons.infos}]
-  (fl.map #(let [hl (.. :DiagnosticsSign $2)]
+  (fl.map #(let [hl (.. :LspDiagnosticsSign $2)]
              (vim.fn.sign_define hl {:text $1 :texthl hl :numhl ""}))
           signs))
 
