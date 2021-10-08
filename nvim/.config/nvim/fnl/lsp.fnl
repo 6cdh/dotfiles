@@ -11,7 +11,7 @@
         :vimls {}
         :texlab {}
         :gopls {}
-        :rust_analyzer {}
+        :rust_analyzer {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
         :efm {:init_options {:documentFormatting true}
               :filetypes [:cpp
                           :css
