@@ -70,7 +70,9 @@
              :r {:name "Root action"
                  :r [(cmd :SudaWrite) "Write as Root"]
                  :j [(cmd :SudaRead) "Read as Root"]}
-             :c {:name :Clipboard :p [(cmd "%y+") "Copy Buffer"]}
+             :c {:name :Clipboard
+                 :p [(cmd "%y+") "Copy Buffer"]
+                 :j ["\"+p" "Paste content"]}
              :l {:name :Lint/Diagnostics
                  :l [(luacmd "vim.lsp.diagnostic.show_line_diagnostics()")
                      "Show Line Diagnostics"]

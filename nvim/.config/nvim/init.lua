@@ -10,6 +10,8 @@ local preinstall_list = {
 
 local preinstall_path = fn.stdpath 'data' .. '/site/pack/packer/start/'
 
+local init_install = false
+
 for _, info in pairs(preinstall_list) do
     local plugin_path = preinstall_path .. info.repo
     if fn.empty(fn.glob(plugin_path)) > 0 then
@@ -21,19 +23,30 @@ for _, info in pairs(preinstall_list) do
                 plugin_path
             )
         )
+        init_install = true
     end
+end
+
+if init_install then
+    require 'hotpot'
+    require 'plugins'
+    require('packer').install()
+    print 'Rerun neovim'
 end
 
 -- profile requires
 
 startup_features = {
-    profile = true,
+    profile = false,
     profile_path = fn.stdpath 'cache' .. '/profile.log',
 }
 
 local function hack_require(module)
     local _s = os.clock()
-    local m = _G._require(module)
+    local m, _ = pcall(_G._require, module)
+    if not m then
+        error("Can't loading " .. module)
+    end
     local _e = os.clock()
     local f = io.open(_G.startup_features.profile_path, 'a')
     f:write(module, ' takes ', (_e - _s) * 1000, ' ms\n')
@@ -51,7 +64,7 @@ end
 
 local modules = {
     'hotpot',
-    'impatient', -- Waiting for hotpot support
+    --    'impatient', -- Waiting for hotpot support
     'register',
     'options',
     'keymap',
@@ -61,9 +74,8 @@ local modules = {
 }
 
 for _, m in ipairs(modules) do
-    xpcall(function()
-        require(m)
-    end, function(err)
-        print('Import ' .. m .. ' Failed: ' .. err)
-    end)
+    local ok, _ = pcall(require, m)
+    if not ok then
+        error("Can't loading " .. m)
+    end
 end
