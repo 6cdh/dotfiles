@@ -117,7 +117,8 @@
                                     (module-conf :kommentary.config
                                                  :configure_language :default
                                                  {:prefer_single_line_comments true}))})
-                  (plug :windwp/nvim-autopairs {:config #(require :pairs)})
+                  (plug :windwp/nvim-autopairs
+                        {:config #(require :pairs) :after :nvim-cmp})
                   (plug :tpope/vim-surround)
                   (plug :godlygeek/tabular)
                   (plug :mizlan/iswap.nvim {:cmd :ISwap})

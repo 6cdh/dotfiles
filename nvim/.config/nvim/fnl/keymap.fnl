@@ -142,18 +142,6 @@
 (macro to_keycodes [s]
   `(vim.api.nvim_replace_termcodes ,s true true true))
 
-(fn _G.smart_tab []
-  (if (and (not= (vf.pumvisible) 0)
-           (not= (. (vf.complete_info [:selected]) :selected) -1))
-      ((. vf "compe#confirm"))
-      (= ((. vf "vsnip#available") 1) 1)
-      (to_keycodes "<Plug>(vsnip-expand-or-jump)")
-      (to_keycodes :<TAB>)))
-
-(fn _G.smart_cr []
-  (let [npairs (require :nvim-autopairs)]
-    (if (not= (vf.pumvisible) 0) (npairs.esc :<cr>) (npairs.autopairs_cr))))
-
 (macro kmap [m lhs rhs ...]
   `(let [t# {}]
      (fl.for_each #(tset t# $1 true) [,...])
@@ -170,7 +158,4 @@
 (kmap mode.terminal :<M-l> "<C-\\><C-n><C-w>l" :noremap)
 
 (kmap mode.normal :K (luacmd "vim.lsp.buf.hover()" :noremap :silent))
-
-; (kmap mode.insert :<TAB> "v:lua.smart_tab()" :expr :silent)
-(kmap mode.insert :<CR> "v:lua.smart_cr()" :expr :silent)
 
