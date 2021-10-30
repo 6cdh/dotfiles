@@ -50,10 +50,6 @@ unsetopt autocd beep
 
 export VI_MODE_SET_CURSOR=true
 
-# pyenv
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
 # Auto Rehash
 zstyle ':completion:*' rehash true
 
@@ -66,3 +62,6 @@ source ~/.zsh_aliases.sh
 source ~/.zsh_func.sh
 
 eval "$(starship init zsh)"
+
+# asdf
+. /opt/asdf-vm/asdf.sh
