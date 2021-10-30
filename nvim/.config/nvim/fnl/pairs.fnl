@@ -1,5 +1,4 @@
-(let [npairs (require :nvim-autopairs)
-      Rule (require :nvim-autopairs.rule)]
+(let [npairs (require :nvim-autopairs)]
   (npairs.setup {:map_cr true}))
 
 (let [cmp_autopairs (require :nvim-autopairs.completion.cmp)
