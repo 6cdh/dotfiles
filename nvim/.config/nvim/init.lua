@@ -41,7 +41,7 @@ startup_features = {
     profile_path = fn.stdpath 'cache' .. '/profile.log',
 }
 
-local function hack_require(module)
+local function hack_require(m)
     local _s = os.clock()
     local ok, err = pcall(require, m)
     if not ok then
@@ -49,7 +49,7 @@ local function hack_require(module)
     end
     local _e = os.clock()
     local f = io.open(_G.startup_features.profile_path, 'a')
-    f:write(module, ' takes ', (_e - _s) * 1000, ' ms\n')
+    f:write(m, ' takes ', (_e - _s) * 1000, ' ms\n')
     f:close()
     return ok
 end

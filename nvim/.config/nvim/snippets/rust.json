@@ -1,0 +1,7 @@
+{
+    "println_debug": {
+        "prefix": "println!",
+        "body": "println!(\"{:?}\", $1)",
+        "description": "println debug"
+    }
+}

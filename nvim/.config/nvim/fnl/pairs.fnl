@@ -1,10 +1,8 @@
 (let [npairs (require :nvim-autopairs)
       Rule (require :nvim-autopairs.rule)]
-  (npairs.setup))
+  (npairs.setup {:map_cr true}))
 
-(macro call [f ...]
-  `(,f ,...))
+(let [cmp_autopairs (require :nvim-autopairs.completion.cmp)
+      cmp (require :cmp)]
+  (cmp.event:on :confirm_done (cmp_autopairs.on_confirm_done)))
 
-(-> (require :nvim-autopairs.completion.cmp)
-    (. :setup)
-    (call {:map_cr true :map_complete true :insert false}))
