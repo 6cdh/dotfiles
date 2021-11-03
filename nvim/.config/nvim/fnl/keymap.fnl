@@ -67,9 +67,7 @@
                  :h [(cmd :BufferLineCyclePrev) :BufferLinePrevious]
                  :l [(cmd :BufferLineCycleNext) :BufferLineNext]
                  :j [(cmd :bdelete) :BufferClose]}
-             :r {:name "Root action"
-                 :r [(cmd :SudaWrite) "Write as Root"]
-                 :j [(cmd :SudaRead) "Read as Root"]}
+             :r {:name "Root action" :r [(cmd :SudoWrite) "Write as Root"]}
              :c {:name :Clipboard
                  :p [(cmd "%y+") "Copy Buffer"]
                  :j ["\"+p" "Paste content"]}

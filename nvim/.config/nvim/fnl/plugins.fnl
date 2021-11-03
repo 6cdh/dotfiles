@@ -94,8 +94,6 @@
                   (plug :ggandor/lightspeed.nvim)
                   (plug :tpope/vim-repeat)
                   (plug :editorconfig/editorconfig-vim)
-                  (plug :lambdalisue/suda.vim
-                        {:config #(tset vim.g "suda#prompt" "[sudo] password: ")})
                   (plug :akinsho/nvim-toggleterm.lua
                         {:cmd :ToggleTerm
                          :config #(setup :toggleterm

@@ -31,6 +31,14 @@
                      (luacmd-util.eval 0)
                      (print)))
 
+(register-luacmd :SudoWrite
+                 (let [passwd (vim.fn.inputsecret "[sudo] password: ")
+                       tmp_file :/tmp/vim_sudo]
+                   (-> "silent! w !tee %s && echo \"%s\" | sudo -S cp %s %% >/dev/null"
+                       (string.format tmp_file passwd tmp_file)
+                       (vim.api.nvim_command))
+                   (vim.api.nvim_command :edit!)))
+
 (new_augroup :packer_autocompile
              [(table.concat [vim-event.BufWritePost
                              :plugins.fnl
