@@ -124,12 +124,6 @@
                   (plug :mizlan/iswap.nvim {:cmd :ISwap})
                   ;; Interactive
                   (plug :metakirby5/codi.vim {:cmd :Codi})
-                  (plug :Olical/conjure
-                        {:ft [:fennel :clojure :racket :scheme]
-                         :config #(do
-                                    (tset vim.g "conjure#filetype#fennel"
-                                          :conjure.client.fennel.stdio)
-                                    (tset vim.g "conjure#log#hud#enabled" false))})
                   ;; lib
                   (plug :6cdh/fulib.nvim)
                   ;; profile

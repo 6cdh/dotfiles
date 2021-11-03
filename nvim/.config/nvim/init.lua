@@ -43,15 +43,15 @@ startup_features = {
 
 local function hack_require(m)
     local _s = os.clock()
-    local ok, err = pcall(require, m)
+    local ok, err = pcall(_G._require, m)
     if not ok then
-        error(string.format("Can't loading module: %s. ERR: %s", m, err))
+         error(err)
     end
     local _e = os.clock()
     local f = io.open(_G.startup_features.profile_path, 'a')
     f:write(m, ' takes ', (_e - _s) * 1000, ' ms\n')
     f:close()
-    return ok
+    return err
 end
 
 if _G.startup_features.profile then
