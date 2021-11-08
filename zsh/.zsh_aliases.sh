@@ -22,6 +22,9 @@ alias cl="clang++"
 alias spp="sudo proxychains4"
 alias pp="proxychains4"
 
+# typo 
+alias suod="sudo"
+
 # common
 alias ls="exa"
 alias l="ls -l"
