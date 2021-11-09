@@ -37,7 +37,9 @@
               :file {:encoding {:provider :file_encoding
                                 :left_sep " "
                                 :hl {:fg colors.violet :style :bold}}
-                     :info {:provider :file_info
+                     :info {:provider {:name :file_info
+                                       :opts {:file_modified_icon "[+]"
+                                              :file_readonly_icon " "}}
                             :left_sep " "
                             :hl {:fg colors.blue :style :bold}}
                      :os {:provider #(vim.bo.fileformat:lower)

@@ -37,18 +37,13 @@
          :signcolumn :yes
          :mouse :a}))
 
+;; netrw
+(set vim.g.netrw_banner 0)
+(set vim.g.netrw_winsize 25)
+
 (set vim.g.mapleader " ")
-(set vim.g.python3_host_prog "~/.pyenv/versions/nvim/bin/python3")
 (opt.shortmess:append :cI)
 
-(let [disabled_builtins [:netrw
-                         :netrwPlugin
-                         :netrwSettings
-                         :netrwFileHandlers
-                         :gzip
-                         :zip
-                         :zipPlugin
-                         :tar
-                         :tarPlugin]]
+(let [disabled_builtins [:gzip :zip :zipPlugin :tar :tarPlugin]]
   (fl.for_each #(tset vim.g (.. :loaded_ $1) 1) disabled_builtins))
 

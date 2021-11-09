@@ -30,12 +30,11 @@
                                               :cmp_tabnine "[tabnine]"}
                                              entry.source.name))
                                      vim_item)}
-              :sources [{:name :cmp_tabnine}
+              :sources [;{:name :cmp_tabnine}
                         {:name :nvim_lsp}
                         {:name :vsnip}
                         {:name :buffer}
                         {:name :path}
                         {:name :nvim_lua}
-                        {:name :calc}
                         {:name :spell}]}))
 

@@ -49,9 +49,7 @@
                                     (spec :hrsh7th/cmp-path {:after :nvim-cmp})
                                     (spec :hrsh7th/cmp-nvim-lua
                                           {:after :nvim-cmp})
-                                    (spec :hrsh7th/cmp-calc {:after :nvim-cmp})
-                                    (spec :f3fora/cmp-spell {:after :nvim-cmp})
-                                    (spec :hrsh7th/cmp-emoji {:after :nvim-cmp})]})
+                                    (spec :f3fora/cmp-spell {:after :nvim-cmp})]})
                   (plug :hrsh7th/vim-vsnip
                         {:config #(set vim.g.vsnip_snippet_dir
                                        "~/.config/nvim/snippets")})

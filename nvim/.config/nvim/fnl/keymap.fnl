@@ -54,7 +54,7 @@
                  :s [(cmd :Codi) "Run REPL"]
                  :d [(cmd :Codi!) "Close REPL"]}
              :e {:name :Explorer
-                 :e [(cmd :NvimTreeToggle) :NvimTree]
+                 :e [(cmd :Lexplore) :Netrw]
                  :j [(cmd :RnvimrToggle) :Ranger]}
              :s {:name :Search
                  :s [(cmd "Telescope live_grep") :Grep]
