@@ -1,18 +1,23 @@
 (local packer (require :packer))
 
+(macro spec [name tbl]
+  (local tbl (or tbl {}))
+  (tset tbl 1 name)
+  tbl)
+
+(macro plug [name tbl]
+  `(use (spec ,name ,tbl)))
+
+(macro call [f ...]
+  `(,f ,...))
+
+(macro module-conf [m f ...]
+  `(-> (require ,m) (. ,f) (call ,...)))
+
+(macro setup [m ...]
+  `(module-conf ,m :setup ,...))
+
 (packer.startup (fn [use]
-                  (macro spec [name tbl]
-                    (local tbl (or tbl {}))
-                    (tset tbl 1 name)
-                    tbl)
-                  (macro plug [name tbl]
-                    `(use (spec ,name ,tbl)))
-                  (macro call [f ...]
-                    `(,f ,...))
-                  (macro module-conf [m f ...]
-                    `(-> (require ,m) (. ,f) (call ,...)))
-                  (macro setup [m ...]
-                    `(module-conf ,m :setup ,...))
                   (plug :wbthomason/packer.nvim)
                   (plug :rktjmp/hotpot.nvim)
                   ;; lsp
@@ -22,7 +27,7 @@
                   (plug :nvim-treesitter/playground {:cmd :TSPlaygroundToggle})
                   (plug :neovim/nvim-lspconfig)
                   (plug :ray-x/lsp_signature.nvim
-                        {:config #(setup :lsp_signature)})
+                        {:config #(setup :lsp_signature {:hint_enable false})})
                   (plug :folke/trouble.nvim
                         {:cmd :Trouble :config #(setup :trouble)})
                   (plug :folke/todo-comments.nvim
@@ -39,17 +44,21 @@
                                     (spec :hrsh7th/cmp-buffer
                                           {:after :nvim-cmp})
                                     (spec :hrsh7th/cmp-vsnip {:after :nvim-cmp})
-                                    (spec :tzachar/cmp-tabnine
-                                          {:run :./install.sh
-                                           :after :nvim-cmp
-                                           :config #(let [tabnine (require :cmp_tabnine.config)]
-                                                      (tabnine:setup {:max_lines 1000
-                                                                      :max_num_results 20
-                                                                      :sort true}))})
+                                    ; (spec :tzachar/cmp-tabnine
+                                    ;       {:run :./install.sh
+                                    ;        :after :nvim-cmp
+                                    ;        :config #(let [tabnine (require :cmp_tabnine.config)]
+                                    ;                   (tabnine:setup {:max_lines 1000
+                                    ;                                   :max_num_results 20
+                                    ;                                   :sort true}))})
                                     (spec :hrsh7th/cmp-path {:after :nvim-cmp})
                                     (spec :hrsh7th/cmp-nvim-lua
                                           {:after :nvim-cmp})
-                                    (spec :f3fora/cmp-spell {:after :nvim-cmp})]})
+                                    (spec :octaltree/cmp-look
+                                          {:after :nvim-cmp})
+                                    (spec :f3fora/cmp-spell {:after :nvim-cmp})
+                                    (spec :hrsh7th/cmp-cmdline
+                                          {:after :nvim-cmp})]})
                   (plug :hrsh7th/vim-vsnip
                         {:config #(set vim.g.vsnip_snippet_dir
                                        "~/.config/nvim/snippets")})
@@ -64,7 +73,7 @@
                          :requires :nvim-lua/plenary.nvim
                          :config #(setup :neorg)})
                   ;; ui
-                  (plug :kyazdani42/nvim-web-devicons) ; (plug :mhinz/vim-startify)
+                  (plug :kyazdani42/nvim-web-devicons)
                   (plug :akinsho/bufferline.nvim
                         {:config #(setup :bufferline
                                          {:options {:show_close_icon false
@@ -73,12 +82,7 @@
                         {:after :onedark.nvim :config #(require :statusline)})
                   (plug :kdav5758/TrueZen.nvim)
                   (plug :norcalli/nvim-colorizer.lua
-                        {:config #(setup :colorizer)}) ; (plug :xiyaowong/nvim-cursorword)
-                  ;; explorer
-                  (plug :kyazdani42/nvim-tree.lua
-                        {:requires :kyazdani42/nvim-web-devicons
-                         :config #(setup :nvim-tree)
-                         :cmd :NvimTreeToggle})
+                        {:config #(setup :colorizer)})
                   (plug :kevinhwang91/rnvimr {:cmd :RnvimrToggle})
                   (plug :nvim-telescope/telescope.nvim
                         {:requires [[:nvim-lua/popup.nvim]
@@ -113,8 +117,7 @@
                                     (module-conf :kommentary.config
                                                  :configure_language :default
                                                  {:prefer_single_line_comments true}))})
-                  (plug :windwp/nvim-autopairs
-                        {:config #(require :pairs) :after :nvim-cmp})
+                  (plug :windwp/nvim-autopairs {:config #(require :pairs)})
                   (plug :tpope/vim-surround)
                   (plug :godlygeek/tabular)
                   (plug :mizlan/iswap.nvim {:cmd :ISwap})

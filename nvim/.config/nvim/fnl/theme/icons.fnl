@@ -9,6 +9,11 @@
  :git ""
  :left_sep ""
  :right_sep ""
+ :unknown ""
+ :buffer "﬘"
+ :dict "﬜"
+ :cmd " "
+ :lang {:lua " "}
  :codicon {:Text " "
            :Method " "
            :Function " "

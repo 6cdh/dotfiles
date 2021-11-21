@@ -1,10 +1,8 @@
 (local fl (require :fulib))
 
-(local opt vim.opt)
-
-(macro bset [tbl]
+(macro bset [tbl opt_g]
   "Batch set"
-  `(fl.for_each #(tset opt $2 $1) ,tbl))
+  `(fl.for_each #(tset ,opt_g $2 $1) ,tbl))
 
 (let [indent 4
       textwidth 90]
@@ -13,15 +11,17 @@
          :tabstop indent
          :shiftwidth indent
          :softtabstop indent
+         :wrap false
          :inccommand :nosplit
          :lazyredraw true
-         :breakindent true
-         :smartindent true
-         :updatetime 500
+         :updatetime 700
          :timeoutlen 300
          :smartcase true
          :ignorecase true
          :showmode false
+         :showmatch true
+         ; for lisp
+         :matchtime 2
          :ruler false
          :cmdheight 1
          :pumheight 10
@@ -30,20 +30,20 @@
          :backup false
          :writebackup false
          :swapfile false
+         :undofile true
          :termguicolors true
          :number true
          :relativenumber true
          :cursorline true
          :signcolumn :yes
-         :mouse :a}))
+         :mouse :a
+         :scrolloff 1
+         :sidescrolloff 5
+         :confirm true} vim.opt))
 
 ;; netrw
-(set vim.g.netrw_banner 0)
-(set vim.g.netrw_winsize 25)
+(bset {:netrw_banner 0 :netrw_winsize 25 :netrw_browse_split 4} vim.g)
 
 (set vim.g.mapleader " ")
-(opt.shortmess:append :cI)
-
-(let [disabled_builtins [:gzip :zip :zipPlugin :tar :tarPlugin]]
-  (fl.for_each #(tset vim.g (.. :loaded_ $1) 1) disabled_builtins))
+(vim.opt.shortmess:append :cI)
 

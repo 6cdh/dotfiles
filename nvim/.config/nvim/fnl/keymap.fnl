@@ -39,10 +39,11 @@
                  :e [(cmd :PackerCompile) :PackerCompile]
                  :s [(cmd :PackerStatus) :PackerStatus]
                  :t [(cmd :PackerInstall) :PackerInstall]}
-             :t {:name :Terminal
+             :t {:name :Toggle
                  :t [":<c-u>exe v:count1 . \"ToggleTerm\"<CR>"
                      "Embeded Float Terminal"]
-                 :m [(cmd :terminal) :Terminal]}
+                 :m [(cmd :terminal) :Terminal]
+                 :p [(cmd :TogglePair) :Autopair]}
              :o {:name "Code Action"
                  :o [(luacmd "vim.lsp.buf.formatting()") "Format Buffer"]
                  :t {1 ":Tabularize /" 2 :Align :silent false}
@@ -79,7 +80,7 @@
                  :f [(luacmd "require'trouble'.next({skip_groups=true, jump=true})")
                      "Next Diagnostic"]}
              :h {:name :Hotpot :c [(cmd :HotpotCompileBuf) "Compile Buffer"]}
-             :w [(cmd :w) :Save]
+             :w [(cmd :up) "Save if changed"]
              :q [(cmd :q) :Quit]
              :Q [(cmd :q!) "Force Quit"]})
 
@@ -149,11 +150,12 @@
 (kmap mode.normal :<M-k> :<C-w>k :noremap)
 (kmap mode.normal :<M-h> :<C-w>h :noremap)
 (kmap mode.normal :<M-l> :<C-w>l :noremap)
+(kmap mode.normal :<C-l> (cmd :noh) :noremap)
 
 (kmap mode.terminal :<M-j> "<C-\\><C-n><C-w>j" :noremap)
 (kmap mode.terminal :<M-k> "<C-\\><C-n><C-w>k" :noremap)
 (kmap mode.terminal :<M-h> "<C-\\><C-n><C-w>h" :noremap)
 (kmap mode.terminal :<M-l> "<C-\\><C-n><C-w>l" :noremap)
 
-(kmap mode.normal :K (luacmd "vim.lsp.buf.hover()" :noremap :silent))
+(kmap mode.normal :K (luacmd "vim.lsp.buf.hover()") :noremap :silent)
 

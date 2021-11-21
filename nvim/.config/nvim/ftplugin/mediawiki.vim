@@ -1,1 +1,1 @@
-set textwidth=10000
+set textwidth=0

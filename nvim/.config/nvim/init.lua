@@ -41,11 +41,11 @@ startup_features = {
     profile_path = fn.stdpath 'cache' .. '/profile.log',
 }
 
-local function hack_require(m)
+local function perf_require(m)
     local _s = os.clock()
     local ok, err = pcall(_G._require, m)
     if not ok then
-         error(err)
+        error(err)
     end
     local _e = os.clock()
     local f = io.open(_G.startup_features.profile_path, 'a')
@@ -57,7 +57,7 @@ end
 if _G.startup_features.profile then
     io.open(_G.startup_features.profile_path, 'w'):close()
     _G._require = require
-    _G.require = hack_require
+    _G.require = perf_require
 end
 
 -- require modules
