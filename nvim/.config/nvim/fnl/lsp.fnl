@@ -11,6 +11,7 @@
         :vimls {}
         :texlab {}
         :gopls {}
+        :racket_langserver {}
         :rust_analyzer {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
         :efm {:init_options {:documentFormatting true}
               :filetypes [:cpp
@@ -47,6 +48,7 @@
                         :texlab
                         :gopls
                         :rust_analyzer
+                        :racket_langserver
                         :efm
                         :sumneko_lua])
 
