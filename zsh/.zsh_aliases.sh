@@ -22,7 +22,7 @@ alias cl="clang++"
 alias spp="sudo proxychains4"
 alias pp="proxychains4"
 
-# typo 
+# typo
 alias suod="sudo"
 
 # common
@@ -42,3 +42,6 @@ alias googler="${PROXY_ENV} googler"
 alias how2="${PROXY_ENV} how2"
 alias tldr="${PROXY_ENV} tldr"
 alias rlwrap="rlwrap -pgreen"
+
+# git
+alias gcl1="git clone --depth 1"
