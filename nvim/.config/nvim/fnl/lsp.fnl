@@ -12,6 +12,7 @@
         :texlab {}
         :gopls {}
         :racket_langserver {}
+        :clojure_lsp {}
         :rust_analyzer {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
         :efm {:init_options {:documentFormatting true}
               :filetypes [:cpp
@@ -49,6 +50,7 @@
                         :gopls
                         :rust_analyzer
                         :racket_langserver
+                        :clojure_lsp
                         :efm
                         :sumneko_lua])
 
