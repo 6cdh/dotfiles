@@ -41,7 +41,7 @@
                         (spec :path)
                         (spec :look
                               {:keyword_length 4
-                               :opts {:convert_case true :loud true}})
+                               :option {:convert_case true :loud true}})
                         (spec :nvim_lua)]})
   (cmp.setup.cmdline ":" {:sources [(spec :cmdline)]}))
 
