@@ -1,17 +1,16 @@
 (let [fl (require :fulib)
       icons (require :theme.icons)
       signs {:Error icons.errs
-             :Warning icons.warns
+             :Warn icons.warns
              :Hint icons.hints
-             :Information icons.infos}]
-  (fl.map #(let [hl (.. :LspDiagnosticsSign $2)]
+             :Info icons.infos}]
+  (fl.map #(let [hl (.. :DiagnosticSign $2)]
              (vim.fn.sign_define hl {:text $1 :texthl hl :numhl ""}))
           signs))
 
-(set vim.lsp.handlers.textDocument/publishDiagnostics
-     (vim.lsp.with vim.lsp.diagnostic.on_publish_diagnostics
-                   {:signs true
-                    :underline true
-                    :virtual_text false
-                    :update_in_insert false}))
+(vim.diagnostic.config {:virtual_text false
+                        :signs true
+                        :underline true
+                        :update_in_insert false
+                        :severity_sort false})
 

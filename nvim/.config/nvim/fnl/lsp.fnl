@@ -1,45 +1,38 @@
 (local sumneko_root_path
        (.. (vim.fn.stdpath :cache) :/lspconfig/sumneko_lua/lua-language-server))
 
-(local config
-       {:default {:flags {:debounce_text_changes 500}}
-        :bashls {}
-        :clangd {:on_attach #(set $1.resolved_capabilities.document_formatting
-                                  false)}
-        :pyright {}
-        :hls {}
-        :vimls {}
-        :texlab {}
-        :gopls {}
-        :racket_langserver {}
-        :clojure_lsp {}
-        :rust_analyzer {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
-        :efm {:init_options {:documentFormatting true}
-              :filetypes [:cpp
-                          :css
-                          :dockerfile
-                          :fennel
-                          :go
-                          :html
-                          :json
-                          :javascript
-                          :lua
-                          :markdown
-                          :python
-                          :sh
-                          :toml
-                          :vim
-                          :yaml]}
-        :sumneko_lua {:cmd [:lua-language-server
-                            :-E
-                            (.. sumneko_root_path :/main.lua)]
-                      :settings {:Lua {:runtime {:version :LuaJIT
-                                                 :path (vim.split package.path
-                                                                  ";")}
-                                       :diagnostics {:globals [:vim]}
-                                       :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
-                                                             (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}}
-                                       :telemetry {:enable false}}}}})
+(local config (setmetatable {:default {:flags {:debounce_text_changes 500}}
+                             :clangd {:on_attach #(set $1.resolved_capabilities.document_formatting
+                                                       false)}
+                             :rust_analyzer {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
+                             :efm {:init_options {:documentFormatting true}
+                                   :filetypes [:cpp
+                                               :css
+                                               :dockerfile
+                                               :fennel
+                                               :go
+                                               :html
+                                               :json
+                                               :javascript
+                                               :lua
+                                               :markdown
+                                               :python
+                                               :sh
+                                               :toml
+                                               :vim
+                                               :yaml]}
+                             :sumneko_lua {:cmd [:lua-language-server
+                                                 :-E
+                                                 (.. sumneko_root_path
+                                                     :/main.lua)]
+                                           :settings {:Lua {:runtime {:version :LuaJIT
+                                                                      :path (vim.split package.path
+                                                                                       ";")}
+                                                            :diagnostics {:globals [:vim]}
+                                                            :workspace {:library {(vim.fn.expand :$VIMRUNTIME/lua) true
+                                                                                  (vim.fn.expand :$VIMRUNTIME/lua/vim/lsp) true}}
+                                                            :telemetry {:enable false}}}}}
+                            {:__index #{}}))
 
 (local enabled-servers [:bashls
                         :clangd

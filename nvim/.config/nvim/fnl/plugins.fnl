@@ -109,6 +109,7 @@
                                           :direction :float})})
                   (plug :folke/which-key.nvim {:config #(setup :which-key)})
                   ;; coding
+                  (plug :eraserhd/parinfer-rust {:run "cargo build --release"})
                   (plug :b3nj5m1n/kommentary
                         {:config #(do
                                     (tset vim.g

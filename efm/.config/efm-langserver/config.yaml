@@ -174,7 +174,6 @@ languages:
   dockerfile:
     - <<: *dockerfile-hadolint
   fennel:
-    - <<: *fennel-fnlfmt
     - <<: *fennel-fennel
   go:
     - <<: *go-staticcheck
