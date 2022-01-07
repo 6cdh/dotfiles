@@ -4,6 +4,9 @@
 
 These configs are not optimized for installing by others but can be a reference.
 
+I use [Colemak](https://en.wikipedia.org/wiki/Colemak) keyboard layout, so the keymaps
+should optimized for it.
+
 ## Install dotfiles
 
 I use [GNU stow](https://www.gnu.org/software/stow/) to manage my dotfiles.
