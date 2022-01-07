@@ -1,8 +1,9 @@
 [directory]
 truncation_length = 5
 
-[env_var.http_proxy]
+[env_var.has_proxy]
 style = "green bold"
+default = "noproxy"
 
 [aws]
 symbol = " "

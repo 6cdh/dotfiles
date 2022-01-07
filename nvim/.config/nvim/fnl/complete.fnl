@@ -21,14 +21,15 @@
                                       :nvim_lua icons.lang.lua
                                       :look icons.dict
                                       :cmdline icons.cmd
-                                      _ "")))
+                                      :cmp_tabnine "T9"
+                                      _ "?")))
   vim_item)
 
 (let [cmp (require :cmp)]
   (cmp.setup {:snippet {:expand #(vim.fn.vsnip#anonymous $1.body)}
-              :mapping {:<C-k> (cmp.mapping (cmp.mapping.select_prev_item)
+              :mapping {:<C-e> (cmp.mapping (cmp.mapping.select_prev_item)
                                             [:i :c])
-                        :<C-j> (cmp.mapping (cmp.mapping.select_next_item)
+                        :<C-n> (cmp.mapping (cmp.mapping.select_next_item)
                                             [:i :c])
                         :<TAB> (fn [fallback]
                                  (match (vim.fn.vsnip#jumpable 1)
@@ -42,7 +43,8 @@
                         (spec :look
                               {:keyword_length 4
                                :option {:convert_case true :loud true}})
-                        (spec :nvim_lua)]})
+                        (spec :nvim_lua)
+                        (spec :cmp_tabnine)]})
   (cmp.setup.cmdline ":" {:sources [(spec :cmdline)]}))
 
 (let [cmp_autopairs (require :nvim-autopairs.completion.cmp)

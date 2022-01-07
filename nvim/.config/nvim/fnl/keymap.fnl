@@ -5,13 +5,18 @@
 ; Keymap Principles
 ; 1. Balance two hands.
 ; 2. As few as possible keystrokes.
-; 3. Map the most frequently functions to repected keystrokes.
+; 3. use repeated keystrokes for the most common action
 ; 4. Semantic mappings.
 ; 5. A key on the home row is expected if it can't meet the principle 4.
 
+; Colemak layout
 (local [left-hand right-hand]
-       [[:q :w :e :r :t :a :s :d :f :g :z :x :c :v :b]
-        [:y :u :i :o :p :h :j :k :l :n :m]])
+       [[:q :w :f :p :g
+         :a :r :s :t :d
+         :z :x :c :v]
+        [:j :l :u :y
+         :h :n :e :i :o
+         :b :k :m]])
 
 (macro cmd [s]
   (string.format "<Cmd>%s<CR>" s))
@@ -26,7 +31,7 @@
 
 ; {:<prefix> {:name :<prefix-name> ;; name is optional
 ;             ;; A family of keymap
-;             :<key> [:<cmd> :<description>] 
+;             :<key> [:<cmd> :<description>]
 ;             :<key> [:<cmd> :<description>]
 ;             ...}
 ;  ...
@@ -34,16 +39,16 @@
 
 (local nmap {:p {:name "Plugins Manager"
                  :p [(cmd :PackerSync) :PackerSync]
-                 :c [(cmd :PackerClean) :PackerClean]
-                 :d [(cmd :PackerUpdate) :PackerUpdate]
-                 :e [(cmd :PackerCompile) :PackerCompile]
-                 :s [(cmd :PackerStatus) :PackerStatus]
-                 :t [(cmd :PackerInstall) :PackerInstall]}
+                 :l [(cmd :PackerClean) :PackerClean]
+                 :u [(cmd :PackerUpdate) :PackerUpdate]
+                 :o [(cmd :PackerCompile) :PackerCompile]
+                 :y [(cmd :PackerStatus) :PackerStatus]
+                 :i [(cmd :PackerInstall) :PackerInstall]}
              :t {:name :Toggle
                  :t [":<c-u>exe v:count1 . \"ToggleTerm\"<CR>"
                      "Embeded Float Terminal"]
                  :m [(cmd :terminal) :Terminal]
-                 :p [(cmd :TogglePair) :Autopair]}
+                 :i [(cmd :TogglePair) :Autopair]}
              :o {:name "Code Action"
                  :o [(luacmd "vim.lsp.buf.formatting()") "Format Buffer"]
                  :t {1 ":Tabularize /" 2 :Align :silent false}
@@ -56,30 +61,33 @@
                  :d [(cmd :Codi!) "Close REPL"]}
              :e {:name :Explorer
                  :e [(cmd :Lexplore) :Netrw]
-                 :j [(cmd :RnvimrToggle) :Ranger]}
+                 :t [(cmd :RnvimrToggle) :Ranger]}
              :s {:name :Search
                  :s [(cmd "Telescope live_grep") :Grep]
-                 :j [(cmd "Telescope find_files") :Files]
-                 :k [(cmd "Telescope buffers") :Buffers]
+                 :n [(cmd "Telescope find_files") :Files]
+                 :b [(cmd "Telescope buffers") :Buffers]
                  :h [(cmd "Telescope help_tags") :Help]}
-             :f {:name :File :f [(cmd "set filetype") "Set FileType"]}
+             :f {:name :File
+                 :f [(cmd "set filetype") "Set FileType"]}
              :b {:name :Buffer
                  :b [(cmd :BufferLinePick) :BufferLinePick]
-                 :h [(cmd :BufferLineCyclePrev) :BufferLinePrevious]
-                 :l [(cmd :BufferLineCycleNext) :BufferLineNext]
-                 :j [(cmd :bdelete) :BufferClose]}
-             :r {:name "Root action" :r [(cmd :SudoWrite) "Write as Root"]}
+                 :p [(cmd :BufferLineCyclePrev) :BufferLinePrevious]
+                 :t [(cmd :BufferLineCycleNext) :BufferLineNext]
+                 :d [(cmd :bdelete) :BufferClose]}
+             :r {:name "Root action"
+                 :r [(cmd :SudoWrite) "Write as Root"]}
              :c {:name :Clipboard
-                 :p [(cmd "%y+") "Copy Buffer"]
-                 :j ["\"+p" "Paste content"]}
+                 :n [(cmd "%y+") "Copy Buffer"]
+                 :e ["\"+p" "Paste content"]}
              :l {:name :Lint/Diagnostics
                  :l [(luacmd "vim.lsp.diagnostic.show_line_diagnostics()")
                      "Show Line Diagnostics"]
-                 :a [(luacmd "require'trouble'.previous({skip_groups=true, jump=true})")
+                 :s [(luacmd "require'trouble'.previous({skip_groups=true, jump=true})")
                      "Last Diagnostic"]
-                 :f [(luacmd "require'trouble'.next({skip_groups=true, jump=true})")
+                 :t [(luacmd "require'trouble'.next({skip_groups=true, jump=true})")
                      "Next Diagnostic"]}
-             :h {:name :Hotpot :c [(cmd :HotpotCompileBuf) "Compile Buffer"]}
+             :h {:name :Hotpot
+                 :c [(cmd :HotpotCompileBuf) "Compile Buffer"]}
              :w [(cmd :up) "Save if changed"]
              :q [(cmd :q) :Quit]
              :Q [(cmd :q!) "Force Quit"]})
@@ -93,7 +101,8 @@
                  :c [(plug :kommentary_visual_default<C-c>) :Comment]
                  :s [(cmd :Codi) "Run REPL"]
                  :d [(cmd :Codi!) "Close REPL"]}
-             :c {:name :Clipboard :p ["\"+y" "Copy Selection"]}
+             :c {:name :Clipboard
+                 :n ["\"+y" "Copy Selection"]}
              :h {:name :Hotpot
                  :c [(cmd :HotpotCompileSel) "Compile Selection"]}})
 

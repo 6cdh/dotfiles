@@ -4,12 +4,14 @@ lcproxy_enable() {
 	export readonly http_proxy="http://${PROXY_ADDR}"
 	export readonly https_proxy="http://${PROXY_ADDR}"
 	export readonly no_proxy=localhost,127.0.0.1
+    export readonly has_proxy="proxy"
 }
 
 lcproxy_disable() {
 	unset http_proxy
 	unset https_proxy
 	unset no_proxy
+    unset has_proxy
 }
 
 lcepub2mobi() {

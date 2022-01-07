@@ -44,13 +44,14 @@
                                     (spec :hrsh7th/cmp-buffer
                                           {:after :nvim-cmp})
                                     (spec :hrsh7th/cmp-vsnip {:after :nvim-cmp})
-                                    ; (spec :tzachar/cmp-tabnine
-                                    ;       {:run :./install.sh
-                                    ;        :after :nvim-cmp
-                                    ;        :config #(let [tabnine (require :cmp_tabnine.config)]
-                                    ;                   (tabnine:setup {:max_lines 1000
-                                    ;                                   :max_num_results 20
-                                    ;                                   :sort true}))})
+                                    (spec :tzachar/cmp-tabnine
+                                          {:run :./install.sh
+                                           :after :nvim-cmp
+                                           :config #(let [tabnine (require :cmp_tabnine.config)]
+                                                      (tabnine:setup {:max_lines 1000
+                                                                      :max_num_results 20
+                                                                      :sort true
+                                                                      :run_on_every_keystroke true}))})
                                     (spec :hrsh7th/cmp-path {:after :nvim-cmp})
                                     (spec :hrsh7th/cmp-nvim-lua
                                           {:after :nvim-cmp})
@@ -124,6 +125,14 @@
                   (plug :mizlan/iswap.nvim {:cmd :ISwap})
                   ;; Interactive
                   (plug :metakirby5/codi.vim {:cmd :Codi})
+                  (plug :Olical/conjure {:ft [:fennel :scheme :clojure :racket]
+                                         :config
+                                         #(do (set vim.g.conjure#client#scheme#stdio#command :petite)
+                                              (set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $")
+                                              (set vim.g.conjure#client#scheme#stdio#value_prefix_pattern false)
+                                              (set vim.g.conjure#filetype#fennel "conjure.client.fennel.stdio")
+                                              (set vim.g.conjure#mapping#prefix " cj")
+                                              (set vim.g.conjure#log#hud#enabled false))})
                   ;; lib
                   (plug :6cdh/fulib.nvim)
                   ;; profile
