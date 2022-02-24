@@ -80,7 +80,7 @@
                  :n [(cmd "%y+") "Copy Buffer"]
                  :e ["\"+p" "Paste content"]}
              :l {:name :Lint/Diagnostics
-                 :l [(luacmd "vim.lsp.diagnostic.show_line_diagnostics()")
+                 :l [(luacmd "vim.diagnostic.open_float()")
                      "Show Line Diagnostics"]
                  :s [(luacmd "require'trouble'.previous({skip_groups=true, jump=true})")
                      "Last Diagnostic"]

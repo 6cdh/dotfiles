@@ -5,11 +5,11 @@
                              :clangd {:on_attach #(set $1.resolved_capabilities.document_formatting
                                                        false)}
                              :rust_analyzer {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
+                             :typeprof {}
                              :efm {:init_options {:documentFormatting true}
                                    :filetypes [:cpp
                                                :css
                                                :dockerfile
-                                               :fennel
                                                :go
                                                :html
                                                :json
@@ -41,9 +41,11 @@
                         :vimls
                         :texlab
                         :gopls
+                        :typeprof
                         :rust_analyzer
                         :racket_langserver
                         :clojure_lsp
+                        :rnix
                         :efm
                         :sumneko_lua])
 

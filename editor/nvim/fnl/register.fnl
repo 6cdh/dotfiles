@@ -34,11 +34,12 @@
 
 (register-fnlcmd :SudoWrite
                  (let [passwd (vim.fn.inputsecret "[sudo] password: ")
-                       tmp_file :/tmp/vim_sudo]
+                       tmp_file (vim.fn.tempname)]
                    (-> "silent! w !tee %s && echo \"%s\" | sudo -S cp %s %% >/dev/null"
                        (string.format tmp_file passwd tmp_file)
                        (vim.api.nvim_command))
-                   (vim.api.nvim_command :edit!)))
+                   (vim.api.nvim_command :edit!)
+                   (vim.fn.delete tmp_file)))
 
 ; for lisp
 (register-fnlcmd :TogglePair (let [m (require :nvim-autopairs)]

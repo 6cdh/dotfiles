@@ -1,5 +1,5 @@
 # Cargo
-source "$HOME/.cargo/env"
+# source "$HOME/.cargo/env"
 
 # Go
 export PATH="${PATH}:${HOME}/go/bin"

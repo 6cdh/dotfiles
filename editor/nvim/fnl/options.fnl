@@ -51,6 +51,7 @@
                  :undofile true
                  ;; ui
                  :termguicolors true
+                 :guifont "BlexMono Nerd Font:h16"
                  ; relative number
                  :number true
                  :relativenumber true

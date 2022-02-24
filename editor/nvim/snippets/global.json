@@ -1,0 +1,7 @@
+{
+    "Lambda": {
+        "prefix": "\\lambda",
+        "body": "λ",
+        "description": "lambda symbol"
+    }
+}
