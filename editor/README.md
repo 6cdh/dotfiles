@@ -30,17 +30,17 @@ Nvim config is mostly written in Fennel. Thanks
 
 Some config:
 
--   [statusline.fnl](nvim/.config/nvim/fnl/statusline.fnl) -
+-   [statusline.fnl](nvim/fnl/statusline.fnl) -
     statusline([feline.nvim](https://github.com/famiu/feline.nvim))
--   [lsp.fnl](nvim/.config/nvim/fnl/lsp.fnl) -
+-   [lsp.fnl](nvim/fnl/lsp.fnl) -
     [lspconfig](https://github.com/neovim/nvim-lspconfig)
--   [options.fnl](nvim/.config/nvim/fnl/options.fnl) - vim/nvim builtin options
--   [complete.fnl](nvim/.config/nvim/fnl/complete.fnl) -
+-   [options.fnl](nvim/fnl/options.fnl) - vim/nvim builtin options
+-   [complete.fnl](nvim/fnl/complete.fnl) -
     complete([nvim-cmp](https://github.com/hrsh7th/nvim-cmp))
--   [keymap.fnl](nvim/.config/nvim/fnl/keymap.fnl) - key mappings
--   [register.fnl](nvim/.config/nvim/fnl/register.fnl) - utilities to define
+-   [keymap.fnl](nvim/fnl/keymap.fnl) - key mappings
+-   [register.fnl](nvim/fnl/register.fnl) - utilities to define
     command with fennel
--   [plugins.fnl](nvim/.config/nvim/fnl/plugins.fnl) - plugins list
+-   [plugins.fnl](nvim/fnl/plugins.fnl) - plugins list
 
 > A short word for why fennel/lisp?
 >
