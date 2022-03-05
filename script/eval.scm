@@ -45,8 +45,9 @@
     "create link src => tgt.
     `src` and `tgt` are absolute path."
     (println (msg 'LINK "~a => ~a" src tgt))
-    (when (file-exists? src)
-      (delete-file src))
+    (catch 'system-error
+           (lambda () (delete-file src))
+           (const #t))
     (symlink tgt src))
 
 
