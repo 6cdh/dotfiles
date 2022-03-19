@@ -7,7 +7,8 @@ These configs are not optimized for installing by others but can be a reference.
 ## Info
 
 ``` shell
-System: Arch Linux
+System: Fedora Linux
+Package Manager: Nix
 Keyboard Layout: Colemak
 Editor: neovim
 Terminal: kitty
@@ -15,13 +16,9 @@ Terminal: kitty
 
 ## Install
 
-I use a [Guile Scheme](https://www.gnu.org/software/guile/) script [home.scm](./home.scm)
-to manage my config.
+I use a [home manager](https://github.com/nix-community/home-manager) to manage my config.
 
-Make sure you have guile installed, then run
+1. Install home-manager
+2. clone the repo to replace the directory `~/.config/nixpkgs/`
+3. `home-manager switch`
 
-``` bash
-./script/eval.scm home.scm
-```
-
-The file `eval.scm` contains the environment interpreting the config `home.scm`.
