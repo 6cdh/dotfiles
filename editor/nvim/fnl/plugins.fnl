@@ -33,6 +33,9 @@
                   (plug :folke/todo-comments.nvim
                         {:requires :nvim-lua/plenary.nvim
                          :config #(setup :todo-comments)})
+                  (plug :j-hui/fidget.nvim
+                        {:config #(setup :fidget)})
+                  (plug :williamboman/nvim-lsp-installer)
                   ;; dap
                   (plug :mfussenegger/nvim-dap)
                   ;; completion
@@ -128,12 +131,14 @@
                   (plug :metakirby5/codi.vim {:cmd :Codi})
                   (plug :Olical/conjure {:ft [:fennel :scheme :clojure :racket]
                                          :config
-                                         #(do (set vim.g.conjure#client#scheme#stdio#command :petite)
-                                              (set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $")
-                                              (set vim.g.conjure#client#scheme#stdio#value_prefix_pattern false)
+                                         #(do ;(set vim.g.conjure#client#scheme#stdio#command :petite)
+                                              ;(set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $")
+                                              ;(set vim.g.conjure#client#scheme#stdio#value_prefix_pattern false)
                                               (set vim.g.conjure#filetype#fennel "conjure.client.fennel.stdio")
-                                              (set vim.g.conjure#mapping#prefix " cj")
-                                              (set vim.g.conjure#log#hud#enabled false))})
+                                              (set vim.g.conjure#mapping#prefix " tn")
+                                              (set vim.g.conjure#log#hud#enabled true))})
+                  ;; lang
+                  (plug :wlangstroth/vim-racket)
                   ;; lib
                   (plug :6cdh/fulib.nvim)
                   ;; profile
