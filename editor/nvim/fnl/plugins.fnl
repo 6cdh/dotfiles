@@ -84,7 +84,7 @@
                                          {:options {:show_close_icon false
                                                     :always_show_bufferline false}})})
                   (plug :famiu/feline.nvim
-                        {:after :onedark.nvim :config #(require :statusline)})
+                        {:config #(require :statusline)})
                   (plug :kdav5758/TrueZen.nvim)
                   (plug :norcalli/nvim-colorizer.lua
                         {:config #(setup :colorizer)})
@@ -131,9 +131,9 @@
                   (plug :metakirby5/codi.vim {:cmd :Codi})
                   (plug :Olical/conjure {:ft [:fennel :scheme :clojure :racket]
                                          :config
-                                         #(do ;(set vim.g.conjure#client#scheme#stdio#command :petite)
-                                              ;(set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $")
-                                              ;(set vim.g.conjure#client#scheme#stdio#value_prefix_pattern false)
+                                         #(do (set vim.g.conjure#client#scheme#stdio#command :petite)
+                                              (set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $")
+                                              (set vim.g.conjure#client#scheme#stdio#value_prefix_pattern false)
                                               (set vim.g.conjure#filetype#fennel "conjure.client.fennel.stdio")
                                               (set vim.g.conjure#mapping#prefix " tn")
                                               (set vim.g.conjure#log#hud#enabled true))})
@@ -145,5 +145,6 @@
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
                   (plug :lewis6991/impatient.nvim)
                   ;; color scheme
-                  (plug :ful1e5/onedark.nvim {:config #(require :theme)})))
+                  (plug :olimorris/onedarkpro.nvim
+                          {:config #(module-conf :onedarkpro :load)})))
 

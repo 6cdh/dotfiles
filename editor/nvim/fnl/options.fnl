@@ -56,7 +56,6 @@
                  :number true
                  :relativenumber true
                  ;
-                 :cursorline true
                  :signcolumn :yes
                  ; respect mouse in all modes
                  :mouse :a

@@ -34,12 +34,15 @@
     rclone
     zoxide
     rlwrap
+    hyperfine
+    delta
     # info
     neofetch
     inxi
     tldr
     # edit
     neovim
+    emacs
     # dev
     proxychains-ng
     nix-prefetch
@@ -56,7 +59,7 @@
     go
     julia-bin
     ghc
-    nodejs
+    nodejs nodePackages.prettier
   ];
 
   programs = {
@@ -122,6 +125,7 @@
         BAT_THEME = "TwoDark";
         FZF_DEFAULT_COMMAND = "rg --files --smart-case";
         FZF_DEFAULT_OPTS = "-m --height 50% --border";
+        LISP = "sbcl";
       };
       localVariables = {
         VI_MODE_SET_CURSOR = true;
