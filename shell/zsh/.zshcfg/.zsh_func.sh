@@ -1,15 +1,17 @@
-PROXY_ADDR="127.0.0.1:4097"
-
 pe() {
-	export readonly http_proxy="http://${PROXY_ADDR}"
-	export readonly https_proxy="http://${PROXY_ADDR}"
+    export readonly PROXY_ADDR="127.0.0.1:4096"
+	export readonly http_proxy="socks5://${PROXY_ADDR}"
+	export readonly https_proxy="socks5://${PROXY_ADDR}"
+    export readonly all_proxy="socks5://${PROXY_ADDR}"
 	export readonly no_proxy=localhost,127.0.0.1
     export readonly has_proxy="proxy"
 }
 
 npe() {
+    unset PROXY_ADDR
 	unset http_proxy
 	unset https_proxy
+    unset all_proxy
 	unset no_proxy
     unset has_proxy
 }

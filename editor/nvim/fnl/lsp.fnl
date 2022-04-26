@@ -24,9 +24,9 @@
 (let [lsp_installer (require :nvim-lsp-installer)]
   (lsp_installer.on_server_ready
     (fn [server]
-      (: server :setup (vim.tbl_extend :force
-                                       config.default
-                                       (. config server))))))
+      (server:setup (vim.tbl_extend :force
+                                    config.default
+                                    (. config server))))))
 
 (vim.lsp.set_log_level :error)
 

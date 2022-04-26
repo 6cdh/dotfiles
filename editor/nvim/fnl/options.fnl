@@ -2,7 +2,7 @@
 
 (macro bset [opt_g tbl]
   "Batch set"
-  `(fl.for_each #(tset ,opt_g $2 $1) ,tbl))
+  `(fl.for-each #(tset ,opt_g $2 $1) ,tbl))
 
 (let [indent 4
       textwidth 90]

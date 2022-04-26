@@ -36,6 +36,7 @@
     rlwrap
     hyperfine
     delta
+    git-quick-stats
     # info
     neofetch
     inxi

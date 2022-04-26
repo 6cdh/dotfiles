@@ -121,9 +121,9 @@
                   (.. "Mappings Didn't Balance Two Hands: " prefix key))))
 
     (if (and (fl.table? family) (fl.not-list? family))
-        (fl.for_each verify-key family)))
+        (fl.for-each verify-key family)))
 
-  (fl.for_each verify-each-family maps))
+  (fl.for-each verify-each-family maps))
 
 (verify-maps-balance-hands nmap)
 (verify-maps-balance-hands vmap)
@@ -152,7 +152,7 @@
 
 (macro kmap [m lhs rhs ...]
   `(let [t# {}]
-     (fl.for_each #(tset t# $1 true) [,...])
+     (fl.for-each #(tset t# $1 true) [,...])
      (vim.api.nvim_set_keymap ,m ,lhs ,rhs t#)))
 
 (kmap mode.normal :<M-j> :<C-w>j :noremap)

@@ -1,17 +1,6 @@
 (local fl (require :fulib))
 (local cmd vim.api.nvim_command)
 
-(fn new_augroup [name event files actions]
-  (local defs [(table.concat [event files actions] " ")])
-  (cmd (string.format "augroup %s" name))
-  (cmd :au!)
-  (fl.map #(cmd (string.format "au %s" $1)) defs)
-  (cmd "augroup END"))
-
-(fn new_augroups [defs]
-  (fl.map #(new_augroup $2 $1) defs))
-
-(local vim-event {:BufWritePost :BufWritePost :BufWritePre :BufWritePre})
 
 (macro register-fnlcmd [cmd expression]
   `(vim.api.nvim_command ,(string.format ":silent! :command %s :Fnl %s" cmd
@@ -47,8 +36,34 @@
                                    (m.enable)
                                    (m.disable))))
 
-(new_augroup :remove_trailingspace vim-event.BufWritePre "*" ":%s/\\s\\+$//e")
+(register-fnlcmd :RemoveTrailingspace
+  (vim.api.nvim_command ":%s/\\s\\+$//e"))
 
-(new_augroup :packer_autocompile vim-event.BufWritePost :plugins.fnl
-             :PackerCompile)
+(fn new_augroup [name events files actions]
+  (local defs [(table.concat [(table.concat events ",")
+                              (table.concat files ",")
+                              actions]
+                             " ")])
+  (cmd (string.format "augroup %s" name))
+  (cmd :au!)
+  (fl.map #(cmd (string.format "au %s" $1)) defs)
+  (cmd "augroup END"))
+
+(fn new_augroups [defs]
+  (fl.map #(new_augroup $2 $1) defs))
+
+(local vim-event {:BufWritePost :BufWritePost
+                  :BufWritePre :BufWritePre
+                  :BufRead :BufRead
+                  :BufNewFile :BufNewFile})
+
+(new_augroup :scmindent
+  [vim-event.BufRead vim-event.BufNewFile]
+  [:*.lisp :*.scm]
+  "setlocal equalprg=scmindent.lisp")
+
+(new_augroup :packer_autocompile
+  [vim-event.BufWritePost]
+  [:plugins.fnl]
+  :PackerCompile)
 
