@@ -37,6 +37,7 @@
     hyperfine
     delta
     git-quick-stats
+    imagemagick
     # info
     neofetch
     inxi
@@ -44,23 +45,16 @@
     # edit
     neovim
     emacs
-    # dev
-    proxychains-ng
-    nix-prefetch
     # lang
-    clang_13
+    gcc
     racket
     sbcl
     chez
-    clojure
-    leiningen
     yarn
     rustup
     python3Minimal
-    go
-    julia-bin
-    ghc
-    nodejs nodePackages.prettier
+    nodejs
+    nodePackages.prettier
   ];
 
   programs = {

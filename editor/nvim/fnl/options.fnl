@@ -12,6 +12,9 @@
                  :tabstop indent
                  :shiftwidth indent
                  :softtabstop indent
+                 ; buffer
+                 :splitright true
+                 :splitbelow true
                  ; wrap
                  :wrap true
                  :linebreak true

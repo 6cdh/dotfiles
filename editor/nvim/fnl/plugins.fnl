@@ -78,7 +78,6 @@
                          :config #(setup :neorg)})
                   ;; ui
                   (plug :kyazdani42/nvim-web-devicons)
-                  (plug :lukas-reineke/indent-blankline.nvim)
                   (plug :akinsho/bufferline.nvim
                         {:config #(setup :bufferline
                                          {:options {:show_close_icon false
@@ -115,7 +114,7 @@
                   (plug :folke/which-key.nvim {:config #(setup :which-key)})
                   ;; coding
                   (plug :eraserhd/parinfer-rust {:run "cargo build --release"})
-                                               
+
                   (plug :b3nj5m1n/kommentary
                         {:config #(do
                                     (tset vim.g
@@ -133,11 +132,11 @@
                   (plug :Olical/conjure {:ft [:fennel :scheme :clojure :racket]
                                          :config
                                          #(do (set vim.g.conjure#client#scheme#stdio#command :petite)
-                                              (set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $")
+                                              (set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $?")
                                               (set vim.g.conjure#client#scheme#stdio#value_prefix_pattern false)
                                               (set vim.g.conjure#filetype#fennel "conjure.client.fennel.stdio")
                                               (set vim.g.conjure#mapping#prefix " tn")
-                                              (set vim.g.conjure#log#hud#enabled true))})
+                                              (set vim.g.conjure#log#hud#enabled false))})
                   ;; lang
                   (plug :wlangstroth/vim-racket)
                   ;; lib
@@ -147,5 +146,8 @@
                   (plug :lewis6991/impatient.nvim)
                   ;; color scheme
                   (plug :olimorris/onedarkpro.nvim
-                          {:config #(module-conf :onedarkpro :load)})))
+                          {:config #(do (setup :onedarkpro
+                                          {:options
+                                            {:cursorline true}})
+                                        (module-conf :onedarkpro :load))})))
 
