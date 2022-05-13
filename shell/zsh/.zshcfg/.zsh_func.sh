@@ -1,8 +1,8 @@
 pe() {
-    export readonly PROXY_ADDR="127.0.0.1:4096"
-	export readonly http_proxy="socks5://${PROXY_ADDR}"
-	export readonly https_proxy="socks5://${PROXY_ADDR}"
-    export readonly all_proxy="socks5://${PROXY_ADDR}"
+    export readonly PROXY_ADDR="127.0.0.1:4097"
+	export readonly http_proxy="http://${PROXY_ADDR}"
+	export readonly https_proxy="http://${PROXY_ADDR}"
+    export readonly all_proxy="http://${PROXY_ADDR}"
 	export readonly no_proxy=localhost,127.0.0.1
     export readonly has_proxy="proxy"
 }
