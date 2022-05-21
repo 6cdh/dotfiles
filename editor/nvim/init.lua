@@ -1,8 +1,8 @@
-local preconfig = require("modules.preconfig")
+local preconfig = require 'modules.preconfig'
 
-preconfig "https://github.com/wbthomason/packer.nvim"
-preconfig "https://github.com/rktjmp/hotpot.nvim"
-preconfig "https://github.com/6cdh/fulib.nvim"
+preconfig 'https://github.com/wbthomason/packer.nvim'
+preconfig 'https://github.com/rktjmp/hotpot.nvim'
+preconfig 'https://github.com/6cdh/fulib.nvim'
 
 local modules = {
     'hotpot',
@@ -12,6 +12,7 @@ local modules = {
     'keymap',
     'diagnostic',
     'lsp',
+    'modules.lisp',
 }
 
 for _, m in ipairs(modules) do

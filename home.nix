@@ -148,9 +148,7 @@
     };
   };
 
-  home.file.".profile".text = ''xrandr --newmode "2560x1440R" 241.50 2560 2608 2640 2720 1440 1443 1448 1481 +hsync +vsync
-xrandr --addmode HDMI-1 2560x1440R
-  '';
+  home.file.".gitconfig".source = ./git/.gitconfig;
 
   fonts.fontconfig = {
     enable = true;

@@ -112,8 +112,6 @@
                                           :persist_size true
                                           :direction :float})})
                   (plug :folke/which-key.nvim {:config #(setup :which-key)})
-                  ;; coding
-                  (plug :eraserhd/parinfer-rust {:run "cargo build --release"})
 
                   (plug :b3nj5m1n/kommentary
                         {:config #(do
@@ -139,6 +137,8 @@
                                               (set vim.g.conjure#log#hud#enabled false))})
                   ;; lang
                   (plug :wlangstroth/vim-racket)
+                  (plug :eraserhd/parinfer-rust {:run "cargo build --release"})
+                  (plug :guns/vim-sexp)
                   ;; lib
                   (plug :6cdh/fulib.nvim)
                   ;; profile
