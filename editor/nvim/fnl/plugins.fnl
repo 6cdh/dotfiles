@@ -11,11 +11,11 @@
 (macro call [f ...]
   `(,f ,...))
 
-(macro module-conf [m f ...]
+(macro module-do [m f ...]
   `(-> (require ,m) (. ,f) (call ,...)))
 
 (macro setup [m ...]
-  `(module-conf ,m :setup ,...))
+  `(module-do ,m :setup ,...))
 
 (packer.startup (fn [use]
                   (plug :wbthomason/packer.nvim)
@@ -77,12 +77,13 @@
                          :requires :nvim-lua/plenary.nvim
                          :config #(setup :neorg)})
                   ;; ui
+                  (plug :rcarriga/nvim-notify {:config #(set vim.notify (require "notify"))})
                   (plug :kyazdani42/nvim-web-devicons)
                   (plug :akinsho/bufferline.nvim
                         {:config #(setup :bufferline
                                          {:options {:show_close_icon false
                                                     :always_show_bufferline false}})})
-                  (plug :famiu/feline.nvim
+                  (plug :feline-nvim/feline.nvim
                         {:config #(require :statusline)})
                   (plug :kdav5758/TrueZen.nvim)
                   (plug :norcalli/nvim-colorizer.lua
@@ -97,6 +98,7 @@
                         {:requires :nvim-lua/plenary.nvim
                          :config #(setup :gitsigns)})
                   ;; utils
+                  (plug :s1n7ax/nvim-comment-frame {:config #(setup "nvim-comment-frame")})
                   (plug :ggandor/lightspeed.nvim)
                   (plug :tpope/vim-repeat)
                   (plug :editorconfig/editorconfig-vim)
@@ -118,7 +120,7 @@
                                     (tset vim.g
                                           :kommentary_create_default_mappings
                                           false)
-                                    (module-conf :kommentary.config
+                                    (module-do :kommentary.config
                                                  :configure_language :default
                                                  {:prefer_single_line_comments true}))})
                   (plug :windwp/nvim-autopairs {:config #(require :pairs)})
@@ -127,7 +129,7 @@
                   (plug :mizlan/iswap.nvim {:cmd :ISwap})
                   ;; Interactive
                   (plug :metakirby5/codi.vim {:cmd :Codi})
-                  (plug :Olical/conjure {:ft [:fennel :scheme :clojure :racket]
+                  (plug :Olical/conjure {:ft [:fennel :scheme :clojure :racket :lisp]
                                          :config
                                          #(do (set vim.g.conjure#client#scheme#stdio#command :petite)
                                               (set vim.g.conjure#client#scheme#stdio#prompt_pattern "> $?")
@@ -143,11 +145,24 @@
                   (plug :6cdh/fulib.nvim)
                   ;; profile
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
-                  (plug :lewis6991/impatient.nvim)
                   ;; color scheme
-                  (plug :olimorris/onedarkpro.nvim
-                          {:config #(do (setup :onedarkpro
-                                          {:options
-                                            {:cursorline true}})
-                                        (module-conf :onedarkpro :load))})))
+                  (plug :catppuccin/nvim 
+                    {:config #(do (setup "catppuccin"
+                                    {:integrations {:which_key true
+                                                    :ts_rainbow true}})
+                                  (set vim.g.catppuccin_flavour "latte")
+                                  (vim.cmd "colorscheme catppuccin"))})))
+                  ; (plug :olimorris/onedarkpro.nvim
+                  ;         {:config #(do (setup :onedarkpro
+                  ;                         {:options
+                  ;                            {:cursorline true
+                  ;                             :bold true
+                  ;                             :italic true
+                  ;                             :bold_italic true
+                  ;                             :underline true
+                  ;                             :undercurl true}
+                  ;                          :styles
+                  ;                           {:comments "italic"
+                  ;                            :keywords "italic"}})
+                  ;                       (module-do :onedarkpro :load))})))
 

@@ -18,12 +18,13 @@
   (.. " " msg " "))
 
 (fn lsp_clientnames []
-  (let [clients (->> (vim.lsp.buf_get_clients) (fl.table-values)
+  (let [clients (->> (vim.lsp.buf_get_clients)
+                     (fl.table-values)
                      (fl.map #$1.name))]
     (table.concat clients "/")))
 
 (fn vimode_hl []
-  {:fg colors.bg :bg (vi_mode.get_mode_color)})
+  {:fg "fg" :bg (vi_mode.get_mode_color)})
 
 (local comps {:vi_mode {:left {:provider #(wrapper-space (-> (vi_mode.get_vim_mode)
                                                              (: :sub 1 3)))
@@ -36,16 +37,16 @@
                                 :left_sep (.. " " icons.left_sep)}}
               :file {:encoding {:provider :file_encoding
                                 :left_sep " "
-                                :hl {:fg colors.violet :style :bold}}
+                                :hl {:fg "violet" :style :bold}}
                      :info {:provider {:name :file_info
                                        :opts {:file_modified_icon "[+]"
                                               :file_readonly_icon " "}}
                             :left_sep " "
-                            :hl {:fg colors.blue :style :bold}}
+                            :hl {:fg "blue" :style :bold}}
                      :os {:provider #(vim.bo.fileformat:lower)
                           :icon #(. icons (vim.bo.fileformat:lower))
                           :left_sep " "
-                          :hl {:fg colors.violet :style :bold}}
+                          :hl {:fg "violet" :style :bold}}
                      :type {:provider :file_type}}
               :line_percentage {:provider :line_percentage
                                 :left_sep " "
@@ -53,31 +54,31 @@
               :diagnos {:err {:provider :diagnostic_errors
                               :icon icons.errs
                               :left_sep " "
-                              :hl {:fg colors.red}}
+                              :hl {:fg "red"}}
                         :hint {:provider :diagnostic_hints
                                :icon icons.hints
                                :left_sep " "
-                               :hl {:fg colors.cyan}}
+                               :hl {:fg "cyan"}}
                         :info {:provider :diagnostic_info
                                :icon icons.infos
                                :left_sep " "
-                               :hl {:fg colors.blue}}
+                               :hl {:fg "blue"}}
                         :warn {:provider :diagnostic_warnings
                                :icon icons.warns
                                :left_sep " "
-                               :hl {:fg colors.yellow}}}
+                               :hl {:fg "yellow"}}}
               :git {:branch {:provider :git_branch
                              :icon icons.git
                              :left_sep " "
-                             :hl {:fg colors.violet :style :bold}}
-                    :add {:provider :git_diff_added :hl {:fg colors.green}}
+                             :hl {:fg "violet" :style :bold}}
+                    :add {:provider :git_diff_added :hl {:fg "green"}}
                     :change {:provider :git_diff_changed
-                             :hl {:fg colors.orange}}
-                    :remove {:provider :git_diff_removed :hl {:fg colors.red}}}
+                             :hl {:fg "orange"}}
+                    :remove {:provider :git_diff_removed :hl {:fg "red"}}}
               :lsp {:name {:provider lsp_clientnames
                            :icon icons.lsp
                            :left_sep " "
-                           :hl {:fg colors.yellow}}}})
+                           :hl {:fg "yellow"}}}})
 
 (local components
        {:active [[comps.vi_mode.left
@@ -97,7 +98,7 @@
         :inactive [[comps.vi_mode.left comps.file.info]]})
 
 (let [feline (require :feline)]
-  (feline.setup {:colors {:fg colors.fg :bg colors.bg}
+  (feline.setup {:theme colors
                  : components
                  :force_inactive {:filetypes [:NvimTree
                                               :dbui

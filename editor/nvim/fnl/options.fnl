@@ -12,9 +12,13 @@
                  :tabstop indent
                  :shiftwidth indent
                  :softtabstop indent
+                 :background "light"
+                 :cursorline true
                  ; buffer
                  :splitright true
                  :splitbelow true
+                 ; fold
+                 :foldmethod "marker"
                  ; wrap
                  :wrap true
                  :linebreak true

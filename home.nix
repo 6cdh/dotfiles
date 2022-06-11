@@ -38,11 +38,16 @@
     delta
     git-quick-stats
     imagemagick
+    ranger
+    python310Packages.compiledb
+    tree-sitter
+    ipfs
     # info
     neofetch
     inxi
     tldr
     # edit
+    vim
     neovim
     emacs
     # lang
@@ -55,6 +60,7 @@
     python3Minimal
     nodejs
     nodePackages.prettier
+    efm-langserver
   ];
 
   programs = {
@@ -117,7 +123,7 @@
       };
       sessionVariables = {
         EDITOR = "nvim";
-        BAT_THEME = "TwoDark";
+        BAT_THEME = "OneHalfLight";
         FZF_DEFAULT_COMMAND = "rg --files --smart-case";
         FZF_DEFAULT_OPTS = "-m --height 50% --border";
         LISP = "sbcl";
@@ -142,6 +148,7 @@
       "starship.toml".source = ./shell/starship.toml;
       "efm-langserver/config.yaml".source = ./editor/efm.yaml;
       "fontconfig/conf.d/20-prefer.conf".source = ./gui/fonts.conf;
+      "alacritty/alacritty.yml".source = ./terminal/alacritty.yml;
     };
     dataFile = {
       "fonts".source = ./gui/fonts;
@@ -157,4 +164,8 @@
   home.sessionVariables = {
     GLFW_IM_MODULE = "ibus";
   };
+
+  home.sessionPath = [
+    "/home/lcdh/.local/bin"
+  ];
 }

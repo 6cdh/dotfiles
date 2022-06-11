@@ -5,14 +5,6 @@ env:
 #                                    Window                                    #
 #------------------------------------------------------------------------------#
 window:
-  dimensions:
-    columns: 100
-    lines: 40
-
-  position:
-    x: 300
-    y: 300
-
   dynamic_padding: false
 
   decorations: full
@@ -20,8 +12,10 @@ window:
   startup_mode: Windowed
   dynamic_title: true
 
+  opacity: 0.9
+
 scrolling:
-  history: 1000
+  history: 10000
   multiplier: 3
 
 #------------------------------------------------------------------------------#
@@ -29,61 +23,102 @@ scrolling:
 #------------------------------------------------------------------------------#
 font:
   normal:
-    family: FiraCode Nerd Font
+    family: Inconsolata Nerd Font
     style: Regular
 
   bold:
-    family: FiraCode Nerd Font
+    family: Inconsolata Nerd Font
     style: Bold
 
   italic:
-    family: FiraCode Nerd Font
+    family: Inconsolata Nerd Font
     style: Italic
 
   bold_italic:
-    family: FiraCode Nerd Font
+    family: Inconsolata Nerd Font
     style: Bold Italic
-  size: 11
+  size: 15
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-#------------------------------------------------------------------------------#
-#                                   One Dark                                   #
-#------------------------------------------------------------------------------#
 colors:
   # Default colors
   primary:
-    background: "0x1e2127"
-    foreground: "0xabb2bf"
+    background: '#eff1f5' # base
+    foreground: '#4c4f69' # text
+    # Bright and dim foreground colors
+    dim_foreground: '#4c4f69' # text
+    bright_foreground: '#4c4f69' # text
+  # Cursor colors
+  cursor:
+    text: '#eff1f5' # base
+    cursor: '#dc8a78' # rosewater
+  vi_mode_cursor:
+    text: '#eff1f5' # base
+    cursor: '#7287fd' # lavender
+    # Search colors
+  search:
+    matches:
+      foreground: '#eff1f5' # base
+      background: '#6c6f85' # subtext0
+    focused_match:
+      foreground: '#eff1f5' # base
+      background: '#40a02b' # green
+    bar:
+      foreground: '#eff1f5' # base
+      background: '#6c6f85' # subtext0
+
+  # Keyboard regex hints
+  hints:
+    start:
+      foreground: '#eff1f5' # base
+      background: '#df8e1d' # yellow
+    end:
+      foreground: '#eff1f5' # base
+      background: '#6c6f85' # subtext0
+
+  # Selection colors
+  selection:
+    text: '#eff1f5' # base
+    background: '#dc8a78' # rosewater
 
   # Normal colors
   normal:
-    black: "0x1e2127"
-    red: "0xe06c75"
-    green: "0x98c379"
-    yellow: "0xd19a66"
-    blue: "0x61afef"
-    magenta: "0xc678dd"
-    cyan: "0x56b6c2"
-    white: "0xabb2bf"
+    black:   '#4C4F69' # text
+    red:     '#D20F39' # red
+    green:   '#40A02B' # green
+    yellow:  '#DF8E1D' # yellow
+    blue:    '#1E66F5' # blue
+    magenta: '#EA76CB' # pink
+    cyan:    '#179299' # teal
+    white:   '#ACB0BE' # surface2
 
   # Bright colors
   bright:
-    black: "0x5c6370"
-    red: "0xe06c75"
-    green: "0x98c379"
-    yellow: "0xd19a66"
-    blue: "0x61afef"
-    magenta: "0xc678dd"
-    cyan: "0x56b6c2"
-    white: "0xffffff"
+    black:   '#4C4F69' # text
+    red:     '#D20F39' # red
+    green:   '#40A02B' # green
+    yellow:  '#DF8E1D' # yellow
+    blue:    '#1E66F5' # blue
+    magenta: '#EA76CB' # pink
+    cyan:    '#179299' # teal
+    white:   '#ACB0BE' # surface2
+
+  # Dim colors
+  dim:
+    black:   '#4C4F69' # text
+    red:     '#D20F39' # red
+    green:   '#40A02B' # green
+    yellow:  '#DF8E1D' # yellow
+    blue:    '#1E66F5' # blue
+    magenta: '#EA76CB' # pink
+    cyan:    '#179299' # teal
+    white:   '#ACB0BE' # surface2
 
 #------------------------------------------------------------------------------#
 #                                Window opacity                                #
 #------------------------------------------------------------------------------#
-background_opacity: 0.85
-
 selection:
   save_to_clipboard: false
 
@@ -96,5 +131,5 @@ cursor:
 #                                    Mouse                                     #
 #------------------------------------------------------------------------------#
 mouse:
-  url:
+  hints:
     modifiers: Control
