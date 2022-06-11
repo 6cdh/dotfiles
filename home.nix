@@ -42,6 +42,7 @@
     python310Packages.compiledb
     tree-sitter
     ipfs
+    fontforge
     # info
     neofetch
     inxi

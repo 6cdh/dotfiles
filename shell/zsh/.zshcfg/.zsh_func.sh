@@ -169,3 +169,10 @@ function lccl {
 function arch_mirrors {
     curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -
 }
+
+ttf2otf() {
+    name="$1"
+    prefix=$(basename "$name" .ttf)
+    otfname="$prefix".otf
+    fontforge -lang=ff -c 'Open($1); Generate($2); close();' "$name" "$otfname"
+}

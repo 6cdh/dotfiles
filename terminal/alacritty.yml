@@ -12,7 +12,7 @@ window:
   startup_mode: Windowed
   dynamic_title: true
 
-  opacity: 0.9
+  opacity: 1
 
 scrolling:
   history: 10000
@@ -23,21 +23,21 @@ scrolling:
 #------------------------------------------------------------------------------#
 font:
   normal:
-    family: Inconsolata Nerd Font
+    family: CamingoCode Nerd Font
     style: Regular
 
   bold:
-    family: Inconsolata Nerd Font
+    family: CamingoCode Nerd Font
     style: Bold
 
   italic:
-    family: Inconsolata Nerd Font
+    family: CamingoCode Nerd Font
     style: Italic
 
   bold_italic:
-    family: Inconsolata Nerd Font
+    family: CamingoCode Nerd Font
     style: Bold Italic
-  size: 15
+  size: 12
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
