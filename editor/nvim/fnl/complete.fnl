@@ -36,15 +36,15 @@
                                    1 (t "<Plug>(vsnip-jump-next)")
                                    _ ((cmp.mapping.confirm {:select true}) fallback)))}
               :formatting {:format menu-format}
-              :sources [(spec :nvim_lsp)
+              :sources [(spec :cmp_tabnine)
+                        (spec :nvim_lsp)
                         (spec :vsnip)
                         (spec :buffer)
                         (spec :path)
                         (spec :look
                               {:keyword_length 4
                                :option {:convert_case true :loud true}})
-                        (spec :nvim_lua)
-                        (spec :cmp_tabnine)]})
+                        (spec :nvim_lua)]})
   (cmp.setup.cmdline ":" {:sources [(spec :cmdline)]}))
 
 (let [cmp_autopairs (require :nvim-autopairs.completion.cmp)

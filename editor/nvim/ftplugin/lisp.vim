@@ -7,6 +7,5 @@ lua <<EOF
 local ap = require("nvim-autopairs")
 local rule = require("nvim-autopairs.rule")
 ap.clear_rules()
-ap.add_rule(rule('"', '"'))
 EOF
 

@@ -43,6 +43,7 @@
     tree-sitter
     ipfs
     fontforge
+    youtube-dl
     # info
     neofetch
     inxi
@@ -50,7 +51,6 @@
     # edit
     vim
     neovim
-    emacs
     # lang
     gcc
     racket
@@ -62,6 +62,9 @@
     nodejs
     nodePackages.prettier
     efm-langserver
+    # lsp
+    rust-analyzer
+    rnix-lsp
   ];
 
   programs = {

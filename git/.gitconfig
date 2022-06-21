@@ -5,6 +5,9 @@
 [alias]
     hist = log --pretty=format:'%h %ad [%an] %s%d ' --graph --date=short
 
+[http]
+    proxy = http://localhost:4097
+
 [core]
     autocrlf = input
     safecrlf = true

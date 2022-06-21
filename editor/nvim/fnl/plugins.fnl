@@ -52,7 +52,7 @@
                                            :after :nvim-cmp
                                            :config #(let [tabnine (require :cmp_tabnine.config)]
                                                       (tabnine:setup {:max_lines 1000
-                                                                      :max_num_results 20
+                                                                      :max_num_results 2
                                                                       :sort true
                                                                       :run_on_every_keystroke true}))})
                                     (spec :hrsh7th/cmp-path {:after :nvim-cmp})
@@ -138,9 +138,6 @@
                                               (set vim.g.conjure#mapping#prefix " tn")
                                               (set vim.g.conjure#log#hud#enabled false))})
                   ;; lang
-                  (plug :wlangstroth/vim-racket)
-                  (plug :eraserhd/parinfer-rust {:run "cargo build --release"})
-                  (plug :guns/vim-sexp)
                   ;; lib
                   (plug :6cdh/fulib.nvim)
                   ;; profile
