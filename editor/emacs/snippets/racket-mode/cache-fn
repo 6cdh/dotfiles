@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: cache-fn
+# key: cache-fn
+# --
+(define (cache-fn fn m n)
+    (let ([cache (make-vector2d m n)])
+      (lambda (a b)
+        (when (= -1 (vector2d-ref cache a b))
+          (vector2d-set! cache a b (fn a b)))
+        (vector2d-ref cache a b))))
