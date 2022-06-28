@@ -2,21 +2,15 @@
 
 (add-hook 'c++-mode-hook #'lsp)
 
-;; lisp
-(dolist (hook '(emacs-lisp-mode-hook
-		scheme-mode-hook
-		clojure-mode-hook
-		common-lisp-mode-hook
-		racket-mode-hook))
-  (add-hook hook #'paredit-mode))
-
 ;; python
 
 (add-hook 'python-mode-hook #'lsp)
 
 ;; racket
 
-(add-hook 'racket-mode-hook #'lsp)
+(my-use-pkg racket-mode
+	    :hook
+	    ((racked-mode . racket-xp-mode)))
 
 ;; rust
 

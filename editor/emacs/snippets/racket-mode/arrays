@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: arrays
+# key: arrays
+# --
+(define (make-array . dims)
+  (if (= (length dims) 1) (first dims)
+      (build-vector (car dims) (lambda _ (apply make-array (cdr dims))))))
+
+(define (aref arr . dims)
+  (if (= (length dims) 0) arr
+      (apply aref (vector-ref arr (car dims)) (cdr dims))))
+
+(define (aset! arr . dims)
+  (if (= (length dims) 2) (vector-set! arr (first dims) (second dims))
+      (apply aset! (vector-ref arr (car dims)) (cdr dims))))

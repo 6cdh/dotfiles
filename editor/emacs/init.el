@@ -89,7 +89,7 @@
 
 (my-use-pkg company
 	    :custom
-	    (company-idle-delay 0.2)
+	    (company-idle-delay 0.1)
 	    (company-minimum-prefix-length 3)
 	    (company-require-match nil)
 	    (company-tooltip-align-annotations t)
@@ -100,23 +100,24 @@
 	    :config (add-to-list 'company-backends #'company-tabnine))
 
 (defun my/company-backend-with-yas (backend)
-  (if (and (listp backend) (member 'company-yasnippet backend))
-      backend
-    (append (if (consp backend) backend
-	      (list backend))
-	    '(:with company-yasnippet))))
+  (let ((disabled-modes '()))
+    (if (or (memq backend disabled-modes)
+	    (and (listp backend) (member 'company-yasnippet backend)))
+	backend
+      (append (if (consp backend) backend
+		(list backend))
+	      '(:with company-yasnippet)))))
 
 (my-use-pkg yasnippet
 	    :config
+	    (add-to-list 'yas-snippet-dirs "~/.config/emacs/snippets")
 	    (setq company-backends
 		  (mapcar #'my/company-backend-with-yas company-backends))
 	    (add-hook 'prog-mode-hook 'yas-minor-mode)
 	    (add-hook 'text-mode-hook 'yas-minor-mode))
 
 (my-use-pkg yasnippet-snippets
-	    :after (yasnippet)
-	    :config
-	    (add-to-list 'yas-snippet-dirs "~/.config/emacs/snippets"))
+	    :after (yasnippet))
 
 (my-use-pkg doom-modeline
 	    :init (doom-modeline-mode 1))
@@ -163,8 +164,10 @@
  '(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold))))
  '(org-verbatim              ((t (:inherit (shadow fixed-pitch))))))
 
-(my-use-pkg racket-mode)
-(my-use-pkg paredit)
+(my-use-pkg smartparens
+	    :config
+	    (require 'smartparens-config)
+	    (add-hook 'prog-mode-hook #'smartparens-strict-mode))
 (my-use-pkg flycheck)
 
 ;; lsp
