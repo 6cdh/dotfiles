@@ -1,7 +1,10 @@
-(my-use-pkg god-mode)
+(my-use-pkg god-mode
+	    :config
+	    (add-hook 'prog-mode-hook #'god-local-mode)
+	    (add-hook 'text-mode-hook #'god-local-mode))
 
 (setq god-mode-alist '((nil . "C-") ("m" . "M-") ("M" . "C-M-")))
-(global-set-key (kbd "<escape>") #'god-mode-all)
+(global-set-key (kbd "<escape>") #'god-local-mode)
 
 (defun god-mode-cursor ()
   (setq cursor-type (if (or god-local-mode buffer-read-only)
@@ -34,7 +37,7 @@
 (defun my-change ()
   (interactive)
   (my-delete)
-  (god-mode))
+  (god-local-mode))
 
 (defun my-select-word ()
   (interactive)
@@ -74,6 +77,10 @@
   (my-map "C-t C-s" #'my-select-sexp)
   ;; semantic
   (my-map "C-x C-;" #'comment-line)
+  ;; code action
+  (my-map "C-z C-r" #'sp-raise-sexp)
+  (my-map "C-z C-p" #'sp-add-to-previous-sexp)
+  (my-map "C-z C-w" #'sp-wrap-round)
   ;; others
   (my-map "a" #'move-beginning-of-line)
   (my-map "0" #'back-to-indentation)
@@ -86,6 +93,7 @@
   (my-map "C-u C-u" #'undo)
   (my-map "C-u C-r" #'undo-redo)
   ;; search
+  (my-map ":" #'avy-goto-char)
   (my-map "/" #'isearch-forward)
   (my-map "?" #'isearch-backward)
   ;; basic move - vim like

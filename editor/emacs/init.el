@@ -4,7 +4,7 @@
 			   ("http" . "localhost:4097")
 			   ("https" . "localhost:4097")))
 
-;; straight.el package manager ;;
+;; straight.el
 
 (defvar bootstrap-version)
 
@@ -14,13 +14,13 @@
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
 	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 "https://raw.githubusercontent.com/radian-software/straight.el/install.el"
 	 'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; pkgs ;;
+;; straight.el END
 
 (straight-use-package 'use-package)
 
@@ -32,6 +32,8 @@
 
 (my-use-pkg gcmh
 	    :config (gcmh-mode 1))
+
+;; options
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -52,6 +54,7 @@
 
 (dolist (mode '(org-mode-hook
 		term-mode-hook
+		vterm-mode-hook
 		eshell-mode-hook
 		help-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -61,6 +64,8 @@
  'user
  '(variable-pitch ((t (:family "Cantarell" :height 150))))
  '(fixed-pitch ((t (:family "CamingoCode Nerd Font" :height 130)))))
+
+;; options END
 
 (load "godmode")
 
@@ -78,6 +83,9 @@
 
 (my-use-pkg vertico :init (vertico-mode))
 
+(my-use-pkg marginalia
+	    :init (marginalia-mode))
+
 (my-use-pkg savehist
 	    :init (savehist-mode))
 
@@ -87,37 +95,42 @@
 		  completion-category-defaults nil
 		  completion-category-overrides '((file (styles partial-completion)))))
 
+;; company
+
 (my-use-pkg company
 	    :custom
 	    (company-idle-delay 0.1)
-	    (company-minimum-prefix-length 3)
+	    (company-minimum-prefix-length 2)
 	    (company-require-match nil)
 	    (company-tooltip-align-annotations t)
 	    (company-tooltip-offset-display 'lines)
-	    :config (add-hook 'after-init-hook 'global-company-mode))
+	    :config
+	    (add-hook 'after-init-hook 'global-company-mode))
 
-(my-use-pkg company-tabnine
-	    :config (add-to-list 'company-backends #'company-tabnine))
-
-(defun my/company-backend-with-yas (backend)
-  (let ((disabled-modes '()))
-    (if (or (memq backend disabled-modes)
-	    (and (listp backend) (member 'company-yasnippet backend)))
-	backend
-      (append (if (consp backend) backend
-		(list backend))
-	      '(:with company-yasnippet)))))
+(defun my/company-always-enable (bks)
+  "add always enabled backends 'bks' into 'company-backends'"
+  (defun add-each (ori-bk)
+    (if (listp ori-bk)
+	(append ori-bk (cons :with bks))
+      (cons ori-bk (cons :with bks))))
+  (setq company-backends
+	(append (mapcar #'add-each company-backends)
+		(list bks))))
 
 (my-use-pkg yasnippet
 	    :config
 	    (add-to-list 'yas-snippet-dirs "~/.config/emacs/snippets")
-	    (setq company-backends
-		  (mapcar #'my/company-backend-with-yas company-backends))
 	    (add-hook 'prog-mode-hook 'yas-minor-mode)
 	    (add-hook 'text-mode-hook 'yas-minor-mode))
 
+(my-use-pkg company-tabnine)
+
+(my/company-always-enable '(company-tabnine company-yasnippet))
+
 (my-use-pkg yasnippet-snippets
 	    :after (yasnippet))
+
+;; company END
 
 (my-use-pkg doom-modeline
 	    :init (doom-modeline-mode 1))
@@ -164,10 +177,13 @@
  '(org-tag                   ((t (:inherit (shadow fixed-pitch) :weight bold))))
  '(org-verbatim              ((t (:inherit (shadow fixed-pitch))))))
 
+;; orgmode END
+
 (my-use-pkg smartparens
 	    :config
 	    (require 'smartparens-config)
 	    (add-hook 'prog-mode-hook #'smartparens-strict-mode))
+
 (my-use-pkg flycheck)
 
 ;; lsp
@@ -184,8 +200,14 @@
 	    (lsp-ui-doc-enable nil)
 	    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
+;; lsp END
+
 (my-use-pkg expand-region
 	    :bind ("C-=" . er/expand-region))
+
+(my-use-pkg vterm)
+
+(my-use-pkg avy)
 
 (load "lang")
 

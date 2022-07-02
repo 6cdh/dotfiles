@@ -44,6 +44,7 @@
     ipfs
     fontforge
     youtube-dl
+    cmake
     # info
     neofetch
     inxi
@@ -59,6 +60,7 @@
     yarn
     rustup
     python3Minimal
+    poetry
     nodejs
     nodePackages.prettier
     efm-langserver
