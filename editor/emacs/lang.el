@@ -23,7 +23,7 @@
 
 ;; racket
 
-;; put it before 'racket-mode' because 'geiser-racket'
+;; put it above 'racket-mode' because 'geiser-racket'
 ;; set racket file as scheme mode
 (my-use-pkg geiser-racket)
 

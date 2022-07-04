@@ -37,7 +37,7 @@
 (defun my-change ()
   (interactive)
   (my-delete)
-  (god-local-mode))
+  (god-local-mode 0))
 
 (defun my-select-word ()
   (interactive)

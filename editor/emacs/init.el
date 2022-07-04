@@ -44,7 +44,8 @@
 
 (setq make-backup-files nil
       delete-old-versions t
-      version-control nil)
+      version-control nil
+      auto-save-default t)
 
 (setq read-process-output-max (* 1024 1024))
 
@@ -105,7 +106,8 @@
 	    (company-tooltip-align-annotations t)
 	    (company-tooltip-offset-display 'lines)
 	    :config
-	    (add-hook 'after-init-hook 'global-company-mode))
+	    (add-hook 'after-init-hook 'global-company-mode)
+	    (add-hook 'after-init-hook 'company-tng-mode))
 
 (defun my/company-always-enable (bks)
   "add always enabled backends 'bks' into 'company-backends'"
@@ -121,6 +123,8 @@
 	    :config
 	    (add-to-list 'yas-snippet-dirs "~/.config/emacs/snippets")
 	    (add-hook 'prog-mode-hook 'yas-minor-mode)
+	    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+	    (define-key yas-minor-mode-map (kbd "TAB") nil)
 	    (add-hook 'text-mode-hook 'yas-minor-mode))
 
 (my-use-pkg company-tabnine)
@@ -210,4 +214,3 @@
 (my-use-pkg avy)
 
 (load "lang")
-
