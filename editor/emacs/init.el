@@ -54,6 +54,7 @@
 (global-hl-line-mode 1)
 
 (dolist (mode '(org-mode-hook
+		markdown-mode-hook
 		term-mode-hook
 		vterm-mode-hook
 		eshell-mode-hook
@@ -152,8 +153,6 @@
 	    :config (progn
 		      (setq which-key-idle-delay 0.2)
 		      (which-key-mode)))
-
-(my-use-pkg markdown-mode)
 
 (my-use-pkg projectile
 	    :config (progn

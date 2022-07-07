@@ -10,6 +10,15 @@
 	    :config
 	    (slime-setup '(slime-fancy slime-quicklisp slime-asdf))
 	    (setq inferior-lisp-program "sbcl"))
+
+;; markdown
+
+(my-use-pkg markdown-mode
+	    :custom
+	    (markdown-code-block-braces t)
+	    (markdown-enable-highlighting-syntax t)
+	    (markdown-enable-math t))
+
 ;; nix
 
 (my-use-pkg nix-mode
@@ -47,3 +56,6 @@
 (add-hook 'rust-mode-hook #'lsp)
 (remove-hook 'rustic-mode-hook 'flycheck-mode)
 
+;; yaml
+
+(my-use-pkg yaml-mode)
