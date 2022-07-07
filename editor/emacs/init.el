@@ -134,6 +134,10 @@
 (my-use-pkg yasnippet-snippets
 	    :after (yasnippet))
 
+(setq company-transformers '(company-sort-by-occurrence
+			     company-sort-prefer-same-case-prefix
+			     delete-consecutive-dups))
+
 ;; company END
 
 (my-use-pkg doom-modeline
@@ -205,6 +209,9 @@
 	    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; lsp END
+
+(my-use-pkg editorconfig
+	    :config (editorconfig-mode 1))
 
 (my-use-pkg expand-region
 	    :bind ("C-=" . er/expand-region))

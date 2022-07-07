@@ -31,41 +31,50 @@
 
 (defun my-join-line ()
   (interactive)
-  (command-execute #'next-line)
-  (command-execute #'join-line))
+  (next-line)
+  (join-line)
+  (indent-for-tab-command))
 
-(defun my-change ()
+(defun my-replace ()
   (interactive)
   (my-delete)
   (god-local-mode 0))
 
 (defun my-select-word ()
   (interactive)
-  (command-execute #'forward-word)
-  (command-execute #'backward-word)
-  (command-execute #'mark-word))
+  (forward-word)
+  (backward-word)
+  (mark-word))
 
 (defun my-select-sexp ()
   (interactive)
-  (command-execute #'forward-sexp)
-  (command-execute #'backward-sexp)
-  (command-execute #'mark-sexp))
+  (forward-sexp)
+  (backward-sexp)
+  (mark-sexp))
 
 (defun my-new-next-line ()
   (interactive)
   (command-execute #'move-end-of-line)
-  (command-execute #'newline))
+  (newline)
+  (indent-for-tab-command))
 
 (defun my-new-prev-line ()
   (interactive)
-  (command-execute #'previous-line)
-  (my-new-next-line))
+  (command-execute #'move-beginning-of-line)
+  (newline)
+  (previous-line)
+  (indent-for-tab-command))
+
+(defun my-repl-run ()
+  (interactive)
+  (pcase major-mode
+    ('racket-mode (racket-run))))
 
 (when my-keymap
   (my-map "." #'repeat)
   ;; copy/cut/delete
   (my-map "d" #'my-delete)
-  (my-map "c" #'my-change)
+  (my-map "r" #'my-replace)
   (my-map "D" #'kill-line)
   (my-map "y" #'copy-region-as-kill)
   (my-map "p" #'yank)
@@ -76,7 +85,7 @@
   (my-map "C-t C-l" "a v e")
   (my-map "C-t C-s" #'my-select-sexp)
   ;; semantic
-  (my-map "C-x C-;" #'comment-line)
+  (my-map "C-c C-;" #'comment-line)
   ;; code action
   (my-map "C-z C-r" #'sp-raise-sexp)
   (my-map "C-z C-p" #'sp-add-to-previous-sexp)
@@ -101,10 +110,12 @@
   (my-map "k" #'previous-line)
   (my-map "h" #'backward-char)
   (my-map "l" #'forward-char)
-  ;; control
+  ;; Emacs level control
   (my-map "C-x C-q" #'quit-window)
   (my-map "C-x C-b" #'switch-to-buffer)
   (my-map "C-x C-w" #'other-window)
   (my-map "C-x C-f" #'find-file)
   (my-map "C-x C-s" #'save-buffer)
-  (my-map "C-x C-x" #'execute-extended-command))
+  (my-map "C-x C-x" #'execute-extended-command)
+  ;; edit commands
+  (my-map "C-c C-r" #'my-repl-run))

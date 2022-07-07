@@ -17,6 +17,10 @@
 
 (add-hook 'nix-mode-hook #'lsp)
 
+;; php
+
+(my-use-pkg php-mode)
+
 ;; python
 
 (add-hook 'python-mode-hook #'lsp)
