@@ -8,9 +8,9 @@ These configs are not optimized for installing by others but can be a reference.
 
 #+BEGIN_src yaml
   system: fedora linux
-  package manager: ["dnf", "nix"]
+  package manager: [dnf, nix]
   keyboard layout: colemak
-  editor: ["neovim", "emacs"]
+  editor: [neovim, emacs]
   terminal: kitty
 #+END_src
 
