@@ -7,11 +7,11 @@ These configs are not optimized for installing by others but can be a reference.
 ## Info
 
 ``` shell
-System: Fedora Linux
-Package Manager: Nix
-Keyboard Layout: Colemak
-Editor: neovim
-Terminal: kitty
+system: fedora linux
+package manager: nix
+keyboard layout: colemak
+editor: neovim and emacs
+terminal: kitty
 ```
 
 ## Install
