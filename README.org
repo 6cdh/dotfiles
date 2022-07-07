@@ -1,6 +1,7 @@
 * Dotfiles
 
 6cdh's dotfiles.
+
 These configs are not optimized for installing by others but can be a reference.
 
 ** Info
