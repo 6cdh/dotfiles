@@ -21,3 +21,11 @@ I use [[https://github.com/nix-community/home-manager][home manager]] to manage 
 1. Install home-manager
 2. clone this repo to replace the directory =~/.config/nixpkgs/=
 3. run =home-manager switch=
+
+Home-manager links config to a new read-only directory. It's inconvenient
+for nvim and emacs config.
+I use [[link.scm][link.scm]] to link them directly, it relys on [[https://www.gnu.org/software/guile/][guile scheme]]:
+
+#+BEGIN_src shell
+  ./script/eval.scm link.scm
+#+END_src

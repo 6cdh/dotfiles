@@ -36,6 +36,7 @@
     rlwrap
     hyperfine
     delta
+    git
     git-quick-stats
     imagemagick
     ranger
@@ -55,6 +56,7 @@
     # lang
     gcc
     racket
+    guile
     sbcl
     chez
     yarn
@@ -148,8 +150,6 @@
 
   xdg = {
     configFile = {
-      "nvim".source = ./editor/nvim;
-      "nvim".recursive = true;
       "kitty/kitty.conf".source = ./terminal/kitty.conf;
       "starship.toml".source = ./shell/starship.toml;
       "efm-langserver/config.yaml".source = ./editor/efm.yaml;

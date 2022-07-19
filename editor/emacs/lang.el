@@ -4,6 +4,20 @@
 
 (add-hook 'c++-mode-hook #'lsp)
 
+;; clojure
+
+(my-use-pkg clojure-mode)
+(my-use-pkg cider)
+
+(add-hook 'clojure-mode-hook #'lsp)
+
+
+;; go
+
+(my-use-pkg go-mode)
+
+(add-hook 'go-mode-hook #'lsp)
+
 ;; lisp
 
 (my-use-pkg slime
@@ -32,7 +46,10 @@
 
 ;; python
 
-(add-hook 'python-mode-hook #'lsp)
+(my-use-pkg lsp-pyright
+  :hook (python-mode . (lambda ()
+			 (require 'lsp-right)
+			 (lsp))))
 
 ;; racket
 

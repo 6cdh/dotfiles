@@ -1,4 +1,4 @@
-#!/bin/guile -s
+#!guile -s
 !#
 ;; utility
 
