@@ -11,13 +11,6 @@
 [core]
     autocrlf = input
     safecrlf = true
-    pager = delta
-
-[delta]
-    navigate = true
-
-[interactive]
-    diffFilter = delta --color-only
 
 [pull]
     rebase = false
@@ -27,3 +20,5 @@
 
 [credential "https://github.com"]
 	helper = !gh auth git-credential
+[diff]
+	external = difft

@@ -77,7 +77,7 @@
                          :requires :nvim-lua/plenary.nvim
                          :config #(setup :neorg)})
                   ;; ui
-                  (plug :rcarriga/nvim-notify {:config #(set vim.notify (require "notify"))})
+                  (plug :rcarriga/nvim-notify)
                   (plug :kyazdani42/nvim-web-devicons)
                   (plug :akinsho/bufferline.nvim
                         {:config #(setup :bufferline
@@ -144,7 +144,8 @@
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
                   ;; color scheme
                   (plug :catppuccin/nvim 
-                    {:config #(do (setup "catppuccin"
+                    {:as "catppuccin-nvim"
+                     :config #(do (setup "catppuccin"
                                     {:integrations {:which_key true
                                                     :ts_rainbow true}})
                                   (set vim.g.catppuccin_flavour "latte")

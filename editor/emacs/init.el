@@ -215,7 +215,7 @@
 (my-use-pkg expand-region
 	    :bind ("C-=" . er/expand-region))
 
-(my-use-pkg vterm)
+;(my-use-pkg vterm)
 
 (my-use-pkg avy)
 

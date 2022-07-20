@@ -46,6 +46,7 @@
     fontforge
     youtube-dl
     cmake
+    difftastic
     # info
     neofetch
     inxi
@@ -160,8 +161,6 @@
       "fonts".source = ./gui/fonts;
     };
   };
-
-  home.file.".gitconfig".source = ./git/.gitconfig;
 
   fonts.fontconfig = {
     enable = true;
