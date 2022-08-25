@@ -61,6 +61,8 @@
     sbcl
     chez
     yarn
+    opam
+    ocaml
     rustup
     python3Minimal
     poetry
@@ -144,6 +146,10 @@
       initExtra = (builtins.readFile ./shell/zsh/.zshcfg/.zsh_func.sh);
     };
     starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    opam = {
       enable = true;
       enableZshIntegration = true;
     };
