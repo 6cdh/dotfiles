@@ -1,34 +1,55 @@
-export ZSH="${HOME}/.oh-my-zsh"
 
-# To use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
 
-# Disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Disable marking untracked files under VCS as dirty. This makes repository
-# status check for large repositories much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
-# Speedup zsh-autosuggestions
-ZSH_AUTOSUGGEST_MANUAL_REBIND="true"
+### End of Zinit's installer chunk
 
-plugins=(
-    colored-man-pages
-    extract
-    fast-syntax-highlighting
-    fd
-    git
-    ripgrep
-    rust
-    vi-mode
-    zoxide
-    zsh-autosuggestions
-    fzf
-)
+source ~/.zshcfg/.zsh_func.sh
+source ~/.zshcfg/.zsh_aliases.sh
+source ~/.zshcfg/.zshenv
+source ~/.zshcfg/.p10k.zsh
 
-source $ZSH/oh-my-zsh.sh
+# enable proxy
+pe
+
+autoload -U compinit
+compinit
+
+zinit light Aloxaf/fzf-tab
+
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit snippet OMZP::extract
+zinit snippet OMZP::colored-man-pages
+zinit snippet OMZP::git
+zinit snippet OMZP::zoxide
+zinit snippet OMZP::vi-mode
+zinit snippet OMZP::fzf
+
+zinit ice blockf
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+
+# theme
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
 
 # History size
 HISTFILE="$HOME/.zsh_history"
@@ -37,20 +58,9 @@ SAVEHIST=1000000
 setopt extendedglob nomatch notify
 unsetopt autocd beep
 
-export VI_MODE_SET_CURSOR=true
-
 # Auto Rehash
 zstyle ':completion:*' rehash true
 
-# aliases
-source ~/.zshcfg/.zsh_aliases.sh
-# function
-source ~/.zshcfg/.zsh_func.sh
-
 # nix
 source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-
-lcproxy_enable
-
-eval "$(starship init zsh)"
 
