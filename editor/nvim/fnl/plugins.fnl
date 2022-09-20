@@ -23,7 +23,6 @@
                   ;; lsp
                   (plug :nvim-treesitter/nvim-treesitter
                         {:run ":TSUpdate" :config #(require :treesitter)})
-                  (plug :p00f/nvim-ts-rainbow)
                   (plug :nvim-treesitter/playground {:cmd :TSPlaygroundToggle})
                   (plug :neovim/nvim-lspconfig)
                   (plug :ray-x/lsp_signature.nvim
@@ -72,8 +71,9 @@
                         {:run "cd app && yarn install" :ft :markdown})
                   (plug :kristijanhusak/orgmode.nvim
                         {:ft :org :config #(setup :orgmode)})
-                  (plug :vhyrro/neorg
+                  (plug :nvim-neorg/neorg
                         {:ft :norg
+                         :after "nvim-treesitter"
                          :requires :nvim-lua/plenary.nvim
                          :config #(setup :neorg)})
                   ;; ui
@@ -146,8 +146,7 @@
                   (plug :catppuccin/nvim 
                     {:as "catppuccin-nvim"
                      :config #(do (setup "catppuccin"
-                                    {:integrations {:which_key true
-                                                    :ts_rainbow true}})
+                                    {:integrations {:which_key true}})
                                   (set vim.g.catppuccin_flavour "latte")
                                   (vim.cmd "colorscheme catppuccin"))})))
                   ; (plug :olimorris/onedarkpro.nvim

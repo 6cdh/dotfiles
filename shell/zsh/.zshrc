@@ -47,6 +47,9 @@ source ~/.zshcfg/.zsh_aliases.sh
 # function
 source ~/.zshcfg/.zsh_func.sh
 
+# nix
+source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+
 lcproxy_enable
 
 eval "$(starship init zsh)"

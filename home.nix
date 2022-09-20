@@ -74,87 +74,6 @@
     rnix-lsp
   ];
 
-  programs = {
-    zsh = {
-      enable = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "colored-man-pages"
-          "extract"
-          "fd"
-          "git"
-          "ripgrep"
-          "rust"
-          "vi-mode"
-          "zoxide"
-          "fzf"
-        ];
-      };
-      plugins = [
-        {
-          name = "zsh-autosuggestions";
-          src = pkgs.fetchFromGitHub {
-            owner = "zsh-users";
-            repo = "zsh-autosuggestions";
-            rev = "v0.7.0";
-            sha256 = "1g3pij5qn2j7v7jjac2a63lxd97mcsgw6xq6k5p7835q9fjiid98";
-          };
-        }
-        {
-          name = "fast-syntax-highlighting";
-          src = pkgs.fetchFromGitHub {
-            owner = "zdharma-continuum";
-            repo = "fast-syntax-highlighting";
-            rev = "585c089";
-            sha256 = "1lc9mhi25ybkcn0747j3i8y2hrmakv5mxndglf6yfiipxpd05vn7";
-          };
-        }
-      ];
-      shellAliases = {
-        hm = "home-manager";
-        ls = "exa";
-        l = "ls -l";
-        ll = "ls -la";
-        la = "ls -la";
-        vi = "nvim";
-        py = "python3";
-        cl = "clang++";
-        free = "free -h";
-        du = "du -h";
-        df = "df -h";
-        diff = "diff --color=always";
-        rlwrap = "rlwrap -pgreen";
-        gcl1 = "git clone --depth 1";
-        nix-shell = "nix-shell --run zsh";
-      };
-      history = {
-        save = 1000000;
-        size = 1000000;
-      };
-      sessionVariables = {
-        EDITOR = "nvim";
-        BAT_THEME = "OneHalfLight";
-        FZF_DEFAULT_COMMAND = "rg --files --smart-case";
-        FZF_DEFAULT_OPTS = "-m --height 50% --border";
-        LISP = "sbcl";
-      };
-      localVariables = {
-        VI_MODE_SET_CURSOR = true;
-        ZSH_AUTOSUGGEST_MANUAL_REBIND = true;
-      };
-      initExtra = (builtins.readFile ./shell/zsh/.zshcfg/.zsh_func.sh);
-    };
-    starship = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    opam = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-  };
-
   xdg = {
     configFile = {
       "kitty/kitty.conf".source = ./terminal/kitty.conf;
@@ -171,12 +90,4 @@
   fonts.fontconfig = {
     enable = true;
   };
-
-  home.sessionVariables = {
-    GLFW_IM_MODULE = "ibus";
-  };
-
-  home.sessionPath = [
-    "/home/lcdh/.local/bin"
-  ];
 }

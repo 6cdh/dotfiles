@@ -17,7 +17,8 @@
 
 (local config (setmetatable config-tbl {:__index #{}}))
 
-(local enabled_servers [:clangd :rust_analyzer :efm :sumneko_lua :hls
+(local enabled_servers [:clangd :rust_analyzer :sumneko_lua :hls
+                        :ocamllsp
                         :rnix :racket_langserver :tsserver :kotlin_language_server])
 
 ((-> (require "nvim-lsp-installer")
