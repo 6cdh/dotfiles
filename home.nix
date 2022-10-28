@@ -47,6 +47,7 @@
     youtube-dl
     cmake
     difftastic
+    starship
     # info
     neofetch
     inxi
@@ -55,11 +56,11 @@
     vim
     neovim
     # lang
-    gcc
     racket
     guile
     sbcl
     chez
+    ghc
     yarn
     opam
     ocaml
@@ -70,7 +71,6 @@
     nodePackages.prettier
     efm-langserver
     # lsp
-    rust-analyzer
     rnix-lsp
   ];
 

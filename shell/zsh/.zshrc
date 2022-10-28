@@ -25,15 +25,12 @@ zinit light-mode for \
 source ~/.zshcfg/.zsh_func.sh
 source ~/.zshcfg/.zsh_aliases.sh
 source ~/.zshcfg/.zshenv
-source ~/.zshcfg/.p10k.zsh
 
 # enable proxy
 pe
 
 autoload -U compinit
 compinit
-
-zinit light Aloxaf/fzf-tab
 
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit snippet OMZP::extract
@@ -49,18 +46,18 @@ zinit light zsh-users/zsh-autosuggestions
 
 # theme
 zinit ice depth=1
-zinit light romkatv/powerlevel10k
+# zinit light romkatv/powerlevel10k
 
 # History size
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=1000000
 SAVEHIST=1000000
-setopt extendedglob nomatch notify
+setopt nomatch notify
 unsetopt autocd beep
 
 # Auto Rehash
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-# nix
-source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+eval "$(starship init zsh)"
 

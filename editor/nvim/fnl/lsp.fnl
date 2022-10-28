@@ -7,7 +7,7 @@
    :rust_analyzer {:settings {:rust-analyzer {:checkOnSave {:command :clippy}}}}
    :efm {:init_options {:documentFormatting true}
          :filetypes [:cpp :css :dockerfile :go :html :json :javascript :lua
-                     :markdown :python :sh :toml :vim :yaml]}
+                     :markdown :python :sh :toml :vim :yaml :fennel]}
    :sumneko_lua {:settings {:Lua {:runtime {:version :LuaJIT
                                             :path (vim.split package.path ";")}
                                   :diagnostics {:globals [:vim]}
@@ -18,11 +18,12 @@
 (local config (setmetatable config-tbl {:__index #{}}))
 
 (local enabled_servers [:clangd :rust_analyzer :sumneko_lua :hls
-                        :ocamllsp
+                        :ocamllsp :julials :pyright
+                        :efm
                         :rnix :racket_langserver :tsserver :kotlin_language_server])
 
-((-> (require "nvim-lsp-installer")
-    (. :setup)))
+; ((-> (require "nvim-lsp-installer")
+;     (. :setup)))
 
 (let [lspconfig (require "lspconfig")]
   (each [_ server (ipairs enabled_servers)]

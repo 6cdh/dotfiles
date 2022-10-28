@@ -2,10 +2,10 @@
 export EDITOR=nvim
 
 # Clang
-export CC=/usr/bin/clang
-export HOSTCC=/usr/bin/clang
-export CXX=/usr/bin/clang++
-export HOSTCXX=/usr/bin/clang++
+export CC=/usr/bin/gcc
+export HOSTCC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+export HOSTCXX=/usr/bin/g++
 export MAKEFLAGS=8
 
 # BAT
