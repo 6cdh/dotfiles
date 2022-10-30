@@ -147,8 +147,8 @@
                   (plug :catppuccin/nvim 
                     {:as "catppuccin-nvim"
                      :config #(do (setup "catppuccin"
-                                    {:integrations {:which_key true}})
-                                  (set vim.g.catppuccin_flavour "latte")
+                                    {:integrations {:which_key true}
+                                     :flavour "latte"})
                                   (vim.cmd "colorscheme catppuccin"))})))
                   ; (plug :olimorris/onedarkpro.nvim
                   ;         {:config #(do (setup :onedarkpro
