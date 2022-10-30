@@ -23,7 +23,7 @@
                   (plug :guns/vim-sexp)
                   ;; lsp
                   (plug :nvim-treesitter/nvim-treesitter
-                        {:run ":TSUpdate" :config #(require :treesitter)})
+                        {:config #(require :treesitter)})
                   (plug :nvim-treesitter/playground {:cmd :TSPlaygroundToggle})
                   (plug :neovim/nvim-lspconfig)
                   (plug :ray-x/lsp_signature.nvim

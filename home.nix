@@ -48,13 +48,11 @@
     cmake
     difftastic
     starship
+    patchelf
     # info
     neofetch
     inxi
     tldr
-    # edit
-    vim
-    neovim
     # lang
     racket
     guile
@@ -73,21 +71,4 @@
     # lsp
     rnix-lsp
   ];
-
-  xdg = {
-    configFile = {
-      "kitty/kitty.conf".source = ./terminal/kitty.conf;
-      "starship.toml".source = ./shell/starship.toml;
-      "efm-langserver/config.yaml".source = ./editor/efm.yaml;
-      "fontconfig/conf.d/20-prefer.conf".source = ./gui/fonts.conf;
-      "alacritty/alacritty.yml".source = ./terminal/alacritty.yml;
-    };
-    dataFile = {
-      "fonts".source = ./gui/fonts;
-    };
-  };
-
-  fonts.fontconfig = {
-    enable = true;
-  };
 }

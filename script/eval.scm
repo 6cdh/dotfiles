@@ -63,9 +63,14 @@
   (canonicalize-path str))
 
 (define (home . path)
-  (apply string-append (passwd:dir
-                          (getpw
-                            (symbol->string *user*))) "/" path))
+  (apply string-append
+         (passwd:dir
+            (getpw
+              (symbol->string *user*))) 
+         "/" path))
+
+(define (root . path)
+  (apply string-append path))
 
 (define (xdg/config path)
   (home ".config/" path))
