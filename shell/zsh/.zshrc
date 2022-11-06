@@ -26,9 +26,6 @@ source ~/.zshcfg/.zsh_func.sh
 source ~/.zshcfg/.zsh_aliases.sh
 source ~/.zshcfg/.zshenv
 
-# enable proxy
-pe
-
 autoload -U compinit
 compinit
 
