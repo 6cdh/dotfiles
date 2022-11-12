@@ -144,23 +144,14 @@
                   ;; profile
                   (plug :dstein64/vim-startuptime {:cmd :StartupTime})
                   ;; color scheme
-                  (plug :catppuccin/nvim 
-                    {:as "catppuccin-nvim"
-                     :config #(do (setup "catppuccin"
-                                    {:integrations {:which_key true}
-                                     :flavour "latte"})
-                                  (vim.cmd "colorscheme catppuccin"))})))
-                  ; (plug :olimorris/onedarkpro.nvim
-                  ;         {:config #(do (setup :onedarkpro
-                  ;                         {:options
-                  ;                            {:cursorline true
-                  ;                             :bold true
-                  ;                             :italic true
-                  ;                             :bold_italic true
-                  ;                             :underline true
-                  ;                             :undercurl true}
-                  ;                          :styles
-                  ;                           {:comments "italic"
-                  ;                            :keywords "italic"}})
-                  ;                       (module-do :onedarkpro :load))})))
+                  (plug :olimorris/onedarkpro.nvim
+                        {:config #(do 
+                                    (setup :onedarkpro
+                                      {:options
+                                         {:cursorline true
+                                          :bold true
+                                          :italic true
+                                          :underline true
+                                          :undercurl true}})
+                                    (vim.cmd "colorscheme onedarkpro"))})))
 

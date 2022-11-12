@@ -50,7 +50,7 @@
                  :m [(cmd :terminal) :Terminal]
                  :i [(cmd :TogglePair) :Autopair]}
              :o {:name "Code Action"
-                 :o [(luacmd "vim.lsp.buf.formatting()") "Format Buffer"]
+                 :o [(luacmd "vim.lsp.buf.format({async=true})") "Format Buffer"]
                  :t {1 ":Tabularize /" 2 :Align :silent false}
                  :f [(luacmd "vim.lsp.buf.definition()")
                      "Find definitions and references"]
