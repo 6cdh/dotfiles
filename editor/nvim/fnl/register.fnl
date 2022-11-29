@@ -64,6 +64,6 @@
 
 (new_augroup :packer_autocompile
   [vim-event.BufWritePost]
-  [:plugins.fnl]
+  [:pkgs.fnl]
   :PackerCompile)
 

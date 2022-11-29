@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 
+let pkgsUnstable = import <nixpkgs-unstable> { };
+in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -14,13 +16,13 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   news.display = "silent";
 
-  home.packages = with pkgs; [
+  home.packages = with pkgsUnstable; [
     # shell
     bat
     exa
@@ -49,6 +51,7 @@
     difftastic
     starship
     patchelf
+    ipfs-cluster
     # info
     neofetch
     inxi
