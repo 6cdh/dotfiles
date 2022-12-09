@@ -44,14 +44,12 @@ in
     ranger
     python310Packages.compiledb
     tree-sitter
-    ipfs
     fontforge
     youtube-dl
     cmake
     difftastic
     starship
     patchelf
-    ipfs-cluster
     # info
     neofetch
     inxi

@@ -11,8 +11,7 @@
  {1 :rktjmp/hotpot.nvim}
  {1 :guns/vim-sexp}
 ;; lsp
- {1 :nvim-treesitter/nvim-treesitter
-  :config #(require :treesitter)}
+ {1 :nvim-treesitter/nvim-treesitter}
  {1 :nvim-treesitter/playground
   :cmd :TSPlaygroundToggle}
  {1 :neovim/nvim-lspconfig}
@@ -57,6 +56,7 @@
  {1 :hrsh7th/cmp-cmdline
   :after :nvim-cmp}
  {1 :hrsh7th/vim-vsnip
+  :after :nvim-cmp
   :config #(set vim.g.vsnip_snippet_dir "~/.config/nvim/snippets")}
 ;; notes
  {1 :chikamichi/mediawiki.vim}
@@ -78,8 +78,7 @@
   :config #(setup :bufferline
                   {:options {:show_close_icon false
                              :always_show_bufferline false}})}
- {1 :feline-nvim/feline.nvim
-  :config #(require :statusline)}
+ {1 :feline-nvim/feline.nvim}
  {1 :kdav5758/TrueZen.nvim}
  {1 :norcalli/nvim-colorizer.lua
   :config #(setup :colorizer)}
@@ -120,17 +119,18 @@
             (module-do :kommentary.config
                        :configure_language :default
                        {:prefer_single_line_comments true}))}
- {1 :windwp/nvim-autopairs
-  :config #(require :pairs)}
+ {1 :windwp/nvim-autopairs}
  {1 :tpope/vim-surround}
  {1 :godlygeek/tabular}
  {1 :mizlan/iswap.nvim
   :cmd :ISwap}
+ {1 :arthurxavierx/vim-unicoder}
+ {1 :p00f/nvim-ts-rainbow}
 ;; Interactive
  {1 :metakirby5/codi.vim
   :cmd :Codi}
 ;; lang
- {1 :gpanders/nvim-parinfer}
+ ; {1 :gpanders/nvim-parinfer}
 ;; lib
  {1 :6cdh/fulib.nvim}
 ;; profile
@@ -146,5 +146,5 @@
                         :italic true
                         :underline true
                         :undercurl true}})
-             (vim.cmd "colorscheme onedarkpro"))}]
+             (vim.cmd "colorscheme onelight"))}]
 

@@ -4,7 +4,10 @@
   {:package-manager "modules.packer"
    :packages "pkgs"
    :mods ["options"
-          "lisp"]})
+          "lisp"
+          "treesitter"
+          "autopairs"
+          "statusline"]})
 
 (let [modules ["register"
                "keymap"

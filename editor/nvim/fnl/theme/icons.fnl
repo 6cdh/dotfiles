@@ -7,7 +7,7 @@
  :hints " "
  :lsp " "
  :git ""
- :left_sep " "
+ :left_sep ""
  :right_sep " "
  :unknown ""
  :buffer "﬘"
