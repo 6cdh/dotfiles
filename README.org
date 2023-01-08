@@ -10,7 +10,7 @@ These configs are not optimized for installing by others but can be a reference.
   system: fedora linux
   package manager: [dnf, nix]
   keyboard layout: colemak
-  editor: [neovim, emacs]
+  editor: [vscode, neovim, emacs]
   terminal: kitty
 #+END_src
 
