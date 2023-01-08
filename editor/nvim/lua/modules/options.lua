@@ -1,5 +1,6 @@
 local indent = 4
 local textwidth = 90
+
 vim.opt["textwidth"] = textwidth
 vim.opt["expandtab"] = true
 vim.opt["tabstop"] = indent
@@ -26,7 +27,6 @@ vim.opt["completeopt"] = { "menu", "menuone", "noselect" }
 vim.opt["magic"] = true
 vim.opt["undofile"] = true
 vim.opt["termguicolors"] = true
-vim.opt["number"] = true
 vim.opt["relativenumber"] = false
 vim.opt["signcolumn"] = "yes"
 vim.opt["mouse"] = "a"
@@ -43,3 +43,13 @@ vim.g["netrw_winsize"] = 25
 vim.g["netrw_browse_split"] = 4
 vim.g.mapleader = " "
 vim.opt.shortmess:append("cI")
+
+if vim.g.vscode == nil then
+    vim.opt.number = true
+    vim.opt.syntax = "on"
+    vim.opt.laststatus = 2
+else
+    vim.opt.number = false
+    vim.opt.syntax = "off"
+    vim.opt.laststatus = 0
+end
