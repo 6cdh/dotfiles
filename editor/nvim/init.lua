@@ -1,9 +1,7 @@
 local preconfig = require 'modules.preconfig'
 
-preconfig 'https://github.com/wbthomason/packer.nvim'
-preconfig 'https://github.com/rktjmp/hotpot.nvim'
-preconfig 'https://github.com/6cdh/fulib.nvim'
+preconfig 'https://github.com/savq/paq-nvim'
 
-require 'hotpot'
-require 'user'
-
+for _, mod in pairs({ 'pkgs', 'options', 'lisp' }) do
+    require("modules." .. mod)
+end

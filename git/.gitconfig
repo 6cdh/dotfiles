@@ -7,6 +7,8 @@
 
 [http]
     proxy = http://localhost:4097
+[https]
+	proxy = http://localhost:4097
 
 [core]
     autocrlf = input

@@ -1,5 +1,4 @@
-local plugin_manager = 'packer'
-local plugin_path = vim.fn.stdpath 'data' .. '/site/pack/' .. plugin_manager .. '/start/'
+local plugin_path = vim.fn.stdpath 'data' .. '/site/pack/preconfig/start/'
 
 -- Example:
 -- preconfig 'https://github.com/rktjmp/hotpot.nvim'
@@ -8,6 +7,7 @@ local function preconfig(url, name)
         local _, repo = url:match '/([^/]-)/([^/]-)/?$'
         name = repo
     end
+
     local path = plugin_path .. name
     if vim.fn.isdirectory(path) == 0 then
         vim.notify('fetching ' .. url)

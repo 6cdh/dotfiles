@@ -1,3 +1,4 @@
+source ~/.nix-profile/etc/profile.d/nix.sh
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -49,7 +50,7 @@ zinit ice depth=1
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=1000000
 SAVEHIST=1000000
-setopt nomatch notify
+setopt nomatch notify histignoredups
 unsetopt autocd beep
 
 # Auto Rehash

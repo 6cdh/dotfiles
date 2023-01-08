@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-let pkgsUnstable = import <nixpkgs-unstable> { };
+let pkgsUnstable = import <nixpkgs> { };
 in
 {
   # Home Manager needs a bit of information about you and the
@@ -55,6 +55,7 @@ in
     inxi
     tldr
     # lang
+    clang
     racket
     guile
     sbcl
