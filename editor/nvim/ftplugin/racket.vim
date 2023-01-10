@@ -5,10 +5,3 @@ setlocal textwidth=0
 
 setlocal commentstring=;\ %s
 setlocal lisp
-
-lua <<EOF
-local ap = require("nvim-autopairs")
-local rule = require("nvim-autopairs.rule")
-ap.clear_rules()
-EOF
-
