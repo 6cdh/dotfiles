@@ -37,7 +37,6 @@ in
     zoxide
     rlwrap
     hyperfine
-    delta
     git
     git-quick-stats
     imagemagick
@@ -55,10 +54,10 @@ in
     inxi
     tldr
     # lang
-    clang
     racket
     guile
     sbcl
+    roswell
     chez
     ghc
     yarn
