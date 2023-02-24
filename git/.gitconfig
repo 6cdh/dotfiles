@@ -11,8 +11,7 @@
 	proxy = http://localhost:4097
 
 [core]
-    autocrlf = input
-    safecrlf = true
+    autocrlf = false
 
 [pull]
     rebase = false
@@ -24,3 +23,8 @@
 	helper = !gh auth git-credential
 [diff]
 	external = difft
+	tool = difftastic
+[difftool]
+    prompt = false
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"

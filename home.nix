@@ -38,20 +38,12 @@ in
     rlwrap
     hyperfine
     git
-    git-quick-stats
     imagemagick
-    ranger
-    python310Packages.compiledb
-    tree-sitter
     fontforge
-    youtube-dl
-    cmake
     difftastic
     starship
     patchelf
     # info
-    neofetch
-    inxi
     tldr
     # lang
     racket
@@ -61,15 +53,10 @@ in
     chez
     ghc
     yarn
-    opam
-    ocaml
     rustup
     python3Minimal
     poetry
     nodejs
     nodePackages.prettier
-    efm-langserver
-    # lsp
-    rnix-lsp
   ];
 }
