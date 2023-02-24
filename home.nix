@@ -38,6 +38,7 @@ in
     rlwrap
     hyperfine
     git
+    gh
     imagemagick
     fontforge
     difftastic
