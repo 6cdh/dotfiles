@@ -1,18 +1,28 @@
 pe() {
     export readonly PROXY_ADDR="127.0.0.1:4097"
+	export readonly HTTP_PROXY="http://${PROXY_ADDR}"
 	export readonly http_proxy="http://${PROXY_ADDR}"
+	export readonly HTTPS_PROXY="http://${PROXY_ADDR}"
 	export readonly https_proxy="http://${PROXY_ADDR}"
+    export readonly ALL_PROXY="http://${PROXY_ADDR}"
     export readonly all_proxy="http://${PROXY_ADDR}"
+	export readonly NO_PROXY=localhost,127.0.0.1
 	export readonly no_proxy=localhost,127.0.0.1
+    export readonly HAS_PROXY="proxy"
     export readonly has_proxy="proxy"
 }
 
 npe() {
     unset PROXY_ADDR
+	unset HTTP_PROXY
 	unset http_proxy
+	unset HTTPS_PROXY
 	unset https_proxy
+    unset ALL_PROXY
     unset all_proxy
+	unset NO_PROXY
 	unset no_proxy
+    unset HAS_PROXY
     unset has_proxy
 }
 

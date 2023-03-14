@@ -6,7 +6,8 @@ require("paq") {
     "tpope/vim-surround",
     "godlygeek/tabular",
     "dstein64/vim-startuptime",
-    "olimorris/onedarkpro.nvim"
+    "olimorris/onedarkpro.nvim",
+    "https://github.com/ggandor/leap.nvim"
 }
 
 if vim.g.vscode == nil then
@@ -34,3 +35,6 @@ if vim.g.vscode == nil then
     }
     vim.cmd("colorscheme onelight")
 end
+
+require('leap').add_default_mappings()
+

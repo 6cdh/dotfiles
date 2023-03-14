@@ -24,6 +24,7 @@ in
 
   home.packages = with pkgsUnstable; [
     # shell
+    neovim
     bat
     exa
     fd
