@@ -45,9 +45,11 @@ in
     difftastic
     starship
     patchelf
+    android-tools
     # info
     tldr
     # lang
+    julia
     racket
     guile
     sbcl
