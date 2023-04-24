@@ -21,8 +21,12 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
+<<<<<<< HEAD
 (setq doom-font (font-spec :family "SometypeMono Nerd Font" :size 30 :weight 'semi-light))
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
+=======
+(setq doom-font (font-spec :family "SometypeMono Nerd Font" :size 32 :weight 'semi-light))
+>>>>>>> 5d8839abe670db8fe8c582c34a06b77d2d0addc5
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
