@@ -49,9 +49,9 @@ in
     # info
     tldr
     # lang
+    guile_3_0
     julia
     racket
-    guile
     sbcl
     roswell
     chez

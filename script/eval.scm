@@ -1,5 +1,3 @@
-#!/usr/bin/guile -s
-!#
 ;; utility
 
 (define (printf fmt . arg)

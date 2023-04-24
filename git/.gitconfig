@@ -1,7 +1,6 @@
 [user]
     name = 6cdh
     email = cd6cdh@gmail.com
-	signingkey = 6E4DAFE82DD7A904!
 
 [alias]
     hist = log --pretty=format:'%h %ad [%an] %s%d ' --graph --date=short
@@ -29,5 +28,3 @@
     prompt = false
 [difftool "difftastic"]
     cmd = difft "$LOCAL" "$REMOTE"
-[commit]
-	gpgsign = true
