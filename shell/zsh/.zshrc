@@ -30,6 +30,8 @@ source ~/.zshcfg/.zshenv
 autoload -U compinit
 compinit
 
+pe
+
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit snippet OMZP::extract
 zinit snippet OMZP::colored-man-pages
@@ -52,6 +54,14 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 setopt nomatch notify histignoredups
 unsetopt autocd beep
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+
+lctoolset_clang
 
 # Auto Rehash
 zstyle ':completion:*' rehash true

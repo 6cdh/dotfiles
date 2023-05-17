@@ -50,7 +50,7 @@ in
     tldr
     # lang
     guile_3_0
-    julia
+    julia-bin
     racket
     sbcl
     roswell

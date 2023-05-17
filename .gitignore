@@ -1,0 +1,7 @@
+private/
+work/
+gui/fonts/
+docker/
+pass.txt
+*.kdbx
+

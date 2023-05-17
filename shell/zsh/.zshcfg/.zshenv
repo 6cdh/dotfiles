@@ -1,13 +1,6 @@
 # Editor
 export EDITOR=nvim
 
-# Clang
-export CC=/usr/bin/gcc
-export HOSTCC=/usr/bin/gcc
-export CXX=/usr/bin/g++
-export HOSTCXX=/usr/bin/g++
-export MAKEFLAGS=8
-
 # BAT
 export BAT_THEME="OneHalfLight"
 
