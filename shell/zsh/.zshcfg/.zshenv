@@ -8,9 +8,6 @@ export BAT_THEME="OneHalfLight"
 export FZF_DEFAULT_COMMAND='rg --files --smart-case'
 export FZF_DEFAULT_OPTS='-m --height 50% --border'
 
-# lisp
-export LISP="sbcl"
-
 # Kitty Chinese
 export GLFW_IM_MODULE=ibus
 

@@ -49,11 +49,8 @@ in
     # info
     tldr
     # lang
-    guile_3_0
     julia-bin
     racket
-    sbcl
-    roswell
     chez
     ghc
     yarn

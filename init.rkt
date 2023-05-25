@@ -188,6 +188,7 @@
           ((home ".gitconfig") => "private/gitconfig")
           ((config "home-manager") => "sys/home-manager")
           ((data "fonts") => "gui/fonts")
+          ((home ".tmux.conf") => "shell/tmux.conf")
           ((home "work") => "work")))
 
   (when (backup-enable?)
