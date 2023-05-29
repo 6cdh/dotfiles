@@ -7,8 +7,8 @@ These configs are not optimized for installing by others but can be a reference.
 ## Info
 
 ```yaml
-system: fedora linux
-package manager: [dnf, nix]
+system: fedora silverblue
+package manager: [rpm-ostree, dnf, yay, nix]
 keyboard layout: [colemak, us(chinese)]
 editor: [vscode, neovim, emacs]
 terminal: kitty
@@ -16,11 +16,10 @@ terminal: kitty
 
 ## Manage
 
-I have a racket script [init.rkt](init.rkt) that link data and config, backup data to cloud, install necessary packages. Like this:
+I have a racket script [init.rkt](init.rkt) that link data and config, backup data to cloud. Like this:
 
-```shell
+```bash
 racket init.rkt link
 racket init.rkt backup
-racket init.rkt pkg
 ```
 

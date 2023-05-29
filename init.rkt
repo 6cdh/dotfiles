@@ -161,7 +161,6 @@
 (define (main)
   (for ([cmd (current-command-line-arguments)])
     (match cmd
-      ["pkg" (pkg-enable? #t)]
       ["link" (link-enable? #t)]
       ["backup" (backup-enable? #t)]
       [_ (error "unknown argument: " cmd)]))
