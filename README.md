@@ -7,8 +7,8 @@ These configs are not optimized for installing by others but can be a reference.
 ## Info
 
 ```yaml
-system: fedora silverblue
-package manager: [rpm-ostree, dnf, yay, nix]
+system: fedora linux
+package manager: [dnf, yay, nix]
 keyboard layout: [colemak, us(chinese)]
 editor: [vscode, neovim, emacs]
 terminal: kitty
