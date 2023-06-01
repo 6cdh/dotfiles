@@ -35,7 +35,6 @@ zinit snippet OMZP::extract
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::git
 zinit snippet OMZP::zoxide
-zinit snippet OMZP::vi-mode
 zinit snippet OMZP::fzf
 
 zinit ice blockf

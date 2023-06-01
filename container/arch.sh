@@ -9,4 +9,8 @@ yay -Syu visual-studio-code-bin \
     difftastic starship android-tools \
     racket julia
 
+# change shell
 sudo chsh -s /bin/zsh lcdh
+
+# use host xdg-open
+sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
