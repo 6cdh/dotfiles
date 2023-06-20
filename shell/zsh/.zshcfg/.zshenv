@@ -16,3 +16,6 @@ export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 export PATH="/home/lcdh/.local/bin:$PATH"
 
+# override old SHELL=bash that inherits from host
+export SHELL=zsh
+

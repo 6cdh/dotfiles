@@ -102,7 +102,7 @@
   (define ignores
     '("node_modules" ".mypy_cache" "compiled"
                      "rust/target" ".gradle" "zig-cache" "zig-out"
-                     "wiki_data/db" "wiki/extensions" "wiki/skins"))
+                     "local/wiki_data" "wiki/extensions" "wiki/skins"))
   (define ignores-str
     (string-join
      (for/list ([d ignores])

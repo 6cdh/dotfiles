@@ -6,8 +6,11 @@ require("paq") {
     "tpope/vim-surround",
     "godlygeek/tabular",
     "dstein64/vim-startuptime",
-    "olimorris/onedarkpro.nvim",
-    "https://github.com/ggandor/leap.nvim"
+    "catppuccin/nvim",
+    "ggandor/leap.nvim",
+    "nvim-lualine/lualine.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/playground"
 }
 
 if vim.g.vscode == nil then
@@ -19,22 +22,30 @@ if vim.g.vscode == nil then
         }
     )
 
-    require("onedarkpro").setup {
-        highlights = {
-            Identifier = {
-                fg = "${black}"
-            }
-        },
+    require("catppuccin").setup {
+       flavour = "latte"
+    }
+
+    vim.cmd("colorscheme catppuccin")
+
+    require("lualine").setup {
         options = {
-            cursorline = true,
-            bold = true,
-            italic = true,
-            underline = true,
-            undercurl = true
+            theme = "auto"
         }
     }
-    vim.cmd("colorscheme onelight")
+
+    require('nvim-treesitter.configs').setup {
+        ensure_installed = "all",
+        sync_install = false,
+        auto_install = true,
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false
+        },
+        indent = {
+            enable = true
+        }
+    }
 end
 
 require('leap').add_default_mappings()
-
