@@ -35,7 +35,7 @@ if vim.g.vscode == nil then
     }
 
     require('nvim-treesitter.configs').setup {
-        ensure_installed = "all",
+        ensure_installed = {},
         sync_install = false,
         auto_install = true,
         highlight = {

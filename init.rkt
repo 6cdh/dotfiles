@@ -101,7 +101,7 @@
 (define (backup1 f c)
   (define ignores
     '("node_modules" ".mypy_cache" "compiled"
-                     "rust/target" ".gradle" "zig-cache" "zig-out"
+                     "target/debug" "target/release" ".gradle" "zig-cache" "zig-out"
                      "local/wiki_data" "wiki/extensions" "wiki/skins"))
   (define ignores-str
     (string-join
@@ -191,8 +191,7 @@
           ((home "work") => "work")))
 
   (when (backup-enable?)
-    (backup ("passwords.kdbx" <-> "Apps/Keepass2Android")
-            ("private.tar.zst.gpg" <-> "backup")
+    (backup ("private.tar.zst.gpg" <-> "backup")
             ("docker.tar.zst.gpg" <-> "backup")
             ("work.tar.zst" <-> "backup"))))
 
