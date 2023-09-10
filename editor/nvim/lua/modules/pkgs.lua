@@ -10,7 +10,8 @@ require("paq") {
     "ggandor/leap.nvim",
     "nvim-lualine/lualine.nvim",
     "nvim-treesitter/nvim-treesitter",
-    "nvim-treesitter/playground"
+    "nvim-treesitter/playground",
+    "mbbill/undotree"
 }
 
 if vim.g.vscode == nil then

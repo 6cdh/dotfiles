@@ -23,19 +23,19 @@ scrolling:
 #------------------------------------------------------------------------------#
 font:
   normal:
-    family: CamingoCode Nerd Font
+    family: SometypeMono Nerd Font
     style: Regular
 
   bold:
-    family: CamingoCode Nerd Font
+    family: SometypeMono Nerd Font
     style: Bold
 
   italic:
-    family: CamingoCode Nerd Font
+    family: SometypeMono Nerd Font
     style: Italic
 
   bold_italic:
-    family: CamingoCode Nerd Font
+    family: SometypeMono Nerd Font
     style: Bold Italic
   size: 12
 
