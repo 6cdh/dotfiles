@@ -1,1 +1,0 @@
-/home/lcdh/work/nvim-lispy/lua/lispy/init.lua
