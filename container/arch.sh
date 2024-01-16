@@ -24,3 +24,6 @@ sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman
 sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman-compose
 sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
 sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/flatpak
+sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdotool
+sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/spectacle
+sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/kdeconnect-cli
