@@ -8,10 +8,10 @@ These configs are not optimized for installing by others but can be a reference.
 
 ```yaml
 system: fedora linux
-package manager: [rpm-ostree, dnf, yay, nix]
+package manager: [rpm-ostree, yay]
 keyboard layout: [colemak, us(chinese)]
 editor: [vscode, neovim, emacs]
-terminal: hyper
+terminal: Warp
 ```
 
 ## Manage
