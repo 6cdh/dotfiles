@@ -3,9 +3,6 @@ git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
 
-yay -S reflector
-sudo reflector -c cn -p https --save /etc/pacman.d/mirrorlist
-
 yay -Syu visual-studio-code-bin \
     zsh neovim vim unzip bat exa fd ripgrep fzf zoxide htop \
     scc-bin cmus rclone rlwrap hyperfine github-cli imagemagick \
@@ -25,5 +22,3 @@ sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman-compose
 sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
 sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/flatpak
 sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdotool
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/spectacle
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/kdeconnect-cli
