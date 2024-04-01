@@ -9,8 +9,8 @@ yay -Syu visual-studio-code-bin \
     difftastic starship android-tools \
     racket julia multon zig \
     tmux tree-sitter-cli valgrind wl-clipboard \
-    neofetch npm proxychains-ng reflector rsync rustup \
-    hyper-bin llvm lsof clang emacs
+    neofetch npm proxychains-ng rsync rustup \
+    llvm lsof clang emacs
 
 # change shell
 sudo chsh -s /bin/zsh lcdh
