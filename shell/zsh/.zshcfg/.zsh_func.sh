@@ -1,11 +1,11 @@
 pe() {
-    export readonly PROXY_ADDR="127.0.0.1:4097"
-	export readonly HTTP_PROXY="http://${PROXY_ADDR}"
-	export readonly http_proxy="http://${PROXY_ADDR}"
-	export readonly HTTPS_PROXY="http://${PROXY_ADDR}"
-	export readonly https_proxy="http://${PROXY_ADDR}"
-    export readonly ALL_PROXY="http://${PROXY_ADDR}"
-    export readonly all_proxy="http://${PROXY_ADDR}"
+    export readonly PROXY_URL="http://127.0.0.1:4097"
+	export readonly HTTP_PROXY="${PROXY_URL}"
+	export readonly http_proxy="${PROXY_URL}"
+	export readonly HTTPS_PROXY="${PROXY_URL}"
+	export readonly https_proxy="${PROXY_URL}"
+    export readonly ALL_PROXY="${PROXY_URL}"
+    export readonly all_proxy="${PROXY_URL}"
 	export readonly NO_PROXY=localhost,127.0.0.1
 	export readonly no_proxy=localhost,127.0.0.1
     export readonly HAS_PROXY="proxy"

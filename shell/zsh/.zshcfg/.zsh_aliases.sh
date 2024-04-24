@@ -20,6 +20,7 @@ alias emacs="emacs"
 alias diff="diff --color=always"
 alias rlwrap="rlwrap -pgreen"
 alias hm="home-manager"
+alias cat="cat -v"
 
 # git
 alias gcl1="git clone --depth 1"
