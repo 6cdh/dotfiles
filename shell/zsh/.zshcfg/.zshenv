@@ -19,3 +19,6 @@ export PATH="/home/lcdh/.local/bin:$PATH"
 # override old SHELL=bash that inherits from host
 export SHELL=zsh
 
+# solve gpg error: Inappropriate ioctl for device
+export GPG_TTY=$(tty)
+
