@@ -102,7 +102,8 @@
   (define ignores
     '("node_modules" ".mypy_cache" "compiled"
                      "target/debug" "target/release" ".gradle" "zig-cache" "zig-out"
-                     "local/wiki_data" "wiki/extensions" "wiki/skins"))
+                     "local/wiki_data" "wiki/extensions" "wiki/skins"
+                     "bin" "obj"))
   (define ignores-str
     (string-join
      (for/list ([d ignores])

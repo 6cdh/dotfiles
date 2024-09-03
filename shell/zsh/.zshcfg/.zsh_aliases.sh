@@ -7,7 +7,7 @@ alias spp="sudo proxychains4"
 alias pp="proxychains4"
 
 # common
-alias ls="exa"
+alias ls="eza"
 alias l="ls -l"
 alias ll="ls -la"
 alias la="ls -la"
@@ -21,7 +21,9 @@ alias diff="diff --color=always"
 alias rlwrap="rlwrap -pgreen"
 alias hm="home-manager"
 alias cat="cat -v"
+alias rm="rm -I"
 
 # git
 alias gcl1="git clone --depth 1"
 alias ns="nix-shell --run zsh"
+

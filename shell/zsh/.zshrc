@@ -66,3 +66,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 eval "$(starship init zsh)"
 
+
+# pnpm
+export PNPM_HOME="/var/home/lcdh/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
