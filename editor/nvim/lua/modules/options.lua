@@ -6,7 +6,6 @@ vim.opt["expandtab"] = true
 vim.opt["tabstop"] = indent
 vim.opt["shiftwidth"] = indent
 vim.opt["softtabstop"] = indent
-vim.opt["background"] = "light"
 vim.opt["splitright"] = true
 vim.opt["splitbelow"] = true
 vim.opt["foldmethod"] = "marker"

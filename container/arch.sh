@@ -14,11 +14,3 @@ yay -Syu visual-studio-code-bin \
 
 # change shell
 sudo chsh -s /bin/zsh lcdh
-
-# use host xdg-open
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman-compose
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/flatpak
-sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdotool

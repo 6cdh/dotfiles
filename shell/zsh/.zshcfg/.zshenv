@@ -2,7 +2,7 @@
 export EDITOR=nvim
 
 # BAT
-export BAT_THEME="OneHalfLight"
+export BAT_THEME="OneHalfDark"
 
 # FZF
 export FZF_DEFAULT_COMMAND='rg --files --smart-case'

@@ -28,8 +28,6 @@ source ~/.zshcfg/.zshenv
 autoload -U compinit
 compinit
 
-pe
-
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit snippet OMZP::extract
 zinit snippet OMZP::colored-man-pages
@@ -43,7 +41,8 @@ zinit light zsh-users/zsh-autosuggestions
 
 # theme
 zinit ice depth=1
-# zinit light romkatv/powerlevel10k
+zinit light romkatv/powerlevel10k
+source ~/.zshcfg/.p10k.zsh
 
 # History size
 HISTFILE="$HOME/.zsh_history"
@@ -64,9 +63,6 @@ lctoolset_clang
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-eval "$(starship init zsh)"
-
-
 # pnpm
 export PNPM_HOME="/var/home/lcdh/.local/share/pnpm"
 case ":$PATH:" in
@@ -74,3 +70,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+

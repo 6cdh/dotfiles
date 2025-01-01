@@ -1,6 +1,6 @@
 require("paq") {
     "savq/paq-nvim",
-    "guns/vim-sexp",
+    "PaterJason/nvim-treesitter-sexp",
     "tpope/vim-repeat",
     "b3nj5m1n/kommentary",
     "tpope/vim-surround",
@@ -11,6 +11,7 @@ require("paq") {
     "nvim-lualine/lualine.nvim",
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/playground",
+    "neovim/nvim-lspconfig",
     "mbbill/undotree"
 }
 
@@ -24,7 +25,7 @@ if vim.g.vscode == nil then
     )
 
     require("catppuccin").setup {
-       flavour = "latte"
+       flavour = "frappe"
     }
 
     vim.cmd("colorscheme catppuccin")
@@ -34,6 +35,8 @@ if vim.g.vscode == nil then
             theme = "auto"
         }
     }
+
+    require('lspconfig').racket_langserver.setup {}
 
     require('nvim-treesitter.configs').setup {
         ensure_installed = {},
@@ -47,6 +50,22 @@ if vim.g.vscode == nil then
             enable = true
         }
     }
+
+    require('leap').add_default_mappings()
+else
+    require('nvim-treesitter.configs').setup {
+        ensure_installed = {},
+        sync_install = false,
+        auto_install = true,
+        highlight = {
+            enable = false,
+            additional_vim_regex_highlighting = false
+        },
+        indent = {
+            enable = false
+        }
+    }
+
+    require('leap').add_default_mappings()
 end
 
-require('leap').add_default_mappings()
