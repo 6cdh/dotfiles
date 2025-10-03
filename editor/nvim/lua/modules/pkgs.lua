@@ -1,6 +1,6 @@
 require("paq") {
     "savq/paq-nvim",
-    "PaterJason/nvim-treesitter-sexp",
+    "6cdh/nvim-treesitter-sexp",
     "tpope/vim-repeat",
     "b3nj5m1n/kommentary",
     "tpope/vim-surround",
@@ -35,8 +35,6 @@ if vim.g.vscode == nil then
             theme = "auto"
         }
     }
-
-    require('lspconfig').racket_langserver.setup {}
 
     require('nvim-treesitter.configs').setup {
         ensure_installed = {},
