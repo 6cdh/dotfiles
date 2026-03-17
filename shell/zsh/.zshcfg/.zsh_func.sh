@@ -153,7 +153,11 @@ lcplugin_bench() {
 }
 
 lcimage_trim() {
-	convert $1 -fuzz 1% -trim +repage $1
+	magick $1 -fuzz 1% -trim +repage $1
+}
+
+lcimage_trim_border() {
+	magick $1 -fuzz 1% -trim +repage -bordercolor white -border 10 $1
 }
 
 lcquality_of_life() {
@@ -186,3 +190,30 @@ ttf2otf() {
     otfname="$prefix".otf
     fontforge -lang=ff -c 'Open($1); Generate($2); close();' "$name" "$otfname"
 }
+
+linkmem() {
+  local name="$1"
+  if [ -z "$name" ]; then
+    echo "usage: linkmem <name>" >&2
+    return 2
+  fi
+
+  # ensure we're in a git repo
+  local root
+  if ! root=$(git rev-parse --show-toplevel 2>/dev/null); then
+    echo "linkmem: not inside a git repository" >&2
+    return 1
+  fi
+
+  local target="$HOME/.agents/memory/$name"
+  mkdir -p "$target" || return 1
+
+  if [ -e "$root/.agent-memory" ] || [ -L "$root/.agent-memory" ]; then
+    echo "linkmem: $root/.agent-memory already exists" >&2
+    return 1
+  fi
+
+  ln -s "$target" "$root/.agent-memory" || return 1
+  echo "linkmem: linked $root/.agent-memory -> $target"
+}
+
